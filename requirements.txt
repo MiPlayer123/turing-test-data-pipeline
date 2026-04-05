@@ -1,0 +1,6 @@
+openai
+anthropic
+google-genai
+groq
+python-dotenv
+textblob
