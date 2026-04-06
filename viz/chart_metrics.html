@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behavioral Metrics — AI-AI Conversations</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #0D1117;
+    color: #E6EDF3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 40px;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #8B949E;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  #charts {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1400px;
+  }
+  .panel-title {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 4px;
+    color: #C9D1D9;
+  }
+  .panel-sub {
+    font-size: 12px;
+    color: #8B949E;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: #161B22;
+    border: 1px solid #30363D;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #E6EDF3;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 10;
+  }
+  .tooltip .val { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Behavioral Metrics Across 5 AI-AI Conversation Conditions</h1>
+<p class="subtitle">162 conversations &middot; 6 LLMs &middot; GPT-5.4, Claude Sonnet 4, Gemini 2.5 Flash, Grok 4.1 Fast, Llama 4 Scout</p>
+<div id="charts"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const CONDITIONS = [
+  { key: "ai_ai_detective",        label: "Detective",       color: "#E74C3C" },
+  { key: "ai_ai_freeform",         label: "Freeform",        color: "#3498DB" },
+  { key: "ai_ai_freeform_persona", label: "Persona",         color: "#9B59B6" },
+  { key: "ai_ai_reverse_turing",   label: "Reverse Turing",  color: "#F39C12" },
+  { key: "ai_ai_structured",       label: "Structured",      color: "#2ECC71" },
+];
+
+const METRICS = [
+  { key: "repetitiveness", label: "Repetitiveness", sub: "3-gram overlap" },
+  { key: "coherence",      label: "Coherence",      sub: "Word overlap" },
+  { key: "hedging",         label: "Hedging",        sub: "Per 100 words" },
+];
+
+const tooltip = d3.select("#tooltip");
+
+d3.csv("/data/processed/conversations.csv").then(raw => {
+  raw.forEach(d => {
+    METRICS.forEach(m => d[m.key] = +d[m.key]);
+  });
+
+  const grouped = d3.group(raw, d => d.condition);
+  const stats = CONDITIONS.map(c => {
+    const rows = grouped.get(c.key) || [];
+    const out = { condition: c.key, label: c.label, color: c.color, n: rows.length };
+    METRICS.forEach(m => {
+      out[m.key] = d3.mean(rows, r => r[m.key]);
+    });
+    return out;
+  });
+
+  const chartDiv = d3.select("#charts");
+
+  METRICS.forEach(metric => {
+    const container = chartDiv.append("div").style("flex", "1").style("min-width", "380px");
+    container.append("div").attr("class", "panel-title").text(metric.label);
+    container.append("div").attr("class", "panel-sub").text(metric.sub);
+
+    const margin = { top: 8, right: 80, bottom: 28, left: 160 };
+    const width = 440 - margin.left - margin.right;
+    const height = 280 - margin.top - margin.bottom;
+
+    const svg = container.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const maxVal = d3.max(stats, d => d[metric.key]) * 1.15;
+
+    const y = d3.scaleBand()
+      .domain(stats.map(d => d.condition))
+      .range([0, height])
+      .padding(0.25);
+
+    const x = d3.scaleLinear()
+      .domain([0, maxVal])
+      .range([0, width]);
+
+    // Y axis labels
+    svg.selectAll(".y-label")
+      .data(stats)
+      .join("text")
+      .attr("x", -10)
+      .attr("y", d => y(d.condition) + y.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", "end")
+      .attr("fill", "#C9D1D9")
+      .attr("font-size", "13px")
+      .text(d => `${d.label} (n=${d.n})`);
+
+    // X axis
+    svg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).ticks(4).tickSize(-height).tickFormat(d3.format(".3f")))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").attr("stroke", "#21262D"))
+      .call(g => g.selectAll(".tick text").attr("fill", "#8B949E").attr("font-size", "11px"));
+
+    // Bars
+    svg.selectAll(".bar")
+      .data(stats)
+      .join("rect")
+      .attr("y", d => y(d.condition))
+      .attr("height", y.bandwidth())
+      .attr("x", 0)
+      .attr("width", 0)
+      .attr("fill", d => d.color)
+      .attr("rx", 4)
+      .on("mouseover", (event, d) => {
+        tooltip.style("opacity", 1)
+          .html(`<strong>${d.label}</strong><br>${metric.label}: <span class="val">${d[metric.key].toFixed(4)}</span><br>n = ${d.n}`);
+      })
+      .on("mousemove", event => {
+        tooltip.style("left", (event.pageX + 14) + "px").style("top", (event.pageY - 14) + "px");
+      })
+      .on("mouseout", () => tooltip.style("opacity", 0))
+      .transition()
+      .duration(800)
+      .delay((d, i) => i * 80)
+      .attr("width", d => x(d[metric.key]));
+
+    // Value labels
+    svg.selectAll(".val-label")
+      .data(stats)
+      .join("text")
+      .attr("y", d => y(d.condition) + y.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .attr("fill", "#E6EDF3")
+      .attr("font-size", "13px")
+      .attr("font-weight", "600")
+      .attr("x", 0)
+      .attr("opacity", 0)
+      .text(d => d[metric.key].toFixed(4))
+      .transition()
+      .duration(800)
+      .delay((d, i) => i * 80)
+      .attr("x", d => x(d[metric.key]) + 8)
+      .attr("opacity", 1);
+  });
+});
+</script>
+</body>
+</html>

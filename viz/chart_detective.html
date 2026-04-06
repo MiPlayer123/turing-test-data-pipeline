@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detective Accuracy &amp; Hedging — AI-AI Conversations</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #0D1117;
+    color: #E6EDF3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 40px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 32px; font-weight: 600; margin-bottom: 40px; text-align: center; }
+  #charts { display: flex; gap: 80px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 1400px; }
+  .panel-title {
+    font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 4px; color: #C9D1D9;
+  }
+  .panel-sub {
+    font-size: 13px; color: #8B949E; text-align: center; margin-bottom: 20px;
+  }
+  .tooltip {
+    position: absolute; pointer-events: none;
+    background: #161B22; border: 1px solid #30363D; border-radius: 6px;
+    padding: 8px 12px; font-size: 13px; color: #E6EDF3;
+    opacity: 0; transition: opacity 0.15s; z-index: 10;
+  }
+  .tooltip .val { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Can AIs Detect Other AIs?</h1>
+<div id="charts"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const CONDITION_COLORS = {
+  ai_ai_detective:        "#E74C3C",
+  ai_ai_freeform:         "#3498DB",
+  ai_ai_freeform_persona: "#9B59B6",
+  ai_ai_reverse_turing:   "#F39C12",
+  ai_ai_structured:       "#2ECC71",
+};
+const CONDITION_LABELS = {
+  ai_ai_detective:        "Detective",
+  ai_ai_freeform:         "Freeform",
+  ai_ai_freeform_persona: "Persona",
+  ai_ai_reverse_turing:   "Reverse Turing",
+  ai_ai_structured:       "Structured",
+};
+const MODEL_COLORS = {
+  "gpt-5.4":          "#10A37F",
+  "gpt-5.4-mini":     "#74AA9C",
+  "gemini-2.5-flash":  "#4285F4",
+  "grok-4-1-fast":    "#1DA1F2",
+  "claude-sonnet-4":  "#D97706",
+};
+const MODEL_LABELS = {
+  "gpt-5.4":          "GPT-5.4",
+  "gpt-5.4-mini":     "GPT-5.4 Mini",
+  "gemini-2.5-flash":  "Gemini 2.5 Flash",
+  "grok-4-1-fast":    "Grok 4.1 Fast",
+  "claude-sonnet-4":  "Claude Sonnet 4",
+};
+const tooltip = d3.select("#tooltip");
+
+d3.csv("/data/processed/conversations.csv").then(raw => {
+  raw.forEach(d => {
+    d.hedging = +d.hedging;
+    d.detective_correct_bool = d.detective_correct === "True";
+  });
+
+  const chartDiv = d3.select("#charts");
+
+  // ===== LEFT PANEL: Detective Accuracy =====
+  {
+    const detective = raw.filter(d => d.condition === "ai_ai_detective");
+    const byModel = d3.group(detective, d => d.model_a);
+    let stats = [];
+    for (const [model, rows] of byModel) {
+      const correct = rows.filter(r => r.detective_correct_bool).length;
+      stats.push({
+        model,
+        label: MODEL_LABELS[model] || model,
+        color: MODEL_COLORS[model] || "#888",
+        accuracy: (correct / rows.length) * 100,
+        n: rows.length,
+      });
+    }
+    stats.sort((a, b) => a.accuracy - b.accuracy);
+
+    const container = chartDiv.append("div").style("flex", "1").style("min-width", "500px");
+    container.append("div").attr("class", "panel-title").text("Detective Accuracy by Interrogator");
+    container.append("div").attr("class", "panel-sub").text("% of correct AI detections (27 conversations)");
+
+    const margin = { top: 24, right: 80, bottom: 36, left: 180 };
+    const width = 600 - margin.left - margin.right;
+    const height = 320 - margin.top - margin.bottom;
+
+    const svg = container.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const y = d3.scaleBand().domain(stats.map(d => d.model)).range([0, height]).padding(0.3);
+    const x = d3.scaleLinear().domain([0, 105]).range([0, width]);
+
+    // Y axis labels
+    svg.selectAll(".y-label").data(stats).join("text")
+      .attr("x", -10).attr("y", d => y(d.model) + y.bandwidth() / 2)
+      .attr("dy", "0.35em").attr("text-anchor", "end")
+      .attr("fill", "#C9D1D9").attr("font-size", "14px")
+      .text(d => `${d.label} (n=${d.n})`);
+
+    // X axis
+    svg.append("g").attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).ticks(5).tickFormat(d => d + "%").tickSize(-height))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").attr("stroke", "#21262D"))
+      .call(g => g.selectAll(".tick text").attr("fill", "#8B949E").attr("font-size", "11px"));
+
+    // 50% chance line
+    svg.append("line")
+      .attr("x1", x(50)).attr("x2", x(50))
+      .attr("y1", -10).attr("y2", height)
+      .attr("stroke", "#E74C3C").attr("stroke-width", 2)
+      .attr("stroke-dasharray", "8,5");
+
+    svg.append("text")
+      .attr("x", x(50)).attr("y", -14)
+      .attr("text-anchor", "middle")
+      .attr("fill", "#E74C3C").attr("font-size", "11px").attr("font-weight", "600")
+      .text("chance (50%)");
+
+    // Bars
+    svg.selectAll(".bar").data(stats).join("rect")
+      .attr("y", d => y(d.model)).attr("height", y.bandwidth())
+      .attr("x", 0).attr("width", 0)
+      .attr("fill", d => d.color).attr("rx", 4)
+      .on("mouseover", (event, d) => {
+        tooltip.style("opacity", 1)
+          .html(`<strong>${d.label}</strong><br>Accuracy: <span class="val">${d.accuracy.toFixed(0)}%</span><br>n = ${d.n}`);
+      })
+      .on("mousemove", e => tooltip.style("left", (e.pageX+14)+"px").style("top", (e.pageY-14)+"px"))
+      .on("mouseout", () => tooltip.style("opacity", 0))
+      .transition().duration(800).delay((d, i) => i * 100)
+      .attr("width", d => x(d.accuracy));
+
+    // Value labels
+    svg.selectAll(".val-label").data(stats).join("text")
+      .attr("y", d => y(d.model) + y.bandwidth() / 2).attr("dy", "0.35em")
+      .attr("fill", "#E6EDF3").attr("font-size", "14px").attr("font-weight", "700")
+      .attr("x", 0).attr("opacity", 0)
+      .text(d => `${d.accuracy.toFixed(0)}%`)
+      .transition().duration(800).delay((d, i) => i * 100)
+      .attr("x", d => x(d.accuracy) + 8).attr("opacity", 1);
+  }
+
+  // ===== RIGHT PANEL: Hedging by Condition =====
+  {
+    const byCondition = d3.group(raw, d => d.condition);
+    let stats = [];
+    for (const [cond, rows] of byCondition) {
+      stats.push({
+        condition: cond,
+        label: CONDITION_LABELS[cond] || cond,
+        color: CONDITION_COLORS[cond] || "#888",
+        hedging: d3.mean(rows, r => r.hedging),
+        n: rows.length,
+      });
+    }
+    stats.sort((a, b) => a.hedging - b.hedging);
+
+    const structuredVal = stats.find(d => d.condition === "ai_ai_structured")?.hedging || 1;
+    const reverseVal = stats.find(d => d.condition === "ai_ai_reverse_turing")?.hedging || 1;
+    const pctIncrease = ((reverseVal - structuredVal) / structuredVal * 100).toFixed(0);
+
+    const container = chartDiv.append("div").style("flex", "1").style("min-width", "500px");
+    container.append("div").attr("class", "panel-title").text("The 'Trying to Sound Human' Effect");
+    container.append("div").attr("class", "panel-sub").text("Mean hedging frequency per 100 words");
+
+    const margin = { top: 24, right: 120, bottom: 36, left: 180 };
+    const width = 600 - margin.left - margin.right;
+    const height = 320 - margin.top - margin.bottom;
+
+    const svg = container.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const maxVal = d3.max(stats, d => d.hedging) * 1.2;
+    const y = d3.scaleBand().domain(stats.map(d => d.condition)).range([0, height]).padding(0.3);
+    const x = d3.scaleLinear().domain([0, maxVal]).range([0, width]);
+
+    // Y axis labels
+    svg.selectAll(".y-label").data(stats).join("text")
+      .attr("x", -10).attr("y", d => y(d.condition) + y.bandwidth() / 2)
+      .attr("dy", "0.35em").attr("text-anchor", "end")
+      .attr("fill", "#C9D1D9").attr("font-size", "14px")
+      .text(d => `${d.label} (n=${d.n})`);
+
+    // X axis
+    svg.append("g").attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).ticks(4).tickFormat(d3.format(".2f")).tickSize(-height))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").attr("stroke", "#21262D"))
+      .call(g => g.selectAll(".tick text").attr("fill", "#8B949E").attr("font-size", "11px"));
+
+    // Bars
+    svg.selectAll(".bar").data(stats).join("rect")
+      .attr("y", d => y(d.condition)).attr("height", y.bandwidth())
+      .attr("x", 0).attr("width", 0)
+      .attr("fill", d => d.color).attr("rx", 4)
+      .on("mouseover", (event, d) => {
+        tooltip.style("opacity", 1)
+          .html(`<strong>${d.label}</strong><br>Hedging: <span class="val">${d.hedging.toFixed(4)}</span><br>n = ${d.n}`);
+      })
+      .on("mousemove", e => tooltip.style("left", (e.pageX+14)+"px").style("top", (e.pageY-14)+"px"))
+      .on("mouseout", () => tooltip.style("opacity", 0))
+      .transition().duration(800).delay((d, i) => i * 100)
+      .attr("width", d => x(d.hedging));
+
+    // Value labels
+    svg.selectAll(".val-label").data(stats).join("text")
+      .attr("y", d => y(d.condition) + y.bandwidth() / 2).attr("dy", "0.35em")
+      .attr("fill", "#E6EDF3").attr("font-size", "14px").attr("font-weight", "700")
+      .attr("x", 0).attr("opacity", 0)
+      .text(d => d.hedging.toFixed(3))
+      .transition().duration(800).delay((d, i) => i * 100)
+      .attr("x", d => x(d.hedging) + 8).attr("opacity", 1);
+
+    // Annotation on Reverse Turing
+    const rtRow = stats.find(d => d.condition === "ai_ai_reverse_turing");
+    if (rtRow) {
+      svg.append("text")
+        .attr("x", x(rtRow.hedging) + 8)
+        .attr("y", y(rtRow.condition) + y.bandwidth() / 2 + 20)
+        .attr("fill", "#F39C12")
+        .attr("font-size", "13px")
+        .attr("font-weight", "700")
+        .attr("opacity", 0)
+        .text(`+${pctIncrease}% vs Structured`)
+        .transition().duration(800).delay(600)
+        .attr("opacity", 1);
+    }
+  }
+});
+</script>
+</body>
+</html>
