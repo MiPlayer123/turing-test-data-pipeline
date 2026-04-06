@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn-by-Turn Hedging — AI-AI Conversations</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #0D1117;
+    color: #E6EDF3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 40px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 32px; font-weight: 600; margin-bottom: 6px; text-align: center; }
+  .subtitle { font-size: 14px; color: #8B949E; margin-bottom: 12px; text-align: center; }
+  .insight { font-size: 13px; color: #F39C12; margin-bottom: 30px; text-align: center; font-weight: 600; }
+  #chart { width: 100%; max-width: 1100px; }
+  .legend { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #C9D1D9; cursor: pointer; }
+  .legend-item:hover { color: #fff; }
+  .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+  .tooltip {
+    position: absolute; pointer-events: none;
+    background: #161B22; border: 1px solid #30363D; border-radius: 6px;
+    padding: 8px 12px; font-size: 13px; color: #E6EDF3;
+    opacity: 0; transition: opacity 0.15s; z-index: 10;
+  }
+  .tooltip .val { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Do AI Conversations Degrade Over Time?</h1>
+<p class="subtitle">Hedging frequency (per 100 words) across conversation turns &middot; averaged across all conversations per condition</p>
+<p class="insight">Reverse Turing is the only condition where hedging increases — models try harder to "sound human" as conversations progress</p>
+<div class="legend" id="legend"></div>
+<div id="chart"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const CONDITIONS = [
+  { key: "ai_ai_freeform",         label: "Freeform",        color: "#3498DB" },
+  { key: "ai_ai_freeform_persona", label: "Persona",         color: "#9B59B6" },
+  { key: "ai_ai_detective",        label: "Detective",       color: "#E74C3C" },
+  { key: "ai_ai_reverse_turing",   label: "Reverse Turing",  color: "#F39C12" },
+  { key: "ai_ai_structured",       label: "Structured",      color: "#2ECC71" },
+];
+
+const tooltip = d3.select("#tooltip");
+
+d3.csv("/data/processed/turn_metrics.csv").then(raw => {
+  raw.forEach(d => {
+    d.turn_number = +d.turn_number;
+    d.hedging = +d.hedging;
+  });
+
+  // Group by condition and turn, compute mean hedging
+  const conditionData = CONDITIONS.map(cond => {
+    const condRows = raw.filter(d => d.condition === cond.key);
+    const byTurn = d3.group(condRows, d => d.turn_number);
+    const points = [];
+    for (const [turn, rows] of byTurn) {
+      points.push({
+        turn: +turn,
+        mean: d3.mean(rows, r => r.hedging),
+        count: rows.length,
+        min: d3.min(rows, r => r.hedging),
+        max: d3.max(rows, r => r.hedging),
+        q1: d3.quantile(rows.map(r => r.hedging).sort(d3.ascending), 0.25),
+        q3: d3.quantile(rows.map(r => r.hedging).sort(d3.ascending), 0.75),
+      });
+    }
+    points.sort((a, b) => a.turn - b.turn);
+    return { ...cond, points };
+  });
+
+  // Legend
+  const legend = d3.select("#legend");
+  CONDITIONS.forEach(c => {
+    const item = legend.append("div").attr("class", "legend-item");
+    item.append("div").attr("class", "legend-swatch").style("background", c.color);
+    item.append("span").text(c.label);
+  });
+
+  // Chart dimensions
+  const margin = { top: 20, right: 40, bottom: 50, left: 60 };
+  const width = 1060 - margin.left - margin.right;
+  const height = 460 - margin.top - margin.bottom;
+
+  const svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Scales
+  const x = d3.scaleLinear()
+    .domain([2, 20])
+    .range([0, width]);
+
+  const allMeans = conditionData.flatMap(c => c.points.map(p => p.mean));
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(allMeans) * 1.15])
+    .range([height, 0]);
+
+  // Grid lines
+  svg.append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(18).tickSize(-height).tickFormat(d => d))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.selectAll(".tick line").attr("stroke", "#21262D"))
+    .call(g => g.selectAll(".tick text").attr("fill", "#8B949E").attr("font-size", "11px"));
+
+  svg.append("g")
+    .call(d3.axisLeft(y).ticks(6).tickSize(-width).tickFormat(d3.format(".2f")))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.selectAll(".tick line").attr("stroke", "#21262D"))
+    .call(g => g.selectAll(".tick text").attr("fill", "#8B949E").attr("font-size", "11px"));
+
+  // Axis labels
+  svg.append("text")
+    .attr("x", width / 2).attr("y", height + 40)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#8B949E").attr("font-size", "13px")
+    .text("Turn Number");
+
+  svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -height / 2).attr("y", -44)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#8B949E").attr("font-size", "13px")
+    .text("Hedging Frequency (per 100 words)");
+
+  // IQR bands (interquartile range)
+  conditionData.forEach(cond => {
+    const area = d3.area()
+      .x(d => x(d.turn))
+      .y0(d => y(d.q1 || 0))
+      .y1(d => y(d.q3 || 0))
+      .curve(d3.curveMonotoneX);
+
+    svg.append("path")
+      .datum(cond.points)
+      .attr("fill", cond.color)
+      .attr("opacity", 0)
+      .attr("d", area)
+      .transition().duration(1200).delay(200)
+      .attr("opacity", 0.1);
+  });
+
+  // Lines
+  const line = d3.line()
+    .x(d => x(d.turn))
+    .y(d => y(d.mean))
+    .curve(d3.curveMonotoneX);
+
+  conditionData.forEach(cond => {
+    const path = svg.append("path")
+      .datum(cond.points)
+      .attr("fill", "none")
+      .attr("stroke", cond.color)
+      .attr("stroke-width", 2.5)
+      .attr("d", line);
+
+    // Animate line drawing
+    const totalLength = path.node().getTotalLength();
+    path.attr("stroke-dasharray", totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition().duration(1500).ease(d3.easeQuadOut)
+      .attr("stroke-dashoffset", 0);
+
+    // Dots
+    svg.selectAll(`.dot-${cond.key}`).data(cond.points).join("circle")
+      .attr("cx", d => x(d.turn))
+      .attr("cy", d => y(d.mean))
+      .attr("r", 0)
+      .attr("fill", cond.color)
+      .attr("stroke", "#0D1117")
+      .attr("stroke-width", 1.5)
+      .on("mouseover", (event, d) => {
+        tooltip.style("opacity", 1)
+          .html(`<strong>${cond.label}</strong> — Turn ${d.turn}<br>Hedging: <span class="val">${d.mean.toFixed(3)}</span><br>IQR: ${(d.q1||0).toFixed(2)} – ${(d.q3||0).toFixed(2)}<br>n = ${d.count} turns`);
+      })
+      .on("mousemove", e => tooltip.style("left", (e.pageX+14)+"px").style("top", (e.pageY-14)+"px"))
+      .on("mouseout", () => tooltip.style("opacity", 0))
+      .transition().duration(600).delay((d, i) => 800 + i * 50)
+      .attr("r", 4);
+  });
+
+  // Trend annotations
+  const annotate = (cond, label, dx, dy) => {
+    const data = conditionData.find(c => c.key === cond);
+    if (!data) return;
+    const last = data.points[data.points.length - 1];
+    svg.append("text")
+      .attr("x", x(last.turn) + dx)
+      .attr("y", y(last.mean) + dy)
+      .attr("fill", data.color)
+      .attr("font-size", "12px")
+      .attr("font-weight", "600")
+      .attr("opacity", 0)
+      .text(label)
+      .transition().duration(600).delay(2000)
+      .attr("opacity", 1);
+  };
+
+  // Compute deltas for annotations
+  conditionData.forEach(cond => {
+    const pts = cond.points;
+    if (pts.length < 4) return;
+    const earlyAvg = d3.mean(pts.slice(0, 3), p => p.mean);
+    const lateAvg = d3.mean(pts.slice(-3), p => p.mean);
+    const delta = lateAvg - earlyAvg;
+    const arrow = delta > 0 ? "\u2191" : "\u2193";
+    const sign = delta > 0 ? "+" : "";
+    const last = pts[pts.length - 1];
+
+    svg.append("text")
+      .attr("x", x(last.turn) + 8)
+      .attr("y", y(last.mean) + 4)
+      .attr("fill", cond.color)
+      .attr("font-size", "11px")
+      .attr("font-weight", "600")
+      .attr("opacity", 0)
+      .text(`${arrow} ${sign}${delta.toFixed(2)}`)
+      .transition().duration(600).delay(2000)
+      .attr("opacity", 0.9);
+  });
+});
+</script>
+</body>
+</html>
