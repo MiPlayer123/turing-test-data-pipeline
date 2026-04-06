@@ -1,0 +1,159 @@
+{
+  "conversation_id": "conv_human_human_personachat_0071",
+  "condition": "human_human",
+  "model_a": "human",
+  "model_b": "human",
+  "system_prompt_a": "PersonaChat crowdsourced conversation",
+  "system_prompt_b": "PersonaChat crowdsourced conversation",
+  "opening_prompt_id": "PC",
+  "temperature": null,
+  "max_turns": 15,
+  "timestamp_start": null,
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "hi anybody there ? ding dong !",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "the witch is dead . i have a cat his name is speckles",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "thank god the witch is dead . but the cat is not obviously .",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i love going shopping when i am not knitting",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "nice , shop me a candy next time as i'm curious how it tastes like .",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i love tattoos i want to get more only have 2",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "you have plenty of space for them .",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "yes indeed my dog keep eating my shoes",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "cat and dog makes a fun household . i am watching anime .",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i do not like cats they have something weird about them",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "like playing the witch part ? lol",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "my dog like the night air he just lay on the porch at night",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "that is cat like . wow i am confused .",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "he will not lay on the porch no other time",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "gosh that's creepy . i'm going to watch baseball now .",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 162,
+    "total_cost_usd": 0,
+    "source": "AlekseyKorshuk/persona-chat"
+  }
+}

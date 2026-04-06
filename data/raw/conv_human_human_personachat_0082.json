@@ -1,0 +1,159 @@
+{
+  "conversation_id": "conv_human_human_personachat_0082",
+  "condition": "human_human",
+  "model_a": "human",
+  "model_b": "human",
+  "system_prompt_a": "PersonaChat crowdsourced conversation",
+  "system_prompt_b": "PersonaChat crowdsourced conversation",
+  "opening_prompt_id": "PC",
+  "temperature": null,
+  "max_turns": 15,
+  "timestamp_start": null,
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "hi how are you tonight",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "hello , i am doing well . another day , another dollar , driving for the man .",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i know what you mean i'm just so simple",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "true , you seem to be very simple . what kind of work do you do ?",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i am a fisherman mainly",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "a noble pursuit . what kind of bait do you use ?",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "wax worms , night crawlers , minos what ever",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "if i were a fish , i would be all over fried chicken .",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i love it they're both good",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "it is unclear what you are referring to . do you drive ?",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i was refering to bears and i drive to go get sunfish",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "oh okay , totally . so do i , but i get paid for it .",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "that's amazing where do i sign up",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "fill out the necessary paperwork and send it to the rector of your parrish .",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i will have to do that thanks",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 165,
+    "total_cost_usd": 0,
+    "source": "AlekseyKorshuk/persona-chat"
+  }
+}

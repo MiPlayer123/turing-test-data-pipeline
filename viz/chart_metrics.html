@@ -70,18 +70,20 @@
 </head>
 <body>
 
-<h1>Behavioral Metrics Across 5 AI-AI Conversation Conditions</h1>
-<p class="subtitle">162 conversations &middot; 6 LLMs &middot; GPT-5.4, Claude Sonnet 4, Gemini 2.5 Flash, Grok 4.1 Fast, Llama 4 Scout</p>
+<h1>Behavioral Metrics Across Conversation Conditions</h1>
+<p class="subtitle">362 conversations &middot; Human-Human, Human-AI, and AI-AI conditions &middot; 6 LLMs</p>
 <div id="charts"></div>
 <div class="tooltip" id="tooltip"></div>
 
 <script>
 const CONDITIONS = [
-  { key: "ai_ai_detective",        label: "Detective",       color: "#E74C3C" },
-  { key: "ai_ai_freeform",         label: "Freeform",        color: "#3498DB" },
-  { key: "ai_ai_freeform_persona", label: "Persona",         color: "#9B59B6" },
-  { key: "ai_ai_reverse_turing",   label: "Reverse Turing",  color: "#F39C12" },
-  { key: "ai_ai_structured",       label: "Structured",      color: "#2ECC71" },
+  { key: "human_human",            label: "Human-Human",     color: "#1ABC9C" },
+  { key: "human_ai",               label: "Human-AI",        color: "#F1C40F" },
+  { key: "ai_ai_detective",        label: "AI Detective",    color: "#E74C3C" },
+  { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#3498DB" },
+  { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#9B59B6" },
+  { key: "ai_ai_reverse_turing",   label: "AI Rev. Turing",  color: "#F39C12" },
+  { key: "ai_ai_structured",       label: "AI Structured",   color: "#2ECC71" },
 ];
 
 const METRICS = [
@@ -116,7 +118,7 @@ d3.csv("/data/processed/conversations.csv").then(raw => {
 
     const margin = { top: 8, right: 80, bottom: 28, left: 160 };
     const width = 440 - margin.left - margin.right;
-    const height = 280 - margin.top - margin.bottom;
+    const height = 360 - margin.top - margin.bottom;
 
     const svg = container.append("svg")
       .attr("width", width + margin.left + margin.right)

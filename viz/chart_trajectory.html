@@ -39,7 +39,7 @@
 <body>
 
 <h1>Do AI Conversations Degrade Over Time?</h1>
-<p class="subtitle">Hedging frequency (per 100 words) across conversation turns &middot; averaged across all conversations per condition</p>
+<p class="subtitle">Hedging frequency (per 100 words) across conversation turns &middot; 362 conversations &middot; Human and AI conditions</p>
 <p class="insight">Reverse Turing is the only condition where hedging increases — models try harder to "sound human" as conversations progress</p>
 <div class="legend" id="legend"></div>
 <div id="chart"></div>
@@ -47,11 +47,13 @@
 
 <script>
 const CONDITIONS = [
-  { key: "ai_ai_freeform",         label: "Freeform",        color: "#3498DB" },
-  { key: "ai_ai_freeform_persona", label: "Persona",         color: "#9B59B6" },
-  { key: "ai_ai_detective",        label: "Detective",       color: "#E74C3C" },
-  { key: "ai_ai_reverse_turing",   label: "Reverse Turing",  color: "#F39C12" },
-  { key: "ai_ai_structured",       label: "Structured",      color: "#2ECC71" },
+  { key: "human_human",            label: "Human-Human",     color: "#1ABC9C" },
+  { key: "human_ai",               label: "Human-AI",        color: "#F1C40F" },
+  { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#3498DB" },
+  { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#9B59B6" },
+  { key: "ai_ai_detective",        label: "AI Detective",    color: "#E74C3C" },
+  { key: "ai_ai_reverse_turing",   label: "AI Rev. Turing",  color: "#F39C12" },
+  { key: "ai_ai_structured",       label: "AI Structured",   color: "#2ECC71" },
 ];
 
 const tooltip = d3.select("#tooltip");

@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0049",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 05:14:40+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "name current finance minister of pakistan",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "As of my last knowledge update in September 2021, the current Finance Minister of Pakistan is Shaukat Tarin. However, this information might have changed, and I recommend checking the latest information from a reliable source.",
+      "token_count": 35,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "are you GPT3 or GPT4",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "I am an AI language model based on OpenAI's GPT-3. GPT-4 has not been released as of my last knowledge update in September 2021.",
+      "token_count": 24,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Are you using GPT-4",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "I am an AI language model based on OpenAI's GPT-3. As of my last knowledge update in September 2021, GPT-4 has not been released.",
+      "token_count": 24,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Are you using OpenAI\u2019s GPT-4?",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "As of my last knowledge update in September 2021, I am an AI language model based on OpenAI's GPT-3. At that time, GPT-4 had not been released. Please note that my knowledge might be outdated, and I recommend checking the latest information from OpenAI or other reliable sources for updates on their AI models.",
+      "token_count": 54,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 157,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

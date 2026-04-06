@@ -1,0 +1,177 @@
+{
+  "conversation_id": "conv_human_human_personachat_0095",
+  "condition": "human_human",
+  "model_a": "human",
+  "model_b": "human",
+  "system_prompt_a": "PersonaChat crowdsourced conversation",
+  "system_prompt_b": "PersonaChat crowdsourced conversation",
+  "opening_prompt_id": "PC",
+  "temperature": null,
+  "max_turns": 17,
+  "timestamp_start": null,
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "hello . how are you today ?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i am good and i hope you are too",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i am , thank you . where do you live ? i am in a rural area .",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i live in the suburbs in new jersey .",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "that is great . how old are you ? i am a woman and a little older .",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i am in my late forties and live alone",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "what is your favorite food ?",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i love pizza and i love to watch shows about superheroes",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "yummy ! mine is pasta . it is delicious .",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i have a samsung phone but i like i phones better , what about you ?",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "iphone for me . have you heard all the bad news about samsung this year ?",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "yes . . . about the batteries exploding ? what kind of work do you do ?",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "yes and ceo in prison for 5 years for bribery . retired here .",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "wow , that work isn't easy . . . . i have alot of responsibility at work",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "retirement is easy ! but i did it to help people and be with my husband .",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 16,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "right now i have to give 2 monitors for work , that i owe them",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 17,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "helping people is my real love . thank you for chatting with me !",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 223,
+    "total_cost_usd": 0,
+    "source": "AlekseyKorshuk/persona-chat"
+  }
+}

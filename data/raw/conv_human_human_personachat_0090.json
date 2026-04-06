@@ -1,0 +1,159 @@
+{
+  "conversation_id": "conv_human_human_personachat_0090",
+  "condition": "human_human",
+  "model_a": "human",
+  "model_b": "human",
+  "system_prompt_a": "PersonaChat crowdsourced conversation",
+  "system_prompt_b": "PersonaChat crowdsourced conversation",
+  "opening_prompt_id": "PC",
+  "temperature": null,
+  "max_turns": 15,
+  "timestamp_start": null,
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "hey how are you doing",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i'm good , getting ready to head to the bookstore where i work",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "cool , how long have you worked there ?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "3 years , where do you work ?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "still in highschool , hope to because astronaut when i'm older",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "that sounds exciting ! ! do you have any tatoos",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "oh no , my parents would kill me haha",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "ll i've 3 , my parents do not know",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "that is funny , cool , what your fav food",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i love healthy food , veggies and such since moms is nurse",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "o yeah , i'm like garfield , lasagna is my fav",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "eating healthy is easy for me cause i do not have a car",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "haha , that is helps with the fast food , do you have animals ?",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i've never driven , so no drive thus , my dog died recently",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "www wow , sorry to hear that , i've 2 dogs",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 159,
+    "total_cost_usd": 0,
+    "source": "AlekseyKorshuk/persona-chat"
+  }
+}

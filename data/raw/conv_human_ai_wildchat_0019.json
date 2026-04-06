@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0019",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 02:57:38+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "lets brainstorm? Silk-made city architecture",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "1) A city with towering silk spires reaching up to the sky\n2) Houses made of silky fabric stretched between metal frames\n3) Bridges made of multi-colored silk strands linking the buildings\n4) Giant silk cocoons used as public gathering spaces\n5) Gardens filled with silk flowers and trees\n6) Water features with cascading silk waterfalls\n7) Streets lined with silk banners flowing in the wind\n8) Silk fabrics hanging from the buildings to provide shade\n9) Public transportation vehicles enclosed in silk bubbles for comfort and luxury\n10) Silk-wrapped streetlights to illuminate the city at night.",
+      "token_count": 97,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "lets brainstorm? combine these ideas in 10 nonsensical and creative ways: wolf + crayon + coal",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "1) A pack of artistic wolves who use crayons and coal to draw on cave walls.\n2) A wolf with rainbow stripes drawn on its fur using crayons and coal.\n3) A magical crayon that turns into a black wolf when you draw with it using coal.\n4) A pack of coal-colored wolves that hunt for crayons as their prey.\n5) A wolf that uses coal to warm up the tip of its crayon before creating a masterpiece.\n6) A pack of wolves that run a factory where they produce crayons from coal.\n7) A mischievous wolf that sneaks up on unsuspecting people and draws on them with crayons and coal.\n8) A wolf that paints its claws with crayon using coal as a medium for artsy scratch marks.\n9) A wolf that transforms into a pile of coal and crayons when threatened as a defense mechanism.\n10) A group of wolves that form a choir and sing songs made entirely with the sound of crayons and coal rubbing together.",
+      "token_count": 170,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "lets brainstorm? 50 hyponyms of stone",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "1. Pebble\n2. Boulder \n3. Cobblestone \n4. Brick\n5. Flint\n6. Gravel \n7. Slate\n8. Granite\n9. Cement \n10. Limestone\n11. Marble \n12. Flagstone\n13. Pumice\n14. Cinder \n15. Feldspar \n16. Basalt\n17. Sandstone \n18. Gneiss\n19. Travertine \n20. Shale\n21. Soapstone \n22. Onyx \n23. Siltstone\n24. Rhyolite \n25. Diorite \n26. Agate \n27. Obsidian \n28. Chert\n29. Dolomite \n30. Quartzite \n31. Jade \n32. Corundum \n33. Gabbro \n34. Andesite \n35. Galena \n36. Hornblendite \n37. Nephrite \n38. Olivine \n39. Serpentinite \n40. Tuff \n41. Jasper \n42. Bauxite \n43. Amethyst \n44. Chalcopyrite \n45. Feldspathoid \n46. Gypsum \n47. Halite \n48. Septarian \n49. Talc \n50. Zeolite",
+      "token_count": 100,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "continue",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "51. Xenotime\n52. Garnet\n53. Hematite\n54. Mica\n55. Pyrite\n56. Schist\n57. Spinel\n58. Turquoise\n59. Lignite\n60. Galenite",
+      "token_count": 20,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 415,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

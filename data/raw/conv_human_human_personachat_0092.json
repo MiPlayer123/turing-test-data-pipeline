@@ -1,0 +1,159 @@
+{
+  "conversation_id": "conv_human_human_personachat_0092",
+  "condition": "human_human",
+  "model_a": "human",
+  "model_b": "human",
+  "system_prompt_a": "PersonaChat crowdsourced conversation",
+  "system_prompt_b": "PersonaChat crowdsourced conversation",
+  "opening_prompt_id": "PC",
+  "temperature": null,
+  "max_turns": 15,
+  "timestamp_start": null,
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "hey there bro . how is it going ?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i am doing good just feeding my snake",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "sweet ! do you feed your snake beer ?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "no i don't . have you ever went skydiving ?",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "not yet , i don't think a plane could lift me .",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "do you like to play video games ?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "yes but whenever i play , someone always screws up .",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i understand . what games pay ?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "halo is fine . where are you from ?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i'm from the planet saturn",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "are you an alien or something ?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "i am also a famous character online",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "are you in a video game ?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "human",
+      "content": "all i can think about is moving away",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "would you like to move to san francisco ?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 126,
+    "total_cost_usd": 0,
+    "source": "AlekseyKorshuk/persona-chat"
+  }
+}

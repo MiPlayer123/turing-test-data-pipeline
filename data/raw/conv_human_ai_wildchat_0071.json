@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0071",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 07:44:58+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "what is wo dong le",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I am not certain what context or language \"wo dong le\" originates from. However, \"wo dong le\" can translate to \"I understand\" in Mandarin Chinese.",
+      "token_count": 30,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "im referring to chinese",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "In Mandarin Chinese, \"wo dong le\" (\u6211\u61c2\u4e86) is a phrase that can be translated to \"I understand\" in English.",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "what about haoxing",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "In Mandarin Chinese, \"haoxing\" (\u597d\u884c) can have various meanings depending on the context. It could mean \"good luck\", \"may it go well\", or \"have a good trip.\"",
+      "token_count": 27,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "how about houxu",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "In Mandarin Chinese, \"houxu\" (\u540e\u7eed) means \"follow-up\" or \"subsequent\". It refers to something that comes after an initial event or action is taken. For example, when making plans, you may discuss the \"houxu,\" or the follow-up details that need to be considered and addressed later.",
+      "token_count": 45,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 136,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

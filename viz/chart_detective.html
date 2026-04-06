@@ -44,6 +44,8 @@
 
 <script>
 const CONDITION_COLORS = {
+  human_human:            "#1ABC9C",
+  human_ai:               "#F1C40F",
   ai_ai_detective:        "#E74C3C",
   ai_ai_freeform:         "#3498DB",
   ai_ai_freeform_persona: "#9B59B6",
@@ -51,11 +53,13 @@ const CONDITION_COLORS = {
   ai_ai_structured:       "#2ECC71",
 };
 const CONDITION_LABELS = {
-  ai_ai_detective:        "Detective",
-  ai_ai_freeform:         "Freeform",
-  ai_ai_freeform_persona: "Persona",
-  ai_ai_reverse_turing:   "Reverse Turing",
-  ai_ai_structured:       "Structured",
+  human_human:            "Human-Human",
+  human_ai:               "Human-AI",
+  ai_ai_detective:        "AI Detective",
+  ai_ai_freeform:         "AI Freeform",
+  ai_ai_freeform_persona: "AI Persona",
+  ai_ai_reverse_turing:   "AI Rev. Turing",
+  ai_ai_structured:       "AI Structured",
 };
 const MODEL_COLORS = {
   "gpt-5.4":          "#10A37F",
@@ -191,7 +195,7 @@ d3.csv("/data/processed/conversations.csv").then(raw => {
 
     const margin = { top: 24, right: 120, bottom: 36, left: 180 };
     const width = 600 - margin.left - margin.right;
-    const height = 320 - margin.top - margin.bottom;
+    const height = 400 - margin.top - margin.bottom;
 
     const svg = container.append("svg")
       .attr("width", width + margin.left + margin.right)
