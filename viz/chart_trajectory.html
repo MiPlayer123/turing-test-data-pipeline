@@ -93,8 +93,8 @@ d3.csv("/data/processed/turn_metrics.csv").then(raw => {
   });
 
   // Chart dimensions
-  const margin = { top: 20, right: 40, bottom: 50, left: 60 };
-  const width = 1060 - margin.left - margin.right;
+  const margin = { top: 20, right: 100, bottom: 50, left: 60 };
+  const width = 1120 - margin.left - margin.right;
   const height = 460 - margin.top - margin.bottom;
 
   const svg = d3.select("#chart").append("svg")
@@ -140,23 +140,6 @@ d3.csv("/data/processed/turn_metrics.csv").then(raw => {
     .attr("text-anchor", "middle")
     .attr("fill", "#8B949E").attr("font-size", "13px")
     .text("Hedging Frequency (per 100 words)");
-
-  // IQR bands (interquartile range)
-  conditionData.forEach(cond => {
-    const area = d3.area()
-      .x(d => x(d.turn))
-      .y0(d => y(d.q1 || 0))
-      .y1(d => y(d.q3 || 0))
-      .curve(d3.curveMonotoneX);
-
-    svg.append("path")
-      .datum(cond.points)
-      .attr("fill", cond.color)
-      .attr("opacity", 0)
-      .attr("d", area)
-      .transition().duration(1200).delay(200)
-      .attr("opacity", 0.1);
-  });
 
   // Lines
   const line = d3.line()
