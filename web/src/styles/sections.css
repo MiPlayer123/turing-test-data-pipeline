@@ -1,0 +1,144 @@
+/* ===== Section layout ===== */
+.scroll-section {
+  position: relative;
+  width: 100%;
+}
+
+/* Sticky graphic container */
+.sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Scrolling narrative steps */
+.scroll-steps {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+.scroll-steps > * { pointer-events: auto; }
+
+.step {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+}
+
+/* Narrative text cards */
+.narrative-card {
+  background: rgba(22, 27, 34, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid #30363D;
+  border-radius: 12px;
+  padding: 28px 32px;
+  max-width: 420px;
+}
+.narrative-card h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.narrative-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #C9D1D9;
+}
+
+/* ===== Hero section ===== */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+#hero .overline {
+  font-size: 16px;
+  color: #8B949E;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+#hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  max-width: 800px;
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+#hero .subtitle {
+  font-size: 18px;
+  color: #8B949E;
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+.stats-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.stat-box {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 12px;
+  padding: 20px 32px;
+  text-align: center;
+}
+.stat-box .number {
+  font-size: 36px;
+  font-weight: 700;
+  display: block;
+}
+.stat-box .label {
+  font-size: 13px;
+  color: #8B949E;
+  margin-top: 4px;
+}
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8B949E;
+  font-size: 14px;
+  animation: bounce 2s ease infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ===== Section titles ===== */
+.section-header {
+  text-align: center;
+  padding: 80px 40px 40px;
+}
+.section-header h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  margin-bottom: 12px;
+}
+.section-header p {
+  font-size: 16px;
+  color: #8B949E;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== Viz containers ===== */
+.viz-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== Transition between sections ===== */
+.section-divider {
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #0D1117);
+}

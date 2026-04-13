@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0055",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 05:41:40+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Make a story about young woman named Sherri Carter who works as baker from Brigham City, Utah. She discovered a newspaper about mystery of reform school named Panorama School for Girls where she studied. She felt shocked and traumatized about the situation. She raised by a Mormon family.",
+      "token_count": 48,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sherri Carter had always loved baking, ever since she was a little girl growing up in Brigham City, Utah. She loved the way the butter and sugar melted together in the heat of the oven, creating something deliciously aromatic and warm. She had started working at a local bakery when she was just eighteen years old, and had quickly become their star baker. Everyone who tasted her cakes and breads raved about how amazing they were.\n\nBut even though Sherri had a talent for baking, she also had a lot of secrets buried deep within her. She had been raised by a strict Mormon family, who had instilled in her a sense of duty and obligation to her faith. But Sherri had always felt like there was something missing in her life, something that she couldn't quite put her finger on.\n\nOne day, while she was working at the bakery, Sherri stumbled across a newspaper article that would change her life forever. The article was about a reform school for girls called Panorama School for Girls, which had recently been closed down due to allegations of abuse and mistreatment.\n\nAs Sherri read the article, her heart raced faster and faster. She realized with a shock that she had attended that very school when she was a young teenager, and that she had been subjected to the same horrific abuse and mistreatment that the other girls had reported.\n\nSherri felt traumatized by the memories flooding back to her. She had tried so hard to forget about her time at Panorama, to bury the memories and move on with her life. But now, faced with the reality of what had happened, she knew that she had to do something.\n\nSherri quit her job at the bakery and started doing some research on Panorama. She read everything she could find about the school and the people who had run it, and she reached out to some of the other girls who had been there with her.\n\nTogether, Sherri and the other girls formed a support group to help each other heal from the trauma they had experienced at Panorama. They went public with their stories, and eventually, the people responsible for running the school were brought to justice.\n\nThrough her experience, Sherri found a new sense of purpose in her life. She started a nonprofit bakery, where she could use her baking skills to help other women who had experienced trauma and abuse. And she continued to use her voice to speak out against injustice, making sure that what happened at Panorama would never be forgotten.",
+      "token_count": 433,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "When Sherri was teenager, her parents wanted to Sherri to go in reform school. Sherri Carter and Martha Dudley were best friends since childhood and they were enrolled for Panorama.",
+      "token_count": 30,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sherri's parents had always been very strict and they believed that their daughter needed to be \"fixed\" in some way. They had heard about Panorama School for Girls from some other parents in their church, who swore that it had changed their daughters for the better.\n\nSherri was devastated when she found out that she was going to be sent away to Panorama. She had always been a happy, outgoing girl, but she knew that her parents wouldn't listen to her if she tried to argue with them.\n\nWhen she arrived at the school, Sherri was relieved to find that her best friend Martha Dudley was also there. Martha had been sent to Panorama for similar reasons as Sherri, and the two girls were overjoyed to be together again.\n\nBut as the days went on, Sherri and Martha realized that Panorama was not the idyllic place that they had been promised. The girls were subjected to harsh punishment for even the smallest infractions, such as talking during mealtime or failing to make their beds perfectly.\n\nSherri and Martha both struggled to adjust to the strict routines of the school, but they found comfort in each other's company. They shared a bunk bed in their dormitory and would whisper together late into the night, dreaming of the day when they would be free to go home.\n\nHowever, as time went on, Sherri began to notice that there was something deeply wrong with the school. The teachers were often cruel and abusive, and some of the girls had unexplained bruises or cuts on their bodies. Sherri knew that she had to do something to help her friends and herself, but she didn't know where to turn.\n\nIt wasn't until years later, when she discovered the newspaper articles about Panorama, that Sherri felt brave enough to share her story. She reached out to Martha, who had also been deeply affected by her time at the school, and together they worked to raise awareness about the situation.\n\nThrough their bravery and determination, Sherri and Martha were able to help bring about justice for themselves and the other girls who had suffered at the hands of the school. Though their time at Panorama had left them scarred, they found solace in each other's friendship and in the knowledge that their voices had been heard.",
+      "token_count": 389,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Panorama School for Girls forced students to wear school uniforms.",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As part of the strict and regimented routine at Panorama School for Girls, the students were required to wear school uniforms at all times. Sherri Carter and Martha Dudley, like all the other girls, were given a plain grey skirt and white blouse to wear each day.\n\nAt first, Sherri didn't mind the uniforms too much. She saw it as just another element of the school's strict routine, and didn't give it too much thought. But as she spent more time at Panorama, she began to feel increasingly uncomfortable and trapped by the clothing she was forced to wear.\n\nThe uniform made her feel like a faceless drone, just another girl in an endless sea of grey and white. She longed to express herself through her clothing, to wear something bright and colorful that would stand out from the crowd.\n\nBut at Panorama, individuality was not encouraged. The school's administrators believed that conformity was key to rehabilitation, and that the girls needed to be stripped of their personal identities in order to be \"fixed.\"\n\nSherri resented this attitude, and longed to break free from the monotony of the uniform. But she knew that any attempt to deviate from the school's strict dress code would be met with punishment and even more restrictions.\n\nIt wasn't until years later, when she was free from Panorama and had found her own voice, that Sherri realized just how oppressive the school's uniform policy had been. She knew that young girls needed to have the freedom to express themselves through their clothing, and that forcing them to conform was a form of psychological control.\n\nToday, Sherri uses her voice to advocate for greater freedom of expression, and to fight against the kinds of oppressive policies that she encountered at Panorama. She knows that individuality and personal expression are key to a healthy, happy life, and she wants to make sure that young people today have the chance to be their own unique selves, free from the kind of harmful control that she experienced at the hands of the school.",
+      "token_count": 344,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Despite Sherri goes to the public school since she was elementary.",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Despite attending public school since she was in elementary, Sherri was still sent to Panorama School for Girls as a teen. Her parents believed that the school's strict program was necessary to help \"fix\" their daughter, and Sherri found herself powerless to resist.\n\nHowever, Sherri's experience at Panorama taught her the value of education and of having access to a wide variety of educational experiences. At Panorama, the curriculum was extremely limited, focusing mostly on basic academics and nothing else.\n\nAfter leaving the school, Sherri was determined to make up for lost time. She threw herself into her studies, eventually earning a degree in business from a local community college.\n\nSherri knew that education was key to her future success, and she was grateful for the education she had received in public school. She believed that all young people should have the chance to learn and grow in a supportive, nurturing environment, and she worked tirelessly to give back to her community.\n\nToday, Sherri is the proud owner of a successful bakery, where she employs young people from diverse backgrounds, giving them the chance to learn valuable skills and get hands-on experience in the culinary arts. She knows that education is about more than just classroom learning, and that real-world experience is crucial to success.\n\nThrough her work at the bakery and her advocacy for education, Sherri is helping to create a brighter future not just for herself, but for all the young people who face similar struggles and challenges. She knows that with hard work, dedication, and a commitment to lifelong learning, anything is possible.",
+      "token_count": 266,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Sherri met the women who abused from the reform school",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "After the closure of Panorama School for Girls and the subsequent investigation into the allegations of abuse and mistreatment, Sherri Carter found herself face-to-face with some of the women who had been responsible for her own abuse.\n\nIt was a difficult and emotional moment for Sherri, who had spent years trying to come to terms with what had happened to her at the school. To see the women who had caused her so much pain was a jarring experience, and Sherri wasn't sure if she was strong enough to handle it.\n\nBut despite her fear and apprehension, Sherri knew that she had to face her abusers head-on. She wanted to confront them about what they had done, to hold them accountable for the harm they had caused to her and so many other young women.\n\nWith the support of her fellow survivors and a team of advocates and counselors, Sherri met with the women who had worked at Panorama. It was a difficult and emotional meeting, with tears and anger on both sides.\n\nBut in the end, Sherri was able to find closure and begin the healing process. She found that confronting her abusers had given her a sense of power and control that she had been missing for so long.\n\nThrough her bravery and determination, Sherri became a powerful advocate for survivors of abuse and trauma, speaking out about her experience and helping others to find the courage to speak their own truth.\n\nHer journey was not an easy one, but Sherri emerged from it stronger and more determined than ever to make a difference in the world. Today, she continues to use her voice and her platform to create change and advocate for a brighter future for all.",
+      "token_count": 290,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 1831,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

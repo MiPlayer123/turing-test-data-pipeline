@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can You Tell If You're Talking to an AI?</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Section 1: Hero -->
+    <section id="hero" class="scroll-section">
+      <p class="overline">Can you tell if you're talking to an AI?</p>
+      <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
+      <p class="subtitle">We put 6 AIs in a room and asked them to figure out who was human.</p>
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="number" data-count="362">0</span>
+          <span class="label">conversations</span>
+        </div>
+        <div class="stat-box">
+          <span class="number" data-count="6">0</span>
+          <span class="label">LLMs</span>
+        </div>
+        <div class="stat-box">
+          <span class="number" data-count="7">0</span>
+          <span class="label">conditions</span>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>&#x2193;</span> scroll to explore
+      </div>
+    </section>
+
+    <!-- Section 2: What is humanness? -->
+    <section id="metrics-section" class="scroll-section">
+      <div class="section-header">
+        <h2>What is humanness?</h2>
+        <p>Three signals. Click each card to learn what it measures. Then see how Human-Human, Human-AI, and AI-AI conversations compare.</p>
+      </div>
+      <div class="metric-cards" id="metric-cards"></div>
+      <div style="height: 80px;"></div>
+    </section>
+
+    <!-- Section 3: Who detects who? -->
+    <section id="detective-section" class="scroll-section">
+      <div class="section-header">
+        <h2>Who detects who — and who gets fooled</h2>
+        <p>Detective accuracy by model. Claude's 50% is the punchline — it trusted the casual hedging language.</p>
+      </div>
+      <div class="viz-container" id="detective-viz"></div>
+      <div style="height: 80px;"></div>
+    </section>
+
+    <!-- Section 4: Trajectory -->
+    <section id="trajectory-section" class="scroll-section">
+      <div class="section-header">
+        <h2>The longer it goes, the harder they try.</h2>
+        <p>Each line = one condition's average. Each dot = one conversation turn. Click any dot to read that message.</p>
+      </div>
+      <div class="viz-container" id="trajectory-viz"></div>
+      <div style="height: 80px;"></div>
+    </section>
+
+    <!-- Section 5: 3D Explorer -->
+    <section id="explorer-section" class="scroll-section">
+      <div class="section-header">
+        <h2>Explore the conversation space</h2>
+        <p>Every dot is a conversation. Rotate, zoom, and click to read. Where do human conversations cluster vs AI?</p>
+      </div>
+      <div id="explorer-viz" style="width: 100%; height: 70vh;"></div>
+      <div class="filter-chips" id="explorer-filters"></div>
+      <div style="height: 80px;"></div>
+    </section>
+
+    <!-- Section 6: Can YOU guess? -->
+    <section id="guess-section" class="scroll-section">
+      <div class="section-header">
+        <h2>Can YOU guess?</h2>
+        <p>Read a real conversation excerpt. Is it human or AI?</p>
+      </div>
+      <div class="viz-container" id="guess-viz">
+        <div style="text-align: center; padding: 60px 0; color: #8B949E;">
+          <p style="font-size: 48px; margin-bottom: 16px;">🤔</p>
+          <p>Interactive guessing game — coming soon</p>
+        </div>
+      </div>
+      <div style="height: 120px;"></div>
+    </section>
+
+  </div>
+
+  <!-- Shared UI -->
+  <div class="tooltip" id="tooltip"></div>
+  <div class="panel-overlay" id="panel-overlay"></div>
+  <div class="side-panel" id="conversation-panel">
+    <div class="panel-header">
+      <div>
+        <h3 id="panel-title">Conversation</h3>
+        <p class="text-muted" id="panel-subtitle" style="font-size: 12px; margin-top: 4px;"></p>
+      </div>
+      <button class="panel-close" id="panel-close">&times;</button>
+    </div>
+    <div class="panel-metrics" id="panel-metrics"></div>
+    <div class="panel-chat" id="panel-chat"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

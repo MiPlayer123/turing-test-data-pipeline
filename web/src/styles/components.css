@@ -1,0 +1,196 @@
+/* ===== Metric cards ===== */
+.metric-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.metric-card {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 12px;
+  padding: 24px;
+  flex: 1;
+  min-width: 280px;
+  max-width: 340px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.metric-card:hover {
+  border-color: #58A6FF;
+  transform: translateY(-2px);
+}
+.metric-card.expanded {
+  max-width: 100%;
+  flex-basis: 100%;
+}
+.metric-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.metric-card .card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.metric-card .card-expand {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #21262D;
+  border: 1px solid #30363D;
+  color: #8B949E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.metric-card:hover .card-expand {
+  background: #30363D;
+}
+.metric-card .card-description {
+  font-size: 13px;
+  color: #8B949E;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.metric-card .card-chart {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+/* ===== Filter chips ===== */
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px 0;
+}
+.chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+  user-select: none;
+}
+.chip.active { opacity: 1; }
+.chip.inactive { opacity: 0.35; }
+
+/* ===== Conversation reader panel ===== */
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background: #161B22;
+  border-left: 1px solid #30363D;
+  z-index: 900;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.side-panel.open { transform: translateX(0); }
+
+.panel-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #30363D;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.panel-header h3 { font-size: 16px; }
+.panel-close {
+  background: none;
+  border: none;
+  color: #8B949E;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+}
+.panel-close:hover { color: #E6EDF3; }
+
+.panel-metrics {
+  display: flex;
+  gap: 16px;
+  padding: 12px 24px;
+  border-bottom: 1px solid #21262D;
+  flex-shrink: 0;
+}
+.panel-metric {
+  text-align: center;
+}
+.panel-metric .pm-value {
+  font-size: 18px;
+  font-weight: 700;
+  display: block;
+}
+.panel-metric .pm-label {
+  font-size: 10px;
+  color: #8B949E;
+  text-transform: uppercase;
+}
+
+.panel-chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 24px;
+}
+
+/* Chat bubbles */
+.chat-bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.chat-bubble.speaker-a {
+  background: #21262D;
+  border-bottom-left-radius: 4px;
+  margin-right: auto;
+}
+.chat-bubble.speaker-b {
+  background: #1C2333;
+  border-bottom-right-radius: 4px;
+  margin-left: auto;
+}
+.chat-speaker {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+.chat-turn-num {
+  font-size: 10px;
+  color: #8B949E;
+  margin-top: 4px;
+}
+
+/* ===== Panel overlay ===== */
+.panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 899;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.panel-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}

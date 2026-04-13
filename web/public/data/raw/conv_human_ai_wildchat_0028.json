@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0028",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 03:43:29+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "What is Rick Ross' most popular song to date?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Rick Ross' most popular song to date is \"Hustlin',\" which was released in 2006 and became his debut single.",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Was the instrumental used in that song considered to be ahead of it's time",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The instrumental in \"Hustlin'\" was produced by J.R. Rotem and features a sample from the 1978 song \"Everybody Loves the Sunshine\" by Roy Ayers. It was considered to be a unique blend of southern hip-hop and soulful jazz elements, which was not common at the time. The beat and production were widely praised and helped to establish Rick Ross as a rising star in the rap industry. However, whether it was considered ahead of its time is subjective and open to interpretation.",
+      "token_count": 82,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Does the sample have a synthesizer in the song",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, the sample used in \"Hustlin'\" features a prominent synthesizer, which has become a recognizable element of the song. The synthesizer riff comes from the beginning of the original source track, \"Everybody Loves the Sunshine\" by Roy Ayers. J.R. Rotem, the producer, also added additional instrumentation and drums to create the beat for \"Hustlin'.\"",
+      "token_count": 54,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Which synthesizer was used in the sample if you know",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The specific synthesizer used in the sample from \"Everybody Loves the Sunshine\" by Roy Ayers is not publicly known. However, some music experts believe that the synthesizer used in the original recording may have been an ARP Odyssey, which was a popular synthesizer in the 1970s. The ARP Odyssey was known for its fat, warm sound and was used by many notable musicians of the time, including Stevie Wonder, Herbie Hancock, and Kraftwerk.",
+      "token_count": 73,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "It sounded more like a minimoog than an Odyssey",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "You may be right. It's possible that the synthesizer used in \"Everybody Loves the Sunshine\" was a Minimoog, which is another popular analog synthesizer that was widely used in the 1970s. The Minimoog was known for its thick, rich sound and was used on countless classic recordings from that era. Even though the identity of the specific synthesizer used in the sample is not publicly known, it's likely that either the ARP Odyssey or Minimoog could have been used to create that distinctive sound.",
+      "token_count": 84,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 363,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}
