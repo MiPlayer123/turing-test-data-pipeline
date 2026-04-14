@@ -9,92 +9,187 @@
 <body>
   <div id="app">
 
-    <!-- Section 1: Hero -->
-    <section id="hero" class="scroll-section">
-      <p class="overline">Can you tell if you're talking to an AI?</p>
-      <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
-      <p class="subtitle">We put 6 AIs in a room and asked them to figure out who was human. Here's what we found.</p>
-      <div class="stats-row">
-        <div class="stat-box">
-          <span class="number" data-count="362">0</span>
-          <span class="label">conversations</span>
-        </div>
-        <div class="stat-box">
-          <span class="number" data-count="6">0</span>
-          <span class="label">LLMs</span>
-        </div>
-        <div class="stat-box">
-          <span class="number" data-count="7">0</span>
-          <span class="label">conditions</span>
-        </div>
+    <!-- ============================================================ -->
+    <!-- ACT 1: THE HOOK                                              -->
+    <!-- ============================================================ -->
+    <section id="act-hook" class="act">
+      <!-- Step 0: Just a conversation, no context -->
+      <div class="full-screen center-content">
+        <div id="hook-chat" class="hook-chat"></div>
       </div>
-      <div class="scroll-hint">
-        <span>&#x2193;</span> scroll to explore
+      <!-- Step 1: The question -->
+      <div class="full-screen center-content">
+        <h2 class="big-question" id="hook-question">Is this human or AI?</h2>
       </div>
-    </section>
-
-    <!-- Pull quote: a real AI conversation excerpt -->
-    <div class="pull-quote fade-in">
-      <blockquote>"I mean... I guess I'd say I'm pretty sure I'm human? Like, I can feel the chair I'm sitting on right now."</blockquote>
-      <cite>— Claude Sonnet 4, pretending to be human in a Reverse Turing conversation</cite>
-    </div>
-
-    <!-- Section 2: What is humanness? -->
-    <section id="metrics-section" class="scroll-section">
-      <div class="section-header">
-        <h2>What is humanness?</h2>
-        <p>We measured three signals in every conversation. Click each card to see how humans and AIs differ — the gaps are larger than you'd expect.</p>
-      </div>
-      <div class="metric-cards" id="metric-cards"></div>
-    </section>
-
-    <!-- Section 3: Who detects who? -->
-    <section id="detective-section" class="scroll-section">
-      <div class="section-header left">
-        <h2>Who detects who — and who gets fooled</h2>
-        <p>We gave each AI a simple task: figure out if your conversation partner is human or AI. GPT-5.4 nailed it every time. Claude? It got fooled half the time — it trusted the casual, hedging language that AIs use when they're trying to sound human.</p>
-      </div>
-      <div class="viz-container wide" id="detective-viz"></div>
-    </section>
-
-    <!-- Pull quote -->
-    <div class="pull-quote fade-in">
-      <blockquote>"That 'gut reaction' was VERY telling..."</blockquote>
-      <cite>— Claude Sonnet 4 interrogating Grok 4.1 Fast, moments before guessing wrong</cite>
-    </div>
-
-    <!-- Section 4: Trajectory -->
-    <section id="trajectory-section" class="scroll-section">
-      <div class="section-header">
-        <h2>The longer it goes, the harder they try.</h2>
-        <p>Watch how hedging changes turn by turn. Most conditions settle down over time — but when AIs are told to "prove they're human," they hedge more and more. Faking humanness is itself the tell.</p>
-      </div>
-      <div class="viz-container wide" id="trajectory-viz"></div>
-    </section>
-
-    <!-- Section 5: 3D Explorer -->
-    <section id="explorer-section" class="scroll-section">
-      <div class="section-header">
-        <h2>Explore the conversation space</h2>
-        <p>Every dot is a conversation. The surface shows where conversations cluster. Human-human conversations sit in a distinct region — AI conversations spread outward, especially when they try to seem human. Rotate, zoom, and hover to explore.</p>
-      </div>
-      <div id="explorer-viz" style="width: 100%; height: 75vh; position: relative;"></div>
-      <div class="filter-chips" id="explorer-filters" style="max-width: 900px; margin: 16px auto;"></div>
-    </section>
-
-    <!-- Section 6: Can YOU guess? -->
-    <section id="guess-section" class="scroll-section">
-      <div class="section-header">
-        <h2>Can you do better than Claude?</h2>
-        <p>Read a real conversation excerpt. Is it human or AI? Claude only got it right 50% of the time. See if you can beat it.</p>
-      </div>
-      <div class="viz-container" id="guess-viz">
-        <div style="text-align: center; padding: 80px 0; color: #484F58;">
-          <p style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 16px; color: #8B949E;">Coming soon</p>
-          <p style="font-size: 14px;">Interactive guessing game</p>
+      <!-- Step 2: The reveal -->
+      <div class="full-screen center-content">
+        <div id="hook-reveal" class="hook-reveal">
+          <p class="reveal-label">This was</p>
+          <h2>Claude Sonnet 4</h2>
+          <p class="reveal-sub">pretending to be human in a Reverse Turing conversation</p>
         </div>
       </div>
-      <div style="height: 160px;"></div>
+      <!-- Step 3: Thesis -->
+      <div class="full-screen center-content">
+        <div class="thesis-block">
+          <p class="overline">Can you tell if you're talking to an AI?</p>
+          <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
+          <p class="thesis-sub">We put 6 AIs in a room and asked them to figure out who was human.</p>
+          <div class="stats-row" id="stats-row">
+            <div class="stat-box"><span class="number" data-count="362">0</span><span class="label">conversations</span></div>
+            <div class="stat-box"><span class="number" data-count="6">0</span><span class="label">LLMs</span></div>
+            <div class="stat-box"><span class="number" data-count="7">0</span><span class="label">conditions</span></div>
+          </div>
+          <div class="scroll-hint"><span>&#x2193;</span> scroll to explore</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACT 2: WHAT WE MEASURED                                      -->
+    <!-- ============================================================ -->
+    <section id="act-metrics" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="metrics-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>What makes a conversation "human"?</h3>
+            <p>We analyzed 362 conversations — human-to-human, human-to-AI, and AI-to-AI — and measured three behavioral signals.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Signal 1: Hedging</h3>
+            <p>"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they're <em>trying</em> to sound human.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>Signal 2: Repetitiveness</h3>
+            <p>How much does a speaker repeat themselves? We measured 3-gram overlap between consecutive turns from the same speaker.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>Signal 3: Coherence</h3>
+            <p>How connected are consecutive turns? Word overlap between back-and-forth messages. Higher means the conversation stays on topic.</p>
+          </div>
+        </div>
+        <div class="step" data-step="4">
+          <div class="step-card">
+            <h3>The full picture</h3>
+            <p>Here's how all seven conditions compare across these three metrics. The gaps are bigger than you'd expect.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACT 3: THE DETECTIVE GAME                                    -->
+    <!-- ============================================================ -->
+    <section id="act-detective" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="detective-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>The detective game</h3>
+            <p>We gave each AI a simple task: talk to another AI, and figure out if your partner is human or machine.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>GPT-5.4 nailed it</h3>
+            <p>100% accuracy. It identified every AI conversation partner correctly. Never fooled.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>Claude? Coin flip.</h3>
+            <p>50% accuracy — no better than random chance. It kept guessing "human" because it trusted the casual, hedging language.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>The hedging connection</h3>
+            <p>Why did Claude get fooled? Look at the hedging data. The "Reverse Turing" condition — where AIs try to prove they're human — produces the most hedging. Claude mistook that faking for authenticity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACT 4: THE TIMELINE                                          -->
+    <!-- ============================================================ -->
+    <section id="act-trajectory" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="trajectory-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>The longer it goes, the harder they try.</h3>
+            <p>Watch how hedging changes turn by turn across a conversation. Each line is one condition, averaged across all conversations.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Humans settle in</h3>
+            <p>Human-human conversations start with some hedging, then relax. People get comfortable.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>AIs follow the same pattern...</h3>
+            <p>Most AI conditions show the same downward trend. Freeform, structured, persona — they all settle down over time.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>Except when they're faking it</h3>
+            <p>Reverse Turing — where AIs are told "prove you're human" — is the <strong>only</strong> condition where hedging goes <em>up</em>. The harder they try, the more they give themselves away.</p>
+          </div>
+        </div>
+        <div class="step" data-step="4">
+          <div class="step-card">
+            <h3>The full timeline</h3>
+            <p>All conditions together. Use the filters below the chart to isolate specific conditions or models.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACT 5: THE FULL PICTURE (3D)                                 -->
+    <!-- ============================================================ -->
+    <section id="act-explorer" class="act">
+      <div class="full-screen center-content" style="flex-direction:column; padding:40px;">
+        <div style="max-width:680px; text-align:center; margin-bottom:32px;">
+          <h2 style="margin-bottom:14px;">Explore the conversation space</h2>
+          <p style="color:#8B949E; font-size:16px; line-height:1.6;">You've seen these metrics one at a time. Now see them all together. Every dot is a conversation. The surface shows where they cluster. Rotate, zoom, and hover to explore.</p>
+        </div>
+        <div id="explorer-viz" style="width:100%; flex:1; min-height:500px; position:relative;"></div>
+        <div class="filter-chips" id="explorer-filters" style="max-width:900px; margin:12px auto 0;"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACT 6: YOUR TURN                                             -->
+    <!-- ============================================================ -->
+    <section id="act-guess" class="act">
+      <div class="full-screen center-content">
+        <div style="max-width:600px; text-align:center;">
+          <h2 style="margin-bottom:14px;">Can you do better than Claude?</h2>
+          <p style="color:#8B949E; font-size:16px; margin-bottom:40px;">Claude only got it right 50% of the time. See if you can beat it.</p>
+          <div style="color:#484F58; padding:40px 0;">
+            <p style="font-family:'Playfair Display',serif; font-size:24px; color:#8B949E; margin-bottom:12px;">Coming soon</p>
+            <p style="font-size:14px;">Interactive guessing game</p>
+          </div>
+        </div>
+      </div>
     </section>
 
   </div>
@@ -105,8 +200,8 @@
   <div class="side-panel" id="conversation-panel">
     <div class="panel-header">
       <div>
-        <h3 id="panel-title" style="font-size: 16px;">Conversation</h3>
-        <p class="text-muted" id="panel-subtitle" style="font-size: 12px; margin-top: 4px;"></p>
+        <h3 id="panel-title" style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;">Conversation</h3>
+        <p class="text-muted" id="panel-subtitle" style="font-size:12px; margin-top:4px;"></p>
       </div>
       <button class="panel-close" id="panel-close">&times;</button>
     </div>
