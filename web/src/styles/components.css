@@ -1,31 +1,24 @@
 /* ===== Metric cards ===== */
 .metric-cards {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: flex-start;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 48px;
 }
 .metric-card {
   background: #161B22;
   border: 1px solid #30363D;
   border-radius: 12px;
   padding: 24px;
-  flex: 1;
-  min-width: 280px;
-  max-width: 340px;
+  width: 320px;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s;
 }
 .metric-card:hover {
   border-color: #58A6FF;
-  transform: translateY(-2px);
-}
-.metric-card.expanded {
-  max-width: 100%;
-  flex-basis: 100%;
 }
 .metric-card .card-header {
   display: flex;
@@ -34,8 +27,10 @@
   margin-bottom: 8px;
 }
 .metric-card .card-title {
-  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
   font-weight: 600;
+  color: #f0f3f6;
 }
 .metric-card .card-expand {
   width: 24px;
@@ -49,19 +44,20 @@
   justify-content: center;
   font-size: 14px;
   transition: background 0.2s;
+  flex-shrink: 0;
 }
-.metric-card:hover .card-expand {
-  background: #30363D;
-}
+.metric-card:hover .card-expand { background: #30363D; }
 .metric-card .card-description {
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   color: #8B949E;
-  line-height: 1.5;
-  margin-bottom: 16px;
+  line-height: 1.55;
+  margin-bottom: 12px;
 }
 .metric-card .card-chart {
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  transition: max-height 0.5s ease;
+  max-height: 0;
 }
 
 /* ===== Filter chips ===== */
@@ -75,6 +71,7 @@
 .chip {
   padding: 6px 14px;
   border-radius: 20px;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
   border: 1px solid;
@@ -84,6 +81,23 @@
 }
 .chip.active { opacity: 1; }
 .chip.inactive { opacity: 0.35; }
+
+/* ===== Chart annotations ===== */
+.annotation-line {
+  stroke: #8B949E;
+  stroke-width: 1;
+  stroke-dasharray: 4,3;
+}
+.annotation-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  fill: #8B949E;
+}
+.annotation-text.highlight {
+  fill: #F39C12;
+  font-weight: 600;
+  font-size: 13px;
+}
 
 /* ===== Conversation reader panel ===== */
 .side-panel {
@@ -111,7 +125,6 @@
   align-items: flex-start;
   flex-shrink: 0;
 }
-.panel-header h3 { font-size: 16px; }
 .panel-close {
   background: none;
   border: none;
@@ -120,7 +133,7 @@
   cursor: pointer;
   padding: 4px;
 }
-.panel-close:hover { color: #E6EDF3; }
+.panel-close:hover { color: #f0f3f6; }
 
 .panel-metrics {
   display: flex;
@@ -129,15 +142,16 @@
   border-bottom: 1px solid #21262D;
   flex-shrink: 0;
 }
-.panel-metric {
-  text-align: center;
-}
+.panel-metric { text-align: center; }
 .panel-metric .pm-value {
-  font-size: 18px;
-  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #f0f3f6;
   display: block;
 }
 .panel-metric .pm-label {
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
   color: #8B949E;
   text-transform: uppercase;
@@ -149,14 +163,14 @@
   padding: 16px 24px;
 }
 
-/* Chat bubbles */
 .chat-bubble {
   max-width: 85%;
   padding: 10px 14px;
   border-radius: 12px;
   margin-bottom: 8px;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .chat-bubble.speaker-a {
   background: #21262D;
@@ -175,12 +189,12 @@
   opacity: 0.7;
 }
 .chat-turn-num {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: #8B949E;
   margin-top: 4px;
 }
 
-/* ===== Panel overlay ===== */
 .panel-overlay {
   position: fixed;
   inset: 0;

@@ -11,10 +11,20 @@ import * as explorer from './sections/explorer.js';
 import * as guess from './sections/guess.js';
 
 async function main() {
-  // Show loading state
   hero.init();
 
-  // Load all data
+  // Fade-in observer for pull quotes and other elements
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  // Load data
   const data = await loadData();
   console.log(`Loaded ${data.conversations.length} conversations, ${data.turnMetrics.length} turn metrics`);
 
@@ -28,9 +38,4 @@ async function main() {
 
 main().catch(err => {
   console.error('Failed to initialize:', err);
-  document.getElementById('app').innerHTML += `
-    <div style="position:fixed;bottom:20px;left:20px;right:20px;background:#E74C3C;color:white;padding:16px;border-radius:8px;z-index:9999;font-size:14px;">
-      Failed to load data: ${err.message}
-    </div>
-  `;
 });

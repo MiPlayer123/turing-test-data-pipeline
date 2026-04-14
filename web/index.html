@@ -13,7 +13,7 @@
     <section id="hero" class="scroll-section">
       <p class="overline">Can you tell if you're talking to an AI?</p>
       <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
-      <p class="subtitle">We put 6 AIs in a room and asked them to figure out who was human.</p>
+      <p class="subtitle">We put 6 AIs in a room and asked them to figure out who was human. Here's what we found.</p>
       <div class="stats-row">
         <div class="stat-box">
           <span class="number" data-count="362">0</span>
@@ -33,60 +33,68 @@
       </div>
     </section>
 
+    <!-- Pull quote: a real AI conversation excerpt -->
+    <div class="pull-quote fade-in">
+      <blockquote>"I mean... I guess I'd say I'm pretty sure I'm human? Like, I can feel the chair I'm sitting on right now."</blockquote>
+      <cite>— Claude Sonnet 4, pretending to be human in a Reverse Turing conversation</cite>
+    </div>
+
     <!-- Section 2: What is humanness? -->
     <section id="metrics-section" class="scroll-section">
       <div class="section-header">
         <h2>What is humanness?</h2>
-        <p>Three signals. Click each card to learn what it measures. Then see how Human-Human, Human-AI, and AI-AI conversations compare.</p>
+        <p>We measured three signals in every conversation. Click each card to see how humans and AIs differ — the gaps are larger than you'd expect.</p>
       </div>
       <div class="metric-cards" id="metric-cards"></div>
-      <div style="height: 80px;"></div>
     </section>
 
     <!-- Section 3: Who detects who? -->
     <section id="detective-section" class="scroll-section">
-      <div class="section-header">
+      <div class="section-header left">
         <h2>Who detects who — and who gets fooled</h2>
-        <p>Detective accuracy by model. Claude's 50% is the punchline — it trusted the casual hedging language.</p>
+        <p>We gave each AI a simple task: figure out if your conversation partner is human or AI. GPT-5.4 nailed it every time. Claude? It got fooled half the time — it trusted the casual, hedging language that AIs use when they're trying to sound human.</p>
       </div>
-      <div class="viz-container" id="detective-viz"></div>
-      <div style="height: 80px;"></div>
+      <div class="viz-container wide" id="detective-viz"></div>
     </section>
+
+    <!-- Pull quote -->
+    <div class="pull-quote fade-in">
+      <blockquote>"That 'gut reaction' was VERY telling..."</blockquote>
+      <cite>— Claude Sonnet 4 interrogating Grok 4.1 Fast, moments before guessing wrong</cite>
+    </div>
 
     <!-- Section 4: Trajectory -->
     <section id="trajectory-section" class="scroll-section">
       <div class="section-header">
         <h2>The longer it goes, the harder they try.</h2>
-        <p>Each line = one condition's average. Each dot = one conversation turn. Click any dot to read that message.</p>
+        <p>Watch how hedging changes turn by turn. Most conditions settle down over time — but when AIs are told to "prove they're human," they hedge more and more. Faking humanness is itself the tell.</p>
       </div>
-      <div class="viz-container" id="trajectory-viz"></div>
-      <div style="height: 80px;"></div>
+      <div class="viz-container wide" id="trajectory-viz"></div>
     </section>
 
     <!-- Section 5: 3D Explorer -->
     <section id="explorer-section" class="scroll-section">
       <div class="section-header">
         <h2>Explore the conversation space</h2>
-        <p>Every dot is a conversation. Rotate, zoom, and click to read. Where do human conversations cluster vs AI?</p>
+        <p>Every dot is a conversation. The surface shows where conversations cluster. Human-human conversations sit in a distinct region — AI conversations spread outward, especially when they try to seem human. Rotate, zoom, and hover to explore.</p>
       </div>
-      <div id="explorer-viz" style="width: 100%; height: 70vh;"></div>
-      <div class="filter-chips" id="explorer-filters"></div>
-      <div style="height: 80px;"></div>
+      <div id="explorer-viz" style="width: 100%; height: 75vh; position: relative;"></div>
+      <div class="filter-chips" id="explorer-filters" style="max-width: 900px; margin: 16px auto;"></div>
     </section>
 
     <!-- Section 6: Can YOU guess? -->
     <section id="guess-section" class="scroll-section">
       <div class="section-header">
-        <h2>Can YOU guess?</h2>
-        <p>Read a real conversation excerpt. Is it human or AI?</p>
+        <h2>Can you do better than Claude?</h2>
+        <p>Read a real conversation excerpt. Is it human or AI? Claude only got it right 50% of the time. See if you can beat it.</p>
       </div>
       <div class="viz-container" id="guess-viz">
-        <div style="text-align: center; padding: 60px 0; color: #8B949E;">
-          <p style="font-size: 48px; margin-bottom: 16px;">🤔</p>
-          <p>Interactive guessing game — coming soon</p>
+        <div style="text-align: center; padding: 80px 0; color: #484F58;">
+          <p style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 16px; color: #8B949E;">Coming soon</p>
+          <p style="font-size: 14px;">Interactive guessing game</p>
         </div>
       </div>
-      <div style="height: 120px;"></div>
+      <div style="height: 160px;"></div>
     </section>
 
   </div>
@@ -97,7 +105,7 @@
   <div class="side-panel" id="conversation-panel">
     <div class="panel-header">
       <div>
-        <h3 id="panel-title">Conversation</h3>
+        <h3 id="panel-title" style="font-size: 16px;">Conversation</h3>
         <p class="text-muted" id="panel-subtitle" style="font-size: 12px; margin-top: 4px;"></p>
       </div>
       <button class="panel-close" id="panel-close">&times;</button>
