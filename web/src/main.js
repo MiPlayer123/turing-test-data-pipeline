@@ -4,29 +4,22 @@ import './styles/components.css';
 
 import scrollama from 'scrollama';
 import { loadData } from './data/loader.js';
-import * as metrics from './sections/metrics.js';
+import * as quiz from './sections/quiz.js';
+import * as metricsExplain from './sections/metricsExplain.js';
+import * as mainFlow from './sections/mainFlow.js';
 import * as detective from './sections/detective.js';
-import * as trajectory from './sections/trajectory.js';
 import * as explorer from './sections/explorer.js';
 
-// Hook conversation — a real excerpt from the data
-const HOOK_LINES = [
-  { side: 'left', text: "Do you ever feel like you're just going through the motions?" },
-  { side: 'right', text: "Yeah, honestly? Sometimes I do. Like, I'll be in the middle of something and suddenly wonder if I'm actually present or just... performing presence, you know?" },
-  { side: 'left', text: "That's a really specific way to put it. Performing presence." },
-  { side: 'right', text: "I mean... I guess I'd say I'm pretty sure I'm human? Like, I can feel the chair I'm sitting on right now." },
-];
+function initScrolly(sectionId, onStep) {
+  const steps = document.querySelectorAll(`#${sectionId} .step`);
+  if (!steps.length) return;
+  const scroller = scrollama();
+  scroller.setup({ step: `#${sectionId} .step`, offset: 0.5 })
+    .onStepEnter(response => onStep(+response.element.dataset.step));
+  window.addEventListener('resize', () => scroller.resize());
+}
 
-function initHook() {
-  const chat = document.getElementById('hook-chat');
-  HOOK_LINES.forEach(line => {
-    const bubble = document.createElement('div');
-    bubble.className = `hook-bubble ${line.side}`;
-    bubble.textContent = line.text;
-    chat.appendChild(bubble);
-  });
-
-  // Count-up for stats
+function initCounters() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -46,49 +39,30 @@ function initHook() {
   document.querySelectorAll('.stat-box .number').forEach(el => observer.observe(el));
 }
 
-function initScrolly(sectionId, onStep) {
-  const section = document.getElementById(sectionId);
-  if (!section) return;
-
-  const scroller = scrollama();
-  scroller.setup({
-    step: `#${sectionId} .step`,
-    offset: 0.5,
-    debug: false,
-  }).onStepEnter(response => {
-    onStep(+response.element.dataset.step, response.direction);
-  });
-
-  window.addEventListener('resize', () => scroller.resize());
-  return scroller;
-}
-
 async function main() {
-  initHook();
-
   const data = await loadData();
   console.log(`Loaded ${data.conversations.length} conversations`);
 
-  // Act 2: Metrics — sticky chart that updates per step
-  metrics.init(data);
-  initScrolly('act-metrics', (step) => metrics.onStep(step));
+  quiz.init(data);
+  initCounters();
+  metricsExplain.init(data);
 
-  // Act 3: Detective — progressive bar reveal
+  // Unified comparison → sub-types → timeline flow
+  mainFlow.init(data);
+  initScrolly('s-main-flow', (step) => mainFlow.onStep(step));
+
+  // Detective
   detective.init(data);
-  initScrolly('act-detective', (step) => detective.onStep(step));
+  initScrolly('s-detective', (step) => detective.onStep(step));
 
-  // Act 4: Trajectory — progressive line reveal
-  trajectory.init(data);
-  initScrolly('act-trajectory', (step) => trajectory.onStep(step));
-
-  // Act 5: 3D Explorer — lazy init when visible
-  const explorerObserver = new IntersectionObserver((entries) => {
+  // 3D Explorer (lazy)
+  const explorerObs = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
       explorer.init(data);
-      explorerObserver.disconnect();
+      explorerObs.disconnect();
     }
   }, { threshold: 0.1 });
-  explorerObserver.observe(document.getElementById('act-explorer'));
+  explorerObs.observe(document.getElementById('s-explorer'));
 }
 
 main().catch(err => console.error('Init failed:', err));

@@ -36,10 +36,13 @@
   padding: 0 0 40vh 0;
 }
 .step {
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   padding: 0 48px;
+}
+.step:first-child {
+  min-height: 50vh;
 }
 /* Left-align steps by default */
 .step-card {
@@ -199,6 +202,106 @@
   color: #484F58;
   font-size: 14px;
   animation: bounce 2.5s ease infinite;
+}
+
+/* ===== Quiz (Section 1) ===== */
+.quiz-container {
+  max-width: 520px;
+  width: 100%;
+  padding: 0 24px;
+}
+.quiz-overline {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #484F58;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.quiz-chat {
+  margin-bottom: 32px;
+}
+.quiz-prompt {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  color: #d0d7de;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.quiz-prompt-area.hidden { display: none; }
+.quiz-subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  color: #d0d7de;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.quiz-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.quiz-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 48px;
+  border-radius: 10px;
+  border: 2px solid #30363D;
+  background: #161B22;
+  color: #d0d7de;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quiz-btn:hover {
+  border-color: #58A6FF;
+  background: #1c2333;
+}
+.quiz-btn.selected {
+  border-color: #58A6FF;
+  background: #1c2333;
+}
+.quiz-btn.correct {
+  border-color: #2ECC71;
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ECC71;
+}
+.quiz-btn.wrong {
+  border-color: #E74C3C;
+  background: rgba(231, 76, 60, 0.1);
+  color: #E74C3C;
+}
+.quiz-result {
+  margin-top: 28px;
+  text-align: center;
+}
+.quiz-result.hidden { display: none; }
+.quiz-result h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.quiz-result p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #8B949E;
+  margin-bottom: 16px;
+}
+.quiz-result-bar {
+  background: #21262D;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 36px;
+  display: flex;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+.quiz-result-bar .bar-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0f3f6;
+  transition: width 0.8s ease;
 }
 
 @keyframes fadeUp {

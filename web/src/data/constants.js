@@ -4,7 +4,7 @@ export const CONDITIONS = [
   { key: "ai_ai_detective",        label: "AI Detective",    color: "#E74C3C" },
   { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#3498DB" },
   { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#9B59B6" },
-  { key: "ai_ai_reverse_turing",   label: "AI Rev. Turing",  color: "#F39C12" },
+  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing",  color: "#F39C12" },
   { key: "ai_ai_structured",       label: "AI Structured",   color: "#2ECC71" },
 ];
 
