@@ -3,19 +3,15 @@ import { CONDITIONS, CONDITION_COLOR } from '../data/constants.js';
 import { createFilterChips } from '../components/filterChips.js';
 import * as tooltip from '../components/tooltip.js';
 
-let svg, x, yScale, width, height, conditionData, groups, line, filtersEl;
+let svg, x, yScale, width, height, conditionData, groups;
 let currentStep = -1;
 
-const CONDITION_ORDER = [
-  'human_human', 'human_ai',
-  'ai_ai_freeform', 'ai_ai_freeform_persona', 'ai_ai_structured', 'ai_ai_detective',
-  'ai_ai_reverse_turing',
-];
-
 export function init(data) {
-  const container = document.getElementById('timeline-viz');
-  container.innerHTML = '';
-  container.style.textAlign = 'center';
+  const chartContainer = document.getElementById('timeline-chart');
+  chartContainer.innerHTML = '';
+  chartContainer.style.textAlign = 'center';
+
+  // RT label removed — animation section handles the transition
 
   conditionData = CONDITIONS.map(cond => {
     const condRows = data.turnMetrics.filter(d => d.condition === cond.key);
@@ -28,19 +24,13 @@ export function init(data) {
     return { ...cond, points };
   });
 
-  // Filters (hidden until step 4)
-  filtersEl = document.createElement('div');
-  filtersEl.className = 'filter-chips';
-  filtersEl.style.cssText = 'max-width:800px; margin:0 auto 12px; opacity:0; transition:opacity 0.4s;';
-  container.appendChild(filtersEl);
-
   const chartDiv = document.createElement('div');
   chartDiv.style.display = 'inline-block';
-  container.appendChild(chartDiv);
+  chartContainer.appendChild(chartDiv);
 
-  const margin = { top: 20, right: 100, bottom: 48, left: 56 };
-  width = 880 - margin.left - margin.right;
-  height = 400 - margin.top - margin.bottom;
+  const margin = { top: 20, right: 120, bottom: 44, left: 60 };
+  width = 960 - margin.left - margin.right;
+  height = 420 - margin.top - margin.bottom;
 
   svg = d3.select(chartDiv).append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -51,7 +41,6 @@ export function init(data) {
   const allMeans = conditionData.flatMap(c => c.points.map(p => p.mean));
   yScale = d3.scaleLinear().domain([0, d3.max(allMeans) * 1.15]).range([height, 0]);
 
-  // Grid
   svg.append('g').attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(18).tickSize(-height).tickFormat(d => d))
     .call(g => g.select('.domain').remove())
@@ -64,54 +53,39 @@ export function init(data) {
     .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
     .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '10px').attr('font-family', 'JetBrains Mono, monospace'));
 
-  svg.append('text').attr('x', width / 2).attr('y', height + 38)
-    .attr('text-anchor', 'middle').attr('fill', '#484F58').attr('font-size', '12px')
-    .attr('font-family', 'Inter, sans-serif').text('Turn Number');
-  svg.append('text').attr('transform', 'rotate(-90)').attr('x', -height / 2).attr('y', -40)
-    .attr('text-anchor', 'middle').attr('fill', '#484F58').attr('font-size', '12px')
-    .attr('font-family', 'Inter, sans-serif').text('Hedging (per 100 words)');
+  svg.append('text').attr('x', width / 2).attr('y', height + 36).attr('text-anchor', 'middle')
+    .attr('fill', '#484F58').attr('font-size', '12px').attr('font-family', 'Inter, sans-serif').text('Turn Number');
+  svg.append('text').attr('transform', 'rotate(-90)').attr('x', -height / 2).attr('y', -36)
+    .attr('text-anchor', 'middle').attr('fill', '#484F58').attr('font-size', '12px').attr('font-family', 'Inter, sans-serif').text('Hedging');
 
-  line = d3.line().x(d => x(d.turn)).y(d => yScale(d.mean)).curve(d3.curveMonotoneX);
+  const line = d3.line().x(d => x(d.turn)).y(d => yScale(d.mean)).curve(d3.curveMonotoneX);
 
-  // Create all line groups, hidden initially
   groups = {};
   conditionData.forEach(cond => {
     if (cond.points.length < 2) return;
-    const g = svg.append('g').attr('class', `line-${cond.key}`).attr('opacity', 0);
+    const g = svg.append('g').attr('opacity', 0);
     groups[cond.key] = g;
 
-    const path = g.append('path')
-      .datum(cond.points).attr('fill', 'none')
-      .attr('stroke', cond.color).attr('stroke-width', 2.5).attr('d', line);
-
-    // Store total length for animation
-    const totalLength = path.node().getTotalLength();
-    path.attr('data-length', totalLength)
-      .attr('stroke-dasharray', totalLength).attr('stroke-dashoffset', totalLength);
+    g.append('path').datum(cond.points).attr('fill', 'none')
+      .attr('stroke', cond.color).attr('stroke-width', 2.5).attr('d', line)
+      .each(function() {
+        const len = this.getTotalLength();
+        d3.select(this).attr('stroke-dasharray', len).attr('stroke-dashoffset', len);
+      });
 
     g.selectAll('circle').data(cond.points).join('circle')
       .attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean))
       .attr('r', 0).attr('fill', cond.color).attr('stroke', '#0D1117').attr('stroke-width', 1.5)
-      .on('mouseover', (event, d) => tooltip.show(`<strong>${cond.label}</strong> — Turn ${d.turn}<br>Hedging: <span class="val">${d.mean.toFixed(3)}</span>`, event))
+      .style('cursor', 'pointer')
+      .on('mouseover', (event, d) => tooltip.show(`<strong>${cond.label}</strong> — Turn ${d.turn}<br>Hedging: <span class="val">${d.mean.toFixed(3)}</span><br>n = ${d.count}`, event))
       .on('mousemove', e => tooltip.move(e))
       .on('mouseout', () => tooltip.hide());
 
-    // End label
     const last = cond.points[cond.points.length - 1];
-    g.append('text')
-      .attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)
+    g.append('text').attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)
       .attr('fill', cond.color).attr('font-size', '11px').attr('font-weight', '600')
       .attr('font-family', 'Inter, sans-serif')
       .text(cond.label.replace('AI ', ''));
-  });
-
-  // Filter chips (activated on step 4)
-  createFilterChips(filtersEl, {
-    onToggle(active) {
-      Object.entries(groups).forEach(([key, g]) => {
-        g.transition().duration(300).attr('opacity', active.has(key) ? 1 : 0.05);
-      });
-    },
   });
 }
 
@@ -119,79 +93,65 @@ export function onStep(step) {
   if (step === currentStep) return;
   currentStep = step;
 
-  if (step === 0) {
-    // Hide everything
-    Object.values(groups).forEach(g => g.attr('opacity', 0));
-    filtersEl.style.opacity = '0';
-  } else if (step === 1) {
-    // Show only human-human
-    showConditions(['human_human']);
-    filtersEl.style.opacity = '0';
-  } else if (step === 2) {
-    // Add AI freeform, structured, persona
-    showConditions(['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona']);
-    filtersEl.style.opacity = '0';
-  } else if (step === 3) {
-    // Add reverse turing with emphasis
-    showConditions(['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona', 'ai_ai_reverse_turing']);
-    // Dim others, highlight reverse turing
-    Object.entries(groups).forEach(([key, g]) => {
-      g.transition().duration(400).attr('opacity', key === 'ai_ai_reverse_turing' ? 1 : 0.2);
-    });
-    addReverseAnnotation();
-    filtersEl.style.opacity = '0';
-  } else if (step === 4) {
-    // Show all, full opacity, show filters
-    showConditions(Object.keys(groups));
-    Object.values(groups).forEach(g => g.transition().duration(400).attr('opacity', 1));
-    svg.selectAll('.rt-annotation').remove();
-    filtersEl.style.opacity = '1';
+  let visibleKeys;
+  let highlightKey = null;
+  if (step === 0) visibleKeys = [];
+  else if (step === 1) visibleKeys = ['human_human'];
+  else if (step === 2) visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona'];
+  else if (step === 3) {
+    visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona', 'ai_ai_reverse_turing'];
+    highlightKey = 'ai_ai_reverse_turing';
+  } else {
+    visibleKeys = CONDITIONS.map(c => c.key);
   }
-}
 
-function showConditions(keys) {
-  const keySet = new Set(keys);
+  const visibleSet = new Set(visibleKeys);
+
   Object.entries(groups).forEach(([key, g]) => {
-    if (keySet.has(key)) {
-      g.transition().duration(600).attr('opacity', 1);
-      // Animate line drawing
+    const visible = visibleSet.has(key);
+    const dimmed = highlightKey && key !== highlightKey && key !== 'human_human';
+    const targetOpacity = !visible ? 0 : (dimmed ? 0.15 : 1);
+
+    g.transition().duration(500).attr('opacity', targetOpacity);
+
+    if (visible) {
+      // Draw line
       g.select('path').transition().duration(1200).ease(d3.easeQuadOut).attr('stroke-dashoffset', 0);
-      // Show dots
-      g.selectAll('circle').transition().duration(400).delay((d, i) => i * 30).attr('r', 3);
+      // Dots appear AFTER line
+      g.selectAll('circle').transition().duration(400).delay((d, i) => 1200 + i * 30).attr('r', 3);
     } else {
-      g.transition().duration(400).attr('opacity', 0);
+      // Reset line
+      g.select('path').each(function() {
+        const len = this.getTotalLength();
+        d3.select(this).attr('stroke-dashoffset', len);
+      });
+      g.selectAll('circle').attr('r', 0);
     }
   });
-}
 
-function addReverseAnnotation() {
+  // Annotation for RT
   svg.selectAll('.rt-annotation').remove();
-  const rtData = conditionData.find(c => c.key === 'ai_ai_reverse_turing');
-  if (!rtData || rtData.points.length < 4) return;
+  if (highlightKey) {
+    const rtData = conditionData.find(c => c.key === highlightKey);
+    if (rtData && rtData.points.length >= 4) {
+      const earlyAvg = d3.mean(rtData.points.slice(0, 3), p => p.mean);
+      const lateAvg = d3.mean(rtData.points.slice(-3), p => p.mean);
+      const midPt = rtData.points[Math.floor(rtData.points.length / 2)];
 
-  const earlyAvg = d3.mean(rtData.points.slice(0, 3), p => p.mean);
-  const lateAvg = d3.mean(rtData.points.slice(-3), p => p.mean);
-  const midPt = rtData.points[Math.floor(rtData.points.length / 2)];
-
-  const g = svg.append('g').attr('class', 'rt-annotation').attr('opacity', 0);
-
-  const boxX = x(midPt.turn) - 110;
-  const boxY = yScale(lateAvg) - 55;
-
-  g.append('rect').attr('x', boxX).attr('y', boxY).attr('width', 220).attr('height', 38)
-    .attr('rx', 6).attr('fill', 'rgba(13,17,23,0.92)').attr('stroke', '#F39C12').attr('stroke-width', 1);
-
-  g.append('text').attr('x', boxX + 110).attr('y', boxY + 15).attr('text-anchor', 'middle')
-    .attr('fill', '#F39C12').attr('font-size', '13px').attr('font-weight', '700').attr('font-family', 'Inter, sans-serif')
-    .text('The only line that goes up');
-
-  g.append('text').attr('x', boxX + 110).attr('y', boxY + 30).attr('text-anchor', 'middle')
-    .attr('fill', '#8B949E').attr('font-size', '11px').attr('font-family', 'Inter, sans-serif')
-    .text(`+${(lateAvg - earlyAvg).toFixed(2)} hedging over time`);
-
-  g.append('line').attr('x1', boxX + 110).attr('y1', boxY + 38)
-    .attr('x2', x(midPt.turn)).attr('y2', yScale(midPt.mean) - 6)
-    .attr('stroke', '#F39C12').attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
-
-  g.transition().duration(600).delay(400).attr('opacity', 1);
+      const ag = svg.append('g').attr('class', 'rt-annotation').attr('opacity', 0);
+      const bx = x(midPt.turn) - 100, by = yScale(lateAvg) - 50;
+      ag.append('rect').attr('x', bx).attr('y', by).attr('width', 200).attr('height', 36)
+        .attr('rx', 6).attr('fill', 'rgba(13,17,23,0.92)').attr('stroke', '#F39C12').attr('stroke-width', 1);
+      ag.append('text').attr('x', bx + 100).attr('y', by + 14).attr('text-anchor', 'middle')
+        .attr('fill', '#F39C12').attr('font-size', '12px').attr('font-weight', '700').attr('font-family', 'Inter, sans-serif')
+        .text('Only line that goes up');
+      ag.append('text').attr('x', bx + 100).attr('y', by + 28).attr('text-anchor', 'middle')
+        .attr('fill', '#8B949E').attr('font-size', '11px').attr('font-family', 'Inter, sans-serif')
+        .text(`+${(lateAvg - earlyAvg).toFixed(2)} over time`);
+      ag.append('line').attr('x1', bx + 100).attr('y1', by + 36)
+        .attr('x2', x(midPt.turn)).attr('y2', yScale(midPt.mean) - 4)
+        .attr('stroke', '#F39C12').attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
+      ag.transition().duration(500).delay(600).attr('opacity', 1);
+    }
+  }
 }

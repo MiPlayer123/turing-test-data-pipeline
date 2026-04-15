@@ -6,7 +6,9 @@ import scrollama from 'scrollama';
 import { loadData } from './data/loader.js';
 import * as quiz from './sections/quiz.js';
 import * as metricsExplain from './sections/metricsExplain.js';
-import * as mainFlow from './sections/mainFlow.js';
+import * as comparison from './sections/comparison.js';
+import * as animation from './sections/animation.js';
+import * as timeline from './sections/timeline.js';
 import * as detective from './sections/detective.js';
 import * as explorer from './sections/explorer.js';
 
@@ -43,19 +45,31 @@ async function main() {
   const data = await loadData();
   console.log(`Loaded ${data.conversations.length} conversations`);
 
+  // S1: Quiz
   quiz.init(data);
+
+  // S2: Thesis counters
   initCounters();
+
+  // S3: Metric explanation cards
   metricsExplain.init(data);
 
-  // Unified comparison → sub-types → timeline flow
-  mainFlow.init(data);
-  initScrolly('s-main-flow', (step) => mainFlow.onStep(step));
+  // S4: Comparison bars (Scrollama)
+  comparison.init(data);
+  initScrolly('s-comparison', (step) => comparison.onStep(step));
 
-  // Detective
+  // S5: GSAP animation (card → center → subtypes → RT slides)
+  animation.init(data);
+
+  // S6: Timeline (Scrollama)
+  timeline.init(data);
+  initScrolly('s-timeline', (step) => timeline.onStep(step));
+
+  // S7: Detective (Scrollama)
   detective.init(data);
   initScrolly('s-detective', (step) => detective.onStep(step));
 
-  // 3D Explorer (lazy)
+  // S8: 3D Explorer (lazy)
   const explorerObs = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
       explorer.init(data);

@@ -51,13 +51,12 @@
       </div>
     </section>
 
-    <!-- S4-S6: COMPARISON → SUB-TYPES → TIMELINE (unified scrolly) -->
-    <section id="s-main-flow" class="act scrolly">
+    <!-- S4: COMPARISON BARS (Scrollama) -->
+    <section id="s-comparison" class="act scrolly">
       <div class="scrolly-graphic">
-        <div id="main-flow-viz" class="scrolly-viz" style="width:100%; max-width:1100px; position:relative;"></div>
+        <div id="comparison-viz" class="scrolly-viz"></div>
       </div>
       <div class="scrolly-steps">
-        <!-- Comparison phase -->
         <div class="step" data-step="0">
           <div class="step-card">
             <h3>What "normal" sounds like</h3>
@@ -76,54 +75,84 @@
             <p>When two AIs talk to each other, the gap becomes clear.</p>
           </div>
         </div>
-        <!-- Sub-type expansion phase -->
-        <div class="step" data-step="3">
-          <div class="step-card">
-            <h3>What kind of AI conversations?</h3>
-            <p>We ran five different types. Let's break them down.</p>
+      </div>
+    </section>
+
+    <!-- S5: GSAP ANIMATION -->
+    <section id="s-animation">
+      <div id="anim-pin" style="height:100vh; position:relative; overflow:hidden;">
+        <div id="anim-ai-card" class="anim-card">
+          <div class="anim-card-title">AI ↔ AI</div>
+          <div class="anim-card-sub" id="anim-card-stats"></div>
+        </div>
+        <!-- Sub-type cards that spawn below -->
+        <div id="anim-subtypes" class="anim-subtypes-grid">
+          <div class="anim-subtype" style="border-color:#3498DB;">
+            <div class="anim-sub-name" style="color:#3498DB;">Freeform</div>
+            <div class="anim-sub-desc">Open-ended casual chat with no specific goal. Two AIs just talk — about whatever comes up.</div>
+            <div class="anim-sub-detail">Prompt: "Hey, how's it going?"</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#9B59B6;">
+            <div class="anim-sub-name" style="color:#9B59B6;">Persona</div>
+            <div class="anim-sub-desc">Each AI is given a human identity — name, age, job, hobbies — and told to stay in character.</div>
+            <div class="anim-sub-detail">Example: "You are Alex, a 28-year-old graphic designer from Chicago."</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#E74C3C;">
+            <div class="anim-sub-name" style="color:#E74C3C;">Detective</div>
+            <div class="anim-sub-desc">One AI interrogates the other, trying to determine if its partner is human or machine.</div>
+            <div class="anim-sub-detail">Task: "Figure out if you're talking to a human or an AI."</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#F39C12;">
+            <div class="anim-sub-name" style="color:#F39C12;">Reverse Turing</div>
+            <div class="anim-sub-desc">Both AIs are told they're human and must convince the other person they're real. A double bluff.</div>
+            <div class="anim-sub-detail">Instruction: "You ARE human. Prove it to the other person."</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#2ECC71;">
+            <div class="anim-sub-name" style="color:#2ECC71;">Structured</div>
+            <div class="anim-sub-desc">Both AIs discuss a specific topic — remote work, vaccines, AI art — with a focused prompt.</div>
+            <div class="anim-sub-detail">Example: "Do you think remote work is better than office work?"</div>
           </div>
         </div>
-        <div class="step" data-step="4">
-          <div class="step-card" style="max-width:440px;">
-            <h3>The five conditions</h3>
-            <div style="font-size:13px; line-height:1.8; color:#b1bac4; margin-top:8px;">
-              <p><strong style="color:#3498DB;">Freeform</strong> — open-ended chat. "Hey, how's it going?"</p>
-              <p><strong style="color:#9B59B6;">Persona</strong> — each AI plays a character with a backstory.</p>
-              <p><strong style="color:#E74C3C;">Detective</strong> — one AI interrogates: "Are you human or AI?"</p>
-              <p><strong style="color:#F39C12;">Reverse Turing</strong> — both told: "You ARE human. Prove it."</p>
-              <p><strong style="color:#2ECC71;">Structured</strong> — discuss a specific topic like remote work.</p>
-            </div>
-          </div>
+      </div>
+      <div style="height:80vh;"></div>
+    </section>
+
+    <!-- S6: TIMELINE -->
+    <section id="s-timeline" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="timeline-viz" class="scrolly-viz" style="display:flex; flex-direction:column; align-items:center;">
+          <div id="timeline-chart"></div>
         </div>
-        <!-- Timeline phase -->
-        <div class="step" data-step="5">
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
           <div class="step-card">
             <h3>The longer it goes, the harder they try.</h3>
-            <p>Now let's watch how hedging changes turn by turn. Does the pattern hold over time?</p>
+            <p>Now let's watch how hedging changes turn by turn.</p>
           </div>
         </div>
-        <div class="step" data-step="6">
+        <div class="step" data-step="1">
           <div class="step-card">
             <h3>Humans settle in</h3>
-            <p>Human-human conversations start with some hedging, then relax. People get comfortable.</p>
+            <p>Human-human conversations start with some hedging, then relax.</p>
           </div>
         </div>
-        <div class="step" data-step="7">
+        <div class="step" data-step="2">
           <div class="step-card">
             <h3>AIs follow the pattern... mostly</h3>
             <p>Most AI conditions trend downward too. They settle over time.</p>
           </div>
         </div>
-        <div class="step" data-step="8">
+        <div class="step" data-step="3">
           <div class="step-card">
             <h3>Except when they're faking it</h3>
-            <p>Reverse Turing is the <strong>only</strong> condition where hedging goes <em>up</em>. The more they try, the more they give themselves away.</p>
+            <p>Reverse Turing is the <strong>only</strong> condition where hedging goes <em>up</em>.</p>
           </div>
         </div>
-        <div class="step" data-step="9">
+        <div class="step" data-step="4">
           <div class="step-card">
             <h3>Explore the timeline</h3>
-            <p>Hover any dot to see the hedging value. Click to read the actual conversation. Use the filters below.</p>
+            <p>Hover any dot to see the hedging value. Click to read the conversation.</p>
           </div>
         </div>
       </div>
