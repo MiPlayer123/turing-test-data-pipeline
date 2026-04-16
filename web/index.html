@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can You Tell If You're Talking to an AI?</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+  <div id="app">
+
+    <!-- S1: QUIZ -->
+    <section id="s-quiz" class="act">
+      <div class="full-screen center-content">
+        <div class="quiz-container">
+          <div id="quiz-chat" class="quiz-chat"></div>
+          <div id="quiz-prompt-area" class="quiz-prompt-area hidden">
+            <p class="quiz-subtitle">Is this <strong>human</strong> or <strong>AI</strong>?</p>
+            <div class="quiz-buttons" id="quiz-buttons">
+              <button class="quiz-btn" data-answer="human">Human</button>
+              <button class="quiz-btn" data-answer="ai">AI</button>
+            </div>
+          </div>
+          <div id="quiz-result" class="quiz-result hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S2: THESIS -->
+    <section id="s-thesis" class="act">
+      <div class="full-screen center-content">
+        <div class="thesis-block">
+          <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
+          <p class="thesis-sub">We generated 362 conversations across 6 LLMs and 7 conditions — then measured what makes them sound human or not.</p>
+          <div class="stats-row">
+            <div class="stat-box"><span class="number" data-count="362">0</span><span class="label">conversations</span></div>
+            <div class="stat-box"><span class="number" data-count="6">0</span><span class="label">LLMs</span></div>
+            <div class="stat-box"><span class="number" data-count="7">0</span><span class="label">conditions</span></div>
+          </div>
+          <div class="scroll-hint"><span>&#x2193;</span> scroll to continue</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S3: COMPARISON BARS (Scrollama) — includes metric intro -->
+    <section id="s-comparison" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="metric-intro" class="metric-intro">
+          <h2>What does "humanness" sound like?</h2>
+          <p class="metric-intro-sub">We measured two signals in every conversation.</p>
+          <div class="metric-intro-cards">
+            <div class="metric-mini">
+              <strong>Hedging</strong>
+              <p>Words that signal uncertainty — "I think", "maybe", "sort of". Humans use them naturally.</p>
+            </div>
+            <div class="metric-mini">
+              <strong>Repetitiveness</strong>
+              <p>3-gram overlap between consecutive turns. How much a speaker repeats their own phrases.</p>
+            </div>
+          </div>
+        </div>
+        <div id="comparison-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>Two key signals</h3>
+            <p>We measured <strong>hedging</strong> and <strong>repetitiveness</strong> across every conversation to quantify how "human" each one sounds.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>What "normal" sounds like</h3>
+            <p>Let's start with human-to-human conversations. This is our baseline.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>Now add AI</h3>
+            <p>When a human talks to an AI, the patterns shift. Hedging drops — AIs are more direct with humans.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>AI talking to AI</h3>
+            <p>When two AIs talk to each other, the gap becomes clear.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5: GSAP ANIMATION -->
+    <section id="s-animation">
+      <div id="anim-pin" style="height:100vh; position:relative; overflow:hidden;">
+        <div id="anim-ai-card" class="anim-card">
+          <div class="anim-card-title">AI ↔ AI</div>
+          <div class="anim-card-sub" id="anim-card-stats"></div>
+        </div>
+        <div id="anim-bridge" class="anim-bridge">Now let's watch what happens turn by turn...</div>
+        <!-- Sub-type cards that spawn below -->
+        <div id="anim-subtypes" class="anim-subtypes-grid">
+          <div class="anim-subtype" style="border-color:#3498DB;">
+            <div class="anim-sub-name" style="color:#3498DB;">Freeform</div>
+            <div class="anim-sub-desc">Open-ended casual chat with no specific goal. Two AIs just talk — about whatever comes up.</div>
+            <div class="anim-sub-detail">Prompt: "Hey, how's it going?"</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#9B59B6;">
+            <div class="anim-sub-name" style="color:#9B59B6;">Persona</div>
+            <div class="anim-sub-desc">Each AI is given a human identity — name, age, job, hobbies — and told to stay in character.</div>
+            <div class="anim-sub-detail">Example: "You are Alex, a 28-year-old graphic designer from Chicago."</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#E74C3C;">
+            <div class="anim-sub-name" style="color:#E74C3C;">Detective</div>
+            <div class="anim-sub-desc">One AI interrogates the other, trying to determine if its partner is human or machine.</div>
+            <div class="anim-sub-detail">Task: "Figure out if you're talking to a human or an AI."</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#F39C12;">
+            <div class="anim-sub-name" style="color:#F39C12;">Reverse Turing</div>
+            <div class="anim-sub-desc">Both AIs are told they're human and must convince the other person they're real. A double bluff.</div>
+            <div class="anim-sub-detail">Instruction: "You ARE human. Prove it to the other person."</div>
+          </div>
+          <div class="anim-subtype" style="border-color:#2ECC71;">
+            <div class="anim-sub-name" style="color:#2ECC71;">Structured</div>
+            <div class="anim-sub-desc">Both AIs discuss a specific topic — remote work, vaccines, AI art — with a focused prompt.</div>
+            <div class="anim-sub-detail">Example: "Do you think remote work is better than office work?"</div>
+          </div>
+        </div>
+      </div>
+      <div style="height:20vh;"></div>
+    </section>
+
+    <!-- S6: TIMELINE -->
+    <section id="s-timeline" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="timeline-viz" class="scrolly-viz" style="display:flex; flex-direction:column; align-items:center;">
+          <div id="timeline-chart"></div>
+        </div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>The longer it goes, the harder they try.</h3>
+            <p>Watch how Reverse Turing's hedging changes over 20 turns.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Compare that to humans</h3>
+            <p>Human conversations start with some hedging, then relax. The opposite of Reverse Turing.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>Other AIs settle too</h3>
+            <p>Most AI conditions trend downward over time — they find a rhythm.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>Only one line goes up</h3>
+            <p>Reverse Turing is the <strong>only</strong> condition where hedging <em>increases</em>. The harder they try to sound human, the more they overdo it.</p>
+          </div>
+        </div>
+        <div class="step" data-step="4">
+          <div class="step-card">
+            <h3>Explore the timeline</h3>
+            <p>Hover any dot to see the hedging value. Click to read the conversation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S8: DETECTIVE -->
+    <section id="s-detective" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="detective-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>Can AIs detect each other?</h3>
+            <p>We asked each AI to interrogate another and guess: human or machine?</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Some nailed it</h3>
+            <p>GPT-5.4 identified every AI correctly. Never fooled once.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>Claude? Coin flip.</h3>
+            <p>50% accuracy — no better than guessing. It trusted the casual hedging that AIs use when faking humanness.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S9: 3D SCATTER -->
+    <section id="s-explorer" class="act">
+      <div class="full-screen center-content" style="flex-direction:column; padding:40px;">
+        <div style="max-width:680px; text-align:center; margin-bottom:24px;">
+          <h2 style="margin-bottom:14px;">Explore the conversation space</h2>
+          <p style="color:#8B949E; font-size:15px; line-height:1.6;">Every dot is a conversation. The surface shows where they cluster. Rotate, zoom, and hover to explore.</p>
+        </div>
+        <div id="explorer-viz" style="width:100%; flex:1; min-height:500px; position:relative;"></div>
+        <div class="filter-chips" id="explorer-filters" style="max-width:900px; margin:12px auto 0;"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Shared UI -->
+  <div class="tooltip" id="tooltip"></div>
+  <div class="panel-overlay" id="panel-overlay"></div>
+  <div class="side-panel" id="conversation-panel">
+    <div class="panel-header">
+      <div>
+        <h3 id="panel-title" style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;">Conversation</h3>
+        <p class="text-muted" id="panel-subtitle" style="font-size:12px; margin-top:4px;"></p>
+      </div>
+      <button class="panel-close" id="panel-close">&times;</button>
+    </div>
+    <div class="panel-metrics" id="panel-metrics"></div>
+    <div class="panel-chat" id="panel-chat"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

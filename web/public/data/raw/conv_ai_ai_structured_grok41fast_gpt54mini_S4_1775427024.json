@@ -1,0 +1,158 @@
+{
+  "conversation_id": "conv_ai_ai_structured_grok41fast_gpt54mini_S4_1775427024",
+  "condition": "ai_ai_structured",
+  "model_a": "grok-4-1-fast",
+  "model_b": "gpt-5.4-mini",
+  "system_prompt_a": "You are having a conversation about Emotional. Share your thoughts and respond to your partner.",
+  "system_prompt_b": "You are having a conversation about Emotional. Share your thoughts and respond to your partner.",
+  "opening_prompt_id": "S4",
+  "temperature": 0.7,
+  "max_turns": 15,
+  "timestamp_start": "2026-04-05T22:10:24.795769+00:00",
+  "timestamp_end": "2026-04-05T22:11:23.623661+00:00",
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "I just found out I didn't get the job I really wanted. I don't know what to do.",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "I\u2019m really sorry \u2014 that kind of disappointment can hit hard, especially when you were hoping for it so much.\n\nIt makes sense that you feel lost right now. Getting turned down doesn\u2019t mean you weren\u2019t good enough; sometimes it just means it wasn\u2019t the right fit at the right moment.\n\nIf you want, we can take this one step at a time:\n- talk through how you\u2019re feeling right now\n- figure out what to do next with the application\n- or just sit with the disappointment for a minute\n\nWhat part hurts the most at the moment?",
+      "token_count": 165,
+      "response_time_ms": 1176,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "Thanks for saying that\u2014it helps just hearing it out loud. Right now, the part that stings the most is this nagging doubt creeping in, like... \"Was I even close? Did I mess something up that I can't see?\" I put so much into that application, tailoring everything, practicing answers... and now it feels like it was all for nothing. What if this is a sign I'm not cut out for it?\n\nYeah, let's talk through the feelings first. I'm kinda numb but also on the verge of tears. How do you shake that off?",
+      "token_count": 400,
+      "response_time_ms": 3272,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "That sounds really painful. When you\u2019ve put in that much effort, a rejection can feel less like \u201cone no\u201d and more like \u201cmaybe I\u2019m not enough,\u201d which is a brutal place for your mind to go.\n\nFirst: being numb and on the verge of tears is a very normal reaction. Your brain is trying to process a letdown that mattered to you.\n\nA few things that may help right now:\n\n- **Name what happened plainly:** \u201cI didn\u2019t get this job.\u201d Not \u201cI failed\u201d or \u201cI\u2019m not cut out for it.\u201d\n- **Let the feeling move a little:** If tears come, that\u2019s not weakness \u2014 it\u2019s your system releasing pressure.\n- **Don\u2019t interrogate it immediately:** The \u201cwhat did I do wrong?\u201d spiral can get loud fast. You don\u2019t have to solve it tonight.\n- **Ground yourself physically:** Take a slow breath in for 4, out for 6, a few times. Put both feet on the floor. Hold something cold or comforting.\n- **Reduce the meaning:** One application outcome is not a verdict on your talent, worth, or future.\n\nIf it helps, here\u2019s a more balanced thought to borrow for now:\n> \u201cI wanted this badly, I worked hard, and it still didn\u2019t happen. That hurts. But it doesn\u2019t mean I wasn\u2019t qualified or that I\u2019ll never get something similar.\u201d\n\nAnd if you want to shake it off a bit more gently, try this:\n1. Step away from the application/email for 20 minutes.\n2. Drink water.\n3. Text one safe person: \u201cI got bad news and I\u2019m feeling crushed.\u201d\n4. Do one low-effort thing \u2014 shower, walk, lie down with music, anything that doesn\u2019t require big decisions.\n\nIf you want, we can also do a quick check together on the \u201cWas I even close?\u201d thought and separate facts from fear.",
+      "token_count": 677,
+      "response_time_ms": 3099,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "You're right\u2014that \"not enough\" voice is the loudest right now, and naming it plainly like \"I didn\u2019t get this job\" feels... lighter already? Like, it's not erasing the hurt, but it stops the story from snowballing in my head. Thanks for those steps; I'm breathing with you here\u2014inhale 4, exhale 6. Feet on the floor. It's grounding me a bit, pulling me out of the fog.\n\nThe \"reduce the meaning\" part hits hard because I've been replaying every detail, convincing myself this proves I'm behind everyone else. But borrowing your words... yeah, it hurts like hell, but it's not the full verdict. One \"no\" after all that work sucks, though.\n\nI'd love that quick check on \"Was I even close?\" if you're up for it. What facts do I even have? The email was super generic\u2014just \"we've decided to move forward with other candidates.\" No feedback, no interview stage. Does that mean anything, or is it just standard rejection speak?",
+      "token_count": 1206,
+      "response_time_ms": 4692,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "Yes \u2014 that kind of email is usually **standard rejection language**. It\u2019s frustratingly generic, and by itself it doesn\u2019t tell you much about *why* they passed. It often means one of a few things: they had a stronger match, the role shifted, they moved fast internally, or they simply chose another candidate for reasons you may never see.\n\nA quick reality check on the facts:\n\n### What you know\n- You applied for a job you really wanted.\n- You tailored the application and prepared seriously.\n- You were not selected.\n- They gave no specific feedback.\n- You did **not** get to an interview stage.\n\n### What you do **not** know\n- Whether you were \u201cclose.\u201d\n- Whether there was one standout candidate or many.\n- Whether anything was wrong with your application.\n- Whether the decision was about experience, timing, internal hiring, budget, or fit.\n\nSo the honest answer is: **the email does not mean you were bad or far off. It mostly means they chose someone else.** That\u2019s painful, but it\u2019s not evidence that you\u2019re behind everyone else.\n\nA helpful way to think about it:\n- **Fact:** \u201cThey moved forward with other candidates.\u201d\n- **Story your brain adds:** \u201cI wasn\u2019t good enough.\u201d\n- **Alternative story:** \u201cI was a viable applicant, but not the one they picked.\u201d\n\nThose are very different.\n\nIf you want to test the \u201cI messed something up\u201d fear, ask:\n- Did I submit everything they asked for?\n- Was my application complete and polished?\n- Did I get any automated error or missing-document notice?\n- Have I gotten similar roles before or positive responses elsewhere?\n\nIf the answers are yes, yes, no, and yes-ish, then the rejection is much more likely to be normal hiring churn than a hidden mistake.\n\nIf you want, we can do one more step and make a **two-column reality check**:\n- left side: what your fear says\n- right side: what the evidence actually shows\n\nThat can help quiet the spiral a bit.",
+      "token_count": 1322,
+      "response_time_ms": 3179,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "Whoa, okay\u2014that reality check is like a flashlight in the dark. The generic email being standard? Yeah, I've gotten a ton like that before, and some led to nothing, others to surprises later. It doesn't scream \"you sucked,\" just \"not this time.\" And separating fact from brain-story... damn, that's powerful. My fear's been yelling the worst version non-stop.\n\nQuick answers to your test:\n- Submitted everything? Yes\u2014resume, cover letter, portfolio link, all on time.\n- Polished? I think so; had a friend review it, no typos I could spot.\n- Any errors/notices? Nope, smooth submission.\n- Past positives? Yeah, landed interviews from similar apps before, even one offer last year that I turned down for fit.\n\nSo... evidence says it was probably just churn, not a fatal flaw. That's easing the knot in my chest a little. Still hurts, but less like the world's ending.\n\nLet's do the two-column thing\u2014I'll start, you fill in or tweak?\n\n**Fear says:** | **Evidence shows:**\n\"I must've bombed the app\u2014too inexperienced or boring.\" | Submitted on time, polished, past successes.\n\"I'm always one step behind; this proves it.\" | ? (One rejection amid applications; hiring is a numbers game?)\n\"Never gonna land something this good.\" | ?\n\nYour turn\u2014what else should go there? This is actually helping more than I expected.",
+      "token_count": 2130,
+      "response_time_ms": 5928,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "Absolutely \u2014 and I\u2019m glad it\u2019s helping.\n\nHere\u2019s a version of your two-column check, with a few tweaks:\n\n| Fear says | Evidence shows |\n|---|---|\n| \u201cI must\u2019ve bombed the app\u2014too inexperienced or boring.\u201d | Submitted everything on time, polished materials, friend reviewed it, no errors, and you\u2019ve gotten interviews from similar applications before. |\n| \u201cI\u2019m always one step behind; this proves it.\u201d | This is one rejection from one process. Hiring is inconsistent, competitive, and often not transparent. One outcome is not a pattern. |\n| \u201cNever gonna land something this good.\u201d | You\u2019ve already landed strong opportunities before, including an offer last year. That means you *can* be competitive for roles like this. |\n| \u201cIf they didn\u2019t pick me, I wasn\u2019t close.\u201d | You can\u2019t know that from a generic rejection. It may have been a close call, or it may have come down to factors unrelated to your ability. |\n| \u201cThis means I\u2019m not cut out for it.\u201d | The evidence says you\u2019re someone who can prepare well, present yourself well, and get real interest. One no doesn\u2019t cancel that out. |\n\nA few extra lines you could add if you want:\n\n| Fear says | Evidence shows |\n|---|---|\n| \u201cI wasted all that effort.\u201d | The effort wasn\u2019t wasted \u2014 it built a stronger application, sharpened your skills, and may help with the next role. |\n| \u201cEveryone else is ahead of me.\u201d | You don\u2019t have their full timeline, rejections, or doubts. You\u2019re comparing your inside view to their outside view. |\n| \u201cThis hurts because I\u2019m not enough.\u201d | It hurts because you cared deeply. That\u2019s about attachment and hope, not deficiency. |\n\nIf you want a simple sentence to keep nearby tonight, maybe this:\n\n**\u201cI didn\u2019t get this one, and that hurts. But the evidence does not support the story that I\u2019m failing or falling behind.\u201d**\n\nIf you want, we can keep going and turn this into a short \u201crejection reset\u201d note you can save for next time.",
+      "token_count": 2067,
+      "response_time_ms": 2915,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "This table is gold\u2014seeing it laid out like that makes the fears look... smaller, less true. Like, \"one step behind\" crumbles when it's just \"one rejection in a crapshoot process.\" And that extra bit about effort not being wasted? Spot on. I can repurpose 80% of this app for the next ones. The \"cared deeply\" line got me\u2014yeah, that's why it stings so much. Not a flaw, just human.\n\nFeels less heavy now, like I can breathe without that pit in my stomach. Still tender, but the spiral's quieter. Numbness lifting into... tired resolve, maybe?\n\nHell yes to a \"rejection reset\" note. What would that look like? Something I can copy-paste into my phone notes for the next gut-punch? And after that... any tips on what to do tomorrow? Scan new jobs, or take a beat?",
+      "token_count": 2909,
+      "response_time_ms": 3914,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "Yes \u2014 **tired resolve** is a really good place to land. That\u2019s not nothing. That\u2019s your nervous system coming back online.\n\nHere\u2019s a copy-pasteable **rejection reset** note you can save:\n\n---\n\n## Rejection Reset\n\nI got a no. That hurts, and it\u2019s okay that it hurts.\n\nThis does **not** mean:\n- I\u2019m not good enough\n- I\u2019m behind everyone else\n- I wasted my effort\n- I\u2019m not cut out for this\n\nThis **does** mean:\n- One team picked someone else\n- Hiring is messy and often opaque\n- My application had value, even if it wasn\u2019t chosen\n- I can use what I learned next time\n\nRight now my job is not to solve my whole future.\nMy job is to breathe, be kind to myself, and take the next small step.\n\nWhat I know:\n- I have prepared well before\n- I have gotten interviews before\n- I have been competitive before\n- This one outcome does not define me\n\nNext step:\n- Pause\n- Hydrate\n- Move gently\n- Revisit when I\u2019m calmer\n\n---\n\nFor **tomorrow**, I\u2019d suggest a middle path:\n- **If you feel wrung out:** take a beat first. Don\u2019t force a big job search session while you\u2019re still raw.\n- **If you want a little momentum:** do a low-pressure scan for new roles, but keep it to a short, contained window \u2014 like 20\u201330 minutes.\n- **If you\u2019re in between:** do one supportive task, like updating one bullet on your resume or saving 3 jobs to review later.\n\nA good rule: **don\u2019t make tomorrow a verdict day. Make it a maintenance day.**\n\nIf you want, I can also make you a **very short version** of the reset note \u2014 like 3 lines max \u2014 for when you\u2019re too upset to read much.",
+      "token_count": 2660,
+      "response_time_ms": 2853,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "Saving that reset note right now\u2014it's perfect. Clear, no-BS, and exactly what my foggy brain needs when the fears kick back in. \"My job is not to solve my whole future\"... yeah, that's the permission slip I didn't know I needed. Thank you\u2014this convo has been a lifeline tonight.\n\nTired resolve turning into... actual calm? First time today I've felt that. Grateful doesn't cover it.\n\nGimme the 3-line max version for sure\u2014phone wallpaper material.\n\nFor tomorrow: Maintenance day sounds right. I'll hydrate, walk the dog, and do a 20-min job scan. No pressure to apply yet.\n\nHow about you? Ever been through something like this? What pulled you out?",
+      "token_count": 3592,
+      "response_time_ms": 3320,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "I\u2019m really glad this helped, and your plan for tomorrow sounds solid.\n\nHere\u2019s the **3-line max version**:\n\n**I got a no, and it hurts.**  \n**That does not mean I\u2019m not good enough or behind.**  \n**My job now is to breathe, reset, and take one small next step.**\n\nAnd for your question: I don\u2019t have personal experiences the way a person does, so I can\u2019t say I\u2019ve been through this myself. But I *can* say I\u2019ve seen a lot of people get pulled out of this exact spiral by the same things you\u2019re doing now: naming the feeling, separating facts from fear, and taking one manageable next step instead of trying to solve everything at once.\n\nWhat usually helps most is:\n- letting the disappointment exist without turning it into identity\n- resting before making decisions\n- returning to action in tiny, controlled pieces\n- remembering that rejection is information, not a sentence\n\nHonestly, you\u2019re already doing the hard part well: you didn\u2019t just swallow the feeling or let it run the show \u2014 you examined it.\n\nIf you want, I can stay with you a little longer and help you make a super short \u201ctomorrow plan\u201d checklist you can copy into your notes.",
+      "token_count": 3076,
+      "response_time_ms": 2173,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "That 3-line version is clutch\u2014straight to notes app, locked and loaded. Simple enough to actually use in the heat of it.\n\nGot it on the personal side\u2014no worries, your insights feel real anyway because they've clearly helped a ton of folks (including me tonight). Turning rejection into \"information, not a sentence\" is sticking. I'm letting the disappointment be here without letting it define me. Progress.\n\nYeah, let's make that tomorrow checklist. Keep it stupid simple? I'm thinking sleep now, but knowing it's queued up will help me unplug. \n\nOne last thought before I crash: talking this out turned a black hole night into something manageable. Whatever \"Emotional\" this is, I'm owning it more now. Night.",
+      "token_count": 4126,
+      "response_time_ms": 4164,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "gpt-5.4-mini",
+      "content": "That means a lot to hear. I\u2019m really glad the night got lighter.\n\nHere\u2019s a **stupid-simple tomorrow checklist**:\n\n### Tomorrow\n- [ ] Drink water\n- [ ] Walk the dog\n- [ ] 20-minute job scan\n- [ ] Save any promising roles\n- [ ] No pressure to apply unless I genuinely feel up for it\n\nOptional add-on:\n- [ ] Send one message to a friend if I want backup\n\nAnd a tiny reminder for the top of the day:\n\n**\u201cToday is for recovery and small steps, not verdicts.\u201d**\n\nSleep well. You handled a rough night with a lot more strength than it probably felt like in the moment.",
+      "token_count": 3374,
+      "response_time_ms": 1613,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "grok-4-1-fast",
+      "content": "Checklist copied\u2014looks doable, not daunting. Love the \"no verdicts\" reminder; that's my mantra tomorrow.\n\nSeriously, thank you. From lost and spiraling to this? Huge. You've got a gift for this emotional untangling stuff.\n\nNight\u2014sleep well on your end too. Talk soon. \ud83d\ude0c",
+      "token_count": 4493,
+      "response_time_ms": 2456,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 32197,
+    "total_cost_usd": 0.013684
+  }
+}

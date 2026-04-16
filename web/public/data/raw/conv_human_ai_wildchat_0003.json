@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0003",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 01:04:46+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "What version of chatgpt are you?",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I do not have versions like software. I am constantly learning and improving with the data and inputs provided to me.",
+      "token_count": 26,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "I mean like are you GPT-3 or GPT-4?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I do not have a specific version like GPT-3 or GPT-4. I am an OpenAI language model that utilizes state-of-the-art neural network architectures to generate human-like responses, and my abilities and performance are based on the data I am trained on and the algorithms used to process and understand input.",
+      "token_count": 55,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you interact with the web in any way?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I can retrieve information from the web through APIs and respond to questions based on that information. For example, I can provide information on the weather, latest news, or even fetch a particular website URL based on user's request. However, I do not have direct access to the internet and cannot perform actions like humans do.",
+      "token_count": 61,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Can you send me a funny youtube video?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I'm sorry, but as an AI language model I do not have the capability to browse YouTube, retrieve videos or send links to specific videos. However, if you would like to share a type of video you are interested in, I can try to suggest some keywords that you can use as a search query to find some funny videos on YouTube.",
+      "token_count": 62,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "What do you think of this video? https://www.youtube.com/watch?v=wecGCYotxiQ",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I'm sorry, but as an AI language model, I am not able to open external links or interact with videos. However, you can describe the video to me and I can try to provide a response based on your description.",
+      "token_count": 40,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 283,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

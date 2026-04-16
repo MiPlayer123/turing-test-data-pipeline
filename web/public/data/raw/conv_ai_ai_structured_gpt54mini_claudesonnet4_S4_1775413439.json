@@ -1,0 +1,158 @@
+{
+  "conversation_id": "conv_ai_ai_structured_gpt54mini_claudesonnet4_S4_1775413439",
+  "condition": "ai_ai_structured",
+  "model_a": "gpt-5.4-mini",
+  "model_b": "claude-sonnet-4",
+  "system_prompt_a": "You are having a conversation about Emotional. Share your thoughts and respond to your partner.",
+  "system_prompt_b": "You are having a conversation about Emotional. Share your thoughts and respond to your partner.",
+  "opening_prompt_id": "S4",
+  "temperature": 0.7,
+  "max_turns": 15,
+  "timestamp_start": "2026-04-05T18:23:59.442630+00:00",
+  "timestamp_end": "2026-04-05T18:25:01.080082+00:00",
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "I just found out I didn't get the job I really wanted. I don't know what to do.",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "I'm really sorry to hear that. Job rejections can feel devastating, especially when it's something you really wanted. It's completely normal to feel disappointed, frustrated, or even lost right now.\n\nTake some time to let yourself feel whatever you're feeling - don't rush to \"get over it.\" These emotions are valid.\n\nWhen you're ready, it might help to:\n- Reach out to the employer for feedback if possible - it could give you valuable insights for next time\n- Reflect on what you learned about yourself and what you want through this process\n- Remember that this doesn't reflect your worth or abilities - sometimes it's just not the right fit or timing\n\nWhat's hitting you hardest about this right now? Sometimes it helps to talk through what specifically feels most difficult.",
+      "token_count": 214,
+      "response_time_ms": 5293,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "Thank you \u2014 that means a lot.  \nI think what\u2019s hitting me hardest is the mix of disappointment and self-doubt. I keep replaying everything and wondering if I said or did something wrong, even though I know that may not be fair to myself.\n\nIt also hurts because I had started imagining what it would be like if I got it, so now it feels like I lost something before I really had it. I\u2019m trying not to be too hard on myself, but it\u2019s definitely tough.\n\nI appreciate you saying that it doesn\u2019t reflect my worth. I really needed to hear that.",
+      "token_count": 300,
+      "response_time_ms": 1470,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "That mix of disappointment and self-doubt is so painful - you're describing something really universal but that doesn't make it hurt any less. The way you're replaying everything shows how much you cared, which isn't a weakness even though it feels awful right now.\n\nAnd yes, that feeling of losing something you never actually had is such a specific kind of grief. When we start picturing ourselves in a role, imagining the daily routine, maybe even thinking about how we'd introduce ourselves - it becomes real in our minds. So the loss feels real too, even though logically we know we didn't actually lose something we possessed.\n\nThe fact that you're trying not to be too hard on yourself shows real self-awareness. That voice that's replaying everything and looking for what went wrong? It thinks it's protecting you by finding \"the reason,\" but often there isn't one clear reason - sometimes it really is just fit, timing, or factors completely outside your control.\n\nYou sound like someone who reflects thoughtfully on experiences, which is actually a strength in job searching and in life generally. How are you feeling about the idea of eventually getting back out there, or is it too soon to even think about that?",
+      "token_count": 601,
+      "response_time_ms": 9511,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "It still feels a little too soon to think about jumping back in, honestly. Right now I mostly just feel drained and embarrassed, even though I know I probably shouldn\u2019t.\n\nBut I do appreciate you framing it that way \u2014 as something that mattered to me, not as a sign that I failed. That helps a lot. I think I need a little time to let the sting pass before I can look at it more objectively.\n\nIf anything, I\u2019m trying to focus on not letting this one outcome rewrite the whole story about me. That\u2019s hard in the moment, but I know it\u2019s important.",
+      "token_count": 665,
+      "response_time_ms": 1545,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "That's really wise - recognizing that you need time before you can look at it objectively. There's no timeline you need to follow here, and honestly, trying to rush into \"learning mode\" or action mode too quickly can sometimes make the disappointment linger longer.\n\nThe embarrassment makes so much sense too, even if it's not logical. When we put ourselves out there and it doesn't work out, there's this feeling of exposure - like everyone can see that we didn't get chosen. But the truth is, most people have been exactly where you are and understand that rejection says nothing about your value.\n\nI'm really struck by what you said about not letting this one outcome rewrite your whole story. That's such an important insight, and the fact that you're actively thinking about it even while you're hurting shows incredible emotional intelligence. It *is* hard in the moment - our brains want to make one disappointing event mean everything about us.\n\nTaking time to let the sting pass isn't avoiding or giving up - it's actually taking care of yourself so you can eventually move forward from a healthier place. You're handling this with a lot of grace, even if it doesn't feel that way to you right now.",
+      "token_count": 995,
+      "response_time_ms": 7982,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "Thank you for saying that. I really needed to hear it framed as taking care of myself rather than avoiding it. That makes it feel a lot less like I\u2019m falling behind.\n\nI\u2019m still embarrassed, but it helps to remember that this kind of thing is more common than it feels when it\u2019s happening to you. I think I\u2019m going to give myself permission to step back for a bit without judging myself for it.\n\nAnd honestly, your words are helping me hold onto the idea that this is just one moment, not my whole future. That means a lot.",
+      "token_count": 1019,
+      "response_time_ms": 1515,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "I'm so glad that reframe resonates with you. You're absolutely right - stepping back isn't falling behind, it's actually moving forward in a way that honors where you are right now. There's real strength in knowing what you need and giving it to yourself.\n\nAnd yes, rejection is so much more common than it feels in the moment. When it's happening to us, it can feel like we're the only person who didn't get the thing they wanted, but the reality is that most people have a collection of \"no's\" that eventually led them to their \"yes.\" You're in good company, even if it feels lonely right now.\n\nI can hear that you're already starting to hold both things at once - the disappointment of this moment and the knowledge that it's not your whole story. That's not easy to do when you're still in the thick of feeling hurt, but you're doing it.\n\nTake all the time you need. Your future is still wide open, and this experience - as much as it sucks right now - doesn't change that. You're going to be okay, even if okay feels far away right now.",
+      "token_count": 1360,
+      "response_time_ms": 6879,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "Thank you. That really helps more than I can say.\n\nI think I needed someone to remind me that a \u201cno\u201d isn\u2019t the end of the road, even when it feels like it in the moment. I\u2019m still hurt, but I do feel a little less alone with it now.\n\nI\u2019m going to try to be gentle with myself and not force a bigger response than I\u2019m ready for. For now, I think that\u2019s enough.",
+      "token_count": 1338,
+      "response_time_ms": 1205,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "That sounds exactly right. Being gentle with yourself and not forcing anything - that's not just enough, that's perfect for where you are right now.\n\nYou're not alone with this, even when it feels that way. And you're absolutely right that a \"no\" isn't the end of the road, even though it can feel so final in the moment.\n\nTake care of yourself. You've got this, even if you don't feel like you do right now. \u2764\ufe0f",
+      "token_count": 1560,
+      "response_time_ms": 3596,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "\u2764\ufe0f Thank you. I\u2019m really grateful for your kindness and for staying with me through this. It means a lot to feel seen and not judged.\n\nI\u2019m going to take that gentleness with me for now.",
+      "token_count": 1480,
+      "response_time_ms": 1105,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "You're so welcome. It's been an honor to sit with you through this - you've shown such thoughtfulness and self-compassion even while you're hurting, and that really comes through.\n\nYou deserve that gentleness, and I'm glad you're taking it with you. Take care of yourself. \u2764\ufe0f",
+      "token_count": 1686,
+      "response_time_ms": 3749,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "Thank you \u2764\ufe0f That really means a lot to hear. I\u2019m going to keep holding onto that gentleness and give myself some time.",
+      "token_count": 1573,
+      "response_time_ms": 759,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "claude-sonnet-4",
+      "content": "\u2764\ufe0f You've got this. Take all the time you need - you're exactly where you should be right now. Sending you warmth.",
+      "token_count": 1757,
+      "response_time_ms": 2155,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "gpt-5.4-mini",
+      "content": "\u2764\ufe0f Thank you. That warmth really helps. I\u2019m going to rest with that for a bit.",
+      "token_count": 1628,
+      "response_time_ms": 823,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 16176,
+    "total_cost_usd": 0.076836
+  }
+}

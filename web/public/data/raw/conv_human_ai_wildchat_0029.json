@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0029",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 03:44:41+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "hi",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "Hello! How can I help you today?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "write 10 interesting intros to backrooms story that involves average people going about their life and unexpectedly enter the backrooms. don't suggest something like like a simple door or portal. something interesting would be like using an elevator for example",
+      "token_count": 40,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "1. Kristen was rummaging through the cluttered storage room in her office building when she accidentally hit a hidden lever on a dusty shelf. The floor beneath her shifted, and in seconds she found herself standing in the dimly lit, unsettling corridors of the backrooms.\n\n2. As Mark was lying in bed, drifting slowly to sleep, his mattress suddenly gave way and sucked him into the underside of the bed. He woke up in the twisted, unsettling backrooms, unsure if he was dreaming or facing a nightmareish reality.\n\n3. Crouched in the crawl space under their family home, Kelly began feeling the air thicken and the walls close in. Terrified, they started crawling faster, which led them straight into the disorienting realm known as the backrooms.\n\n4. While cleaning an old mirror in her new apartment, Rachel noticed a subtle, almost unnoticeable difference in her reflection. Curiosity getting the better of her, she reached out and touched the glass, only to find herself pulled into the eerie corridors of the backrooms.\n\n5. While waiting for a friend at a crowded train station, Clay followed a mysterious figure through the cacophony of people, only to find himself wandering into a tunnel he'd never seen before. As soon as he stepped in, the noise disappeared, replaced by the ominous atmosphere of the backrooms.\n\n6. During a family camping trip, Jenny found herself exploring a cave hidden in the woods. As she ventured deeper into the cave, she suddenly emerged into the unnatural, labyrinthine structure of the backrooms.\n\n7. Attending an escape room experience event, Devin and his friends worked on solving the puzzles to leave the room. A series of strange occurrences led to them accidentally discovering a secret passage, and as they ventured through it, they ended up lost in the vast backrooms - a challenge far more real than they had ever bargained for.\n\n8. Waking up in the middle of the night disoriented, Amy went to the kitchen for a glass of water. Half-asleep and in the dark, she opened a door she thought led to the bathroom, only to be faced with the gloomy, twisted reality of the backrooms.\n\n9. Caught in a sudden downpour on his way home from work, Carter took shelter in a phone booth to stay momentarily dry. The moment the door closed behind him, the fluorescent lights above flickered, the rain outside ceased, and he found himself in the unnervingly silent backrooms.\n\n10. Sarah accidentally dropped her keys while walking her dog, and as she bent down to pick them up, a gust of wind pushed her down a curiously hidden flight of stairs. At the bottom, she discovered the endless maze of rooms and hallways known as the backrooms, unsure how to return to the world above.",
+      "token_count": 465,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "As of 2019, what was the fifth best-selling video game of all time?",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "As of 2019, the fifth best-selling video game of all time was \"PlayerUnknown's Battlegrounds\" (PUBG) with over 50 million copies sold across various platforms. Please note that this information might have changed since 2019, and newer data might show a different ranking.",
+      "token_count": 42,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "what are the 5 best ways to go from having a fulltime job that pays $60k per year to making at least $20k per month doing something besides that fulltime job?",
+      "token_count": 31,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "1. Freelance or Consulting Business: Leverage your existing skills, knowledge, or expertise to offer services to clients as a freelancer or consultant. This can be done part-time alongside your full-time job until it generates enough income to replace your current salary and eventually surpass it.\n\n2. Start an Online Business: Create an online business, such as an e-commerce store or content-based website, that generates revenue through advertising, affiliate marketing, or selling physical or digital products. This usually requires time and effort to grow but can bring substantial, scalable income once it takes off.\n\n3. Real Estate Investing: Invest in rental properties, either residential or commercial, and earn income from the monthly rent payments. This may involve leveraging your current income or savings to acquire properties, but the passive income generated can eventually surpass your full-time job's income.\n\n4. Stock Market and Dividend Investing: Learn about the stock market and develop a solid investment strategy focused on dividend-paying stocks, mutual funds, or exchange-traded funds (ETFs). Consistently investing and reinvesting your dividends can help you grow your portfolio over time and eventually generate substantial monthly income from your investments.\n\n5. Create and Sell Digital Products: Develop digital products like online courses, ebooks, or mobile apps, using your expertise in a particular field. Market your product online and generate income from sales. As digital products can be sold indefinitely without additional production costs, this business model can have great potential to grow and provide substantial income over time.\n\nRemember, achieving a $20k per month income may take time and a significant amount of effort across these strategies. It's important to be patient, committed, and consistently work towards your goals.",
+      "token_count": 276,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "which gpt version are you using or made from?",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "I am based on OpenAI's GPT-3 (third-generation Generative Pre-trained Transformer). GPT-3 is currently the latest version of the model, and it provides improved capabilities in natural language understanding, generation, and context sensitivity compared to its predecessors.",
+      "token_count": 36,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 920,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}
