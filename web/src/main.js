@@ -5,12 +5,11 @@ import './styles/components.css';
 import scrollama from 'scrollama';
 import { loadData } from './data/loader.js';
 import * as quiz from './sections/quiz.js';
-import * as metricsExplain from './sections/metricsExplain.js';
 import * as comparison from './sections/comparison.js';
 import * as animation from './sections/animation.js';
 import * as timeline from './sections/timeline.js';
 import * as detective from './sections/detective.js';
-import * as explorer from './sections/explorer.js';
+// explorer is dynamically imported when needed (Three.js is ~624KB)
 
 function initScrolly(sectionId, onStep) {
   const steps = document.querySelectorAll(`#${sectionId} .step`);
@@ -51,10 +50,7 @@ async function main() {
   // S2: Thesis counters
   initCounters();
 
-  // S3: Metric explanation cards
-  metricsExplain.init(data);
-
-  // S4: Comparison bars (Scrollama)
+  // S3: Comparison bars with metric intro (Scrollama)
   comparison.init(data);
   initScrolly('s-comparison', (step) => comparison.onStep(step));
 
@@ -69,9 +65,10 @@ async function main() {
   detective.init(data);
   initScrolly('s-detective', (step) => detective.onStep(step));
 
-  // S8: 3D Explorer (lazy)
-  const explorerObs = new IntersectionObserver((entries) => {
+  // S8: 3D Explorer (lazy — dynamic import keeps Three.js out of main bundle)
+  const explorerObs = new IntersectionObserver(async (entries) => {
     if (entries[0].isIntersecting) {
+      const explorer = await import('./sections/explorer.js');
       explorer.init(data);
       explorerObs.disconnect();
     }

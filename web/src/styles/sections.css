@@ -33,16 +33,16 @@
 .scrolly-steps {
   position: relative;
   z-index: 2;
-  padding: 0 0 40vh 0;
+  padding: 0 0 25vh 0;
 }
 .step {
-  min-height: 70vh;
+  min-height: 55vh;
   display: flex;
   align-items: center;
   padding: 0 48px;
 }
 .step:first-child {
-  min-height: 50vh;
+  min-height: 40vh;
 }
 /* Left-align steps by default */
 .step-card {
@@ -70,6 +70,61 @@
 }
 .step-card p em { color: #F39C12; font-style: italic; }
 .step-card p strong { color: #f0f3f6; }
+
+/* ===== Metric intro overlay (inside comparison scrolly-graphic) ===== */
+.metric-intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+  transition: opacity 0.4s ease;
+  max-width: 600px;
+  width: 100%;
+  padding: 0 24px;
+}
+.metric-intro h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700;
+  color: #f0f3f6;
+  margin-bottom: 12px;
+}
+.metric-intro-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #8B949E;
+  margin-bottom: 32px;
+}
+.metric-intro-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.metric-mini {
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 12px;
+  padding: 20px 24px;
+  max-width: 260px;
+  text-align: left;
+}
+.metric-mini strong {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f0f3f6;
+  display: block;
+  margin-bottom: 8px;
+}
+.metric-mini p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #b1bac4;
+  line-height: 1.55;
+  margin: 0;
+}
 
 /* ===== Act 1: Hook ===== */
 .hook-chat {
@@ -379,6 +434,21 @@
   font-size: 11px;
   color: #484F58;
   font-style: italic;
+}
+
+/* ===== Animation bridge text ===== */
+.anim-bridge {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: #8B949E;
+  text-align: center;
+  opacity: 0;
+  z-index: 10;
+  white-space: nowrap;
 }
 
 @keyframes fadeUp {

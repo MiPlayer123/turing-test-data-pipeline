@@ -3,24 +3,21 @@ import * as tooltip from '../components/tooltip.js';
 
 let container, data;
 let currentStep = -1;
-
-// Store reference to the AI-AI label element for handoff
-let aiAiLabelRect = null;
+let metricIntro;
 
 export function init(rawData) {
   data = rawData;
   container = document.getElementById('comparison-viz');
+  metricIntro = document.getElementById('metric-intro');
   container.innerHTML = '';
   container.style.textAlign = 'center';
 }
 
 export function getAiAiBarPosition() {
-  // Find the AI-AI y-label text in the SVG
   const label = container.querySelector('[data-key="ai_ai_combined"]');
   if (label) {
     return label.getBoundingClientRect();
   }
-  // Fallback: return the container's center-ish position
   const rect = container.getBoundingClientRect();
   return { left: rect.left + rect.width / 2 - 60, top: rect.top + rect.height - 80, width: 120, height: 40 };
 }
@@ -28,15 +25,30 @@ export function getAiAiBarPosition() {
 export function onStep(step) {
   if (step === currentStep) return;
   currentStep = step;
+
+  // Step 0: show metric intro, hide bars
+  if (step === 0) {
+    metricIntro.style.opacity = '1';
+    metricIntro.style.display = '';
+    container.style.opacity = '0';
+    container.innerHTML = '';
+    return;
+  }
+
+  // Steps 1+: hide metric intro, show bars
+  metricIntro.style.opacity = '0';
+  metricIntro.style.display = 'none';
+  container.style.opacity = '1';
+
   container.innerHTML = '';
 
   const grouped = d3.group(data.conversations, d => d.condition);
   const metrics = ['hedging', 'repetitiveness'];
 
   let items;
-  if (step === 0) {
+  if (step === 1) {
     items = [{ key: 'human_human', label: 'Human-Human', color: '#1ABC9C' }];
-  } else if (step === 1) {
+  } else if (step === 2) {
     items = [
       { key: 'human_human', label: 'Human-Human', color: '#1ABC9C' },
       { key: 'human_ai', label: 'Human-AI', color: '#F1C40F' },
@@ -81,7 +93,6 @@ export function onStep(step) {
       .attr('font-family', 'Inter, sans-serif')
       .text(metric.charAt(0).toUpperCase() + metric.slice(1));
 
-    // Y labels — mark AI-AI label with data attribute for handoff
     svg.selectAll('.y-label').data(rows).join('text')
       .attr('x', -10).attr('y', d => y(d.key) + y.bandwidth() / 2)
       .attr('dy', '0.35em').attr('text-anchor', 'end')
@@ -95,7 +106,6 @@ export function onStep(step) {
       .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
       .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '10px').attr('font-family', 'JetBrains Mono, monospace'));
 
-    // Bars — mark AI-AI bars
     svg.selectAll('.bar').data(rows).join('rect')
       .attr('class', d => `bar bar-${d.key}`)
       .attr('data-key', d => d.key)

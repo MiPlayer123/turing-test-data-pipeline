@@ -11,8 +11,6 @@ export function init(data) {
   chartContainer.innerHTML = '';
   chartContainer.style.textAlign = 'center';
 
-  // RT label removed — animation section handles the transition
-
   conditionData = CONDITIONS.map(cond => {
     const condRows = data.turnMetrics.filter(d => d.condition === cond.key);
     const byTurn = d3.group(condRows, d => d.turn_number);
@@ -95,13 +93,26 @@ export function onStep(step) {
 
   let visibleKeys;
   let highlightKey = null;
-  if (step === 0) visibleKeys = [];
-  else if (step === 1) visibleKeys = ['human_human'];
-  else if (step === 2) visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona'];
+
+  // Step 0: Start with RT (narrative bridge from animation)
+  if (step === 0) {
+    visibleKeys = ['ai_ai_reverse_turing'];
+  }
+  // Step 1: Add human-human for contrast
+  else if (step === 1) {
+    visibleKeys = ['human_human', 'ai_ai_reverse_turing'];
+  }
+  // Step 2: Add other AI conditions
+  else if (step === 2) {
+    visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona', 'ai_ai_reverse_turing'];
+  }
+  // Step 3: Highlight RT with annotation
   else if (step === 3) {
     visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona', 'ai_ai_reverse_turing'];
     highlightKey = 'ai_ai_reverse_turing';
-  } else {
+  }
+  // Step 4: All visible
+  else {
     visibleKeys = CONDITIONS.map(c => c.key);
   }
 
@@ -115,12 +126,9 @@ export function onStep(step) {
     g.transition().duration(500).attr('opacity', targetOpacity);
 
     if (visible) {
-      // Draw line
       g.select('path').transition().duration(1200).ease(d3.easeQuadOut).attr('stroke-dashoffset', 0);
-      // Dots appear AFTER line
       g.selectAll('circle').transition().duration(400).delay((d, i) => 1200 + i * 30).attr('r', 3);
     } else {
-      // Reset line
       g.select('path').each(function() {
         const len = this.getTotalLength();
         d3.select(this).attr('stroke-dashoffset', len);

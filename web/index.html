@@ -42,34 +42,45 @@
       </div>
     </section>
 
-    <!-- S3: WHAT IS HUMANNESS -->
-    <section id="s-metrics-explain" class="act">
-      <div class="full-screen center-content" style="flex-direction:column; padding:40px 48px;">
-        <h2 style="font-size:clamp(30px,4vw,44px); margin-bottom:14px;">What does "humanness" sound like?</h2>
-        <p class="text-muted" style="max-width:540px; text-align:center; margin-bottom:32px; font-size:16px; line-height:1.6;">We measured two signals in every conversation.</p>
-        <div class="metric-cards-wide" id="metric-cards"></div>
-      </div>
-    </section>
-
-    <!-- S4: COMPARISON BARS (Scrollama) -->
+    <!-- S3: COMPARISON BARS (Scrollama) — includes metric intro -->
     <section id="s-comparison" class="act scrolly">
       <div class="scrolly-graphic">
+        <div id="metric-intro" class="metric-intro">
+          <h2>What does "humanness" sound like?</h2>
+          <p class="metric-intro-sub">We measured two signals in every conversation.</p>
+          <div class="metric-intro-cards">
+            <div class="metric-mini">
+              <strong>Hedging</strong>
+              <p>Words that signal uncertainty — "I think", "maybe", "sort of". Humans use them naturally.</p>
+            </div>
+            <div class="metric-mini">
+              <strong>Repetitiveness</strong>
+              <p>3-gram overlap between consecutive turns. How much a speaker repeats their own phrases.</p>
+            </div>
+          </div>
+        </div>
         <div id="comparison-viz" class="scrolly-viz"></div>
       </div>
       <div class="scrolly-steps">
         <div class="step" data-step="0">
           <div class="step-card">
+            <h3>Two key signals</h3>
+            <p>We measured <strong>hedging</strong> and <strong>repetitiveness</strong> across every conversation to quantify how "human" each one sounds.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
             <h3>What "normal" sounds like</h3>
             <p>Let's start with human-to-human conversations. This is our baseline.</p>
           </div>
         </div>
-        <div class="step" data-step="1">
+        <div class="step" data-step="2">
           <div class="step-card">
             <h3>Now add AI</h3>
             <p>When a human talks to an AI, the patterns shift. Hedging drops — AIs are more direct with humans.</p>
           </div>
         </div>
-        <div class="step" data-step="2">
+        <div class="step" data-step="3">
           <div class="step-card">
             <h3>AI talking to AI</h3>
             <p>When two AIs talk to each other, the gap becomes clear.</p>
@@ -85,6 +96,7 @@
           <div class="anim-card-title">AI ↔ AI</div>
           <div class="anim-card-sub" id="anim-card-stats"></div>
         </div>
+        <div id="anim-bridge" class="anim-bridge">Now let's watch what happens turn by turn...</div>
         <!-- Sub-type cards that spawn below -->
         <div id="anim-subtypes" class="anim-subtypes-grid">
           <div class="anim-subtype" style="border-color:#3498DB;">
@@ -114,7 +126,7 @@
           </div>
         </div>
       </div>
-      <div style="height:80vh;"></div>
+      <div style="height:20vh;"></div>
     </section>
 
     <!-- S6: TIMELINE -->
@@ -128,25 +140,25 @@
         <div class="step" data-step="0">
           <div class="step-card">
             <h3>The longer it goes, the harder they try.</h3>
-            <p>Now let's watch how hedging changes turn by turn.</p>
+            <p>Watch how Reverse Turing's hedging changes over 20 turns.</p>
           </div>
         </div>
         <div class="step" data-step="1">
           <div class="step-card">
-            <h3>Humans settle in</h3>
-            <p>Human-human conversations start with some hedging, then relax.</p>
+            <h3>Compare that to humans</h3>
+            <p>Human conversations start with some hedging, then relax. The opposite of Reverse Turing.</p>
           </div>
         </div>
         <div class="step" data-step="2">
           <div class="step-card">
-            <h3>AIs follow the pattern... mostly</h3>
-            <p>Most AI conditions trend downward too. They settle over time.</p>
+            <h3>Other AIs settle too</h3>
+            <p>Most AI conditions trend downward over time — they find a rhythm.</p>
           </div>
         </div>
         <div class="step" data-step="3">
           <div class="step-card">
-            <h3>Except when they're faking it</h3>
-            <p>Reverse Turing is the <strong>only</strong> condition where hedging goes <em>up</em>.</p>
+            <h3>Only one line goes up</h3>
+            <p>Reverse Turing is the <strong>only</strong> condition where hedging <em>increases</em>. The harder they try to sound human, the more they overdo it.</p>
           </div>
         </div>
         <div class="step" data-step="4">
