@@ -1,3 +1,28 @@
+/* ===== Corner-dot overlay =====
+   Persistent narrative thread. Dots are born in later scenes and locked top-right.
+   Start hidden (scale 0). Sections opt-in via .is-lit. */
+.corner-dots {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+  pointer-events: none;
+}
+.corner-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: scale(0);
+  transform-origin: center;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(.2,.7,.2,1), opacity 0.3s;
+}
+.corner-dot.is-lit { transform: scale(1); opacity: 1; }
+#corner-dot-red    { background: #E74C3C; box-shadow: 0 0 14px rgba(231, 76, 60, 0.55); }
+#corner-dot-yellow { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
+
 /* ===== Metric cards (wide layout) ===== */
 .metric-cards-wide {
   display: flex;
@@ -18,7 +43,7 @@
   transition: border-color 0.3s;
 }
 .metric-card-wide .mcard-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 26px;
   font-weight: 700;
   color: #f0f3f6;
@@ -47,7 +72,7 @@
   border-top: 1px solid #21262D;
 }
 .metric-card-wide .mcard-example blockquote {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 16px;
   font-style: italic;
   color: #c9d1d9;

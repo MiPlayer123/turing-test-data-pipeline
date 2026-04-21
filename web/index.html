@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Can You Tell If You're Talking to an AI?</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="app">
@@ -170,7 +173,7 @@
       </div>
     </section>
 
-    <!-- S8: DETECTIVE -->
+    <!-- S7: DETECTIVE — per-model report card -->
     <section id="s-detective" class="act scrolly">
       <div class="scrolly-graphic">
         <div id="detective-viz" class="scrolly-viz"></div>
@@ -197,7 +200,7 @@
       </div>
     </section>
 
-    <!-- S9: 3D SCATTER -->
+    <!-- S8: 3D SCATTER -->
     <section id="s-explorer" class="act">
       <div class="full-screen center-content" style="flex-direction:column; padding:40px;">
         <div style="max-width:680px; text-align:center; margin-bottom:24px;">
@@ -209,6 +212,12 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- Corner-dot overlay: persistent narrative thread. Dots are born later in the scroll. -->
+  <div class="corner-dots" id="corner-dots" aria-hidden="true">
+    <span class="corner-dot" id="corner-dot-red" data-dot="hedging"></span>
+    <span class="corner-dot" id="corner-dot-yellow" data-dot="repetition"></span>
   </div>
 
   <!-- Shared UI -->

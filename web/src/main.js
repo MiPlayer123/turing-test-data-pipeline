@@ -2,8 +2,11 @@ import './styles/base.css';
 import './styles/sections.css';
 import './styles/components.css';
 
-import scrollama from 'scrollama';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadData } from './data/loader.js';
+
+gsap.registerPlugin(ScrollTrigger);
 import * as quiz from './sections/quiz.js';
 import * as comparison from './sections/comparison.js';
 import * as animation from './sections/animation.js';
@@ -14,10 +17,15 @@ import * as detective from './sections/detective.js';
 function initScrolly(sectionId, onStep) {
   const steps = document.querySelectorAll(`#${sectionId} .step`);
   if (!steps.length) return;
-  const scroller = scrollama();
-  scroller.setup({ step: `#${sectionId} .step`, offset: 0.5 })
-    .onStepEnter(response => onStep(+response.element.dataset.step));
-  window.addEventListener('resize', () => scroller.resize());
+  steps.forEach(step => {
+    ScrollTrigger.create({
+      trigger: step,
+      start: 'top 50%',
+      end: 'bottom 50%',
+      onEnter: () => onStep(+step.dataset.step),
+      onEnterBack: () => onStep(+step.dataset.step),
+    });
+  });
 }
 
 function initCounters() {
@@ -50,18 +58,18 @@ async function main() {
   // S2: Thesis counters
   initCounters();
 
-  // S3: Comparison bars with metric intro (Scrollama)
+  // S3: Comparison bars with metric intro
   comparison.init(data);
   initScrolly('s-comparison', (step) => comparison.onStep(step));
 
   // S5: GSAP animation (card → center → subtypes → RT slides)
   animation.init(data);
 
-  // S6: Timeline (Scrollama)
+  // S6: Timeline
   timeline.init(data);
   initScrolly('s-timeline', (step) => timeline.onStep(step));
 
-  // S7: Detective (Scrollama)
+  // S7: Detective — per-model report card
   detective.init(data);
   initScrolly('s-detective', (step) => detective.onStep(step));
 

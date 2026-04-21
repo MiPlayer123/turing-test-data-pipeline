@@ -55,7 +55,7 @@
   transition: opacity 0.4s ease;
 }
 .step-card h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 700;
   color: #f0f3f6;
@@ -85,7 +85,7 @@
   padding: 0 24px;
 }
 .metric-intro h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 700;
   color: #f0f3f6;
@@ -165,7 +165,7 @@
 }
 
 .big-question {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   color: #f0f3f6;
@@ -187,7 +187,7 @@
   margin-bottom: 8px;
 }
 .hook-reveal h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: clamp(32px, 4vw, 48px);
   color: #D97706;
   margin-bottom: 12px;
@@ -209,7 +209,7 @@
   margin-bottom: 20px;
 }
 .thesis-block h1 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: clamp(34px, 4.5vw, 52px);
   font-weight: 700;
   color: #f0f3f6;
@@ -276,7 +276,7 @@
   margin-bottom: 32px;
 }
 .quiz-prompt {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 22px;
   color: #d0d7de;
   text-align: center;
@@ -284,7 +284,7 @@
 }
 .quiz-prompt-area.hidden { display: none; }
 .quiz-subtitle {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 22px;
   color: #d0d7de;
   text-align: center;
@@ -331,7 +331,7 @@
 }
 .quiz-result.hidden { display: none; }
 .quiz-result h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 24px;
   margin-bottom: 8px;
 }
@@ -382,7 +382,7 @@
   white-space: nowrap;
 }
 .anim-card-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 28px;
   font-weight: 700;
   color: #f0f3f6;
