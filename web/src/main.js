@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 import * as quiz from './sections/quiz.js';
 import * as metricsIntro from './sections/metricsIntro.js';
 import * as comparison from './sections/comparison.js';
-import * as animation from './sections/animation.js';
+import * as subtypes from './sections/subtypes.js';
 import * as timeline from './sections/timeline.js';
 import * as detective from './sections/detective.js';
 // explorer is dynamically imported when needed (Three.js is ~624KB)
@@ -62,12 +62,12 @@ async function main() {
   // S3.5: Metrics intro (definition cards + yellow dot birth)
   metricsIntro.init();
 
-  // S4: Comparison bars
+  // S4: Comparison bars (H-H / H-AI / AI-AI)
   comparison.init(data);
   initScrolly('s-comparison', (step) => comparison.onStep(step));
 
-  // S5: GSAP animation (card → center → subtypes → RT slides)
-  animation.init(data);
+  // S4.5: AI-AI subtype breakdown
+  subtypes.init(data);
 
   // S6: Timeline
   timeline.init(data);

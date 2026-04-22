@@ -117,7 +117,7 @@
       </div>
     </section>
 
-    <!-- S4: COMPARISON BARS — extended to all conditions in Phase 2.3 -->
+    <!-- S4: COMPARISON BARS — all 7 conditions, white/gray bars, colored condition legend -->
     <section id="s-comparison" class="act scrolly">
       <div class="scrolly-graphic">
         <div id="comparison-viz" class="scrolly-viz"></div>
@@ -125,69 +125,42 @@
       <div class="scrolly-steps">
         <div class="step" data-step="0">
           <div class="step-card">
-            <h3>Two key signals</h3>
-            <p>We measured <strong>hedging</strong> and <strong>repetitiveness</strong> across every conversation to quantify how "human" each one sounds.</p>
+            <h3>The baseline.</h3>
+            <p>Start with humans talking to humans. Low hedging, low repetition — this is what "normal" looks like.</p>
           </div>
         </div>
         <div class="step" data-step="1">
           <div class="step-card">
-            <h3>What "normal" sounds like</h3>
-            <p>Let's start with human-to-human conversations. This is our baseline.</p>
+            <h3>Now add AI.</h3>
+            <p>A human talking to an AI. Hedging actually <em>drops</em> — people are more direct with machines.</p>
           </div>
         </div>
         <div class="step" data-step="2">
           <div class="step-card">
-            <h3>Now add AI</h3>
-            <p>When a human talks to an AI, the patterns shift. Hedging drops — AIs are more direct with humans.</p>
+            <h3>AIs alone together.</h3>
+            <p>Put two AIs in a room — no human in the loop. Hedging jumps. Repetition climbs. They behave differently than when a human's around.</p>
           </div>
         </div>
         <div class="step" data-step="3">
           <div class="step-card">
-            <h3>AI talking to AI</h3>
-            <p>When two AIs talk to each other, the gap becomes clear.</p>
+            <h3>Your dots live here.</h3>
+            <p>Red marks <strong>hedging in AI-AI</strong>. Yellow marks <strong>repetition in human-AI</strong>. But "AI-AI" is actually <em>five different setups</em> — keep scrolling.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- S5: GSAP ANIMATION -->
-    <section id="s-animation">
-      <div id="anim-pin" style="height:100vh; position:relative; overflow:hidden;">
-        <div id="anim-ai-card" class="anim-card">
-          <div class="anim-card-title">AI ↔ AI</div>
-          <div class="anim-card-sub" id="anim-card-stats"></div>
+    <!-- S4.5: AI-AI SUBTYPE BREAKDOWN -->
+    <section id="s-subtypes" class="act">
+      <div class="subtypes-container">
+        <div class="subtypes-header">
+          <h2 class="subtypes-title">Unpacking AI-AI.</h2>
+          <p class="subtypes-sub">One bar, five setups. Each changes how AIs behave together.</p>
         </div>
-        <div id="anim-bridge" class="anim-bridge">Now let's watch what happens turn by turn...</div>
-        <!-- Sub-type cards that spawn below -->
-        <div id="anim-subtypes" class="anim-subtypes-grid">
-          <div class="anim-subtype" style="border-color:#3498DB;">
-            <div class="anim-sub-name" style="color:#3498DB;">Freeform</div>
-            <div class="anim-sub-desc">Open-ended casual chat with no specific goal. Two AIs just talk — about whatever comes up.</div>
-            <div class="anim-sub-detail">Prompt: "Hey, how's it going?"</div>
-          </div>
-          <div class="anim-subtype" style="border-color:#9B59B6;">
-            <div class="anim-sub-name" style="color:#9B59B6;">Persona</div>
-            <div class="anim-sub-desc">Each AI is given a human identity — name, age, job, hobbies — and told to stay in character.</div>
-            <div class="anim-sub-detail">Example: "You are Alex, a 28-year-old graphic designer from Chicago."</div>
-          </div>
-          <div class="anim-subtype" style="border-color:#E74C3C;">
-            <div class="anim-sub-name" style="color:#E74C3C;">Detective</div>
-            <div class="anim-sub-desc">One AI interrogates the other, trying to determine if its partner is human or machine.</div>
-            <div class="anim-sub-detail">Task: "Figure out if you're talking to a human or an AI."</div>
-          </div>
-          <div class="anim-subtype" style="border-color:#F39C12;">
-            <div class="anim-sub-name" style="color:#F39C12;">Reverse Turing</div>
-            <div class="anim-sub-desc">Both AIs are told they're human and must convince the other person they're real. A double bluff.</div>
-            <div class="anim-sub-detail">Instruction: "You ARE human. Prove it to the other person."</div>
-          </div>
-          <div class="anim-subtype" style="border-color:#2ECC71;">
-            <div class="anim-sub-name" style="color:#2ECC71;">Structured</div>
-            <div class="anim-sub-desc">Both AIs discuss a specific topic — remote work, vaccines, AI art — with a focused prompt.</div>
-            <div class="anim-sub-detail">Example: "Do you think remote work is better than office work?"</div>
-          </div>
+        <div class="subtypes-grid" id="subtypes-grid">
+          <!-- Cards injected by subtypes.js so we can attach the mini bar charts -->
         </div>
       </div>
-      <div style="height:20vh;"></div>
     </section>
 
     <!-- S6: TIMELINE -->
