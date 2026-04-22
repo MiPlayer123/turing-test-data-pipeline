@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Order + metadata for each AI-AI variant
 const SUBTYPES = [
   {
     key: 'ai_ai_freeform',
@@ -45,7 +44,6 @@ export function init(data) {
   const grid = document.getElementById('subtypes-grid');
   if (!grid) return;
 
-  // Compute per-subtype means for hedging + repetitiveness
   const grouped = d3.group(data.conversations, d => d.condition);
   const means = {};
   SUBTYPES.forEach(s => {
@@ -56,8 +54,6 @@ export function init(data) {
       n:              rows.length,
     };
   });
-
-  // Global scale so bars are comparable across cards
   const maxHedging = d3.max(SUBTYPES, s => means[s.key].hedging) || 1;
   const maxRep     = d3.max(SUBTYPES, s => means[s.key].repetitiveness) || 1;
 
@@ -66,7 +62,6 @@ export function init(data) {
     const m = means[s.key];
     const hedPct = (m.hedging / maxHedging) * 100;
     const repPct = (m.repetitiveness / maxRep) * 100;
-
     const card = document.createElement('div');
     card.className = 'subtype-card';
     card.dataset.key = s.key;
@@ -94,29 +89,121 @@ export function init(data) {
     grid.appendChild(card);
   });
 
-  // Scroll-reveal: each card reveals when it enters view, reverses when scrolled back up past it.
-  const cards = grid.querySelectorAll('.subtype-card');
-  gsap.set(cards, { opacity: 0, y: 32 });
-  cards.forEach((card) => {
-    const fills = card.querySelectorAll('.mini-fill');
-    const showTween = () => {
-      gsap.to(card, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      fills.forEach(fill => {
-        gsap.to(fill, { width: `${fill.dataset.pct}%`, duration: 0.8, delay: 0.2, ease: 'power2.out' });
-      });
-    };
-    const hideTween = () => {
-      gsap.to(card, { opacity: 0, y: 32, duration: 0.35, ease: 'power2.in' });
-      fills.forEach(fill => gsap.to(fill, { width: '0%', duration: 0.3 }));
-    };
+  wirePinnedTimeline();
+}
 
-    ScrollTrigger.create({
-      trigger: card,
-      start: 'top 78%',
-      end:   'bottom 20%',
-      onEnter:     () => showTween(),
-      onEnterBack: () => showTween(),
-      onLeaveBack: () => hideTween(),
-    });
+// The scene-4.5 experience has two separate scroll ranges:
+//   (A) Morph — fires EARLY, between "leaving comparison" and "entering the pin",
+//       so it visually lands the AI-AI row into the title before the pin engages.
+//   (B) Pinned timeline — handles card reveals only, starts once pin is active.
+function wirePinnedTimeline() {
+  const section = document.getElementById('s-subtypes');
+  const header  = section?.querySelector('.subtypes-header');
+  const cards   = section?.querySelectorAll('.subtype-card');
+  const aiRow   = document.querySelector('#s-comparison .cmp-row[data-cond="ai_ai"][data-metric="hedging"]');
+  if (!section || !header || !cards) return;
+
+  // Pre-hide everything we'll reveal
+  gsap.set(header, { opacity: 0 });
+  gsap.set(cards, { opacity: 0, y: 30 });
+  cards.forEach(c => c.querySelectorAll('.mini-fill').forEach(f => gsap.set(f, { width: 0 })));
+
+  // Ghost box element — starts at AI-AI row's last-visible rect, morphs to title rect
+  const ghost = document.createElement('div');
+  ghost.className = 'subtypes-title-ghost';
+  ghost.innerHTML = `<span class="subtypes-title-ghost-label">AI-AI</span>`;
+  document.body.appendChild(ghost);
+  gsap.set(ghost, { opacity: 0 });
+
+  let cachedPositions = null;
+  const computePositions = () => {
+    if (!aiRow) return null;
+    const startRect = aiRow.getBoundingClientRect();
+    const endRect   = header.getBoundingClientRect();
+    return {
+      startLeft:   startRect.left + window.scrollX,
+      startTop:    startRect.top  + window.scrollY,
+      startWidth:  startRect.width,
+      startHeight: startRect.height,
+      endLeft:     endRect.left + window.scrollX,
+      endTop:      endRect.top  + window.scrollY,
+      endWidth:    endRect.width,
+      endHeight:   endRect.height,
+    };
+  };
+
+  // (A) MORPH — fires when the subtypes section enters the viewport (from bottom),
+  // finishes by the time the section top reaches the top of viewport (pin engage).
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top bottom',     // section top enters viewport bottom
+    end:   'top top',        // section top reaches viewport top (pin engages)
+    scrub: true,
+    onUpdate: (self) => {
+      const p = self.progress; // 0 -> 1 across the morph window
+      if (p < 1) {
+        const positions = computePositions();
+        if (positions) cachedPositions = positions;
+        const pos = cachedPositions;
+        if (pos) {
+          const lerp = (a, b) => a + (b - a) * p;
+          gsap.set(ghost, {
+            position: 'absolute',
+            left:   lerp(pos.startLeft,   pos.endLeft),
+            top:    lerp(pos.startTop,    pos.endTop),
+            width:  lerp(pos.startWidth,  pos.endWidth),
+            height: lerp(pos.startHeight, pos.endHeight),
+            opacity: Math.min(1, p * 4),
+          });
+          const label = ghost.querySelector('.subtypes-title-ghost-label');
+          if (label) label.style.opacity = Math.max(0, 1 - p * 1.4);
+        }
+        // Title text hidden during morph, fades in at very end (0.85 -> 1.0)
+        const textT = Math.max(0, (p - 0.85) / 0.15);
+        gsap.set(header, { opacity: textT });
+      } else {
+        // Morph done
+        gsap.set(ghost, { opacity: 0 });
+        gsap.set(header, { opacity: 1 });
+      }
+    },
+    onLeaveBack: () => {
+      // Scrolling back above the morph start — fully reset
+      gsap.set(ghost, { opacity: 0 });
+      gsap.set(header, { opacity: 0 });
+    },
+  });
+
+  // (B) PINNED CARD TIMELINE — starts at pin engage, runs across the remaining section height.
+  // Card windows distributed evenly across 0 → 1.
+  const cardWindows = [
+    [0.02, 0.18],
+    [0.20, 0.36],
+    [0.38, 0.54],
+    [0.56, 0.72],
+    [0.74, 0.90],
+  ];
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: true,
+    onUpdate: (self) => {
+      const p = self.progress;
+      // Keep title visible while pinned, keep ghost hidden
+      gsap.set(header, { opacity: 1 });
+      gsap.set(ghost, { opacity: 0 });
+
+      cards.forEach((card, i) => {
+        const [start, end] = cardWindows[i];
+        const t = Math.max(0, Math.min(1, (p - start) / (end - start)));
+        gsap.set(card, { opacity: t, y: (1 - t) * 30 });
+        const barT = Math.max(0, Math.min(1, (t - 0.4) / 0.6));
+        card.querySelectorAll('.mini-fill').forEach(fill => {
+          const pct = +fill.dataset.pct;
+          gsap.set(fill, { width: `${pct * barT}%` });
+        });
+      });
+    },
   });
 }

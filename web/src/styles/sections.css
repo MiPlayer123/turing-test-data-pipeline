@@ -476,8 +476,41 @@
 
 /* ===== Scene 4.5: AI-AI subtype breakdown ===== */
 #s-subtypes {
-  padding: 80px 24px 120px;
+  padding: 0;
   position: relative;
+}
+/* Scene 4.5 pin: title + grid stay centered while the scroll-scrub reveals cards */
+.subtypes-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  overflow: hidden;
+}
+/* Ghost box that morphs from the AI-AI chart row into the subtypes title */
+.subtypes-title-ghost {
+  position: absolute;
+  border: 1px solid #c9d1d9;
+  border-radius: 10px;
+  background: rgba(13, 17, 23, 0.82);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  box-sizing: border-box;
+  transition: none;
+}
+.subtypes-title-ghost-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #c9d1d9;
+  letter-spacing: 0.06em;
 }
 .subtypes-container {
   max-width: 1080px;
@@ -507,12 +540,22 @@
   font-size: 14px;
   color: #8b949e;
 }
+/* 6-column grid so the 2 orphan cards on row 2 can straddle center (cols 2-5). */
 .subtypes-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  max-width: 680px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  max-width: 1080px;
   margin: 0 auto;
+}
+.subtype-card:nth-child(1) { grid-column: 1 / span 2; }
+.subtype-card:nth-child(2) { grid-column: 3 / span 2; }
+.subtype-card:nth-child(3) { grid-column: 5 / span 2; }
+.subtype-card:nth-child(4) { grid-column: 2 / span 2; }
+.subtype-card:nth-child(5) { grid-column: 4 / span 2; }
+@media (max-width: 880px) {
+  .subtypes-grid { grid-template-columns: repeat(2, 1fr); }
+  .subtype-card:nth-child(n) { grid-column: span 1; }
 }
 .subtype-card {
   padding: 24px 26px;

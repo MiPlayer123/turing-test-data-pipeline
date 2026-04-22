@@ -32,6 +32,7 @@ let container, data;
 let currentStep = -1;
 let cachedMeans = null;
 let highlightDotRed = null, highlightDotYellow = null;
+let dotsSpawned = false;
 
 export function init(rawData) {
   data = rawData;
@@ -43,8 +44,8 @@ export function init(rawData) {
   // to their persistent corner slots instead of leaving them stranded on the bars.
   ScrollTrigger.create({
     trigger: '#s-comparison',
-    start: 'bottom center',
-    onEnter:     () => retireHighlights(),
+    start: 'bottom 85%',
+    onEnter:     () => { retireHighlights(); dotsSpawned = false; },
     onLeaveBack: () => { /* re-entering from below; onStep handles respawn */ },
   });
 }
@@ -183,12 +184,17 @@ export function onStep(step) {
   const aiAiRows = container.querySelectorAll('.cmp-row[data-cond="ai_ai"]');
   aiAiRows.forEach(r => r.classList.toggle('is-boxed', step >= 2));
 
-  // Step 3: red/yellow dot highlights on their specific bars
-  if (step === 3) {
-    spawnHighlight('red',    'hedging',        'ai_ai');
-    spawnHighlight('yellow', 'repetitiveness', 'human_ai');
-  } else {
+  // Dot highlights: spawn once at step 2 (when AI-AI arrives) so they're settled by step 3.
+  // Skip re-spawn on step 3 so dots don't fly in twice.
+  if (step >= 2) {
+    if (!dotsSpawned) {
+      spawnHighlight('red',    'hedging',        'ai_ai');
+      spawnHighlight('yellow', 'repetitiveness', 'human_ai');
+      dotsSpawned = true;
+    }
+  } else if (dotsSpawned) {
     removeHighlights();
+    dotsSpawned = false;
   }
 }
 
@@ -219,8 +225,8 @@ function spawnHighlight(color, metric, cond) {
     scale: 1,
   });
 
-  // Wait for bars to finish animating (0.7s transition) before flying.
-  // Query live via function + invalidateOnRefresh so scroll-induced rect shifts are tracked.
+  // Wait for bars to finish the 0.7s width transition, then fly fast.
+  // Query target live so scroll-induced rect shifts stay tracked.
   const flyTween = gsap.to(dot, {
     left: () => fill.getBoundingClientRect().right - 8,
     top:  () => {
@@ -229,9 +235,9 @@ function spawnHighlight(color, metric, cond) {
     },
     scale: 1.2,
     opacity: 1,
-    duration: 1.1,
-    delay: 1.2,
-    ease: 'power2.inOut',
+    duration: 0.7,
+    delay: 0.7,
+    ease: 'power2.out',
   });
 
   // Recompute target on scroll to stay pinned to the bar end
@@ -243,7 +249,7 @@ function spawnHighlight(color, metric, cond) {
   gsap.to(dot, {
     scale: 1,
     duration: 0.5,
-    delay: 2.4,
+    delay: 1.5,
     ease: 'sine.inOut',
     repeat: -1,
     yoyo: true,
