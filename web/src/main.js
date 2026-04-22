@@ -8,6 +8,7 @@ import { loadData } from './data/loader.js';
 
 gsap.registerPlugin(ScrollTrigger);
 import * as quiz from './sections/quiz.js';
+import * as metricsIntro from './sections/metricsIntro.js';
 import * as comparison from './sections/comparison.js';
 import * as animation from './sections/animation.js';
 import * as timeline from './sections/timeline.js';
@@ -58,7 +59,10 @@ async function main() {
   // S2: Thesis counters
   initCounters();
 
-  // S3: Comparison bars with metric intro
+  // S3.5: Metrics intro (definition cards + yellow dot birth)
+  metricsIntro.init();
+
+  // S4: Comparison bars
   comparison.init(data);
   initScrolly('s-comparison', (step) => comparison.onStep(step));
 

@@ -23,7 +23,7 @@
 #corner-dot-red    { background: #E74C3C; box-shadow: 0 0 14px rgba(231, 76, 60, 0.55); }
 #corner-dot-yellow { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
 
-/* Fly-dot: temporary element that morphs bubbles → corner red dot */
+/* Fly-dot: temporary element that morphs content → persistent corner dots */
 .fly-dot {
   position: fixed;
   width: 16px;
@@ -34,6 +34,15 @@
   z-index: 999;
   pointer-events: none;
   opacity: 0;
+  transform: translate(0, 0);
+}
+.fly-dot-yellow {
+  background: #F1C40F;
+  box-shadow: 0 0 24px rgba(241, 196, 15, 0.7);
+}
+.fly-dot-red {
+  background: #E74C3C;
+  box-shadow: 0 0 24px rgba(231, 76, 60, 0.7);
 }
 
 /* ===== Metric cards (wide layout) ===== */

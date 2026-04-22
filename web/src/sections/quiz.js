@@ -71,11 +71,35 @@ export async function init() {
   `;
   gsap.set(promptArea, { opacity: 0, y: 16 });
 
+  // Scroll-lock helpers: hold the page in place until the viewer picks an answer.
+  const preventScroll = (e) => e.preventDefault();
+  let scrollLocked = false;
+  function lockScroll() {
+    if (scrollLocked) return;
+    scrollLocked = true;
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('keydown', blockScrollKeys, { passive: false });
+  }
+  function unlockScroll() {
+    if (!scrollLocked) return;
+    scrollLocked = false;
+    window.removeEventListener('wheel', preventScroll);
+    window.removeEventListener('touchmove', preventScroll);
+    window.removeEventListener('keydown', blockScrollKeys);
+  }
+  function blockScrollKeys(e) {
+    const keys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Space', ' '];
+    if (keys.includes(e.key)) e.preventDefault();
+  }
+
   ScrollTrigger.create({
     trigger: '#s-quiz',
     start: 'center center',
     onEnter: () => {
       gsap.to(promptArea, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+      // Lock scroll once the prompt is visible — viewer must answer to continue
+      lockScroll();
     },
   });
 
@@ -85,6 +109,7 @@ export async function init() {
     word.addEventListener('click', () => {
       if (answered) return;
       answered = true;
+      unlockScroll();
       const answer = word.dataset.answer;
       const correct = answer === 'ai';
       promptArea.querySelectorAll('.quiz-word').forEach(w => {

@@ -47,23 +47,79 @@
       </div>
     </section>
 
-    <!-- S3: COMPARISON BARS (Scrollama) — includes metric intro -->
-    <section id="s-comparison" class="act scrolly">
-      <div class="scrolly-graphic">
-        <div id="metric-intro" class="metric-intro">
-          <h2>What does "humanness" sound like?</h2>
-          <p class="metric-intro-sub">We measured two signals in every conversation.</p>
-          <div class="metric-intro-cards">
-            <div class="metric-mini">
-              <strong>Hedging</strong>
-              <p>Words that signal uncertainty — "I think", "maybe", "sort of". Humans use them naturally.</p>
+    <!-- S3: METRICS INTRO — two definition cards, AI-AI row highlighted, yellow dot born here -->
+    <section id="s-metrics-intro" class="act" style="min-height: 260vh; position: relative;">
+      <div class="mintro-pin">
+        <div class="mintro-container">
+          <h2 class="mintro-title">Two signals give them away.</h2>
+          <p class="mintro-sub">We measured every conversation for these. One you just saw — the red one.</p>
+
+          <div class="mintro-cards">
+            <!-- HEDGING CARD -->
+            <div class="mdef">
+              <h3 class="mdef-title mdef-title-red">Hedging</h3>
+              <p class="mdef-desc">"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they're <em>trying</em> to seem human.</p>
+              <div class="mdef-examples">
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–H</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble">maybe we go?</span>
+                    <span class="mini-bubble">yeah <em class="hi hi-red">I think</em> so</span>
+                  </div>
+                </div>
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble">Um, so <em class="hi hi-red">I suppose</em>…</span>
+                    <span class="mini-bubble"><em class="hi hi-red">perhaps</em> that works</span>
+                  </div>
+                </div>
+                <div class="mdef-row mdef-row-highlight mdef-row-highlight-red" id="hedging-ai-ai-row">
+                  <span class="mdef-row-label">AI–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble">Um.. <em class="hi hi-red">maybe</em>…</span>
+                    <span class="mini-bubble"><em class="hi hi-red">I think</em> probably</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="metric-mini">
-              <strong>Repetitiveness</strong>
-              <p>3-gram overlap between consecutive turns. How much a speaker repeats their own phrases.</p>
+
+            <!-- REPETITION CARD -->
+            <div class="mdef">
+              <h3 class="mdef-title mdef-title-yellow">Repetitiveness</h3>
+              <p class="mdef-desc">Repeating the same phrases back. A small tell, but a real one — AIs mirror themselves more than humans do.</p>
+              <div class="mdef-examples">
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–H</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble"><em class="hi hi-yellow">I feel like</em> yeah</span>
+                    <span class="mini-bubble">yeah <em class="hi hi-yellow">I feel like</em></span>
+                  </div>
+                </div>
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble"><em class="hi hi-yellow">makes sense</em> yeah</span>
+                    <span class="mini-bubble">yeah <em class="hi hi-yellow">makes sense</em></span>
+                  </div>
+                </div>
+                <div class="mdef-row mdef-row-highlight mdef-row-highlight-yellow" id="repetition-ai-ai-row">
+                  <span class="mdef-row-label">AI–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble"><em class="hi hi-yellow">maybe</em>… yeah <em class="hi hi-yellow">maybe</em></span>
+                    <span class="mini-bubble"><em class="hi hi-yellow">I think</em>… <em class="hi hi-yellow">I think</em></span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- S4: COMPARISON BARS — extended to all conditions in Phase 2.3 -->
+    <section id="s-comparison" class="act scrolly">
+      <div class="scrolly-graphic">
         <div id="comparison-viz" class="scrolly-viz"></div>
       </div>
       <div class="scrolly-steps">

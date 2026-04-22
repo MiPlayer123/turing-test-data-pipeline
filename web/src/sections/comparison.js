@@ -26,18 +26,16 @@ export function onStep(step) {
   if (step === currentStep) return;
   currentStep = step;
 
-  // Step 0: show metric intro, hide bars
+  // Step 0: bars hidden (intro now lives in its own section s-metrics-intro)
   if (step === 0) {
-    metricIntro.style.opacity = '1';
-    metricIntro.style.display = '';
+    if (metricIntro) { metricIntro.style.opacity = '1'; metricIntro.style.display = ''; }
     container.style.opacity = '0';
     container.innerHTML = '';
     return;
   }
 
-  // Steps 1+: hide metric intro, show bars
-  metricIntro.style.opacity = '0';
-  metricIntro.style.display = 'none';
+  // Steps 1+: show bars
+  if (metricIntro) { metricIntro.style.opacity = '0'; metricIntro.style.display = 'none'; }
   container.style.opacity = '1';
 
   container.innerHTML = '';

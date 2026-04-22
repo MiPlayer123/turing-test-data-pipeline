@@ -232,6 +232,117 @@
   margin-top: 6px;
 }
 
+/* ===== Scene 3.5: hedging + repetition definition cards ===== */
+.mintro-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+.mintro-container {
+  max-width: 1080px;
+  width: 100%;
+  text-align: center;
+}
+.mintro-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4.2vw, 52px);
+  color: #f0f3f6;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.mintro-sub {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: #8b949e;
+  margin-bottom: 48px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mintro-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  text-align: left;
+}
+@media (max-width: 780px) {
+  .mintro-cards { grid-template-columns: 1fr; }
+}
+
+.mdef {
+  background: #0f1419;
+  border: 1px solid #22272e;
+  border-radius: 14px;
+  padding: 28px 30px;
+}
+.mdef-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.mdef-title-red    { color: #E74C3C; }
+.mdef-title-yellow { color: #F1C40F; }
+.mdef-desc {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: #8b949e;
+  line-height: 1.55;
+  margin-bottom: 22px;
+}
+.mdef-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mdef-row {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+.mdef-row-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #6a7380;
+  letter-spacing: 0.08em;
+}
+.mdef-row-bubbles {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mdef-row-highlight.mdef-row-highlight-red    { border-color: rgba(231, 76, 60, 0.55); }
+.mdef-row-highlight.mdef-row-highlight-yellow { border-color: rgba(241, 196, 15, 0.55); }
+
+.mini-bubble {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: #1c2128;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: #c9d1d9;
+  line-height: 1.3;
+}
+.hi {
+  font-style: normal;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.hi-red    { background: rgba(231, 76, 60, 0.22); color: #f1a9a2; }
+.hi-yellow { background: rgba(241, 196, 15, 0.22); color: #f1df8a; }
+
 /* "How others answered" bar chart (scene 3 intro) */
 .others-bar {
   margin: 28px auto 0;
