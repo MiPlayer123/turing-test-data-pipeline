@@ -132,36 +132,145 @@
   width: 100%;
   padding: 0 24px;
 }
+/* Mystery bubbles — unlabeled. Muted dark so they read as "any conversation". */
 .hook-bubble {
   padding: 14px 18px;
   border-radius: 16px;
   margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.55;
   max-width: 88%;
-  opacity: 0;
-  transform: translateY(12px);
-  animation: bubbleIn 0.5s ease forwards;
+  color: #d0d7de;
 }
-.hook-bubble:nth-child(1) { animation-delay: 0.3s; }
-.hook-bubble:nth-child(2) { animation-delay: 0.8s; }
-.hook-bubble:nth-child(3) { animation-delay: 1.3s; }
-.hook-bubble:nth-child(4) { animation-delay: 1.8s; }
 .hook-bubble.left {
   background: #1c2333;
   border-bottom-left-radius: 4px;
   margin-right: auto;
-  color: #d0d7de;
 }
 .hook-bubble.right {
   background: #21262D;
   border-bottom-right-radius: 4px;
   margin-left: auto;
-  color: #d0d7de;
 }
-@keyframes bubbleIn {
-  to { opacity: 1; transform: translateY(0); }
+.hook-caption {
+  max-width: 480px;
+  width: 100%;
+  padding: 24px 24px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #6a7380;
+  text-align: left;
+  margin: 0 auto;
+  letter-spacing: 0.02em;
+}
+
+/* Scroll nudge — disappears on first scroll */
+.scroll-nudge {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #6a7380;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+  transition: opacity 0.4s;
+  animation: nudgeBob 1.6s ease-in-out infinite;
+}
+.scroll-nudge.gone { opacity: 0; pointer-events: none; }
+.scroll-nudge .arrow { font-size: 14px; color: #8b949e; }
+@keyframes nudgeBob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 4px); }
+}
+
+/* Scene 2 prompt — plain text with clickable underlined words */
+.quiz-prompt-area {
+  text-align: center;
+  margin-top: 40px;
+}
+.quiz-prompt-line {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3vw, 36px);
+  color: #f0f3f6;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.quiz-word {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.quiz-word:hover { color: #58A6FF; }
+.quiz-word.answered { cursor: default; pointer-events: none; }
+.quiz-word.correct  { color: #2ECC71; }
+.quiz-word.wrong    { color: #E74C3C; }
+.quiz-prompt-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #484F58;
+  letter-spacing: 0.05em;
+}
+.quiz-result-verdict {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 2.4vw, 30px);
+  color: #f0f3f6;
+  margin-top: 24px;
+}
+.quiz-result-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #484F58;
+  margin-top: 6px;
+}
+
+/* "How others answered" bar chart (scene 3 intro) */
+.others-bar {
+  margin: 28px auto 0;
+  max-width: 360px;
+  text-align: left;
+}
+.others-bar-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #6a7380;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.others-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 44px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #c9d1d9;
+}
+.others-row-track {
+  height: 12px;
+  background: #1c2128;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.others-row-fill {
+  height: 100%;
+  background: #e6edf3;
+  width: 0%;
+}
+.others-row-pct {
+  text-align: right;
+  color: #8b949e;
 }
 
 .big-question {
@@ -260,6 +369,16 @@
 }
 
 /* ===== Quiz (Section 1) ===== */
+/* Scene 1 pin: chat stays centered in viewport while user scrolls the section */
+.quiz-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quiz-container { position: relative; }
 .quiz-container {
   max-width: 520px;
   width: 100%;

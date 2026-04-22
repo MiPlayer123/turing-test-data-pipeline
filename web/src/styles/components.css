@@ -23,6 +23,19 @@
 #corner-dot-red    { background: #E74C3C; box-shadow: 0 0 14px rgba(231, 76, 60, 0.55); }
 #corner-dot-yellow { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
 
+/* Fly-dot: temporary element that morphs bubbles → corner red dot */
+.fly-dot {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #E74C3C;
+  box-shadow: 0 0 24px rgba(231, 76, 60, 0.7);
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+}
+
 /* ===== Metric cards (wide layout) ===== */
 .metric-cards-wide {
   display: flex;

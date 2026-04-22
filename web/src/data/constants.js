@@ -31,6 +31,18 @@ export const MODEL_LABELS = {
   "human":           "Human",
 };
 
+// Scene 1 hook: curated AI-AI Reverse Turing conversations with the highest hedging
+// in their opening turns — two AIs each trying to convince the other they're human.
+// One of these is picked at random per page load for replayability.
+export const HOOK_CONVERSATION_IDS = [
+  "conv_ai_ai_freeform_gpt54mini_gpt54_F1_1775413091",
+  "conv_ai_ai_freeform_gemini25flash_grok41fast_F1_1775428314",
+  "conv_ai_ai_freeform_gpt54_grok41fast_F1_1775426738",
+  "conv_ai_ai_freeform_persona_gemini25flash_grok41fast_F1_1775425610",
+  "conv_ai_ai_freeform_persona_gpt54_gemini25flash_F5_1775424063",
+];
+export const HOOK_NUM_BUBBLES = 4;
+
 export const METRICS = [
   { key: "repetitiveness", label: "Repetitiveness", description: "3-gram overlap between consecutive same-speaker turns. Higher = more self-repeating." },
   { key: "hedging",        label: "Hedging",        description: '"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they\'re trying to sound human.' },

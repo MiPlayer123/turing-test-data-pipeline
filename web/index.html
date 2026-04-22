@@ -12,9 +12,11 @@
 <body>
   <div id="app">
 
-    <!-- S1: QUIZ -->
-    <section id="s-quiz" class="act">
-      <div class="full-screen center-content">
+    <!-- S1: QUIZ — mystery bubbles scroll in, then "human or AI?" gate (1.2 wiring TBD).
+         Section is 200vh tall; inner .quiz-pin is sticky so the chat stays centered
+         while scroll progress drives the bubble reveal. -->
+    <section id="s-quiz" class="act" style="min-height: 280vh; position: relative;">
+      <div class="quiz-pin">
         <div class="quiz-container">
           <div id="quiz-chat" class="quiz-chat"></div>
           <div id="quiz-prompt-area" class="quiz-prompt-area hidden">
