@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as tooltip from '../components/tooltip.js';
 import { CONDITIONS } from '../data/constants.js';
 import { getCornerRect } from '../lib/cornerDots.js';
+import { renderInlineSnippet } from '../components/chatSnippet.js';
+import { loadConversation } from '../data/loader.js';
 
 // Scene 4 keeps the chart simple: three rows. The 5 AI-AI variants are averaged into
 // one "AI-AI" bar; the subtype breakdown happens in scene 4.5.
@@ -122,9 +124,10 @@ function buildChart() {
           `<strong>${cond?.label || key}</strong><br>${metric.label}: <span class="val">${val.toFixed(4)}</span><br>n = ${means[key].n}`,
           e
         );
+        showBarSnippet(key, e);
       });
-      row.addEventListener('mousemove', e => tooltip.move(e));
-      row.addEventListener('mouseleave', () => tooltip.hide());
+      row.addEventListener('mousemove', e => { tooltip.move(e); moveBarSnippet(e); });
+      row.addEventListener('mouseleave', () => { tooltip.hide(); hideBarSnippet(); });
     });
   });
 }
@@ -301,6 +304,72 @@ function retireHighlights() {
   });
   highlightDotRed = null;
   highlightDotYellow = null;
+}
+
+// ----- Inline transcript snippet on bar hover -----
+// The aggregated bars don't map to one conversation, so pick a representative
+// one for each bucket and cache by key.
+let activeSnippet = null;
+const snippetCache = new Map();    // bar-key -> loaded conversation
+const snippetLoading = new Set();  // bar-keys currently loading
+
+function pickRepresentativeId(barKey) {
+  if (!data || !data.conversations) return null;
+  const matchesAiAi = (c) => AI_AI_KEYS.includes(c.condition);
+  let row;
+  if (barKey === 'ai_ai') row = data.conversations.find(matchesAiAi);
+  else                    row = data.conversations.find(c => c.condition === barKey);
+  return row?.conversation_id || null;
+}
+
+function showBarSnippet(barKey, event) {
+  const cached = snippetCache.get(barKey);
+  if (cached) {
+    renderActiveSnippet(cached, event);
+    return;
+  }
+  if (snippetLoading.has(barKey)) return;
+  const id = pickRepresentativeId(barKey);
+  if (!id) return;
+  snippetLoading.add(barKey);
+  loadConversation(id)
+    .then(conv => {
+      snippetCache.set(barKey, conv);
+      // Only render if the user is still hovering this row
+      const hovered = container?.querySelector(`.cmp-row[data-cond="${barKey}"]:hover`);
+      if (hovered) renderActiveSnippet(conv, event);
+    })
+    .catch(err => console.warn('chat snippet load failed', id, err))
+    .finally(() => snippetLoading.delete(barKey));
+}
+
+function renderActiveSnippet(conv, event) {
+  hideBarSnippet();
+  const el = renderInlineSnippet(conv, { maxTurns: 3 });
+  document.body.appendChild(el);
+  activeSnippet = el;
+  moveBarSnippet(event);
+  requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function moveBarSnippet(event) {
+  if (!activeSnippet) return;
+  const pad = 14;
+  const w = activeSnippet.offsetWidth || 280;
+  const h = activeSnippet.offsetHeight || 120;
+  let left = event.clientX + pad;
+  let top  = event.clientY + pad;
+  if (left + w + 8 > window.innerWidth)  left = event.clientX - w - pad;
+  if (top  + h + 8 > window.innerHeight) top  = event.clientY - h - pad;
+  activeSnippet.style.left = `${Math.max(8, left)}px`;
+  activeSnippet.style.top  = `${Math.max(8, top)}px`;
+}
+
+function hideBarSnippet() {
+  if (!activeSnippet) return;
+  const el = activeSnippet;
+  activeSnippet = null;
+  el.remove();
 }
 
 // Legacy export kept for animation.js compatibility

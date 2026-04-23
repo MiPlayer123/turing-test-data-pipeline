@@ -25,7 +25,7 @@
 #corner-dot-freeform   { background: #3498DB; box-shadow: 0 0 14px rgba(52, 152, 219, 0.55); }
 #corner-dot-persona    { background: #9B59B6; box-shadow: 0 0 14px rgba(155, 89, 182, 0.55); }
 #corner-dot-detective  { background: #E67E22; box-shadow: 0 0 14px rgba(230, 126, 34, 0.55); }
-#corner-dot-revturing  { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
+#corner-dot-revturing  { background: #E91E63; box-shadow: 0 0 14px rgba(233, 30, 99, 0.55); }
 #corner-dot-structured { background: #2ECC71; box-shadow: 0 0 14px rgba(46, 204, 113, 0.55); }
 
 /* Fly-dot: temporary element that morphs content → persistent corner dots */
@@ -322,4 +322,54 @@
 .panel-overlay.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* ===== Inline chat snippet (hover tooltip for bars / timeline points) ===== */
+.chat-snippet {
+  position: fixed;
+  z-index: 950;
+  max-width: 280px;
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #f0f3f6;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.chat-snippet.visible { opacity: 1; }
+
+.chat-snippet-header {
+  font-size: 10px;
+  color: #8B949E;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-bubble-mini {
+  font-size: 11px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  max-width: 100%;
+  line-height: 1.4;
+}
+.chat-bubble-mini .chat-speaker {
+  font-size: 9px;
+  margin-bottom: 2px;
+}
+
+/* Preserve whitespace in full transcript bodies without breaking layout */
+.panel-chat .chat-body {
+  white-space: pre-wrap;
+  word-break: break-word;
 }

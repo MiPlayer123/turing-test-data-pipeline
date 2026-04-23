@@ -1,10 +1,10 @@
 export const CONDITIONS = [
   { key: "human_human",            label: "Human-Human",     color: "#1ABC9C" },
-  { key: "human_ai",               label: "Human-AI",        color: "#F1C40F" },
-  { key: "ai_ai_detective",        label: "AI Detective",    color: "#E74C3C" },
+  { key: "human_ai",               label: "Human-AI",        color: "#95A5A6" },
+  { key: "ai_ai_detective",        label: "AI Detective",    color: "#E67E22" },
   { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#3498DB" },
   { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#9B59B6" },
-  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing",  color: "#F39C12" },
+  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing",  color: "#E91E63" },
   { key: "ai_ai_structured",       label: "AI Structured",   color: "#2ECC71" },
 ];
 

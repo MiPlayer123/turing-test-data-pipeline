@@ -1,12 +1,14 @@
 import * as d3 from 'd3';
 import * as tooltip from '../components/tooltip.js';
+import { renderInlineSnippet } from '../components/chatSnippet.js';
+import { loadConversation } from '../data/loader.js';
 
 // Scene 5: lines over 20 turns. Progressive reveal — Rev Turing first (alone),
 // then H-H baseline, then the other AI conditions, then dim all but Rev Turing.
 const SHOWN_CONDITIONS = [
-  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing', color: '#E74C3C' },
+  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing', color: '#E91E63' },
   { key: 'human_human',            label: 'Human-Human',    color: '#1ABC9C' },
-  { key: 'human_ai',               label: 'Human-AI',       color: '#F1C40F' },
+  { key: 'human_ai',               label: 'Human-AI',       color: '#95A5A6' },
   { key: 'ai_ai_freeform',         label: 'Freeform',       color: '#3498DB' },
   { key: 'ai_ai_freeform_persona', label: 'Persona',        color: '#9B59B6' },
   { key: 'ai_ai_detective',        label: 'Detective',      color: '#E67E22' },
@@ -25,8 +27,63 @@ const STEP_VISIBLE = {
 
 let svg, x, yScale, width, height, conditionData, groups;
 let currentStep = -1;
+let fullData = null;
+
+// Inline snippet state (shared across all timeline points)
+let tlActiveSnippet = null;
+const tlSnippetCache = new Map();     // condKey -> conv
+const tlSnippetLoading = new Set();   // condKey
+
+function tlPickId(condKey) {
+  if (!fullData || !fullData.conversations) return null;
+  const row = fullData.conversations.find(c => c.condition === condKey);
+  return row?.conversation_id || null;
+}
+
+function tlShowSnippet(condKey, event) {
+  const cached = tlSnippetCache.get(condKey);
+  if (cached) { tlRender(cached, event); return; }
+  if (tlSnippetLoading.has(condKey)) return;
+  const id = tlPickId(condKey);
+  if (!id) return;
+  tlSnippetLoading.add(condKey);
+  loadConversation(id)
+    .then(conv => { tlSnippetCache.set(condKey, conv); tlRender(conv, event); })
+    .catch(err => console.warn('timeline snippet load failed', id, err))
+    .finally(() => tlSnippetLoading.delete(condKey));
+}
+
+function tlRender(conv, event) {
+  tlHideSnippet();
+  const el = renderInlineSnippet(conv, { maxTurns: 3 });
+  document.body.appendChild(el);
+  tlActiveSnippet = el;
+  tlMoveSnippet(event);
+  requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function tlMoveSnippet(event) {
+  if (!tlActiveSnippet) return;
+  const pad = 14;
+  const w = tlActiveSnippet.offsetWidth || 280;
+  const h = tlActiveSnippet.offsetHeight || 120;
+  let left = event.clientX + pad;
+  let top  = event.clientY + pad;
+  if (left + w + 8 > window.innerWidth)  left = event.clientX - w - pad;
+  if (top  + h + 8 > window.innerHeight) top  = event.clientY - h - pad;
+  tlActiveSnippet.style.left = `${Math.max(8, left)}px`;
+  tlActiveSnippet.style.top  = `${Math.max(8, top)}px`;
+}
+
+function tlHideSnippet() {
+  if (!tlActiveSnippet) return;
+  const el = tlActiveSnippet;
+  tlActiveSnippet = null;
+  el.remove();
+}
 
 export function init(data) {
+  fullData = data;
   const chartContainer = document.getElementById('timeline-chart');
   chartContainer.innerHTML = '';
   chartContainer.style.textAlign = 'center';
@@ -96,9 +153,12 @@ export function init(data) {
       .attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean))
       .attr('r', 0).attr('fill', cond.color).attr('stroke', '#0D1117').attr('stroke-width', 1.5)
       .style('cursor', 'pointer')
-      .on('mouseover', (event, d) => tooltip.show(`<strong>${cond.label}</strong> — Turn ${d.turn}<br>Hedging: <span class="val">${d.mean.toFixed(3)}</span><br>n = ${d.count}`, event))
-      .on('mousemove', e => tooltip.move(e))
-      .on('mouseout', () => tooltip.hide());
+      .on('mouseover', (event, d) => {
+        tooltip.show(`<strong>${cond.label}</strong> — Turn ${d.turn}<br>Hedging: <span class="val">${d.mean.toFixed(3)}</span><br>n = ${d.count}`, event);
+        tlShowSnippet(cond.key, event);
+      })
+      .on('mousemove', e => { tooltip.move(e); tlMoveSnippet(e); })
+      .on('mouseout', () => { tooltip.hide(); tlHideSnippet(); });
 
     const last = cond.points[cond.points.length - 1];
     g.append('text').attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)

@@ -37,7 +37,7 @@ const SUBTYPES = [
   {
     key: 'ai_ai_reverse_turing',
     name: 'Reverse Turing',
-    color: '#F1C40F',
+    color: '#E91E63',
     desc: 'Both AIs are told they\'re human and must convince the other. A double bluff.',
     prompt: '"You ARE human. Prove it to the other person."',
   },

@@ -6,6 +6,7 @@ import { CONDITIONS, CONDITION_COLOR } from '../data/constants.js';
 import { createFilterChips } from '../components/filterChips.js';
 import * as tooltip from '../components/tooltip.js';
 import { getCornerRect, unlight } from '../lib/cornerDots.js';
+import { openTranscriptPanel } from '../components/chatSnippet.js';
 
 function gaussianKDE(points, gridX, gridY, bandwidth) {
   const nx = gridX.length, ny = gridY.length;
@@ -337,6 +338,45 @@ export function init(data) {
       });
       colAttr.needsUpdate = true;
     },
+  });
+
+  // Click-to-open transcript panel via raycasting on the scatter points.
+  // Threshold is sized to match the on-screen dot radius; tweak if hit-testing feels off.
+  const raycaster = new THREE.Raycaster();
+  raycaster.params.Points = { threshold: 0.02 };
+  const ndc = new THREE.Vector2();
+  let downPos = null;
+
+  renderer.domElement.addEventListener('pointerdown', (e) => {
+    downPos = { x: e.clientX, y: e.clientY };
+  });
+  renderer.domElement.addEventListener('pointerup', (e) => {
+    // Ignore if the user dragged (OrbitControls rotate) — only treat true clicks as selection
+    if (!downPos) return;
+    const dx = e.clientX - downPos.x, dy = e.clientY - downPos.y;
+    downPos = null;
+    if (dx * dx + dy * dy > 16) return;
+
+    const rect = renderer.domElement.getBoundingClientRect();
+    ndc.x = ((e.clientX - rect.left) / rect.width)  * 2 - 1;
+    ndc.y = -((e.clientY - rect.top)  / rect.height) * 2 + 1;
+    raycaster.setFromCamera(ndc, camera);
+    const hits = raycaster.intersectObject(dotMesh);
+    if (!hits.length) return;
+    const idx = hits[0].index;
+    const conv = convs[idx];
+    if (!conv) return;
+    // `convs` come from trajectories.json — enrich with metrics from the CSV row if available.
+    const csvRow = (data.conversations || []).find(r => r.conversation_id === conv.id);
+    openTranscriptPanel({
+      conversation_id: conv.id,
+      condition: conv.condition,
+      model_a: conv.model_a,
+      model_b: conv.model_b,
+      hedging:        csvRow?.hedging,
+      repetitiveness: csvRow?.repetitiveness,
+      coherence:      csvRow?.coherence,
+    });
   });
 
   // Resize
