@@ -12,6 +12,7 @@ import * as metricsIntro from './sections/metricsIntro.js';
 import * as comparison from './sections/comparison.js';
 import * as subtypes from './sections/subtypes.js';
 import * as timeline from './sections/timeline.js';
+import * as timelineMorph from './sections/timelineMorph.js';
 import * as detective from './sections/detective.js';
 // explorer is dynamically imported when needed (Three.js is ~624KB)
 
@@ -69,9 +70,10 @@ async function main() {
   // S4.5: AI-AI subtype breakdown
   subtypes.init(data);
 
-  // S6: Timeline
+  // S6: Timeline (Reverse Turing-focused line chart)
   timeline.init(data);
   initScrolly('s-timeline', (step) => timeline.onStep(step));
+  timelineMorph.init();
 
   // S7: Detective — per-model report card
   detective.init(data);

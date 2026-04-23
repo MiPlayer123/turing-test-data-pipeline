@@ -1,7 +1,27 @@
 import * as d3 from 'd3';
-import { CONDITIONS, CONDITION_COLOR } from '../data/constants.js';
-import { createFilterChips } from '../components/filterChips.js';
 import * as tooltip from '../components/tooltip.js';
+
+// Scene 5: lines over 20 turns. Progressive reveal — Rev Turing first (alone),
+// then H-H baseline, then the other AI conditions, then dim all but Rev Turing.
+const SHOWN_CONDITIONS = [
+  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing', color: '#E74C3C' },
+  { key: 'human_human',            label: 'Human-Human',    color: '#1ABC9C' },
+  { key: 'human_ai',               label: 'Human-AI',       color: '#F1C40F' },
+  { key: 'ai_ai_freeform',         label: 'Freeform',       color: '#3498DB' },
+  { key: 'ai_ai_freeform_persona', label: 'Persona',        color: '#9B59B6' },
+  { key: 'ai_ai_detective',        label: 'Detective',      color: '#E67E22' },
+  { key: 'ai_ai_structured',       label: 'Structured',     color: '#2ECC71' },
+];
+
+// Visibility per step — keys to show (rest are hidden)
+const STEP_VISIBLE = {
+  0: ['ai_ai_reverse_turing'],
+  1: ['ai_ai_reverse_turing', 'human_human'],
+  2: ['ai_ai_reverse_turing', 'human_human', 'human_ai',
+      'ai_ai_freeform', 'ai_ai_freeform_persona', 'ai_ai_detective', 'ai_ai_structured'],
+  3: ['ai_ai_reverse_turing', 'human_human', 'human_ai',
+      'ai_ai_freeform', 'ai_ai_freeform_persona', 'ai_ai_detective', 'ai_ai_structured'],
+};
 
 let svg, x, yScale, width, height, conditionData, groups;
 let currentStep = -1;
@@ -11,7 +31,7 @@ export function init(data) {
   chartContainer.innerHTML = '';
   chartContainer.style.textAlign = 'center';
 
-  conditionData = CONDITIONS.map(cond => {
+  conditionData = SHOWN_CONDITIONS.map(cond => {
     const condRows = data.turnMetrics.filter(d => d.condition === cond.key);
     const byTurn = d3.group(condRows, d => d.turn_number);
     const points = [];
@@ -27,8 +47,8 @@ export function init(data) {
   chartContainer.appendChild(chartDiv);
 
   const margin = { top: 20, right: 120, bottom: 44, left: 60 };
-  width = 960 - margin.left - margin.right;
-  height = 420 - margin.top - margin.bottom;
+  width = 820 - margin.left - margin.right;
+  height = 380 - margin.top - margin.bottom;
 
   svg = d3.select(chartDiv).append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -39,6 +59,7 @@ export function init(data) {
   const allMeans = conditionData.flatMap(c => c.points.map(p => p.mean));
   yScale = d3.scaleLinear().domain([0, d3.max(allMeans) * 1.15]).range([height, 0]);
 
+  // Axes
   svg.append('g').attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(18).tickSize(-height).tickFormat(d => d))
     .call(g => g.select('.domain').remove())
@@ -83,7 +104,69 @@ export function init(data) {
     g.append('text').attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)
       .attr('fill', cond.color).attr('font-size', '11px').attr('font-weight', '600')
       .attr('font-family', 'Inter, sans-serif')
-      .text(cond.label.replace('AI ', ''));
+      .text(cond.label);
+  });
+}
+
+// Animate a single condition's line + dots in (called per-step)
+function drawLine(key) {
+  const g = groups[key];
+  if (!g) return;
+  if (g.attr('data-drawn') === '1') {
+    g.transition().duration(400).attr('opacity', 1);
+    return;
+  }
+  g.attr('data-drawn', '1');
+  g.transition().duration(400).attr('opacity', 1);
+  g.select('path').transition().duration(1200).ease(d3.easeQuadOut)
+    .attr('stroke-dashoffset', 0);
+  g.selectAll('circle').transition().duration(300).delay((d, i) => 1200 + i * 25)
+    .attr('r', 3);
+}
+
+function renderAnnotation() {
+  svg.selectAll('.rt-annotation').remove();
+  const rt = conditionData.find(c => c.key === 'ai_ai_reverse_turing');
+  if (!rt || rt.points.length < 4) return;
+
+  const earlyAvg = d3.mean(rt.points.slice(0, 3), p => p.mean);
+  const lateAvg  = d3.mean(rt.points.slice(-3), p => p.mean);
+  const midPt    = rt.points[Math.floor(rt.points.length / 2)];
+
+  const ag = svg.append('g').attr('class', 'rt-annotation').attr('opacity', 0);
+  const bx = x(midPt.turn) - 110, by = yScale(lateAvg) - 56;
+  ag.append('rect').attr('x', bx).attr('y', by).attr('width', 220).attr('height', 40)
+    .attr('rx', 6).attr('fill', 'rgba(13,17,23,0.92)').attr('stroke', '#E74C3C').attr('stroke-width', 1);
+  ag.append('text').attr('x', bx + 110).attr('y', by + 16).attr('text-anchor', 'middle')
+    .attr('fill', '#E74C3C').attr('font-size', '12px').attr('font-weight', '700').attr('font-family', 'Inter, sans-serif')
+    .text('Only line that goes up');
+  ag.append('text').attr('x', bx + 110).attr('y', by + 32).attr('text-anchor', 'middle')
+    .attr('fill', '#8B949E').attr('font-size', '11px').attr('font-family', 'Inter, sans-serif')
+    .text(`+${(lateAvg - earlyAvg).toFixed(2)} over time`);
+  ag.append('line').attr('x1', bx + 110).attr('y1', by + 40)
+    .attr('x2', x(midPt.turn)).attr('y2', yScale(midPt.mean) - 4)
+    .attr('stroke', '#E74C3C').attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
+  ag.transition().duration(500).delay(200).attr('opacity', 1);
+}
+
+function removeAnnotation() {
+  svg.selectAll('.rt-annotation').transition().duration(300).attr('opacity', 0).remove();
+}
+
+function applyVisibility(visibleSet, dimNonRt) {
+  Object.entries(groups).forEach(([key, g]) => {
+    const visible = visibleSet.has(key);
+    if (!visible) {
+      g.transition().duration(400).attr('opacity', 0);
+      return;
+    }
+    // Visible: reveal (drawing if first time) and dim-or-full based on mode
+    const isRt = key === 'ai_ai_reverse_turing';
+    const targetOpacity = dimNonRt ? (isRt ? 1 : 0.18) : 1;
+    if (g.attr('data-drawn') !== '1') {
+      drawLine(key);
+    }
+    g.transition().duration(400).attr('opacity', targetOpacity);
   });
 }
 
@@ -91,75 +174,12 @@ export function onStep(step) {
   if (step === currentStep) return;
   currentStep = step;
 
-  let visibleKeys;
-  let highlightKey = null;
-
-  // Step 0: Start with RT (narrative bridge from animation)
-  if (step === 0) {
-    visibleKeys = ['ai_ai_reverse_turing'];
-  }
-  // Step 1: Add human-human for contrast
-  else if (step === 1) {
-    visibleKeys = ['human_human', 'ai_ai_reverse_turing'];
-  }
-  // Step 2: Add other AI conditions
-  else if (step === 2) {
-    visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona', 'ai_ai_reverse_turing'];
-  }
-  // Step 3: Highlight RT with annotation
-  else if (step === 3) {
-    visibleKeys = ['human_human', 'ai_ai_freeform', 'ai_ai_structured', 'ai_ai_freeform_persona', 'ai_ai_reverse_turing'];
-    highlightKey = 'ai_ai_reverse_turing';
-  }
-  // Step 4: All visible
-  else {
-    visibleKeys = CONDITIONS.map(c => c.key);
-  }
-
+  const visibleKeys = STEP_VISIBLE[step] || STEP_VISIBLE[3];
   const visibleSet = new Set(visibleKeys);
+  const dimNonRt = step === 3;
 
-  Object.entries(groups).forEach(([key, g]) => {
-    const visible = visibleSet.has(key);
-    const dimmed = highlightKey && key !== highlightKey && key !== 'human_human';
-    const targetOpacity = !visible ? 0 : (dimmed ? 0.15 : 1);
+  applyVisibility(visibleSet, dimNonRt);
 
-    g.transition().duration(500).attr('opacity', targetOpacity);
-
-    if (visible) {
-      g.select('path').transition().duration(1200).ease(d3.easeQuadOut).attr('stroke-dashoffset', 0);
-      g.selectAll('circle').transition().duration(400).delay((d, i) => 1200 + i * 30).attr('r', 3);
-    } else {
-      g.select('path').each(function() {
-        const len = this.getTotalLength();
-        d3.select(this).attr('stroke-dashoffset', len);
-      });
-      g.selectAll('circle').attr('r', 0);
-    }
-  });
-
-  // Annotation for RT
-  svg.selectAll('.rt-annotation').remove();
-  if (highlightKey) {
-    const rtData = conditionData.find(c => c.key === highlightKey);
-    if (rtData && rtData.points.length >= 4) {
-      const earlyAvg = d3.mean(rtData.points.slice(0, 3), p => p.mean);
-      const lateAvg = d3.mean(rtData.points.slice(-3), p => p.mean);
-      const midPt = rtData.points[Math.floor(rtData.points.length / 2)];
-
-      const ag = svg.append('g').attr('class', 'rt-annotation').attr('opacity', 0);
-      const bx = x(midPt.turn) - 100, by = yScale(lateAvg) - 50;
-      ag.append('rect').attr('x', bx).attr('y', by).attr('width', 200).attr('height', 36)
-        .attr('rx', 6).attr('fill', 'rgba(13,17,23,0.92)').attr('stroke', '#F39C12').attr('stroke-width', 1);
-      ag.append('text').attr('x', bx + 100).attr('y', by + 14).attr('text-anchor', 'middle')
-        .attr('fill', '#F39C12').attr('font-size', '12px').attr('font-weight', '700').attr('font-family', 'Inter, sans-serif')
-        .text('Only line that goes up');
-      ag.append('text').attr('x', bx + 100).attr('y', by + 28).attr('text-anchor', 'middle')
-        .attr('fill', '#8B949E').attr('font-size', '11px').attr('font-family', 'Inter, sans-serif')
-        .text(`+${(lateAvg - earlyAvg).toFixed(2)} over time`);
-      ag.append('line').attr('x1', bx + 100).attr('y1', by + 36)
-        .attr('x2', x(midPt.turn)).attr('y2', yScale(midPt.mean) - 4)
-        .attr('stroke', '#F39C12').attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
-      ag.transition().duration(500).delay(600).attr('opacity', 1);
-    }
-  }
+  if (step === 3) renderAnnotation();
+  else            removeAnnotation();
 }

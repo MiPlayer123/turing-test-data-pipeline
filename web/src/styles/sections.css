@@ -360,6 +360,49 @@
 #s-comparison .step-card h3 { font-size: 18px; margin-bottom: 8px; }
 #s-comparison .step-card p  { font-size: 13.5px; line-height: 1.55; }
 
+/* Timeline shares the same compact step-card treatment */
+#s-timeline .step { align-items: flex-end; }
+#s-timeline .step-card {
+  max-width: 280px;
+  padding: 20px 22px;
+  background: rgba(13, 17, 23, 0.88);
+  backdrop-filter: blur(12px);
+}
+#s-timeline .step-card h3 { font-size: 18px; margin-bottom: 8px; }
+#s-timeline .step-card p  { font-size: 13.5px; line-height: 1.55; }
+
+/* Timeline title — gold, echoing Reverse Turing card. Hidden initially so the morph reveals it. */
+.timeline-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 48px);
+  color: #F1C40F;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  opacity: 0;
+}
+.timeline-sub {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #8b949e;
+  margin-bottom: 24px;
+  max-width: 520px;
+  text-align: center;
+  opacity: 0;
+}
+/* Ghost text that morphs the Rev Turing card title into the timeline heading */
+.timeline-title-ghost {
+  position: absolute;
+  font-family: var(--font-serif);
+  color: #F1C40F;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  z-index: 50;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .cmp-shell {
   width: 100%;
   padding: 12px 16px;
