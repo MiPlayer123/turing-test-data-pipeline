@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { gsap } from 'gsap';
 import { CONDITIONS, CONDITION_COLOR } from '../data/constants.js';
 import { createFilterChips } from '../components/filterChips.js';
 import * as tooltip from '../components/tooltip.js';
@@ -203,12 +204,44 @@ export function init(data) {
     dotConditions.push(c.condition);
   });
 
+  // Entrance animation: points start scattered high/wide, fly into their real positions.
+  const finalPositions = Float32Array.from(dotPositions);
+  const startPositions = new Float32Array(finalPositions.length);
+  for (let i = 0; i < finalPositions.length; i += 3) {
+    startPositions[i]     = Math.random() * 1.4 - 0.2;        // x ~ [-0.2, 1.2]
+    startPositions[i + 1] = 1.0 + Math.random() * 0.8;        // y high above surface
+    startPositions[i + 2] = Math.random() * 1.4 - 0.2;        // z ~ [-0.2, 1.2]
+  }
+  const livePositions = new Float32Array(startPositions);
+
   const dotGeo = new THREE.BufferGeometry();
-  dotGeo.setAttribute('position', new THREE.Float32BufferAttribute(dotPositions, 3));
+  dotGeo.setAttribute('position', new THREE.BufferAttribute(livePositions, 3));
   dotGeo.setAttribute('color', new THREE.Float32BufferAttribute(dotColors, 3));
-  const dotMat = new THREE.PointsMaterial({ size: 0.015, sizeAttenuation: true, vertexColors: true });
+  const dotMat = new THREE.PointsMaterial({ size: 0.015, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: 0 });
   const dotMesh = new THREE.Points(dotGeo, dotMat);
   scene.add(dotMesh);
+
+  // Drive the fly-in with a GSAP tween once Three.js has rendered the first frame.
+  const entrance = { t: 0 };
+  const startEntrance = () => {
+    gsap.to(entrance, {
+      t: 1,
+      duration: 2.8,
+      ease: 'power3.out',
+      onUpdate: () => {
+        const posAttr = dotGeo.attributes.position;
+        const arr = posAttr.array;
+        const k = entrance.t;
+        for (let i = 0; i < finalPositions.length; i++) {
+          arr[i] = startPositions[i] + (finalPositions[i] - startPositions[i]) * k;
+        }
+        posAttr.needsUpdate = true;
+        dotMat.opacity = Math.min(1, k * 1.4);
+      },
+    });
+  };
+  // Kick off entrance on next frame — the surface has already rendered.
+  requestAnimationFrame(() => setTimeout(startEntrance, 200));
 
   // Filter chips
   const filtersEl = document.getElementById('explorer-filters');
