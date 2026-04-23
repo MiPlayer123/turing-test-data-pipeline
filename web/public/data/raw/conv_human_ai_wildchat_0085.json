@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0085",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 08:41:03+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Write examples of 4-year old speech",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "1. \"Mommy, can I have some cookies please?\" \n2. \"I want to play with my toys now.\" \n3. \"I don't like vegetables, they taste yucky.\" \n4. \"Look at the pretty flowers, they are so colorful!\" \n5. \"I love my new toy car, it goes very fast.\" \n6. \"Can we go to the park and play on the swings?\" \n7. \"I'm tired, I want to take a nap now.\" \n8. \"I'm so excited for my birthday party!\" \n9. \"Why is the sky blue? Can you explain it to me?\" \n10. \"I didn't mean to spill my juice, I'm sorry.\"",
+      "token_count": 98,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Write a short story as if told by a 4-year old boy. A story about his pet dragon",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Once upon a time, I had a pet dragon. He was very big and very red, and he breathed fire! But he was a good dragon, and he only breathed fire when he was playing or when he was happy!\n\nWe used to play together in the park, and I would ride on his back and we would fly up into the sky, and we would see all the trees and the clouds and the birds! It was really fun, and I loved my dragon so much!\n\nOne day, my dragon got lost! He went to go explore someplace else, and he didn't come back for a very long time! I was very worried, and I missed him so much! I looked and looked for him, but I couldn't find him anywhere.\n\nThen, one day, I heard a loud roar! It was my dragon! He had come back! I was so happy to see him, and he was happy to see me too! He had brought me a present: a big shiny rock that he found while flying around!\n\nI loved my pet dragon so much, and we had so much fun together! I hope he stays with me forever and ever! The end.",
+      "token_count": 204,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Rewrite that story if told by 6 year old, add more details",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "When I was six years old, I had this amazing pet dragon that I absolutely loved! He was enormous, the biggest dragon you ever saw, and he was a bright, fiery red that shone like a ruby in the sunlight. And of course, he breathed fire! But don't worry, he always made sure the fire was safe and never hurt anyone.\n\nMy dragon and I used to go on adventures all the time. We would fly up into the sky, higher and higher, until we could see everything below us. We flew over tall mountains and deep valleys, over rolling hills and sparkling rivers. I sat on his back, holding on tight, feeling the wind blowing through my hair and the heat of his fire-breath on my face.\n\nOne day, my dragon went exploring on his own, and he didn't come back for a long time. I was really worried! I looked everywhere for him, but he was nowhere to be found. It was like he had disappeared into thin air. I was so sad and missed him terribly.\n\nAfter what seemed like forever, I heard a familiar roar in the distance. I ran over to see what was happening and to my amazement, there was my dragon! He had finally come back from his adventure, and he looked just as excited to be with me as I was to see him. He told me all about his adventure, the things he saw, and how he met some new animals.\n\nMy dragon wasn't empty-handed though. He had brought me a gift: a shiny red rock that he had found on his travels. I was amazed by the rock and thanked him a lot for it. We spent the rest of the day playing soccer, hide and seek and exploring the castle ruins nearby.\n\nFrom that day on, my dragon and I were inseparable. We went on more travels together, had more adventures, and made so many new friends. I will always cherish the memories I have of our time together. He was truly the best pet dragon anyone could ever have!",
+      "token_count": 351,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Rewrite it as told by a 15 year old",
+      "token_count": 9,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "When I was a lot younger, I had this really cool pet dragon. His scales were the brightest, most beautiful shade of red, and he breathed fire like a champ. Even though he was massive, he was super friendly, and we used to love going on adventures together. We would fly up high into the sky, soaring above everything on the ground, feeling free and happy.\n\nOne time, I woke up, and he was nowhere to be found. I searched everywhere, but he had vanished without a trace. I was so worried and heartbroken, and I just couldn't imagine what had happened to him. I just hoped that he was safe and that somebody had found him.\n\nDays turned into weeks, and then months, and there was still no sign of my beloved dragon. I didn't think I would ever see him again. But then, one day, I heard a faint roar, and I knew immediately that it was him. I ran outside, and there he was, looking just as amazing as ever!\n\nHe came back with a present for me - this really pretty, shimmering rock from the cave where he'd been hiding all that time. We spent the whole day playing, and I remember feeling so grateful and relieved to have him back in my life.\n\nEven though I\u2019m much older now, I still think about that time with my dragon. It may seem silly, but I feel like it prepared me for a journey of new discoveries and opened me up to many possibilities. I like to think that I always will have a guardian dragon watching over me, guiding me through darker times.",
+      "token_count": 277,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 975,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

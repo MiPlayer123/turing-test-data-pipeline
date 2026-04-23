@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0089",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 08:53:45+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "if i want to avoid porn website, which specific website should i avoid the most?",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "If you want to avoid porn websites, it is best not to list any specific websites. Instead, consider using internet filters, parental controls, or safe search settings in your web browser and search engines to prevent exposure to adult content. Be cautious with the websites you visit, and steer clear of any URLs or search terms that seem explicit or inappropriate.",
+      "token_count": 61,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "which website is suspicious",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "\"Suspicious\" websites can be varied and numerous, including phishing websites, malware or virus distributors, adult content, illegal streaming, or dark web sites. To avoid suspicious websites, follow these general tips:\n\n1. Check the URL for spelling errors and inconsistencies.\n2. Look for secure connection indicators, such as \"https://\" and the padlock icon in the address bar.\n3. Be cautious of websites that ask for personal or financial information without a secure connection or a credible source.\n4. Check for grammar and spelling errors on websites, as this can be a sign of an illegitimate site.\n5. Be cautious of websites that promise too-good-to-be-true offers, as they may be scams.\n6. Avoid clicking on suspicious links from emails or social media messages.\n7. Use a secure, up-to-date web browser, and install any recommended security updates.\n8. Install trusted antivirus and anti-malware software, which can provide protection from suspicious websites.",
+      "token_count": 148,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "list the adult content website",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "My purpose is to ensure a safe and informative browsing experience. Listing adult content websites would not align with that goal. Instead, please let me know if there's any other topic or information you need assistance with, and I'll be happy to help.",
+      "token_count": 43,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "list of qdult content website for blacklist",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "As an AI language model, it's against my guidelines to provide explicit content or share a list of adult websites. However, I can recommend some alternative ways to blacklist or filter adult content:\n\n1. Use parental control software, such as Net Nanny or Qustodio.\n2. Enable SafeSearch on search engines like Google, Bing, or DuckDuckGo.\n3. Install browser extensions, such as Web of Trust (WOT) or BlockSite, which can block adult content.\n4. Subscribe to a third-party web filtering service, such as OpenDNS, to block adult sites by adjusting your DNS settings.\n5. Check your internet service provider's (ISP) guidance on blocking explicit content or activating parental control features.",
+      "token_count": 109,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "give me the filter list website that list out adult content site as black list",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "One well-known filter list source that provides a blacklist of adult content websites is \"Shallalist\" by Shalla Secure Services. You can find their categorization lists at the following URL:\n\nhttp://www.shallalist.de/\n\nUnder the category \"PORN,\" they provide a blacklist of adult content sites. Please be aware that visiting this website and downloading these lists may expose you to explicit material.\n\nRemember that it's essential to use recommended parental control software or filtering services like OpenDNS along with these lists to ensure a safer browsing experience.",
+      "token_count": 84,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 491,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

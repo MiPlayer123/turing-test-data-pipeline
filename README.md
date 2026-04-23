@@ -1,26 +1,35 @@
-# Turing Test Visualization —  AI-AI Data Pipeline
+# Turing Test Visualization
 
-Generates AI-AI conversations across multiple LLM providers, computes behavioral metrics on the transcripts, and exports a CSV for 3D visualization of "conversation behavioral space."
+Scrollytelling data visualization exploring how LLMs communicate with humans and other LLMs. Thesis: **"The harder an AI tries to seem human, the more it gives itself away."**
 
-## Pipeline
+## Structure
 
-1. **`config.py`** — Models, prompts, settings
-2. **`generate.py`** — Runs conversations between LLM pairs, saves JSON transcripts to `data/raw/`
-3. **`analyze.py`** — Computes metrics (repetitiveness, coherence, hedging, etc.), exports CSV to `data/processed/`
+```
+web/           → Scrollytelling visualization (Vite + D3 + Three.js)
+data/          → 362 conversation transcripts + computed metrics
+viz/           → Standalone EDA charts (legacy, now integrated into web/)
+config.py      → Model definitions, prompts, settings
+generate.py    → AI-AI conversation generation via LLM APIs
+analyze.py     → Metric computation (repetitiveness, coherence, hedging)
+ingest_human_data.py → Human-human (PersonaChat) + Human-AI (WildChat) ingestion
+```
 
-## Quick Start
+## Data Pipeline
+
+1. `generate.py` — Runs conversations between LLM pairs (GPT-5.4, Claude Sonnet 4, Gemini 2.5 Flash, Grok 4.1 Fast, Llama 4 Scout)
+2. `ingest_human_data.py` — Pulls human-human and human-AI conversations from HuggingFace
+3. `analyze.py` — Computes metrics, exports CSV to `data/processed/`
+
+## Visualization
 
 ```bash
-pip install -r requirements.txt
-cp .env.example .env   # Fill in API keys
-python generate.py --dry-run          # Preview the plan
-python generate.py --limit 1          # Test with 1 conversation
-python analyze.py                     # Compute metrics → CSV
+cd web && npm install && npm run dev
 ```
+
+Scrollytelling page with 6 sections: hero, metric explainer, detective accuracy, turn-by-turn trajectory, 3D explorer, and interactive guessing game.
 
 ## Conditions
 
-- **AI-AI Freeform** — Two models chat casually (20 turns)
-- **AI-AI Detective** — One model tries to detect if the other is AI (20 turns)
-- **AI-AI Structured** — Both discuss a specific topic (15 turns)
-- **Human-AI / Human-Human** — Collected manually by teammates
+- **Human-Human** — PersonaChat crowdsourced conversations
+- **Human-AI** — WildChat real user-LLM conversations
+- **AI-AI Freeform / Persona / Detective / Reverse Turing / Structured** — Generated via API

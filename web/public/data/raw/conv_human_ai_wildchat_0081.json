@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0081",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 08:31:03+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "In an episode of \"The Corridor\" an anthology drama series (with Twilight Zone type stories) , it was established that the show uses a 'corridor' metaphor for or in some stories.   An episode idea might be some kind of Cold war thriller, where the corridor isn't physical, but perhaps is an 'escape' route?  for example maybe in one story the episode is about how the lead is an agent trying to get out of Berlin, and must find the mysterious corridor that allows him past the Berlin Wall,  and into the West?    What would a title , log-line and episode summary might be?  You can include a short opening and closing narration.",
+      "token_count": 112,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Title: Escape from the Corridor\n\nLog-line: In Cold War Berlin, an American agent must use a mysterious corridor to escape from East to West.\n\nOpening narration: \"For some, the corridor is a path to freedom. For others, it's a trap. But for an American agent trapped in East Berlin during the height of the Cold War, the corridor may be his only hope for survival.\"\n\nEpisode summary: John, an American agent, is trapped in East Berlin during the height of the Cold War. His only chance of survival is to cross the border to the West, but the Berlin Wall separates him from freedom. John learns of a mysterious corridor that supposedly leads past the Wall and into the West. He must find the corridor before the authorities catch him or risk being trapped in East Berlin forever. After facing numerous obstacles and setbacks, John finally discovers the corridor and makes his escape. But he soon realizes that the corridor is not what it seems, and the price of his freedom may be higher than he ever imagined.\n\nClosing narration: \"Sometimes the path to freedom is clear. But more often than not, we must face our deepest fears and darkest secrets to find it. For John, the corridor was more than just an escape route. It was a journey of self-discovery and sacrifice that would change the course of his life forever.\"",
+      "token_count": 232,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Sumarise a possible but plausible seen where John doubts where the corridor is supposed to lead?",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "John is on the run and desperate to cross the Berlin Wall into the West. He's heard rumors of a mysterious corridor that can take him there. After encountering some locals, he finally discovers the entrance to the corridor. As he navigates his way through the dark, winding passage, he begins to have doubts about where it's supposed to lead. He can't shake the feeling that he's being led into a trap, and that the corridor may be a way for the authorities to catch escapees like him. John's fears are validated when he hears footsteps getting closer behind him. John realizes he's been lured into a trap and must fight his way out or risk getting captured. Fueled by fear and adrenaline, John fights off his attackers and makes a break for the exit. He emerges from the corridor, battered and bruised, but determined to find another way to escape.",
+      "token_count": 151,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Perhaps unbknownst to his persuers the corridor has a side exit, or a flight of steps into the subway, that brings him out into the West, he only realises this when he gets back to ground level?",
+      "token_count": 37,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, that's a great idea! John emerges from the corridor, still on high alert and unsure of his surroundings. As he looks around, he realizes that he's no longer in East Berlin. The buildings and signs are different, and the people around him are dressed in Western clothes. He takes in his surroundings, realizing that the corridor brought him to the West, but not in the way he expected. John is surprised but relieved, knowing that he's finally escaped the oppressive East Berlin. As he takes a few cautious steps forward, he sees a subway entrance. Without hesitation, John descends the stairs and boards a train, grateful for the convenient means of escape. The camera pulls back as the train pulls away from the station, leaving John to contemplate his uncertain future in the West.",
+      "token_count": 135,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Which is where you'd put the closing narration over the train pulling out of the station  :) Nice thinking :)",
+      "token_count": 20,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Thank you! Yes, the closing narration would be a perfect fit for John's uncertain future as he boards the train.",
+      "token_count": 20,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 723,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

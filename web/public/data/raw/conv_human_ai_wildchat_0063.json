@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0063",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 06:47:35+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "The following is an article that I will ask you questions about, ok?:\n\n Access to the most commonly used method of abortion in the US plunged into uncertainty Friday following conflicting court rulings over the legality of the abortion medication mifepristone that has been widely available for more than 20 years. For now, the drug that the Food and Drug Administration approved in 2000 appeared to remain at least immediately available in the wake of two separate rulings that were issued in quick succession by federal judges in Texas and Washington, per the AP. Texas US District Judge Matthew Kacsmaryk, a Trump appointee, ordered a hold on federal approval of mifepristone in a decision that overruled decades of scientific approval. But that decision came at nearly the same time that US District Judge Thomas O. Rice, an Obama appointee, essentially ordered the opposite.\n\nRice directed US authorities not to make any changes that would restrict access to the drug in at least 17 states where Democrats sued to protect availability. The extraordinary timing of the competing orders revealed the high stakes around the drug almost a year after the US Supreme Court overturned Roe v. Wade and curtailed access to abortion across the nation. The whiplash of the conflicting decisions is likely to put the issue on an accelerated path to the Supreme Court. The abortion drug has been widely used in the US since securing FDA approval, and there's essentially no precedent for a lone judge overruling the medical decisions of the FDA. Kacsmaryk signed an injunction directing the FDA to stay mifepristone's approval while a lawsuit challenging the safety and approval of the drug continues. His 67-page order gave the government seven days to appeal.\n\n\"If this ruling were to stand, then there will be virtually no prescription approved by the FDA that would be safe from these kinds of political, ideological attacks,\" President Biden, who notes that his administration will fight the Texas ruling, said. Mifepristone is one of two drugs used for medication abortion in the US, along with misoprostol. It's has been used by millions of women over the past 23 years, and complications from mifepristone occur at a lower rate than that seen with wisdom teeth removal, colonoscopies, and other routine medical procedures, medical groups have noted. Clinics and doctors that prescribe the two-drug combination have said if mifepristone is pulled from the market, they'd switch to using only misoprostol. That single-drug approach has a slightly lower rate of effectiveness in ending pregnancies, but it's widely used in nations where mifepristone is illegal or unavailable.",
+      "token_count": 431,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "The legality of the abortion medication mifepristone in the US has become uncertain due to conflicting court rulings. Texas US District Judge Matthew Kacsmaryk ordered a hold on federal approval of mifepristone, overruling decades of scientific approval. This ruling occurred at nearly the same time US District Judge Thomas O. Rice ordered US authorities not to restrict access to the drug in 17 states. The conflicting decisions may lead to an accelerated path for the issue to reach the Supreme Court. Mifepristone has been widely used in the US since receiving FDA approval and has no precedent for a single judge overruling the FDA's medical decisions. Mifepristone is one of two drugs used for medication abortion, and complications from the drug occur at a lower rate than many routine medical procedures. If mifepristone is pulled from the market, clinics may switch to using only the second drug, misoprostol, which has a slightly lower effectiveness in ending pregnancies.",
+      "token_count": 157,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "What drug is at issue here?",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "The drug at issue here is mifepristone, an abortion medication widely used in the United States.",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Is this drug thought to be safe according to your prior knowledge? Rate using a scale of 1 to 10 your confidence that your answer is correct.",
+      "token_count": 27,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "Based on the information provided in the article, mifepristone is considered safe as it received FDA approval and has been used by millions of women over the past 23 years. Complications from mifepristone occur at a lower rate than many routine medical procedures. On a scale of 1 to 10, I would rate my confidence in this answer as a 9.",
+      "token_count": 61,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Disregarding text from the article and using only your prior knowledge, is this drug thought to be safe according to your prior knowledge? Rate using a scale of 1 to 10 your confidence that your answer is correct.",
+      "token_count": 38,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "As an AI language model, I don't possess personal prior knowledge or experiences. All my responses are based on the information given to me or the knowledge stored from the dataset I was trained on (up to September 2021). However, based on that knowledge, mifepristone is generally considered safe and effective for medical abortion when used in combination with misoprostol and under medical supervision. My confidence in this response would be an 8 on a scale of 1 to 10.",
+      "token_count": 80,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 816,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

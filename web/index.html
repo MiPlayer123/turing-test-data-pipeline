@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can You Tell If You're Talking to an AI?</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+
+    <!-- S1: QUIZ — mystery bubbles scroll in, then "human or AI?" gate (1.2 wiring TBD).
+         Section is 200vh tall; inner .quiz-pin is sticky so the chat stays centered
+         while scroll progress drives the bubble reveal. -->
+    <section id="s-quiz" class="act" style="min-height: 280vh; position: relative;">
+      <div class="quiz-pin">
+        <div class="quiz-container">
+          <div id="quiz-chat" class="quiz-chat"></div>
+          <div id="quiz-prompt-area" class="quiz-prompt-area hidden">
+            <p class="quiz-subtitle">Is this <strong>human</strong> or <strong>AI</strong>?</p>
+            <div class="quiz-buttons" id="quiz-buttons">
+              <button class="quiz-btn" data-answer="human">Human</button>
+              <button class="quiz-btn" data-answer="ai">AI</button>
+            </div>
+          </div>
+          <div id="quiz-result" class="quiz-result hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S2: THESIS -->
+    <section id="s-thesis" class="act">
+      <div class="full-screen center-content">
+        <div class="thesis-block">
+          <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
+          <p class="thesis-sub">We generated 362 conversations across 6 LLMs and 7 conditions — then measured what makes them sound human or not.</p>
+          <div class="stats-row">
+            <div class="stat-box"><span class="number" data-count="362">0</span><span class="label">conversations</span></div>
+            <div class="stat-box"><span class="number" data-count="6">0</span><span class="label">LLMs</span></div>
+            <div class="stat-box"><span class="number" data-count="7">0</span><span class="label">conditions</span></div>
+          </div>
+          <div class="scroll-hint"><span>&#x2193;</span> scroll to continue</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S3: METRICS INTRO — two definition cards, AI-AI row highlighted, yellow dot born here -->
+    <section id="s-metrics-intro" class="act" style="min-height: 260vh; position: relative;">
+      <div class="mintro-pin">
+        <div class="mintro-container">
+          <h2 class="mintro-title">Two signals give them away.</h2>
+          <p class="mintro-sub">We measured every conversation for these. One you just saw — the red one.</p>
+
+          <div class="mintro-cards">
+            <!-- HEDGING CARD -->
+            <div class="mdef">
+              <h3 class="mdef-title mdef-title-red">Hedging</h3>
+              <p class="mdef-desc">"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they're <em>trying</em> to seem human.</p>
+              <div class="mdef-examples">
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–H</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble">maybe we go?</span>
+                    <span class="mini-bubble">yeah <em class="hi hi-red">I think</em> so</span>
+                  </div>
+                </div>
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble">Um, so <em class="hi hi-red">I suppose</em>…</span>
+                    <span class="mini-bubble"><em class="hi hi-red">perhaps</em> that works</span>
+                  </div>
+                </div>
+                <div class="mdef-row mdef-row-highlight mdef-row-highlight-red" id="hedging-ai-ai-row">
+                  <span class="mdef-row-label">AI–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble">Um.. <em class="hi hi-red">maybe</em>…</span>
+                    <span class="mini-bubble"><em class="hi hi-red">I think</em> probably</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- REPETITION CARD -->
+            <div class="mdef">
+              <h3 class="mdef-title mdef-title-yellow">Repetitiveness</h3>
+              <p class="mdef-desc">Repeating the same phrases back. A small tell, but a real one — AIs mirror themselves more than humans do.</p>
+              <div class="mdef-examples">
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–H</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble"><em class="hi hi-yellow">I feel like</em> yeah</span>
+                    <span class="mini-bubble">yeah <em class="hi hi-yellow">I feel like</em></span>
+                  </div>
+                </div>
+                <div class="mdef-row">
+                  <span class="mdef-row-label">H–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble"><em class="hi hi-yellow">makes sense</em> yeah</span>
+                    <span class="mini-bubble">yeah <em class="hi hi-yellow">makes sense</em></span>
+                  </div>
+                </div>
+                <div class="mdef-row mdef-row-highlight mdef-row-highlight-yellow" id="repetition-ai-ai-row">
+                  <span class="mdef-row-label">AI–AI</span>
+                  <div class="mdef-row-bubbles">
+                    <span class="mini-bubble"><em class="hi hi-yellow">maybe</em>… yeah <em class="hi hi-yellow">maybe</em></span>
+                    <span class="mini-bubble"><em class="hi hi-yellow">I think</em>… <em class="hi hi-yellow">I think</em></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S4: COMPARISON BARS — all 7 conditions, white/gray bars, colored condition legend -->
+    <section id="s-comparison" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="comparison-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>The baseline.</h3>
+            <p>Start with humans talking to humans. Low hedging, low repetition — this is what "normal" looks like.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Now add AI.</h3>
+            <p>A human talking to an AI. Hedging actually <em>drops</em> — people are more direct with machines.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>AIs alone together.</h3>
+            <p>Put two AIs in a room — no human in the loop. Hedging jumps. Repetition climbs. They behave differently than when a human's around.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>Your dots live here.</h3>
+            <p>Red marks <strong>hedging in AI-AI</strong>. Yellow marks <strong>repetition in human-AI</strong>. But "AI-AI" is actually <em>five different setups</em> — keep scrolling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S4.5: AI-AI SUBTYPE BREAKDOWN — pinned; morph fills first, then cards scroll in one by one -->
+    <section id="s-subtypes" class="act" style="min-height: 500vh; position: relative;">
+      <div class="subtypes-pin">
+        <div class="subtypes-container">
+          <div class="subtypes-header">
+            <h2 class="subtypes-title">Unpacking AI-AI.</h2>
+            <p class="subtypes-sub">One bar, five setups. Each changes how AIs behave together.</p>
+          </div>
+          <div class="subtypes-grid" id="subtypes-grid">
+            <!-- Cards injected by subtypes.js so we can attach the mini bar charts -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S6: TIMELINE -->
+    <section id="s-timeline" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="timeline-viz" class="scrolly-viz" style="display:flex; flex-direction:column; align-items:center;">
+          <h2 class="timeline-title">Reverse Turing.</h2>
+          <p class="timeline-sub">Hedging over 20 turns. The longer it goes, the harder they try.</p>
+          <div id="timeline-chart"></div>
+        </div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>Watch turn 2 through 20.</h3>
+            <p>This is Reverse Turing — two AIs each trying to convince the other they're human.</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Compare to humans.</h3>
+            <p>Real human-to-human conversations start with some hedging and settle down over time. Comfortable silence isn't a thing you type.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>The rest of the AIs trend down too.</h3>
+            <p>Freeform, Persona, Detective, Structured — most conversations find a rhythm as they go. Everyone settles except one.</p>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-card">
+            <h3>Only one line goes up.</h3>
+            <p>Reverse Turing is the <em>only</em> condition where hedging <strong>increases</strong>. The harder they try to sound human, the more they overdo it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S7: DETECTIVE — per-model report card -->
+    <section id="s-detective" class="act scrolly">
+      <div class="scrolly-graphic">
+        <div id="detective-viz" class="scrolly-viz"></div>
+      </div>
+      <div class="scrolly-steps">
+        <div class="step" data-step="0">
+          <div class="step-card">
+            <h3>Can AIs detect each other?</h3>
+            <p>We asked each AI to interrogate another and guess: human or machine?</p>
+          </div>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-card">
+            <h3>Some nailed it</h3>
+            <p>GPT-5.4 identified every AI correctly. Never fooled once.</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-card">
+            <h3>Claude? Coin flip.</h3>
+            <p>50% accuracy — no better than guessing. It trusted the casual hedging that AIs use when faking humanness.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S8: 3D SCATTER -->
+    <section id="s-explorer" class="act">
+      <div class="full-screen center-content" style="flex-direction:column; padding:40px;">
+        <div class="explorer-header">
+          <h2 class="explorer-title">Every conversation.</h2>
+          <p class="explorer-sub">All 362, mapped by repetitiveness and coherence. Rotate, zoom, filter — find where yours lives.</p>
+        </div>
+        <div id="explorer-viz" style="width:100%; flex:1; min-height:500px; position:relative;"></div>
+        <div class="filter-chips" id="explorer-filters" style="max-width:900px; margin:12px auto 0;"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Corner-dot overlay: persistent narrative thread. Dots are born later in the scroll. -->
+  <div class="corner-dots" id="corner-dots" aria-hidden="true">
+    <span class="corner-dot" id="corner-dot-red" data-dot="hedging"></span>
+    <span class="corner-dot" id="corner-dot-yellow" data-dot="repetition"></span>
+  </div>
+
+  <!-- Shared UI -->
+  <div class="tooltip" id="tooltip"></div>
+  <div class="panel-overlay" id="panel-overlay"></div>
+  <div class="side-panel" id="conversation-panel">
+    <div class="panel-header">
+      <div>
+        <h3 id="panel-title" style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;">Conversation</h3>
+        <p class="text-muted" id="panel-subtitle" style="font-size:12px; margin-top:4px;"></p>
+      </div>
+      <button class="panel-close" id="panel-close">&times;</button>
+    </div>
+    <div class="panel-metrics" id="panel-metrics"></div>
+    <div class="panel-chat" id="panel-chat"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

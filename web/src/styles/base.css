@@ -1,0 +1,94 @@
+:root {
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { min-height: 100vh; }
+
+body {
+  background: #0D1117;
+  color: #d0d7de;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Editorial typography */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: #f0f3f6;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* Mono for data labels */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+a { color: #58A6FF; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Shared tooltip */
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: #161B22;
+  border: 1px solid #30363D;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #d0d7de;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 1000;
+  max-width: 320px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+.tooltip .val { font-weight: 700; color: #f0f3f6; }
+.tooltip .label { color: #8B949E; font-size: 11px; }
+
+/* Muted text */
+.text-muted { color: #8B949E; }
+.text-accent { color: #F39C12; font-weight: 600; }
+
+/* Pull quotes — conversation excerpts between sections */
+.pull-quote {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 80px 40px 100px;
+  text-align: center;
+}
+.pull-quote blockquote {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-style: italic;
+  color: #c9d1d9;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.pull-quote cite {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #8B949E;
+  font-style: normal;
+}
+
+/* Fade-in animation for scroll reveals */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
