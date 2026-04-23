@@ -2,3 +2,10 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Node / Vite
+node_modules/
+.vite/
+dist/
+*.log
+
