@@ -46,27 +46,29 @@
 }
 /* Left-align steps by default */
 .step-card {
-  background: rgba(13, 17, 23, 0.92);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(48, 54, 61, 0.5);
-  border-radius: 14px;
-  padding: 32px 36px;
-  max-width: 380px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  backdrop-filter: none;
+  padding: 0;
+  max-width: 520px;
   transition: opacity 0.4s ease;
 }
 .step-card h3 {
   font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 700;
+  font-size: clamp(28px, 2.9vw, 40px);
+  font-weight: 400;
   color: #f0f3f6;
-  margin-bottom: 12px;
-  line-height: 1.2;
+  margin-bottom: 14px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
 }
 .step-card p {
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
-  color: #b1bac4;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.7vw, 24px);
+  line-height: 1.55;
+  color: #c9d1d9;
+  max-width: 36ch;
 }
 .step-card p em { color: #F39C12; font-style: italic; }
 .step-card p strong { color: #f0f3f6; }
@@ -344,32 +346,13 @@
 .hi-yellow { background: rgba(241, 196, 15, 0.22); color: #f1df8a; }
 
 /* ===== Scene 4: comparison chart (white/gray bars + condition legend) ===== */
-/* Chart stays centered; step cards sit bottom-left, small, semi-transparent so they don't collide */
 #s-comparison .scrolly-viz {
   max-width: 820px;
   padding: 0 24px;
 }
-#s-comparison .step { align-items: flex-end; }
-#s-comparison .step-card {
-  max-width: 280px;
-  padding: 20px 22px;
-  font-size: 13px;
-  background: rgba(13, 17, 23, 0.88);
-  backdrop-filter: blur(12px);
-}
-#s-comparison .step-card h3 { font-size: 18px; margin-bottom: 8px; }
-#s-comparison .step-card p  { font-size: 13.5px; line-height: 1.55; }
+#s-comparison .step { align-items: center; }
 
-/* Timeline shares the same compact step-card treatment */
-#s-timeline .step { align-items: flex-end; }
-#s-timeline .step-card {
-  max-width: 280px;
-  padding: 20px 22px;
-  background: rgba(13, 17, 23, 0.88);
-  backdrop-filter: blur(12px);
-}
-#s-timeline .step-card h3 { font-size: 18px; margin-bottom: 8px; }
-#s-timeline .step-card p  { font-size: 13.5px; line-height: 1.55; }
+#s-timeline .step { align-items: center; }
 
 /* Timeline title — magenta, echoing Reverse Turing card. Hidden initially so the morph reveals it. */
 .timeline-title {
