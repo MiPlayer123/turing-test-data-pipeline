@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { CONDITIONS, CONDITION_COLOR } from '../data/constants.js';
 import { createFilterChips } from '../components/filterChips.js';
 import * as tooltip from '../components/tooltip.js';
+import { getCornerRect, unlight } from '../lib/cornerDots.js';
 
 function gaussianKDE(points, gridX, gridY, bandwidth) {
   const nx = gridX.length, ny = gridY.length;
@@ -238,10 +239,91 @@ export function init(data) {
         posAttr.needsUpdate = true;
         dotMat.opacity = Math.min(1, k * 1.4);
       },
+      onComplete: () => findHome(),
     });
   };
   // Kick off entrance on next frame — the surface has already rendered.
   requestAnimationFrame(() => setTimeout(startEntrance, 200));
+
+  // ----- Find-home: corner dots fly into their condition cluster centroids -----
+  let didFindHome = false;
+  function findHome() {
+    if (didFindHome) return;
+    didFindHome = true;
+
+    const centroid = (condKey) => {
+      let sx = 0, sy = 0, sz = 0, n = 0;
+      for (let i = 0; i < dotConditions.length; i++) {
+        if (dotConditions[i] === condKey) {
+          sx += finalPositions[i * 3];
+          sy += finalPositions[i * 3 + 1];
+          sz += finalPositions[i * 3 + 2];
+          n++;
+        }
+      }
+      return n ? new THREE.Vector3(sx / n, sy / n, sz / n) : null;
+    };
+
+    const projectToScreen = (v3) => {
+      const p = v3.clone().project(camera);
+      const rect = renderer.domElement.getBoundingClientRect();
+      return {
+        left: rect.left + (p.x * 0.5 + 0.5) * rect.width,
+        top:  rect.top  + (1 - (p.y * 0.5 + 0.5)) * rect.height,
+      };
+    };
+
+    const clusters = {
+      red:    { key: 'ai_ai_reverse_turing' },
+      yellow: { key: 'human_ai'              },
+    };
+
+    Object.entries(clusters).forEach(([slot, info]) => {
+      const c3 = centroid(info.key);
+      if (!c3) return;
+      const screen = projectToScreen(c3);
+      const corner = getCornerRect(slot);
+      if (!corner) return;
+
+      // Create a flying clone of the corner dot
+      const flyer = document.createElement('div');
+      flyer.className = `fly-dot fly-dot-${slot}`;
+      flyer.style.width  = '16px';
+      flyer.style.height = '16px';
+      document.body.appendChild(flyer);
+      gsap.set(flyer, {
+        left: corner.left + corner.width / 2 - 8,
+        top:  corner.top  + corner.height / 2 - 8,
+        opacity: 0,
+        scale: 1,
+      });
+      // Simultaneously dim the persistent corner dot
+      gsap.to(flyer, { opacity: 1, duration: 0.3 });
+
+      // Fly to the cluster centroid on-screen
+      gsap.to(flyer, {
+        left: screen.left - 8,
+        top:  screen.top  - 8,
+        scale: 1.3,
+        duration: 1.6,
+        delay: 0.2,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          // Pulse briefly so the viewer sees the "landing"
+          gsap.to(flyer, { scale: 1, duration: 0.4, ease: 'sine.inOut', repeat: 3, yoyo: true });
+          // Fade the persistent corner dot — it has landed in the scatter now
+          unlight(slot);
+          // Fade out the flyer after its pulses
+          gsap.to(flyer, {
+            opacity: 0,
+            duration: 0.6,
+            delay: 2.0,
+            onComplete: () => { if (flyer.parentNode) flyer.remove(); },
+          });
+        },
+      });
+    });
+  }
 
   // Filter chips
   const filtersEl = document.getElementById('explorer-filters');
