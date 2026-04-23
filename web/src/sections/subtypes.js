@@ -1,6 +1,16 @@
 import * as d3 from 'd3';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { light as lightCornerDot, getCornerRect } from '../lib/cornerDots.js';
+
+// Map each AI-AI condition to its corner-dot slot id
+const CORNER_SLOT = {
+  ai_ai_freeform:         'freeform',
+  ai_ai_freeform_persona: 'persona',
+  ai_ai_detective:        'detective',
+  ai_ai_reverse_turing:   'revturing',
+  ai_ai_structured:       'structured',
+};
 
 const SUBTYPES = [
   {
@@ -183,6 +193,56 @@ function wirePinnedTimeline() {
     [0.56, 0.72],
     [0.74, 0.90],
   ];
+  // Track which subtype dots have already flown to the corner (prevents re-firing on scroll wiggle)
+  const dotsLaunched = new Set();
+
+  function launchSubtypeDot(card) {
+    const key = card.dataset.key;
+    if (dotsLaunched.has(key)) return;
+    const slot = CORNER_SLOT[key];
+    if (!slot) return;
+    dotsLaunched.add(key);
+
+    const headerDot = card.querySelector('.subtype-dot');
+    const color = getComputedStyle(card).getPropertyValue('--subtype-color').trim() || '#fff';
+    const rect = headerDot.getBoundingClientRect();
+
+    const flyer = document.createElement('div');
+    flyer.className = 'fly-dot';
+    flyer.style.background = color;
+    flyer.style.boxShadow = `0 0 22px ${color}88`;
+    document.body.appendChild(flyer);
+    gsap.set(flyer, {
+      left: rect.left + rect.width / 2 - 8,
+      top:  rect.top  + rect.height / 2 - 8,
+      opacity: 0,
+      scale: 0.6,
+    });
+    gsap.to(flyer, { opacity: 1, scale: 1, duration: 0.35 });
+
+    gsap.to(flyer, {
+      left: () => {
+        const c = getCornerRect(slot);
+        return c ? c.left + c.width / 2 - 8 : window.innerWidth - 40;
+      },
+      top: () => {
+        const c = getCornerRect(slot);
+        return c ? c.top + c.height / 2 - 8 : 28;
+      },
+      duration: 1.1,
+      delay: 0.25,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        lightCornerDot(slot);
+        gsap.to(flyer, {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => { if (flyer.parentNode) flyer.remove(); },
+        });
+      },
+    });
+  }
+
   ScrollTrigger.create({
     trigger: section,
     start: 'top top',
@@ -203,6 +263,8 @@ function wirePinnedTimeline() {
           const pct = +fill.dataset.pct;
           gsap.set(fill, { width: `${pct * barT}%` });
         });
+        // Once the card is nearly fully revealed, send its colored dot to the corner
+        if (t > 0.85) launchSubtypeDot(card);
       });
     },
   });

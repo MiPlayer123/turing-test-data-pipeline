@@ -20,8 +20,13 @@
   transition: transform 0.4s cubic-bezier(.2,.7,.2,1), opacity 0.3s;
 }
 .corner-dot.is-lit { transform: scale(1); opacity: 1; }
-#corner-dot-red    { background: #E74C3C; box-shadow: 0 0 14px rgba(231, 76, 60, 0.55); }
-#corner-dot-yellow { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
+#corner-dot-red        { background: #E74C3C; box-shadow: 0 0 14px rgba(231, 76, 60, 0.55); }
+#corner-dot-yellow     { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
+#corner-dot-freeform   { background: #3498DB; box-shadow: 0 0 14px rgba(52, 152, 219, 0.55); }
+#corner-dot-persona    { background: #9B59B6; box-shadow: 0 0 14px rgba(155, 89, 182, 0.55); }
+#corner-dot-detective  { background: #E67E22; box-shadow: 0 0 14px rgba(230, 126, 34, 0.55); }
+#corner-dot-revturing  { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
+#corner-dot-structured { background: #2ECC71; box-shadow: 0 0 14px rgba(46, 204, 113, 0.55); }
 
 /* Fly-dot: temporary element that morphs content → persistent corner dots */
 .fly-dot {
