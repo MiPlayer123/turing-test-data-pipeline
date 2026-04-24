@@ -80,8 +80,8 @@ function buildChart() {
   const shell = document.createElement('div');
   shell.className = 'cmp-shell';
   shell.innerHTML = `
-    <div class="cmp-title">Behavioral Metrics</div>
-    <div class="cmp-sub">362 conversations · 6 LLMs · three groupings</div>
+    <div class="cmp-title">Baseline First</div>
+    <div class="cmp-sub">Human-Human vs Human-AI vs AI-AI</div>
     <div class="cmp-charts"></div>
   `;
   container.appendChild(shell);

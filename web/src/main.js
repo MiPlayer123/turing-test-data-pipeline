@@ -30,26 +30,6 @@ function initScrolly(sectionId, onStep) {
   });
 }
 
-function initCounters() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = +el.dataset.count;
-      let start = null;
-      function tick(now) {
-        if (!start) start = now;
-        const t = Math.min((now - start) / 1000, 1);
-        el.textContent = Math.round((1 - Math.pow(1 - t, 3)) * target);
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.stat-box .number').forEach(el => observer.observe(el));
-}
-
 async function main() {
   const data = await loadData();
   console.log(`Loaded ${data.conversations.length} conversations`);
@@ -59,9 +39,6 @@ async function main() {
 
   // S1.5: Grid reveal — red dot lands on 2-D Repetitiveness × Hedging axes
   gridReveal.init();
-
-  // S2: Thesis counters
-  initCounters();
 
   // S4: Comparison bars (H-H / H-AI / AI-AI)
   comparison.init(data);

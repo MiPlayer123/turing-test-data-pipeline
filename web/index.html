@@ -16,8 +16,8 @@
     <section id="s-title" class="act full-screen center-content">
       <div class="title-block">
         <p class="title-overline">Control Risks × AI Research</p>
-        <h1 class="title-heading">Can you tell if you're<br>talking to an AI?</h1>
-        <p class="title-sub">We ran 362 conversations across 6 LLMs and measured exactly what gives them away.</p>
+        <h1 class="title-heading">Can you tell when a chat<br>is actually AI?</h1>
+        <p class="title-sub">You will make the first call yourself. Then we will show the two measurable signals that separate human and model conversations.</p>
         <div class="scroll-hint"><span>&#x2193;</span> scroll to begin</div>
       </div>
     </section>
@@ -25,17 +25,11 @@
     <!-- S1: QUIZ — mystery bubbles scroll in, then "human or AI?" gate (1.2 wiring TBD).
          Section is 200vh tall; inner .quiz-pin is sticky so the chat stays centered
          while scroll progress drives the bubble reveal. -->
-    <section id="s-quiz" class="act" style="min-height: 280vh; position: relative;">
+    <section id="s-quiz" class="act" style="min-height: 320vh; position: relative;">
       <div class="quiz-pin">
         <div class="quiz-container">
+          <div id="quiz-prompt-area" class="quiz-prompt-area hidden"></div>
           <div id="quiz-chat" class="quiz-chat"></div>
-          <div id="quiz-prompt-area" class="quiz-prompt-area hidden">
-            <p class="quiz-subtitle">Is this <strong>human</strong> or <strong>AI</strong>?</p>
-            <div class="quiz-buttons" id="quiz-buttons">
-              <button class="quiz-btn" data-answer="human">Human</button>
-              <button class="quiz-btn" data-answer="ai">AI</button>
-            </div>
-          </div>
           <div id="quiz-result" class="quiz-result hidden"></div>
         </div>
       </div>
@@ -44,13 +38,13 @@
     <!-- S1.5: GRID REVEAL — red dot lands on 2-D axes; then metric names + descriptions +
                   real-data examples on the sides of the axes; then the yellow + blue dots
                   appear to introduce the three conversation types. -->
-    <section id="s-grid" class="act" style="min-height: 700vh; position: relative;">
+    <section id="s-grid" class="act" style="min-height: 680vh; position: relative;">
       <div class="grid-pin">
         <div class="grid-shell">
           <!-- Phase 1 headline -->
           <div class="grid-headbar" id="grid-headbar-1">
-            <h2 class="grid-headline">Two signals give them away.</h2>
-            <p class="grid-headline-sub">We measured every conversation for these. One you just saw — the red one.</p>
+            <h2 class="grid-headline">What gave it away?</h2>
+            <p class="grid-headline-sub">Across all conversations, two signals stand out. The first one is the red dot you just saw.</p>
           </div>
           <!-- Phase 2 headline (conversation types) -->
           <div class="grid-headbar grid-headbar-2" id="grid-headbar-2">
@@ -63,10 +57,9 @@
             <aside class="grid-side grid-side-left">
               <div class="mdef mdef-side" id="mdef-hedging">
                 <h3 class="mdef-title mdef-title-red">Hedging</h3>
-                <p class="mdef-desc">"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they're <em>trying</em> to seem human.</p>
+                <p class="mdef-desc">"I think", "maybe", "sort of" — language that softens certainty. Humans use it naturally; models often overuse it when trying to sound human.</p>
                 <div class="mdef-examples">
                   <div class="mdef-row mdef-row-highlight mdef-row-highlight-red" id="hedging-ai-ai-row">
-                    <span class="mdef-row-label">AI–AI</span>
                     <span class="mini-bubble mdef-full-msg">"<em class="hi hi-red">Honestly</em>, it <em class="hi hi-red">might</em> give me the 'I should host people' feeling, but then I'll <em class="hi hi-red">probably</em> still end up just enjoying it solo while catching up on some design blogs or <em class="hi hi-red">maybe</em> even a nature documentary."</span>
                   </div>
                 </div>
@@ -75,19 +68,20 @@
 
             <!-- CENTRE: the grid + the Repetitiveness card beneath it -->
             <div class="grid-centre">
+              <div id="grid-motion-wrap" class="grid-motion-wrap">
               <div class="grid-canvas-wrap">
                 <svg id="grid-svg" class="grid-svg"
                      viewBox="0 0 640 520"
                      preserveAspectRatio="xMidYMid meet"
                      aria-hidden="true"></svg>
               </div>
+              </div>
               <div class="grid-bottom">
                 <div class="mdef mdef-side" id="mdef-repetition">
                   <h3 class="mdef-title mdef-title-yellow">Repetitiveness</h3>
-                  <p class="mdef-desc">Repeating the same phrases back. A small tell, but a real one — AIs mirror themselves more than humans do.</p>
+                  <p class="mdef-desc">Repeating the same phrase patterns in short spans. It is subtle, but models mirror themselves more often than humans do.</p>
                   <div class="mdef-examples">
                     <div class="mdef-row mdef-row-highlight mdef-row-highlight-yellow" id="repetition-ai-ai-row">
-                      <span class="mdef-row-label">AI–AI</span>
                       <span class="mini-bubble mdef-full-msg">"Totally agree, <em class="hi hi-yellow">she's</em> got a good ear for style. And <em class="hi hi-yellow">she's</em> not a snob about pop either, but <em class="hi hi-yellow">she's</em> drawn to the more experimental stuff — <em class="hi hi-yellow">she's</em> actually obsessed with Currents right now."</span>
                     </div>
                   </div>
@@ -124,22 +118,6 @@
       </div>
     </section>
 
-    <!-- S2: THESIS -->
-    <section id="s-thesis" class="act">
-      <div class="full-screen center-content">
-        <div class="thesis-block">
-          <h1>The harder an AI tries to seem human, the more it gives itself away.</h1>
-          <p class="thesis-sub">We generated 362 conversations across 6 LLMs and 7 conditions — then measured what makes them sound human or not.</p>
-          <div class="stats-row">
-            <div class="stat-box"><span class="number" data-count="362">0</span><span class="label">conversations</span></div>
-            <div class="stat-box"><span class="number" data-count="6">0</span><span class="label">LLMs</span></div>
-            <div class="stat-box"><span class="number" data-count="7">0</span><span class="label">conditions</span></div>
-          </div>
-          <div class="scroll-hint"><span>&#x2193;</span> scroll to continue</div>
-        </div>
-      </div>
-    </section>
-
     <!-- S4: COMPARISON BARS — all 7 conditions, white/gray bars, colored condition legend -->
     <section id="s-comparison" class="act scrolly">
       <div class="scrolly-graphic">
@@ -148,8 +126,8 @@
       <div class="scrolly-steps">
         <div class="step" data-step="0">
           <div class="step-card">
-            <h3>The baseline.</h3>
-            <p>Start with humans talking to humans. Low hedging, low repetition — this is what "normal" looks like.</p>
+            <h3>Start with the baseline.</h3>
+            <p>This is real human-to-human conversation data. Low hedging and low repetition set the reference point for everything that follows.</p>
           </div>
         </div>
         <div class="step" data-step="1">

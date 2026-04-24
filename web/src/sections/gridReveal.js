@@ -22,9 +22,9 @@ export function init() {
   const W = VW - M.left - M.right;
   const H = VH - M.top  - M.bottom;
 
-  // Axis colours — NOT in the dot series (red/yellow/blue/purple/orange/green)
-  const COL_X = '#22D3EE';   // cyan  → Repetitiveness
-  const COL_Y = '#F472B6';   // pink  → Hedging
+  // Neutral axis colours for metric explanation phase
+  const COL_X = '#e6edf3';   // off-white → Repetitiveness
+  const COL_Y = '#e6edf3';   // off-white → Hedging
 
   // ── Defs: glow filters for each dot colour ────────────────────────────────
   const defs = el('defs');
@@ -52,18 +52,18 @@ export function init() {
   const root = el('g', { transform: `translate(${M.left},${M.top})` });
   svg.appendChild(root);
 
-  // ── Grid lines — blue like the 3D scatter ─────────────────────────────────
+  // ── Grid lines — blue like the 3D scatter (one <g> fade = smoother than 22 staggered lines)
   const TICKS = 5;
-  const gridEls = [];
+  const gridLinesG = el('g', { class: 'grid-lines-layer' });
+  gsap.set(gridLinesG, { opacity: 0 });
+  root.appendChild(gridLinesG);
   for (let i = 0; i <= TICKS; i++) {
     const x = (i / TICKS) * W;
     const y = (i / TICKS) * H;
     const vl = el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#1e3a5f', 'stroke-width': 1 });
     const hl = el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#1e3a5f', 'stroke-width': 1 });
-    gsap.set([vl, hl], { opacity: 0 });
-    root.appendChild(vl);
-    root.appendChild(hl);
-    gridEls.push(vl, hl);
+    gridLinesG.appendChild(vl);
+    gridLinesG.appendChild(hl);
   }
 
   // ── Axes + arrows + labels ────────────────────────────────────────────────
@@ -132,20 +132,35 @@ export function init() {
     });
   }
 
-  // Helper: SVG viewBox coords → screen coords for the DOM fly-dot
+  // Helper: SVG viewBox coords → screen coords for the DOM fly-dot (guarded: bad rects → no jump to 0,0)
+  const lastGoodScreen = { left: window.innerWidth / 2 - 8, top: window.innerHeight / 2 - 8 };
   const svgToScreen = (vx, vy) => {
     const r = svg.getBoundingClientRect();
-    const sx = r.width  / VW;
+    if (r.width < 2 || r.height < 2 || !Number.isFinite(r.left)) {
+      return { ...lastGoodScreen };
+    }
+    const sx = r.width / VW;
     const sy = r.height / VH;
-    return {
+    const out = {
       left: r.left + (M.left + vx) * sx - 8,
-      top:  r.top  + (M.top  + vy) * sy - 8,
+      top: r.top + (M.top + vy) * sy - 8,
     };
+    if (Number.isFinite(out.left) && Number.isFinite(out.top)) {
+      lastGoodScreen.left = out.left;
+      lastGoodScreen.top = out.top;
+    }
+    return out;
   };
 
   // ── DOM refs — phase 1 ────────────────────────────────────────────────────
   const headbar1  = document.getElementById('grid-headbar-1');
   const headbar2  = document.getElementById('grid-headbar-2');
+  const gridShell = section.querySelector('.grid-shell');
+  const gridBody = section.querySelector('.grid-body');
+  const gridSideLeft = section.querySelector('.grid-side-left');
+  const gridBottom = section.querySelector('.grid-bottom');
+  const canvasWrap = section.querySelector('.grid-canvas-wrap');
+  const motionWrap = document.getElementById('grid-motion-wrap');
   const hedgeCard = document.getElementById('mdef-hedging');
   const repCard   = document.getElementById('mdef-repetition');
 
@@ -160,6 +175,24 @@ export function init() {
   const convoLegend = document.querySelector('.convo-legend');
   const convoChips  = document.querySelectorAll('.convo-chip');
 
+  // Always-visible phase-2 tooltips positioned beside each dot.
+  const tooltipLayer = document.createElement('div');
+  tooltipLayer.className = 'grid-tooltips';
+  const tooltipData = [
+    { key: 'ai-ai', x: DOT_X, y: DOT_Y, dx: 22,  dy: -86, title: 'AI ↔ AI', body: 'Generated AI-only conversations between models.' },
+    { key: 'ai-human', x: YEL_X, y: YEL_Y, dx: 22, dy: -24, title: 'AI ↔ Human', body: 'Conversations between a model and a human participant.' },
+    { key: 'human-human', x: BLU_X, y: BLU_Y, dx: 22, dy: -62, title: 'Human ↔ Human', body: 'Real human-to-human conversations from the dataset.' },
+  ];
+  const tooltips = tooltipData.map((d) => {
+    const tip = document.createElement('div');
+    tip.className = 'grid-tooltip';
+    tip.dataset.type = d.key;
+    tip.innerHTML = `<h4>${d.title}</h4><p>${d.body}</p>`;
+    tooltipLayer.appendChild(tip);
+    return { ...d, node: tip };
+  });
+  if (canvasWrap) canvasWrap.appendChild(tooltipLayer);
+
   // Initial hidden states — phase 1
   gsap.set(headbar1, { opacity: 0, y: 10 });
   gsap.set([hedgeCard, repCard],   { opacity: 0, y: 16 });
@@ -168,8 +201,49 @@ export function init() {
 
   // Initial hidden states — phase 2
   gsap.set(headbar2,    { opacity: 0, y: 10 });
-  gsap.set(convoLegend, { opacity: 0 });
+  gsap.set(convoLegend, { opacity: 0, display: 'none' });
   if (convoChips.length) gsap.set(convoChips, { opacity: 0, y: 8 });
+  gsap.set(tooltips.map((t) => t.node), { opacity: 0, y: 8 });
+
+  /** Hero: oversized chart placed *below the fold* (viewport-based), then one tween brings it into the final slot */
+  const HERO_SCALE = 2.48;
+  /** Positive px: chart starts mostly below the sticky viewport (“below the fold”), then tweens to y:0 */
+  const heroBelowFoldY = () =>
+    Math.min(820, Math.round(window.innerHeight * 0.58 + 200));
+  const heroMaxPx = () => Math.min(Math.round(window.innerWidth * 0.98), 1180);
+  if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
+  if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
+  if (gridBottom) gsap.set(gridBottom, { autoAlpha: 0 });
+  if (motionWrap) {
+    gsap.set(motionWrap, {
+      scale: HERO_SCALE,
+      y: heroBelowFoldY(),
+      // Scale from bottom edge so the “big grid” reads as living below centre / below fold
+      transformOrigin: '50% 100%',
+    });
+  }
+  if (canvasWrap) {
+    gsap.set(canvasWrap, {
+      maxWidth: heroMaxPx(),
+      scale: 1,
+      transformOrigin: '50% 50%',
+    });
+  }
+
+  function positionTooltips() {
+    if (!canvasWrap) return;
+    const wrapRect = canvasWrap.getBoundingClientRect();
+    tooltips.forEach((t) => {
+      const p = svgToScreen(t.x, t.y);
+      t.node.style.left = `${p.left - wrapRect.left + t.dx}px`;
+      t.node.style.top = `${p.top - wrapRect.top + t.dy}px`;
+    });
+  }
+  positionTooltips();
+  window.addEventListener('resize', positionTooltips);
+
+  // Scrub-safe fly-dot: lerp quiz → live plot (u 0→1); anchor captured once at start of motion block.
+  const flyLerp = { u: 0, _sl: NaN, _st: NaN };
 
   // ── Scrubbed master timeline ──────────────────────────────────────────────
   const tl = gsap.timeline({
@@ -177,70 +251,205 @@ export function init() {
       trigger: '#s-grid',
       start: 'top top',
       end:   'bottom bottom',
-      scrub: true,
+      // Smooth scrub: playhead eases toward scroll over ~1s so fast flicks stay readable
+      scrub: 1.05,
+      onUpdate: () => positionTooltips(),
+      onLeaveBack: () => {
+        // Fully rewind scene state when user scrolls above this section.
+        gsap.killTweensOf(flyDot);
+        gsap.set(flyLerp, { u: 0, _sl: NaN, _st: NaN });
+        gsap.set(flyDot, { opacity: 0, y: 0, scale: 1 });
+        gsap.set(gridLinesG, { opacity: 0 });
+        if (headbar1) gsap.set(headbar1, { opacity: 0, y: 10 });
+        gsap.set(svgDotRed, { opacity: 0, scale: 0 });
+        gsap.set(svgDotYellow, { opacity: 0, scale: 0 });
+        gsap.set(svgDotBlue, { opacity: 0, scale: 0 });
+        gsap.set(tooltips.map((t) => t.node), { opacity: 0, y: 8 });
+        if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
+        if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
+        if (gridBottom) gsap.set(gridBottom, { autoAlpha: 0 });
+        if (motionWrap) {
+          gsap.set(motionWrap, {
+            scale: HERO_SCALE,
+            y: heroBelowFoldY(),
+            transformOrigin: '50% 100%',
+          });
+        }
+        if (canvasWrap) {
+          gsap.set(canvasWrap, {
+            maxWidth: heroMaxPx(),
+            scale: 1,
+            transformOrigin: '50% 50%',
+          });
+        }
+        positionTooltips();
+      },
     },
   });
 
-  // ── PHASE 1: dot lands → grid draws → axes reveal → metric cards ─────────
+  // ── PHASE 1: blue grid + red dot → final slot (direct, no mid-stop) → title → Y + hedging → X + repetition ─
 
-  // 0 — ensure dot visible (handles skipped-quiz path)
-  tl.set(flyDot, { opacity: 1 }, 0);
+  function captureFlyAnchor() {
+    const b = flyDot.getBoundingClientRect();
+    flyLerp._sl = b.left;
+    flyLerp._st = b.top;
+  }
+  function updateFlyDotAlongChart(u) {
+    if (!Number.isFinite(flyLerp._sl) || !Number.isFinite(flyLerp._st)) captureFlyAnchor();
+    const end = svgToScreen(DOT_X, DOT_Y);
+    gsap.set(flyDot, {
+      left: flyLerp._sl + (end.left - flyLerp._sl) * u,
+      top: flyLerp._st + (end.top - flyLerp._st) * u,
+    });
+    positionTooltips();
+  }
 
-  // 0→3 — fly-dot arcs from chat centre onto the grid
-  tl.to(flyDot, {
-    left: () => svgToScreen(DOT_X, DOT_Y).left,
-    top:  () => svgToScreen(DOT_X, DOT_Y).top,
-    duration: 3,
-    ease: 'power2.inOut',
-  }, 0);
+  tl.set(flyLerp, { u: 0 }, 0);
 
-  // 3 — SVG dot materialises, fly-dot disappears
-  tl.to(svgDotRed, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.4)' }, 3);
-  tl.to(flyDot,    { opacity: 0, duration: 0.4 }, 3.2);
+  // 0 — red dot ready (survey handoff); do not move left/top until motion block
+  tl.to(flyDot, { opacity: 1, scale: 1, y: 0, duration: 0.2, ease: 'power1.out' }, 0);
 
-  // 3.5 — grid lines draw in
-  tl.to(gridEls, { opacity: 1, duration: 0.8, stagger: 0.03, ease: 'power1.out' }, 3.5);
+  // 0 — show full blue grid on the hero chart (same beat as motion start: you see the big off-screen grid, then it goes to slot)
+  tl.set(gridLinesG, { opacity: 1 }, 0);
 
-  // 4 — X axis + label (cyan, Repetitiveness)
-  tl.to([xAxis, xArrow], { opacity: 1, duration: 0.5 }, 4);
-  tl.to(xLabel,          { opacity: 1, duration: 0.6 }, 4.4);
-  if (repTitle) tl.to(repTitle, { opacity: 1, y: 0, duration: 0.5 }, 4.5);
+  const motionStart = 0;
+  const motionDur = 0.72;
 
-  // 5 — Y axis + label (pink, Hedging)
-  tl.to([yAxis, yArrow], { opacity: 1, duration: 0.5 }, 5);
-  tl.to(yLabel,          { opacity: 1, duration: 0.6 }, 5.4);
-  if (hedgeTitle) tl.to(hedgeTitle, { opacity: 1, y: 0, duration: 0.5 }, 5.5);
+  if (motionWrap) {
+    tl.to(
+      motionWrap,
+      {
+        scale: 1,
+        y: 0,
+        duration: motionDur,
+        ease: 'power2.inOut',
+        onUpdate: positionTooltips,
+      },
+      motionStart,
+    );
+  }
+  if (canvasWrap) {
+    tl.to(
+      canvasWrap,
+      {
+        maxWidth: 620,
+        duration: motionDur,
+        ease: 'power2.inOut',
+        onUpdate: positionTooltips,
+      },
+      motionStart,
+    );
+  }
+  // Land in the same two-column slot the chart uses once explanations appear (not centred 1fr first)
+  if (gridBody) {
+    tl.to(
+      gridBody,
+      {
+        gridTemplateColumns: 'minmax(260px, 340px) minmax(0, 1fr)',
+        gap: 28,
+        duration: motionDur,
+        ease: 'power2.inOut',
+        onUpdate: positionTooltips,
+      },
+      motionStart,
+    );
+  }
+  tl.to(
+    flyLerp,
+    {
+      u: 1,
+      duration: motionDur,
+      ease: 'power2.inOut',
+      onStart: captureFlyAnchor,
+      onUpdate() {
+        updateFlyDotAlongChart(flyLerp.u);
+      },
+    },
+    motionStart,
+  );
 
-  // 6 — phase-1 headline
-  tl.to(headbar1, { opacity: 1, y: 0, duration: 0.8 }, 6);
+  const handoffT = motionStart + motionDur;
+  tl.set(svgDotRed, { opacity: 1, scale: 1 }, handoffT);
+  tl.to(flyDot, { opacity: 0, duration: 0.12, ease: 'power1.out' }, handoffT);
 
-  // 7 — metric card shells
-  tl.to([hedgeCard, repCard], { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }, 7);
+  // Title only after chart + red dot are in final slot
+  const titleT = handoffT + 0.14;
+  tl.to(headbar1, { opacity: 1, y: 0, duration: 0.42, ease: 'power2.out' }, titleT);
 
-  // 8 — descriptions
-  tl.to([hedgeDesc, repDesc], { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }, 8);
+  // First axis (Y / Hedging) + hedging explainer
+  const yBeat = titleT + 0.48;
+  tl.to([yAxis, yArrow], { opacity: 1, duration: 0.3, ease: 'power2.out' }, yBeat);
+  tl.to(yLabel, { opacity: 1, duration: 0.32, ease: 'power2.out' }, yBeat + 0.1);
+  const g0 = yBeat + 0.28;
+  if (gridSideLeft) tl.set(gridSideLeft, { autoAlpha: 1 }, g0);
+  if (hedgeTitle) tl.to(hedgeTitle, { opacity: 1, y: 0, duration: 0.34 }, g0 + 0.06);
+  if (hedgeCard) tl.to(hedgeCard, { opacity: 1, y: 0, duration: 0.4 }, g0 + 0.14);
+  if (hedgeDesc) tl.to(hedgeDesc, { opacity: 1, y: 0, duration: 0.34 }, g0 + 0.36);
+  if (hedgeEx) tl.to(hedgeEx, { opacity: 1, y: 0, duration: 0.42 }, g0 + 0.56);
 
-  // 9 — examples
-  tl.to([hedgeEx, repEx], { opacity: 1, y: 0, duration: 0.7, stagger: 0.15 }, 9);
+  // Second axis (X / Repetitiveness) + repetition explainer
+  const rep0 = g0 + 0.95;
+  if (gridBottom) tl.set(gridBottom, { autoAlpha: 1 }, rep0 - 0.04);
+  tl.to([xAxis, xArrow], { opacity: 1, duration: 0.32, ease: 'power2.out' }, rep0);
+  tl.to(xLabel, { opacity: 1, duration: 0.34, ease: 'power2.out' }, rep0 + 0.12);
+  if (repTitle) tl.to(repTitle, { opacity: 1, y: 0, duration: 0.32 }, rep0 + 0.18);
+  if (repCard) tl.to(repCard, { opacity: 1, y: 0, duration: 0.4 }, rep0 + 0.26);
+  if (repDesc) tl.to(repDesc, { opacity: 1, y: 0, duration: 0.34 }, rep0 + 0.48);
+  if (repEx) tl.to(repEx, { opacity: 1, y: 0, duration: 0.42 }, rep0 + 0.66);
 
   // ── PHASE 2: three conversation types ────────────────────────────────────
 
-  // 10.5 — headline cross-fade: phase-1 out, phase-2 in
-  tl.to(headbar1, { opacity: 0, y: -8, duration: 0.5 }, 10.5);
-  tl.to(headbar2, { opacity: 1, y: 0,  duration: 0.6 }, 10.8);
+  // 5.85 — title fades away before phase-2 map presentation
+  tl.to(headbar1, { opacity: 0, y: -8, duration: 0.5 }, 5.85);
 
-  // 10.5 — metric cards slide out
-  tl.to([hedgeCard, repCard], { opacity: 0, y: 10, duration: 0.5 }, 10.5);
+  // 5.85 — metric cards slide out
+  tl.to([hedgeCard, repCard], { opacity: 0, y: 10, duration: 0.5 }, 5.85);
 
-  // 11 — AI-Human yellow dot blops in
-  tl.to(svgDotYellow, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 11);
-
-  // 11.6 — Human-Human blue dot blops in
-  tl.to(svgDotBlue, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 11.6);
-
-  // 12 — legend appears, chips stagger in
-  tl.to(convoLegend, { opacity: 1, duration: 0.4 }, 12);
-  if (convoChips.length) {
-    tl.to(convoChips, { opacity: 1, y: 0, duration: 0.5, stagger: 0.2, ease: 'power2.out' }, 12.2);
+  // 5.9+ — smooth continuous morph into the "types" map:
+  // fade/slide cards out while the grid recenters and expands.
+  if (gridSideLeft) {
+    tl.to(gridSideLeft, { opacity: 0, x: -40, duration: 1.0, ease: 'power2.inOut' }, 5.9);
   }
+  if (gridBottom) {
+    tl.to(gridBottom, { opacity: 0, y: 30, duration: 1.0, ease: 'power2.inOut' }, 5.9);
+  }
+  if (gridBody) {
+    tl.to(gridBody, {
+      gridTemplateColumns: '0fr minmax(0, 1fr)',
+      gap: 0,
+      duration: 1.1,
+      ease: 'power2.inOut',
+    }, 5.93);
+  }
+  if (canvasWrap) {
+    tl.to(canvasWrap, {
+      maxWidth: 860,
+      duration: 1.1,
+      ease: 'power2.inOut',
+      onUpdate: positionTooltips,
+    }, 5.97);
+  }
+
+  // 6.35 — red type context appears first (dot is already present; tooltip arrives now)
+  const redTooltip = tooltips.find((t) => t.key === 'ai-ai')?.node;
+  if (redTooltip) {
+    tl.to(redTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 6.35);
+  }
+
+  // 7.05 — AI-Human yellow dot appears a bit later
+  tl.to(svgDotYellow, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.05);
+  const yellowTooltip = tooltips.find((t) => t.key === 'ai-human')?.node;
+  if (yellowTooltip) {
+    tl.to(yellowTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 7.35);
+  }
+
+  // 7.6 — Human-Human blue dot and tooltip follow
+  tl.to(svgDotBlue, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.6);
+  const blueTooltip = tooltips.find((t) => t.key === 'human-human')?.node;
+  if (blueTooltip) {
+    tl.to(blueTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 7.9);
+  }
+
+  // Keep refs used so lint doesn't strip while preserving future extensibility.
+  void gridShell;
 }
