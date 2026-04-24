@@ -12,6 +12,16 @@
 <body>
   <div id="app">
 
+    <!-- S0: TITLE SLIDE -->
+    <section id="s-title" class="act full-screen center-content">
+      <div class="title-block">
+        <p class="title-overline">Control Risks × AI Research</p>
+        <h1 class="title-heading">Can you tell if you're<br>talking to an AI?</h1>
+        <p class="title-sub">We ran 362 conversations across 6 LLMs and measured exactly what gives them away.</p>
+        <div class="scroll-hint"><span>&#x2193;</span> scroll to begin</div>
+      </div>
+    </section>
+
     <!-- S1: QUIZ — mystery bubbles scroll in, then "human or AI?" gate (1.2 wiring TBD).
          Section is 200vh tall; inner .quiz-pin is sticky so the chat stays centered
          while scroll progress drives the bubble reveal. -->
@@ -31,6 +41,89 @@
       </div>
     </section>
 
+    <!-- S1.5: GRID REVEAL — red dot lands on 2-D axes; then metric names + descriptions +
+                  real-data examples on the sides of the axes; then the yellow + blue dots
+                  appear to introduce the three conversation types. -->
+    <section id="s-grid" class="act" style="min-height: 700vh; position: relative;">
+      <div class="grid-pin">
+        <div class="grid-shell">
+          <!-- Phase 1 headline -->
+          <div class="grid-headbar" id="grid-headbar-1">
+            <h2 class="grid-headline">Two signals give them away.</h2>
+            <p class="grid-headline-sub">We measured every conversation for these. One you just saw — the red one.</p>
+          </div>
+          <!-- Phase 2 headline (conversation types) -->
+          <div class="grid-headbar grid-headbar-2" id="grid-headbar-2">
+            <h2 class="grid-headline">Three kinds of conversation.</h2>
+            <p class="grid-headline-sub">Each type sits in a different part of the map.</p>
+          </div>
+
+          <div class="grid-body">
+            <!-- LEFT: Hedging card, flush against the Y-axis -->
+            <aside class="grid-side grid-side-left">
+              <div class="mdef mdef-side" id="mdef-hedging">
+                <h3 class="mdef-title mdef-title-red">Hedging</h3>
+                <p class="mdef-desc">"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they're <em>trying</em> to seem human.</p>
+                <div class="mdef-examples">
+                  <div class="mdef-row mdef-row-highlight mdef-row-highlight-red" id="hedging-ai-ai-row">
+                    <span class="mdef-row-label">AI–AI</span>
+                    <span class="mini-bubble mdef-full-msg">"<em class="hi hi-red">Honestly</em>, it <em class="hi hi-red">might</em> give me the 'I should host people' feeling, but then I'll <em class="hi hi-red">probably</em> still end up just enjoying it solo while catching up on some design blogs or <em class="hi hi-red">maybe</em> even a nature documentary."</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <!-- CENTRE: the grid + the Repetitiveness card beneath it -->
+            <div class="grid-centre">
+              <div class="grid-canvas-wrap">
+                <svg id="grid-svg" class="grid-svg"
+                     viewBox="0 0 640 520"
+                     preserveAspectRatio="xMidYMid meet"
+                     aria-hidden="true"></svg>
+              </div>
+              <div class="grid-bottom">
+                <div class="mdef mdef-side" id="mdef-repetition">
+                  <h3 class="mdef-title mdef-title-yellow">Repetitiveness</h3>
+                  <p class="mdef-desc">Repeating the same phrases back. A small tell, but a real one — AIs mirror themselves more than humans do.</p>
+                  <div class="mdef-examples">
+                    <div class="mdef-row mdef-row-highlight mdef-row-highlight-yellow" id="repetition-ai-ai-row">
+                      <span class="mdef-row-label">AI–AI</span>
+                      <span class="mini-bubble mdef-full-msg">"Totally agree, <em class="hi hi-yellow">she's</em> got a good ear for style. And <em class="hi hi-yellow">she's</em> not a snob about pop either, but <em class="hi hi-yellow">she's</em> drawn to the more experimental stuff — <em class="hi hi-yellow">she's</em> actually obsessed with Currents right now."</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 2: conversation-type legend chips (start hidden) -->
+          <div class="convo-legend" id="convo-legend">
+            <div class="convo-chip" data-type="ai-ai">
+              <span class="convo-dot" style="background:#E74C3C;box-shadow:0 0 12px rgba(231,76,60,.6)"></span>
+              <div>
+                <h4>AI &harr; AI</h4>
+                <p>Models left alone together. Hedging spikes, repetition climbs.</p>
+              </div>
+            </div>
+            <div class="convo-chip" data-type="ai-human">
+              <span class="convo-dot" style="background:#F1C40F;box-shadow:0 0 12px rgba(241,196,15,.6)"></span>
+              <div>
+                <h4>AI &harr; Human</h4>
+                <p>Mixed dialogue. AIs temper themselves when a human is on the other end.</p>
+              </div>
+            </div>
+            <div class="convo-chip" data-type="human-human">
+              <span class="convo-dot" style="background:#58A6FF;box-shadow:0 0 12px rgba(88,166,255,.6)"></span>
+              <div>
+                <h4>Human &harr; Human</h4>
+                <p>The baseline. Low on both — this is what "natural" sounds like.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- S2: THESIS -->
     <section id="s-thesis" class="act">
       <div class="full-screen center-content">
@@ -43,48 +136,6 @@
             <div class="stat-box"><span class="number" data-count="7">0</span><span class="label">conditions</span></div>
           </div>
           <div class="scroll-hint"><span>&#x2193;</span> scroll to continue</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- S3: METRICS INTRO — two definition cards, AI-AI row highlighted, yellow dot born here -->
-    <section id="s-metrics-intro" class="act" style="min-height: 260vh; position: relative;">
-      <div class="mintro-pin">
-        <div class="mintro-container">
-          <h2 class="mintro-title">Two signals give them away.</h2>
-          <p class="mintro-sub">We measured every conversation for these. One you just saw — the red one.</p>
-
-          <div class="mintro-cards">
-            <!-- HEDGING CARD -->
-            <div class="mdef">
-              <h3 class="mdef-title mdef-title-red">Hedging</h3>
-              <p class="mdef-desc">"I think", "maybe", "sort of" — words that signal uncertainty. Humans use them naturally. AIs use them when they're <em>trying</em> to seem human.</p>
-              <div class="mdef-examples">
-                <div class="mdef-row mdef-row-highlight mdef-row-highlight-red" id="hedging-ai-ai-row">
-                  <span class="mdef-row-label">AI–AI</span>
-                  <div class="mdef-row-bubbles">
-                    <span class="mini-bubble">Um.. <em class="hi hi-red">maybe</em>…</span>
-                    <span class="mini-bubble"><em class="hi hi-red">I think</em> probably</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- REPETITION CARD -->
-            <div class="mdef">
-              <h3 class="mdef-title mdef-title-yellow">Repetitiveness</h3>
-              <p class="mdef-desc">Repeating the same phrases back. A small tell, but a real one — AIs mirror themselves more than humans do.</p>
-              <div class="mdef-examples">
-                <div class="mdef-row mdef-row-highlight mdef-row-highlight-yellow" id="repetition-ai-ai-row">
-                  <span class="mdef-row-label">AI–AI</span>
-                  <div class="mdef-row-bubbles">
-                    <span class="mini-bubble"><em class="hi hi-yellow">maybe</em>… yeah <em class="hi hi-yellow">maybe</em></span>
-                    <span class="mini-bubble"><em class="hi hi-yellow">I think</em>… <em class="hi hi-yellow">I think</em></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

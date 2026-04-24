@@ -8,11 +8,11 @@ import { loadData } from './data/loader.js';
 
 gsap.registerPlugin(ScrollTrigger);
 import * as quiz from './sections/quiz.js';
-import * as metricsIntro from './sections/metricsIntro.js';
 import * as comparison from './sections/comparison.js';
 import * as subtypes from './sections/subtypes.js';
 import * as timeline from './sections/timeline.js';
 import * as timelineMorph from './sections/timelineMorph.js';
+import * as gridReveal from './sections/gridReveal.js';
 import * as detective from './sections/detective.js';
 // explorer is dynamically imported when needed (Three.js is ~624KB)
 
@@ -57,11 +57,11 @@ async function main() {
   // S1: Quiz
   quiz.init(data);
 
+  // S1.5: Grid reveal — red dot lands on 2-D Repetitiveness × Hedging axes
+  gridReveal.init();
+
   // S2: Thesis counters
   initCounters();
-
-  // S3.5: Metrics intro (definition cards + yellow dot birth)
-  metricsIntro.init();
 
   // S4: Comparison bars (H-H / H-AI / AI-AI)
   comparison.init(data);

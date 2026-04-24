@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadConversation } from '../data/loader.js';
 import { HOOK_CONVERSATION_IDS, HOOK_NUM_BUBBLES } from '../data/constants.js';
-import { light as lightCornerDot, getCornerRect } from '../lib/cornerDots.js';
+// (corner-dot helpers removed — quiz now hands the red dot off to #s-grid instead)
 
 function pickHookId() {
   return HOOK_CONVERSATION_IDS[Math.floor(Math.random() * HOOK_CONVERSATION_IDS.length)];
@@ -140,79 +140,76 @@ export async function init() {
         { width: 0 },
         { width: (_, el) => `${el.dataset.pct}%`, duration: 0.9, ease: 'power2.out', delay: 0.5, stagger: 0.12 }
       );
-      // Now arm the collapse-to-corner morph on the next scroll segment of the pinned section.
-      armCollapseToCorner();
+      // Time-based "blop": bubbles converge into a red dot at chat centre.
+      // Triggered once the user has answered — NOT scroll-driven. The dot
+      // then parks here until #s-grid animates it onto the axes.
+      playBlopIntoDot();
     });
   });
 
-  // ----- Collapse morph: bubbles → red dot → corner -----
+  // ----- Click-triggered collapse: bubbles shrink INTO a red dot that blops
+  //       into existence at the chat centre. Dot is owned here; #s-grid finds
+  //       it by id (#story-red-dot). -----
   let armed = false;
-  function armCollapseToCorner() {
+  function playBlopIntoDot() {
     if (armed) return;
     armed = true;
 
-    // Floating dot element used for the fly-to-corner motion (position:fixed, above pin)
-    const flyDot = document.createElement('div');
-    flyDot.className = 'fly-dot';
-    document.body.appendChild(flyDot);
+    // Persistent red story-dot shared with #s-grid
+    let flyDot = document.getElementById('story-red-dot');
+    if (!flyDot) {
+      flyDot = document.createElement('div');
+      flyDot.id = 'story-red-dot';
+      flyDot.className = 'fly-dot fly-dot-red';
+      document.body.appendChild(flyDot);
+    }
 
-    const chatRect = () => chatEl.getBoundingClientRect();
+    const chatRect = chatEl.getBoundingClientRect();
+    const cx = chatRect.left + chatRect.width  / 2 - 8;
+    const cy = chatRect.top  + chatRect.height / 2 - 8;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#s-quiz',
-        start: 'center center',        // start right as the prompt/bar finish settling
-        end: 'bottom bottom',          // end when section scroll completes (140vh of runway)
-        scrub: true,                   // tight coupling — dot moves with the scrollbar
-      },
+    // Pre-position the dot at centre, hidden, scale 0 so the blop is dramatic
+    gsap.set(flyDot, {
+      left: cx, top: cy,
+      opacity: 0, scale: 0,
+      transformOrigin: '50% 50%',
     });
 
-    // Phase A (progress 0→3): slowly converge bubbles to chat center, shrink + fade.
-    // Long internal duration so it stretches across a lot of scroll.
-    tl.to(bubbles, {
-      x: 0, y: 0, scale: 0.2, opacity: 0,
-      duration: 3,
-      ease: 'power2.in',
-      stagger: 0.1,
-    }, 0);
+    // Give the viewer ~1.6s to read the verdict + watch the bars fill
+    const tl = gsap.timeline({ delay: 1.6 });
 
-    // Phase A.5: fade the prompt + bar chart as collapse starts
-    tl.to([promptArea, resultEl], { opacity: 0, y: -10, duration: 2.5 }, 0.5);
-
-    // Phase B (progress 2→4): position fly-dot at chat center, scale in
-    tl.call(() => {
-      const r = chatRect();
-      gsap.set(flyDot, {
-        left: r.left + r.width / 2 - 8,
-        top:  r.top  + r.height / 2 - 8,
+    // Each bubble flies to the chat centre, shrinks, fades — staggered for rhythm
+    bubbles.forEach((b, i) => {
+      const r = b.getBoundingClientRect();
+      const dx = (chatRect.left + chatRect.width  / 2) - (r.left + r.width  / 2);
+      const dy = (chatRect.top  + chatRect.height / 2) - (r.top  + r.height / 2);
+      tl.to(b, {
+        x: dx, y: dy,
+        scale: 0.05,
         opacity: 0,
-        scale: 0.4,
-      });
-    }, null, 2);
-    tl.to(flyDot, { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, 2.2);
+        duration: 0.75,
+        ease: 'power2.in',
+      }, i * 0.04);
+    });
 
-    // Phase C (progress 4→7): arc up the right side — pass through middle-right before top-right
-    tl.to(flyDot, {
-      left: () => window.innerWidth - 72,           // right edge margin
-      top:  () => window.innerHeight * 0.45,        // middle-right waypoint
-      duration: 1.5,
-      ease: 'power1.inOut',
-    }, 4);
-    tl.to(flyDot, {
-      left: () => {
-        const c = getCornerRect('red');
-        return c ? c.left + c.width / 2 - 8 : window.innerWidth - 40;
-      },
-      top: () => {
-        const c = getCornerRect('red');
-        return c ? c.top + c.height / 2 - 8 : 28;
-      },
-      duration: 1.5,
-      ease: 'power2.inOut',
-    }, 5.5);
+    // Prompt line + "how others answered" fade up and out as bubbles converge
+    tl.to([promptArea, resultEl], {
+      opacity: 0, y: -12,
+      duration: 0.55,
+      ease: 'power2.in',
+    }, 0.15);
 
-    // Phase D (progress 7→8): hand off to the persistent corner dot, dismiss fly-dot
-    tl.call(() => lightCornerDot('red'), null, 7);
-    tl.to(flyDot, { opacity: 0, duration: 0.5 }, 7);
+    // BLOP — dot pops into existence at the impact point with a squash-and-settle
+    tl.set(flyDot, { opacity: 1 }, 0.72);
+    tl.to(flyDot, {
+      scale: 1.6,
+      duration: 0.18,
+      ease: 'power2.out',
+    }, 0.72);
+    tl.to(flyDot, {
+      scale: 1,
+      duration: 0.5,
+      ease: 'elastic.out(1, 0.55)',
+    }, 0.9);
   }
 }
