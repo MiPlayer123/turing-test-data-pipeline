@@ -179,8 +179,9 @@ export async function init() {
       );
       // Collapse only after explicit “continue” intent (scroll or wheel), not immediately.
       const scrollYAtAnswer = window.scrollY;
-      const scrollThreshold = () => Math.max(90, Math.min(160, window.innerHeight * 0.14));
-      const wheelThreshold = () => Math.max(120, Math.min(220, window.innerHeight * 0.2));
+      // Lower thresholds so "continue" triggers with less extra scrolling.
+      const scrollThreshold = () => Math.max(30, Math.min(64, window.innerHeight * 0.065));
+      const wheelThreshold = () => Math.max(48, Math.min(96, window.innerHeight * 0.09));
 
       let collapseArmed = false;
       function disarmContinueListeners() {
@@ -192,6 +193,7 @@ export async function init() {
         if (collapseArmed) return;
         collapseArmed = true;
         disarmContinueListeners();
+        gsap.to(resultEl, { opacity: 0, y: -12, duration: 0.26, ease: 'power1.out' });
         // Undo the small scroll that fired the trigger so motion reads as “squeeze”, not “page drift”.
         if (Math.abs(window.scrollY - scrollYAtAnswer) > 2) {
           window.scrollTo({ top: scrollYAtAnswer, behavior: 'instant' });
@@ -223,14 +225,14 @@ export async function init() {
     });
   });
 
-  // ----- Click-triggered collapse: whole quiz stack (chat + question + results/bars)
+  // ----- Continue-triggered collapse: conversation frame (chat bubbles only)
   //       converges into one red dot. Dot is owned here; #s-grid finds #story-red-dot.
   let armed = false;
   function playBlopIntoDot() {
     if (armed) return;
 
-    const container = document.querySelector('#s-quiz .quiz-container');
-    if (!container) return;
+    const section = document.getElementById('s-quiz');
+    if (!section) return;
 
     armed = true;
 
@@ -243,25 +245,43 @@ export async function init() {
       document.body.appendChild(flyDot);
     }
 
-    lockScroll();
-
-    const cRect = container.getBoundingClientRect();
-    const targetX = cRect.left + cRect.width / 2;
-    const targetY = cRect.top + cRect.height / 2;
+    const chatRect = chatEl.getBoundingClientRect();
+    const frameTop = chatRect.top;
+    const frameBottom = chatRect.bottom;
+    const frameLeft = chatRect.left;
+    const frameRight = chatRect.right;
+    const framePad = 12;
+    const frameRect = {
+      left: frameLeft - framePad,
+      top: frameTop - framePad,
+      width: Math.max(40, frameRight - frameLeft + framePad * 2),
+      height: Math.max(40, frameBottom - frameTop + framePad * 2),
+    };
+    const targetX = frameRect.left + frameRect.width / 2;
+    const targetY = frameRect.top + frameRect.height / 2;
     const cx = targetX - 8;
     const cy = targetY - 8;
 
-    // Stack squeeze reads as one object: whole container scales into the impact point.
-    const originX = ((targetX - cRect.left) / Math.max(cRect.width, 1)) * 100;
-    const originY = ((targetY - cRect.top) / Math.max(cRect.height, 1)) * 100;
-    gsap.set(container, {
-      transformOrigin: `${originX}% ${originY}%`,
-      x: 0,
-      y: 0,
+    lockScroll();
+
+    let collapseFrame = document.getElementById('quiz-collapse-frame');
+    if (!collapseFrame) {
+      collapseFrame = document.createElement('div');
+      collapseFrame.id = 'quiz-collapse-frame';
+      collapseFrame.className = 'quiz-collapse-frame';
+      document.body.appendChild(collapseFrame);
+    }
+    gsap.set(collapseFrame, {
+      left: frameRect.left,
+      top: frameRect.top,
+      width: frameRect.width,
+      height: frameRect.height,
+      opacity: 0,
       scale: 1,
+      transformOrigin: '50% 50%',
     });
-    gsap.set([promptArea, resultEl], { transformOrigin: '50% 50%', x: 0, y: 0, scale: 1 });
-    gsap.set(bubbles, { transformOrigin: '50% 50%' });
+    gsap.set(chatEl, { transformOrigin: '50% 50%', x: 0, y: 0, scale: 1 });
+    gsap.set(bubbles, { transformOrigin: '50% 50%', clearProps: 'filter' });
 
     // Pre-position the dot at impact centre (hidden until stack nearly vanishes)
     gsap.set(flyDot, {
@@ -275,14 +295,16 @@ export async function init() {
 
     const tl = gsap.timeline({
       delay: 0.06,
-      onStart: () => {
-        container.classList.add('is-collapsing');
-      },
       onComplete: () => {
-        container.classList.remove('is-collapsing');
+        gsap.set(collapseFrame, { opacity: 0 });
         unlockScroll();
+        // Nudge into the next section so the handoff feels immediate.
+        const gridSection = document.getElementById('s-grid');
+        if (gridSection) gridSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       },
     });
+
+    tl.to(collapseFrame, { opacity: 1, duration: 0.12, ease: 'power1.out' }, 0);
 
     // Micro “gather” so motion reads before the hard squeeze
     tl.to(bubbles, {
@@ -291,19 +313,13 @@ export async function init() {
       stagger: 0.02,
       ease: 'power1.out',
     }, 0);
-    tl.to([promptArea, resultEl], { scale: 0.96, duration: 0.12, ease: 'power1.out' }, 0.02);
-
-    // Whole stack collapses into one point (dominant read)
-    tl.to(container, {
-      scale: 0.028,
+    // Only the conversation area collapses into one point.
+    tl.to(collapseFrame, {
+      scale: 0.04,
+      opacity: 0.2,
       duration: squeezeDur,
       ease: easeSqueeze,
     }, 0.14);
-    tl.to([promptArea, resultEl], {
-      opacity: 0,
-      duration: squeezeDur * 0.55,
-      ease: easeSqueeze,
-    }, 0.22);
     tl.to(bubbles, {
       opacity: 0,
       scale: 0.35,
@@ -311,6 +327,11 @@ export async function init() {
       stagger: 0.015,
       ease: easeSqueeze,
     }, 0.18);
+    tl.to(chatEl, {
+      opacity: 0,
+      duration: squeezeDur * 0.62,
+      ease: easeSqueeze,
+    }, 0.2);
 
     const impactT = 0.14 + squeezeDur * 0.82;
     tl.set(flyDot, { opacity: 1, scale: 0.12, y: 0 }, impactT);
@@ -328,6 +349,6 @@ export async function init() {
     tl.to(flyDot, { y: 0, duration: 0.55, ease: 'bounce.out(1.35)' }, impactT + 0.76);
     tl.to(flyDot, { y: -6, duration: 0.14, ease: 'power2.out' }, impactT + 1.33);
     tl.to(flyDot, { y: 0, scale: 1, duration: 0.32, ease: 'power2.inOut' }, impactT + 1.47);
-    tl.set(container, { opacity: 0, pointerEvents: 'none' }, impactT + 0.05);
+    tl.set(chatEl, { pointerEvents: 'none' }, impactT + 0.05);
   }
 }

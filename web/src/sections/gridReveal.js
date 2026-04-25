@@ -16,6 +16,15 @@ export function init() {
   const svg = document.getElementById('grid-svg');
   if (!svg) return;
 
+  // Tuning knobs for the red-dot handoff feel:
+  // - lower scrub => more immediate reaction to scroll
+  // - higher duration => slower travel along the path
+  const HANDOFF_SCRUB = 0;
+  const DOT_TRAVEL_DURATION = 0.1;
+  // Layout knobs to keep JS timeline and CSS sizing in sync
+  const FINAL_CHART_MAX = 550;
+  const PHASE_ONE_GRID_COLUMNS = 'minmax(220px, 280px) minmax(500px, 550px) minmax(220px, 280px)';
+
   // ── Layout (matches viewBox 0 0 640 520) ─────────────────────────────────
   const VW = 640, VH = 520;
   const M = { top: 48, right: 48, bottom: 64, left: 64 };
@@ -67,7 +76,7 @@ export function init() {
   }
 
   // ── Axes + arrows + labels ────────────────────────────────────────────────
-  const xAxis  = el('line', { x1: 0, y1: H, x2: W, y2: H, stroke: COL_X, 'stroke-width': 2.5 });
+  const xAxis  = el('line', { x1: 0, y1: H, x2: W, y2: H, stroke: COL_X, 'stroke-width': 2.2 });
   const xArrow = el('polygon', { points: `${W},${H - 6} ${W + 12},${H} ${W},${H + 6}`, fill: COL_X });
   const xLabel = el('text', {
     x: W / 2, y: H + 52, 'text-anchor': 'middle', fill: COL_X,
@@ -76,7 +85,7 @@ export function init() {
   });
   xLabel.textContent = 'REPETITIVENESS';
 
-  const yAxis  = el('line', { x1: 0, y1: H, x2: 0, y2: 0, stroke: COL_Y, 'stroke-width': 2.5 });
+  const yAxis  = el('line', { x1: 0, y1: H, x2: 0, y2: 0, stroke: COL_Y, 'stroke-width': 2.2 });
   const yArrow = el('polygon', { points: `-6,0 0,-12 6,0`, fill: COL_Y });
   const yLabel = el('text', {
     x: -H / 2, y: -46, 'text-anchor': 'middle', fill: COL_Y,
@@ -92,17 +101,18 @@ export function init() {
   });
 
   // ── Phase-1 dot: AI-AI (red) — high hedging, low repetition ──────────────
-  const DOT_X = W * 0.28;
-  const DOT_Y = H * 0.22;
+  // Keep red AI-AI point close to the upper-left chart corner (high hedging, low repetition)
+  const DOT_X = W * 0.14;
+  const DOT_Y = H * 0.14;
   const svgDotRed = el('circle', {
-    cx: DOT_X, cy: DOT_Y, r: 9, fill: '#E74C3C', filter: 'url(#gridRedGlow)',
+    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#E74C3C', filter: 'url(#gridRedGlow)',
   });
   gsap.set(svgDotRed, { opacity: 0, scale: 0, transformOrigin: `${DOT_X}px ${DOT_Y}px` });
   root.appendChild(svgDotRed);
 
   // ── Phase-2 dots: AI-Human (yellow) and Human-Human (blue) ───────────────
   const YEL_X = W * 0.42, YEL_Y = H * 0.52;
-  const BLU_X = W * 0.15, BLU_Y = H * 0.82;
+  const BLU_X = W * 0.16, BLU_Y = H * 0.84;
 
   const svgDotYellow = el('circle', {
     cx: YEL_X, cy: YEL_Y, r: 9, fill: '#F1C40F', filter: 'url(#gridYellowGlow)',
@@ -158,6 +168,7 @@ export function init() {
   const gridShell = section.querySelector('.grid-shell');
   const gridBody = section.querySelector('.grid-body');
   const gridSideLeft = section.querySelector('.grid-side-left');
+  const gridSideRight = section.querySelector('.grid-side-right');
   const gridBottom = section.querySelector('.grid-bottom');
   const canvasWrap = section.querySelector('.grid-canvas-wrap');
   const motionWrap = document.getElementById('grid-motion-wrap');
@@ -179,7 +190,7 @@ export function init() {
   const tooltipLayer = document.createElement('div');
   tooltipLayer.className = 'grid-tooltips';
   const tooltipData = [
-    { key: 'ai-ai', x: DOT_X, y: DOT_Y, dx: 22,  dy: -86, title: 'AI ↔ AI', body: 'Generated AI-only conversations between models.' },
+    { key: 'ai-ai', x: DOT_X, y: DOT_Y, dx: 22,  dy: -34, title: 'AI ↔ AI', body: 'Generated AI-only conversations between models.' },
     { key: 'ai-human', x: YEL_X, y: YEL_Y, dx: 22, dy: -24, title: 'AI ↔ Human', body: 'Conversations between a model and a human participant.' },
     { key: 'human-human', x: BLU_X, y: BLU_Y, dx: 22, dy: -62, title: 'Human ↔ Human', body: 'Real human-to-human conversations from the dataset.' },
   ];
@@ -213,11 +224,13 @@ export function init() {
   const heroMaxPx = () => Math.min(Math.round(window.innerWidth * 0.98), 1180);
   if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
   if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
+  if (gridSideRight) gsap.set(gridSideRight, { autoAlpha: 0 });
   if (gridBottom) gsap.set(gridBottom, { autoAlpha: 0 });
   if (motionWrap) {
     gsap.set(motionWrap, {
       scale: HERO_SCALE,
       y: heroBelowFoldY(),
+      opacity: 0,
       // Scale from bottom edge so the “big grid” reads as living below centre / below fold
       transformOrigin: '50% 100%',
     });
@@ -252,7 +265,7 @@ export function init() {
       start: 'top top',
       end:   'bottom bottom',
       // Smooth scrub: playhead eases toward scroll over ~1s so fast flicks stay readable
-      scrub: 1.05,
+      scrub: HANDOFF_SCRUB,
       onUpdate: () => positionTooltips(),
       onLeaveBack: () => {
         // Fully rewind scene state when user scrolls above this section.
@@ -267,11 +280,13 @@ export function init() {
         gsap.set(tooltips.map((t) => t.node), { opacity: 0, y: 8 });
         if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
         if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
+        if (gridSideRight) gsap.set(gridSideRight, { autoAlpha: 0 });
         if (gridBottom) gsap.set(gridBottom, { autoAlpha: 0 });
         if (motionWrap) {
           gsap.set(motionWrap, {
             scale: HERO_SCALE,
             y: heroBelowFoldY(),
+            opacity: 0,
             transformOrigin: '50% 100%',
           });
         }
@@ -313,7 +328,7 @@ export function init() {
   tl.set(gridLinesG, { opacity: 1 }, 0);
 
   const motionStart = 0;
-  const motionDur = 0.72;
+  const motionDur = DOT_TRAVEL_DURATION;
 
   if (motionWrap) {
     tl.to(
@@ -321,6 +336,7 @@ export function init() {
       {
         scale: 1,
         y: 0,
+        opacity: 1,
         duration: motionDur,
         ease: 'power2.inOut',
         onUpdate: positionTooltips,
@@ -332,7 +348,7 @@ export function init() {
     tl.to(
       canvasWrap,
       {
-        maxWidth: 620,
+        maxWidth: FINAL_CHART_MAX,
         duration: motionDur,
         ease: 'power2.inOut',
         onUpdate: positionTooltips,
@@ -340,13 +356,13 @@ export function init() {
       motionStart,
     );
   }
-  // Land in the same two-column slot the chart uses once explanations appear (not centred 1fr first)
+  // Land in the same three-column slot used in the metric explanation phase.
   if (gridBody) {
     tl.to(
       gridBody,
       {
-        gridTemplateColumns: 'minmax(260px, 340px) minmax(0, 1fr)',
-        gap: 28,
+        gridTemplateColumns: PHASE_ONE_GRID_COLUMNS,
+        gap: 24,
         duration: motionDur,
         ease: 'power2.inOut',
         onUpdate: positionTooltips,
@@ -370,17 +386,26 @@ export function init() {
 
   const handoffT = motionStart + motionDur;
   tl.set(svgDotRed, { opacity: 1, scale: 1 }, handoffT);
-  tl.to(flyDot, { opacity: 0, duration: 0.12, ease: 'power1.out' }, handoffT);
+  // Keep the moving dot visible through handoff to avoid any perceived disappear/reappear.
+  tl.set(flyDot, {
+    left: () => svgToScreen(DOT_X, DOT_Y).left,
+    top: () => svgToScreen(DOT_X, DOT_Y).top,
+    opacity: 1,
+    scale: 1,
+    y: 0,
+  }, handoffT);
+  // Hide the handoff DOM dot once the SVG dot owns the point.
+  tl.to(flyDot, { opacity: 0, duration: 0.12, ease: 'power1.out' }, handoffT + 0.03);
 
   // Title only after chart + red dot are in final slot
   const titleT = handoffT + 0.14;
   tl.to(headbar1, { opacity: 1, y: 0, duration: 0.42, ease: 'power2.out' }, titleT);
 
   // First axis (Y / Hedging) + hedging explainer
-  const yBeat = titleT + 0.48;
-  tl.to([yAxis, yArrow], { opacity: 1, duration: 0.3, ease: 'power2.out' }, yBeat);
-  tl.to(yLabel, { opacity: 1, duration: 0.32, ease: 'power2.out' }, yBeat + 0.1);
-  const g0 = yBeat + 0.28;
+  const hedge0 = titleT + 0.48;
+  tl.to([yAxis, yArrow], { opacity: 1, duration: 0.3, ease: 'power2.out' }, hedge0);
+  tl.to(yLabel, { opacity: 1, duration: 0.32, ease: 'power2.out' }, hedge0 + 0.1);
+  const g0 = hedge0 + 0.28;
   if (gridSideLeft) tl.set(gridSideLeft, { autoAlpha: 1 }, g0);
   if (hedgeTitle) tl.to(hedgeTitle, { opacity: 1, y: 0, duration: 0.34 }, g0 + 0.06);
   if (hedgeCard) tl.to(hedgeCard, { opacity: 1, y: 0, duration: 0.4 }, g0 + 0.14);
@@ -388,14 +413,14 @@ export function init() {
   if (hedgeEx) tl.to(hedgeEx, { opacity: 1, y: 0, duration: 0.42 }, g0 + 0.56);
 
   // Second axis (X / Repetitiveness) + repetition explainer
-  const rep0 = g0 + 0.95;
-  if (gridBottom) tl.set(gridBottom, { autoAlpha: 1 }, rep0 - 0.04);
-  tl.to([xAxis, xArrow], { opacity: 1, duration: 0.32, ease: 'power2.out' }, rep0);
-  tl.to(xLabel, { opacity: 1, duration: 0.34, ease: 'power2.out' }, rep0 + 0.12);
-  if (repTitle) tl.to(repTitle, { opacity: 1, y: 0, duration: 0.32 }, rep0 + 0.18);
-  if (repCard) tl.to(repCard, { opacity: 1, y: 0, duration: 0.4 }, rep0 + 0.26);
-  if (repDesc) tl.to(repDesc, { opacity: 1, y: 0, duration: 0.34 }, rep0 + 0.48);
-  if (repEx) tl.to(repEx, { opacity: 1, y: 0, duration: 0.42 }, rep0 + 0.66);
+  const repBeat = hedge0 + 0.95;
+  if (gridBottom) tl.set(gridBottom, { autoAlpha: 1 }, repBeat - 0.04);
+  tl.to([xAxis, xArrow], { opacity: 1, duration: 0.32, ease: 'power2.out' }, repBeat);
+  tl.to(xLabel, { opacity: 1, duration: 0.34, ease: 'power2.out' }, repBeat + 0.12);
+  if (repTitle) tl.to(repTitle, { opacity: 1, y: 0, duration: 0.32 }, repBeat + 0.18);
+  if (repCard) tl.to(repCard, { opacity: 1, y: 0, duration: 0.4 }, repBeat + 0.26);
+  if (repDesc) tl.to(repDesc, { opacity: 1, y: 0, duration: 0.34 }, repBeat + 0.48);
+  if (repEx) tl.to(repEx, { opacity: 1, y: 0, duration: 0.42 }, repBeat + 0.66);
 
   // ── PHASE 2: three conversation types ────────────────────────────────────
 
@@ -410,12 +435,15 @@ export function init() {
   if (gridSideLeft) {
     tl.to(gridSideLeft, { opacity: 0, x: -40, duration: 1.0, ease: 'power2.inOut' }, 5.9);
   }
+  if (gridSideRight) {
+    tl.to(gridSideRight, { opacity: 0, x: 40, duration: 1.0, ease: 'power2.inOut' }, 5.9);
+  }
   if (gridBottom) {
     tl.to(gridBottom, { opacity: 0, y: 30, duration: 1.0, ease: 'power2.inOut' }, 5.9);
   }
   if (gridBody) {
     tl.to(gridBody, {
-      gridTemplateColumns: '0fr minmax(0, 1fr)',
+      gridTemplateColumns: '0fr minmax(0, 1fr) 0fr',
       gap: 0,
       duration: 1.1,
       ease: 'power2.inOut',
@@ -423,7 +451,7 @@ export function init() {
   }
   if (canvasWrap) {
     tl.to(canvasWrap, {
-      maxWidth: 860,
+      maxWidth: FINAL_CHART_MAX,
       duration: 1.1,
       ease: 'power2.inOut',
       onUpdate: positionTooltips,

@@ -41,6 +41,7 @@ export function init(rawData) {
   container = document.getElementById('comparison-viz');
   container.innerHTML = '';
   buildChart();
+  onStep(0);
 
   // When the viewer scrolls past the section, animate the highlight dots back home
   // to their persistent corner slots instead of leaving them stranded on the bars.
@@ -153,13 +154,20 @@ function rowEl(metric, cond) {
   return container.querySelector(`.cmp-row[data-metric="${metric}"][data-cond="${cond}"]`);
 }
 
-function setVisible(cond, visible) {
+function setMetricVisible(metric, visible) {
+  const col = container.querySelector(`.cmp-col[data-metric="${metric}"]`);
+  if (!col) return;
+  col.classList.toggle('is-hidden', !visible);
+}
+
+function setVisible(cond, visible, visibleMetrics) {
   METRICS.forEach(m => {
     const row = rowEl(m.key, cond);
     if (!row) return;
-    row.classList.toggle('is-hidden', !visible);
+    const shouldShow = visible && visibleMetrics.has(m.key);
+    row.classList.toggle('is-hidden', !shouldShow);
     const fill = row.querySelector('.cmp-row-fill');
-    if (visible) {
+    if (shouldShow) {
       gsap.to(fill, { width: `${fill.dataset.target}%`, duration: 0.7, ease: 'power2.out' });
     } else {
       gsap.set(fill, { width: '0%' });
@@ -174,22 +182,34 @@ export function onStep(step) {
 
   // Which conditions should be visible at each step
   const visibleByStep = {
-    0: ['human_human'],
-    1: ['human_human', 'human_ai'],
+    0: ORDER,
+    1: ORDER,
     2: ORDER,
     3: ORDER,
+    4: ORDER,
+    5: ORDER,
+  };
+  const metricsByStep = {
+    0: ['repetitiveness'],
+    1: METRICS.map(m => m.key),
+    2: METRICS.map(m => m.key),
+    3: METRICS.map(m => m.key),
+    4: METRICS.map(m => m.key),
+    5: METRICS.map(m => m.key),
   };
 
   const visible = new Set(visibleByStep[step] || ORDER);
-  ORDER.forEach(cond => setVisible(cond, visible.has(cond)));
+  const visibleMetrics = new Set(metricsByStep[step] || METRICS.map(m => m.key));
+  METRICS.forEach(metric => setMetricVisible(metric.key, visibleMetrics.has(metric.key)));
+  ORDER.forEach(cond => setVisible(cond, visible.has(cond), visibleMetrics));
 
-  // Box outline around the AI-AI row appears at step 2 (when AI-AI first arrives), stays for step 3
+  // Box outline around the AI-AI row appears on the final explanatory beat.
   const aiAiRows = container.querySelectorAll('.cmp-row[data-cond="ai_ai"]');
-  aiAiRows.forEach(r => r.classList.toggle('is-boxed', step >= 2));
+  aiAiRows.forEach(r => r.classList.toggle('is-boxed', step >= 5));
 
-  // Dot highlights: spawn once at step 2 (when AI-AI arrives) so they're settled by step 3.
-  // Skip re-spawn on step 3 so dots don't fly in twice.
-  if (step >= 2) {
+  // Dot highlights: spawn once when AI-AI arrives so they're settled by the final
+  // explanation beat. Skip re-spawn later so dots don't fly in twice.
+  if (step >= 5) {
     if (!dotsSpawned) {
       spawnHighlight('red',    'hedging',        'ai_ai');
       spawnHighlight('yellow', 'repetitiveness', 'human_ai');

@@ -41,11 +41,6 @@
     <section id="s-grid" class="act" style="min-height: 680vh; position: relative;">
       <div class="grid-pin">
         <div class="grid-shell">
-          <!-- Phase 1 headline -->
-          <div class="grid-headbar" id="grid-headbar-1">
-            <h2 class="grid-headline">What gave it away?</h2>
-            <p class="grid-headline-sub">Across all conversations, two signals stand out. The first one is the red dot you just saw.</p>
-          </div>
           <!-- Phase 2 headline (conversation types) -->
           <div class="grid-headbar grid-headbar-2" id="grid-headbar-2">
             <h2 class="grid-headline">Three kinds of conversation.</h2>
@@ -53,7 +48,7 @@
           </div>
 
           <div class="grid-body">
-            <!-- LEFT: Hedging card, flush against the Y-axis -->
+            <!-- LEFT: Hedging card -->
             <aside class="grid-side grid-side-left">
               <div class="mdef mdef-side" id="mdef-hedging">
                 <h3 class="mdef-title mdef-title-red">Hedging</h3>
@@ -88,6 +83,14 @@
                 </div>
               </div>
             </div>
+
+            <!-- RIGHT: section copy -->
+            <aside class="grid-side grid-side-right">
+              <div class="grid-headbar" id="grid-headbar-1">
+                <h2 class="grid-headline">Behavioral Metrics</h2>
+                <p class="grid-headline-sub">First: repetitiveness. Then: hedging. Scroll to watch both signals enter the map.</p>
+              </div>
+            </aside>
           </div>
 
           <!-- Phase 2: conversation-type legend chips (start hidden) -->
@@ -124,30 +127,32 @@
         <div id="comparison-viz" class="scrolly-viz"></div>
       </div>
       <div class="scrolly-steps">
-        <div class="step" data-step="0">
-          <div class="step-card">
+        <div class="step step-quiet" data-step="0" aria-hidden="true"></div>
+        <div class="step step-quiet" data-step="1" aria-hidden="true"></div>
+        <div class="step" data-step="2">
+          <!-- <div class="step-card">
             <h3>Start with the baseline.</h3>
             <p>This is real human-to-human conversation data. Low hedging and low repetition set the reference point for everything that follows.</p>
           </div>
         </div>
-        <div class="step" data-step="1">
+        <div class="step" data-step="3">
           <div class="step-card">
             <h3>Now add AI.</h3>
             <p>A human talking to an AI. Hedging actually <em>drops</em> — people are more direct with machines.</p>
           </div>
         </div>
-        <div class="step" data-step="2">
+        <div class="step" data-step="4">
           <div class="step-card">
             <h3>AIs alone together.</h3>
             <p>Put two AIs in a room — no human in the loop. Hedging jumps. Repetition climbs. They behave differently than when a human's around.</p>
           </div>
         </div>
-        <div class="step" data-step="3">
+        <div class="step" data-step="5">
           <div class="step-card">
             <h3>Your dots live here.</h3>
             <p>Red marks <strong>hedging in AI-AI</strong>. Yellow marks <strong>repetition in human-AI</strong>. But "AI-AI" is actually <em>five different setups</em> — keep scrolling.</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
 
