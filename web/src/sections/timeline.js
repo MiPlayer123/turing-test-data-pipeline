@@ -44,10 +44,6 @@ const ACT_COPY = {
     title: 'Except one.',
     sub: 'Reverse Turing is the only AI condition where hedging climbs — tracing the same arc as humans. The only AI that sounds more human over time is the one pretending to be one.',
   },
-  4: {
-    title: 'Repetitiveness shows a similar split.',
-    sub: 'Human-Human vs AI-AI, plus any standout AI-AI subtype.',
-  },
 };
 
 const EASE_IN_OUT = d3.easeCubicInOut;
@@ -67,6 +63,8 @@ let act3AnimationDone = false;
 let act3AnimToken = 0;
 let act0EntranceTimer = null;
 let subtextTimer = null;
+let act3StartTimer = null;
+let hoverHideTimer = null;
 
 // Inline snippet state (shared across all timeline points)
 let tlActiveSnippet = null;
@@ -127,6 +125,10 @@ function tlMoveSnippet(event) {
 }
 
 function tlHideSnippet() {
+  if (hoverHideTimer) {
+    window.clearTimeout(hoverHideTimer);
+    hoverHideTimer = null;
+  }
   if (!tlActiveSnippet) return;
   const el = tlActiveSnippet;
   tlActiveSnippet = null;
@@ -136,15 +138,44 @@ function tlHideSnippet() {
 function bindPointHover(selection, cond) {
   selection
     .style('cursor', 'pointer')
-    .on('mouseover', (event, d) => {
+    .on('pointerenter', (event, d) => {
+      if (hoverHideTimer) {
+        window.clearTimeout(hoverHideTimer);
+        hoverHideTimer = null;
+      }
       if (currentStep === 0 && cond.key !== 'human_human') return;
       tlShowSnippet(cond.key, d.turn, event);
     })
-    .on('mousemove', (e) => {
+    .on('pointermove', (e) => {
       if (currentStep === 0 && cond.key !== 'human_human') return;
       tlMoveSnippet(e);
     })
-    .on('mouseout', () => { tlHideSnippet(); });
+    .on('pointerleave', (event) => {
+      const next = event.relatedTarget;
+      if (next instanceof Element && next.closest('circle.hit-target')) return;
+      hoverHideTimer = window.setTimeout(() => {
+        tlHideSnippet();
+      }, 60);
+    });
+}
+
+function clearScheduledTimers() {
+  if (act0EntranceTimer) {
+    window.clearTimeout(act0EntranceTimer);
+    act0EntranceTimer = null;
+  }
+  if (subtextTimer) {
+    window.clearTimeout(subtextTimer);
+    subtextTimer = null;
+  }
+  if (act3StartTimer) {
+    window.clearTimeout(act3StartTimer);
+    act3StartTimer = null;
+  }
+  if (annotationTimer) {
+    window.clearTimeout(annotationTimer);
+    annotationTimer = null;
+  }
 }
 
 function trimTrailingSparse(points, minCount = 5) {
@@ -306,29 +337,23 @@ export function init(data) {
       const aiRows = data.turnMetrics.filter(d => AI_AI_KEYS.includes(d.condition));
       const byTurn = d3.group(aiRows, d => d.turn_number);
       const points = [];
-      const pointsRep = [];
       for (const [turn, rows] of byTurn) {
         points.push({ turn: +turn, mean: d3.mean(rows, r => r.hedging), count: rows.length });
-        pointsRep.push({ turn: +turn, mean: d3.mean(rows, r => +r.repetitiveness), count: rows.length });
       }
       points.sort((a, b) => a.turn - b.turn);
-      pointsRep.sort((a, b) => a.turn - b.turn);
-      return { ...cond, points, pointsRep };
+      return { ...cond, points };
     }
     const condRows = data.turnMetrics.filter(d => d.condition === cond.key);
     const byTurn = d3.group(condRows, d => d.turn_number);
     const points = [];
-    const pointsRep = [];
     for (const [turn, rows] of byTurn) {
       points.push({ turn: +turn, mean: d3.mean(rows, r => r.hedging), count: rows.length });
-      pointsRep.push({ turn: +turn, mean: d3.mean(rows, r => +r.repetitiveness), count: rows.length });
     }
     points.sort((a, b) => a.turn - b.turn);
-    pointsRep.sort((a, b) => a.turn - b.turn);
     if (cond.key === 'human_human') {
-      return { ...cond, points: trimTrailingSparse(points), pointsRep: trimTrailingSparse(pointsRep) };
+      return { ...cond, points: trimTrailingSparse(points) };
     }
-    return { ...cond, points, pointsRep };
+    return { ...cond, points };
   });
 
   const chartDiv = document.createElement('div');
@@ -342,6 +367,10 @@ export function init(data) {
   svg = d3.select(chartDiv).append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
+    .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('max-width', '100%')
+    .style('height', 'auto')
     .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
   x = d3.scaleLinear().domain([2, 20]).range([0, width]);
@@ -512,52 +541,13 @@ function setVisibility(key, targetOpacity, duration = 450) {
 
 function setYAxisForMetric(mode = 'hedging', duration = 450) {
   if (!yAxisG || !yAxisLabel) return;
-  if (mode === 'repetitiveness') {
-    const repMax = d3.max(conditionData.flatMap((c) => (c.pointsRep || []).map((p) => p.mean))) || 0.2;
-    yScale.domain([0, Math.max(repMax * 1.15, 0.15)]);
-    yAxisLabel.text('Repetitiveness');
-  } else {
-    yScale.domain([0, hedgingYMax]);
-    yAxisLabel.text('Hedging');
-  }
+  yScale.domain([0, hedgingYMax]);
+  yAxisLabel.text('Hedging');
   yAxisG.transition().duration(duration).ease(EASE_IN_OUT)
     .call(d3.axisLeft(yScale).ticks(6).tickSize(-width).tickFormat(d3.format('.1f')))
     .call(g => g.select('.domain').remove())
     .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
     .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '10px').attr('font-family', 'JetBrains Mono, monospace'));
-}
-
-function materializeLinePoints(key, points, { duration = 500, opacity = 1, strokeWidth = null } = {}) {
-  const entry = groups[key];
-  if (!entry || !points?.length) return;
-  const { g, path, circles, hitTargets, cond } = entry;
-  resetLineStyle(entry);
-  const sw = strokeWidth ?? (cond.key === 'ai_ai_reverse_turing' ? 3 : 1.5);
-  path.attr('d', lineGen(points))
-    .transition().duration(duration).ease(EASE_IN_OUT)
-    .attr('stroke-dasharray', null).attr('stroke-dashoffset', null).attr('stroke-width', sw);
-  circles.transition().duration(duration).ease(EASE_IN_OUT)
-    .attr('cx', d => x(d.turn)).attr('cy', d => {
-      const p = points.find((pt) => pt.turn === d.turn);
-      return yScale((p && Number.isFinite(p.mean)) ? p.mean : points[0].mean);
-    }).attr('r', 2.6);
-  hitTargets?.transition().duration(duration).ease(EASE_IN_OUT)
-    .attr('cx', d => x(d.turn)).attr('cy', d => {
-      const p = points.find((pt) => pt.turn === d.turn);
-      return yScale((p && Number.isFinite(p.mean)) ? p.mean : points[0].mean);
-    });
-  g.transition().duration(duration).ease(EASE_IN_OUT).attr('opacity', opacity);
-}
-
-function pickRepetitivenessStandoutKey() {
-  const subtypes = conditionData.filter((c) => AI_AI_KEYS.includes(c.key) && c.pointsRep?.length);
-  if (subtypes.length < 2) return null;
-  const means = subtypes.map((c) => ({ key: c.key, mean: d3.mean(c.pointsRep, (p) => p.mean) || 0 }));
-  const globalMean = d3.mean(means, (m) => m.mean) || 0;
-  const ranked = means
-    .map((m) => ({ ...m, delta: Math.abs(m.mean - globalMean) }))
-    .sort((a, b) => b.delta - a.delta);
-  return ranked[0] && ranked[0].delta > 0.02 ? ranked[0].key : null;
 }
 
 function drawLine(key, { duration = 800 } = {}) {
@@ -1030,7 +1020,12 @@ function enterAct2() {
   materializeLine('ai_ai_combined', { duration: 260, opacity: 0, strokeWidth: 1.5 });
   AI_AI_KEYS.forEach((key, i) => fanOutFromCombined(key, i));
   // Start Act 3 sequence after fracture fan-out has finished + short pause.
-  window.setTimeout(() => {
+  if (act3StartTimer) {
+    window.clearTimeout(act3StartTimer);
+    act3StartTimer = null;
+  }
+  act3StartTimer = window.setTimeout(() => {
+    act3StartTimer = null;
     if (currentStep === 2) runAct3TrendSequence();
   }, 1800);
   revealStepSubtext(2, 340);
@@ -1085,41 +1080,14 @@ function enterAct3() {
   revealStepSubtext(3, 340);
 }
 
-function enterAct4() {
-  removeRevealAnnotations();
-  setYAxisForMetric('repetitiveness');
-  resetAct3TrendOverlay();
-  resetAct4TrendOverlay();
-
-  const selected = new Set(['human_human', 'ai_ai_combined']);
-  const standout = pickRepetitivenessStandoutKey();
-  if (standout) selected.add(standout);
-
-  Object.entries(groups).forEach(([key]) => {
-    if (!selected.has(key)) {
-      setVisibility(key, 0, 320);
-      return;
-    }
-    const cond = conditionData.find((c) => c.key === key);
-    materializeLinePoints(key, cond?.pointsRep || [], { duration: 640, opacity: key === 'human_human' ? 1 : 0.95, strokeWidth: 2 });
-  });
-  revealStepSubtext(4, 340);
-}
-
 export function onStep(step) {
-  // Gate Act 4 until Act 3 trendline + annotation sequence has fully completed.
-  if (step >= 3 && !act3AnimationDone) return;
+  // Only gate the reveal step when transitioning directly from Act 3 fracture state.
+  if (step >= 3 && currentStep === 2 && !act3AnimationDone) return;
   if (step === currentStep) return;
-  if (act0EntranceTimer) {
-    window.clearTimeout(act0EntranceTimer);
-    act0EntranceTimer = null;
-  }
-  if (subtextTimer) {
-    window.clearTimeout(subtextTimer);
-    subtextTimer = null;
-  }
+  clearScheduledTimers();
   clearLineTransitions();
   removeRevealAnnotations();
+  tlHideSnippet();
   currentStep = step;
   setActCopy(step);
 
@@ -1132,6 +1100,6 @@ export function onStep(step) {
   } else if (step === 3) {
     enterAct3();
   } else {
-    enterAct4();
+    enterAct3();
   }
 }
