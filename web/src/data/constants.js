@@ -1,11 +1,11 @@
 export const CONDITIONS = [
   { key: "human_human",            label: "Human-Human",     color: "#1ABC9C" },
   { key: "human_ai",               label: "Human-AI",        color: "#95A5A6" },
-  { key: "ai_ai_detective",        label: "AI Detective",    color: "#E67E22" },
-  { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#3498DB" },
-  { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#9B59B6" },
-  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing",  color: "#E91E63" },
-  { key: "ai_ai_structured",       label: "AI Structured",   color: "#2ECC71" },
+  { key: "ai_ai_detective",        label: "AI Detective",    color: "#FF7438" },
+  { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#FF4D6D" },
+  { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#C9184A" },
+  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing",  color: "#FF006E" },
+  { key: "ai_ai_structured",       label: "AI Structured",   color: "#FFAA00" },
 ];
 
 export const CONDITION_COLOR = Object.fromEntries(CONDITIONS.map(c => [c.key, c.color]));

@@ -2,6 +2,16 @@ import { CONDITIONS } from '../data/constants.js';
 
 export function createFilterChips(container, { onToggle, initialActive = null }) {
   const active = new Set(initialActive || CONDITIONS.map(c => c.key));
+  const chips = new Map();
+
+  const repaint = () => {
+    CONDITIONS.forEach((c) => {
+      const chip = chips.get(c.key);
+      const isActive = active.has(c.key);
+      chip.className = `chip ${isActive ? 'active' : 'inactive'}`;
+      chip.style.background = isActive ? c.color + '1A' : 'transparent';
+    });
+  };
 
   container.innerHTML = '';
   CONDITIONS.forEach(c => {
@@ -11,16 +21,18 @@ export function createFilterChips(container, { onToggle, initialActive = null })
     chip.style.color = c.color;
     chip.style.background = active.has(c.key) ? c.color + '1A' : 'transparent';
     chip.textContent = c.label;
+    chips.set(c.key, chip);
     chip.addEventListener('click', () => {
-      if (active.has(c.key)) {
-        active.delete(c.key);
-        chip.classList.replace('active', 'inactive');
-        chip.style.background = 'transparent';
+      // Explorer behavior: click isolates one condition; clicking it again restores all.
+      const alreadySolo = active.size === 1 && active.has(c.key);
+      if (alreadySolo) {
+        active.clear();
+        CONDITIONS.forEach(({ key }) => active.add(key));
       } else {
+        active.clear();
         active.add(c.key);
-        chip.classList.replace('inactive', 'active');
-        chip.style.background = c.color + '1A';
       }
+      repaint();
       onToggle(active);
     });
     container.appendChild(chip);

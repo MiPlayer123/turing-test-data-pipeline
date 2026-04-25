@@ -83,6 +83,9 @@ export function init(data) {
   controls.enableDamping = true;
   controls.dampingFactor = 0.12;
   controls.target.set(0.5, 0.2, 0.5);
+  controls.minDistance = 1.35;
+  // Clamp zoom-out so the scene cannot shrink beyond the intended framing.
+  controls.maxDistance = 2.65;
   controls.update();
 
   scene.add(new THREE.AmbientLight(0xffffff, 1.0));
@@ -331,9 +334,14 @@ export function init(data) {
   createFilterChips(filtersEl, {
     onToggle(active) {
       const colAttr = dotGeo.attributes.color;
+      const fadeCol = new THREE.Color(0x2b3139);
+      const singleSelected = active.size === 1;
+      const selectedKey = singleSelected ? Array.from(active)[0] : null;
       convs.forEach((c, i) => {
-        const visible = active.has(c.condition);
-        const col = visible ? new THREE.Color(CONDITION_COLOR[c.condition] || '#fff') : new THREE.Color(0x21262D);
+        const base = new THREE.Color(CONDITION_COLOR[c.condition] || '#fff');
+        const isFocus = singleSelected ? c.condition === selectedKey : active.has(c.condition);
+        // Keep non-focused points visible but clearly faded.
+        const col = isFocus ? base : base.clone().lerp(fadeCol, 0.78);
         colAttr.setXYZ(i, col.r, col.g, col.b);
       });
       colAttr.needsUpdate = true;

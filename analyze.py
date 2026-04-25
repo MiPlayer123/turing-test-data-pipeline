@@ -113,6 +113,18 @@ def hedging_frequency(turns):
         return 0.0
     return (total_hedges / total_words) * 100
 
+def hedging_frequency_for_text(text):
+    """Hedge phrases per 100 words for one text span."""
+    text_lower = text.lower()
+    words = tokenize(text_lower)
+    total_words = len(words)
+    if total_words == 0:
+        return 0.0
+    total_hedges = 0
+    for hedge in config.HEDGE_WORDS:
+        total_hedges += text_lower.count(hedge)
+    return (total_hedges / total_words) * 100
+
 
 # ---------------------------------------------------------------------------
 # Secondary Metrics
@@ -237,6 +249,42 @@ def compute_metrics(conv, include_secondary=True):
 
     return metrics
 
+def compute_turn_metrics(conv):
+    """Per-turn metrics used by trajectory/timeline visualizations.
+
+    Emits rows for non-opening turns (typically turn 2+):
+    - hedging: hedge phrases per 100 words in that turn
+    - word_count: token count in that turn
+    - repetitiveness: 3-gram overlap with previous turn by same speaker
+    """
+    rows = []
+    prev_ngrams_by_speaker = {}
+    for turn in conv["turns"]:
+        if turn.get("is_opening_prompt", False):
+            continue
+        speaker = turn.get("speaker")
+        text = turn.get("content", "")
+        tokens = tokenize(text)
+        ngrams = set(get_ngrams(tokens, 3))
+
+        prev_ngrams = prev_ngrams_by_speaker.get(speaker)
+        if prev_ngrams:
+            union = prev_ngrams | ngrams
+            repet = (len(prev_ngrams & ngrams) / len(union)) if union else 0.0
+        else:
+            repet = 0.0
+        prev_ngrams_by_speaker[speaker] = ngrams
+
+        rows.append({
+            "conversation_id": conv["conversation_id"],
+            "condition": conv["condition"],
+            "turn_number": int(turn["turn_number"]),
+            "hedging": round(hedging_frequency_for_text(text), 4),
+            "word_count": len(tokens),
+            "repetitiveness": round(repet, 4),
+        })
+    return rows
+
 
 # ---------------------------------------------------------------------------
 # Export CSV
@@ -257,6 +305,20 @@ def export_csv(all_metrics, output_path):
         writer.writerows(all_metrics)
 
     print(f"Exported {len(all_metrics)} rows to {output_path}")
+
+def export_turn_metrics(turn_metrics_rows, output_path):
+    """Write per-turn metrics to CSV."""
+    if not turn_metrics_rows:
+        print("No turn metrics to export.")
+        return
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    fieldnames = ["conversation_id", "condition", "turn_number", "hedging", "word_count", "repetitiveness"]
+    with open(output_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(turn_metrics_rows)
+    print(f"Exported {len(turn_metrics_rows)} turn rows to {output_path}")
 
 
 # ---------------------------------------------------------------------------
@@ -280,13 +342,23 @@ def main():
         return
 
     all_metrics = []
+    all_turn_metrics = []
     for conv in conversations:
         metrics = compute_metrics(conv, include_secondary=include_secondary)
         all_metrics.append(metrics)
+        all_turn_metrics.extend(compute_turn_metrics(conv))
         print(f"  {conv['conversation_id']}: rep={metrics['repetitiveness']:.3f} "
               f"coh={metrics['coherence']:.3f} hedge={metrics['hedging']:.3f}")
 
     export_csv(all_metrics, output_path)
+    turn_output_path = os.path.join(config.DATA_PROCESSED_DIR, "turn_metrics.csv")
+    export_turn_metrics(all_turn_metrics, turn_output_path)
+
+    # Keep web app data in sync with processed outputs.
+    web_data_dir = os.path.join(os.path.dirname(__file__), "web", "public", "data")
+    os.makedirs(web_data_dir, exist_ok=True)
+    export_csv(all_metrics, os.path.join(web_data_dir, "conversations.csv"))
+    export_turn_metrics(all_turn_metrics, os.path.join(web_data_dir, "turn_metrics.csv"))
 
     # Print summary stats
     print(f"\n{'='*60}")
