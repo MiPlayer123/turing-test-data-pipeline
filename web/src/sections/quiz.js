@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadConversation } from '../data/loader.js';
 import { HOOK_CONVERSATION_IDS, HOOK_NUM_BUBBLES } from '../data/constants.js';
+import { setConversationId } from '../lib/cornerDots.js';
 // (corner-dot helpers removed — quiz now hands the red dot off to #s-grid instead)
 
 function pickHookId() {
@@ -13,13 +14,15 @@ export async function init() {
   const promptArea = document.getElementById('quiz-prompt-area');
   const resultEl = document.getElementById('quiz-result');
 
+  const hookId = pickHookId();
   let conv;
   try {
-    conv = await loadConversation(pickHookId());
+    conv = await loadConversation(hookId);
   } catch (err) {
     console.warn('Hook load failed, aborting quiz init:', err);
     return;
   }
+  setConversationId('red', hookId);
 
   const turns = (conv.turns || []).slice(0, HOOK_NUM_BUBBLES);
   if (!turns.length) return;

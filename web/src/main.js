@@ -15,6 +15,7 @@ import * as timelineMorph from './sections/timelineMorph.js';
 import * as gridReveal from './sections/gridReveal.js';
 import * as detective from './sections/detective.js';
 import * as detectiveMorph from './sections/detectiveMorph.js';
+import * as cornerDots from './lib/cornerDots.js';
 // explorer is dynamically imported when needed (Three.js is ~624KB)
 
 function initScrolly(sectionId, onStep) {
@@ -34,6 +35,16 @@ function initScrolly(sectionId, onStep) {
 async function main() {
   const data = await loadData();
   console.log(`Loaded ${data.conversations.length} conversations`);
+
+  // Default conversation IDs for corner-dot transcript shortcuts.
+  // The red dot's id is set later by quiz.js to the actual conversation that was shown.
+  cornerDots.setConversationId('yellow',     'conv_human_ai_wildchat_0000');
+  cornerDots.setConversationId('freeform',   'conv_ai_ai_freeform_claudesonnet4_gemini25flash_F1_1775427182');
+  cornerDots.setConversationId('persona',    'conv_ai_ai_freeform_persona_claudesonnet4_gemini25flash_F2_1775424633');
+  cornerDots.setConversationId('detective',  'conv_ai_ai_detective_claudesonnet4_grok41fast_D1_1775424532');
+  cornerDots.setConversationId('revturing',  'conv_ai_ai_reverse_turing_claudesonnet4_gpt54mini_F2_1775423379');
+  cornerDots.setConversationId('structured', 'conv_ai_ai_structured_claudesonnet4_gemini25flash_S1_1775423896');
+  cornerDots.initClickHandlers();
 
   // S1: Quiz
   quiz.init(data);

@@ -1,6 +1,8 @@
 // Persistent narrative-thread corner dots.
 // Each slot is born in a specific scene and stays lit until explicitly unlit.
 
+import { openConversation } from '../components/conversationReader.js';
+
 const SLOTS = {
   red:        '#corner-dot-red',
   yellow:     '#corner-dot-yellow',
@@ -10,6 +12,8 @@ const SLOTS = {
   revturing:  '#corner-dot-revturing',
   structured: '#corner-dot-structured',
 };
+
+const conversationIds = {};
 
 function get(which) {
   return document.querySelector(SLOTS[which] || SLOTS.red);
@@ -33,4 +37,20 @@ export function unlight(which) {
 export function isLit(which) {
   const el = get(which);
   return !!(el && el.classList.contains('is-lit'));
+}
+
+export function setConversationId(slot, id) {
+  conversationIds[slot] = id;
+}
+
+export function initClickHandlers() {
+  Object.keys(SLOTS).forEach((slot) => {
+    const el = get(slot);
+    if (!el) return;
+    el.addEventListener('click', () => {
+      const id = conversationIds[slot];
+      if (!id) return;
+      openConversation(id);
+    });
+  });
 }
