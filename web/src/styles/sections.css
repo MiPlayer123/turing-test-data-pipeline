@@ -702,8 +702,26 @@
 #s-timeline .step { align-items: center; }
 #s-timeline .step .step-card h3 { display: none; }
 #s-timeline .step .step-card p {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.55;
+}
+
+.detective-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+.detective-chart-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3vw, 42px);
+  color: #f0f3f6;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  opacity: 0;
 }
 
 /* Timeline title — magenta, echoing Reverse Turing card. Hidden initially so the morph reveals it. */

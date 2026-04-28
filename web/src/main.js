@@ -14,6 +14,7 @@ import * as timeline from './sections/timeline.js';
 import * as timelineMorph from './sections/timelineMorph.js';
 import * as gridReveal from './sections/gridReveal.js';
 import * as detective from './sections/detective.js';
+import * as detectiveMorph from './sections/detectiveMorph.js';
 // explorer is dynamically imported when needed (Three.js is ~624KB)
 
 function initScrolly(sectionId, onStep) {
@@ -55,6 +56,7 @@ async function main() {
   // S7: Detective — per-model report card
   detective.init(data);
   initScrolly('s-detective', (step) => detective.onStep(step));
+  detectiveMorph.init();
 
   // S8: 3D Explorer (lazy — dynamic import keeps Three.js out of main bundle)
   const explorerObs = new IntersectionObserver(async (entries) => {

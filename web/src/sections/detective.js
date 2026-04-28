@@ -86,21 +86,6 @@ export function onStep(step) {
     // Show 50% marker now that all bars are in
     svg.select('.fifty-label').transition().duration(400).attr('opacity', 1);
     svg.select('.fifty-shade').transition().duration(400).attr('opacity', 0.03);
-    // Annotation on Claude
-    const claudeRow = stats.find(d => d.model === 'claude-sonnet-4');
-    if (claudeRow) {
-      const g = svg.append('g').attr('class', 'annotation').attr('opacity', 0);
-      const barEnd = x(claudeRow.accuracy);
-      const barY = y(claudeRow.model) + y.bandwidth() / 2;
-      g.append('text').attr('x', barEnd + 68).attr('y', barY - 2)
-        .attr('fill', '#F39C12').attr('font-size', '13px').attr('font-weight', '700')
-        .attr('font-family', 'Inter, sans-serif').attr('text-anchor', 'start')
-        .text('Coin flip');
-      g.append('line').attr('x1', barEnd + 60).attr('y1', barY)
-        .attr('x2', barEnd + 10).attr('y2', barY)
-        .attr('stroke', '#F39C12').attr('stroke-width', 1.5).attr('stroke-dasharray', '4,3');
-      g.transition().duration(500).delay(500).attr('opacity', 1);
-    }
   }
 }
 

@@ -55,14 +55,12 @@ let currentStep = -1;
 let fullData = null;
 let titleEl = null;
 let subEl = null;
-let stepCards = [];
 let annotationTimer = null;
 let act3Trend = null;
 let act4Trend = null;
 let act3AnimationDone = false;
 let act3AnimToken = 0;
 let act0EntranceTimer = null;
-let subtextTimer = null;
 let act3StartTimer = null;
 let hoverHideTimer = null;
 
@@ -163,10 +161,6 @@ function clearScheduledTimers() {
   if (act0EntranceTimer) {
     window.clearTimeout(act0EntranceTimer);
     act0EntranceTimer = null;
-  }
-  if (subtextTimer) {
-    window.clearTimeout(subtextTimer);
-    subtextTimer = null;
   }
   if (act3StartTimer) {
     window.clearTimeout(act3StartTimer);
@@ -324,7 +318,6 @@ export function init(data) {
   fullData = data;
   titleEl = document.querySelector('.timeline-title');
   subEl = document.querySelector('.timeline-sub');
-  stepCards = Array.from(document.querySelectorAll('#s-timeline .step .step-card'));
   currentStep = -1;
 
   const chartContainer = document.getElementById('timeline-chart');
@@ -383,18 +376,18 @@ export function init(data) {
     .call(d3.axisBottom(x).ticks(18).tickSize(-height).tickFormat(d => d))
     .call(g => g.select('.domain').remove())
     .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '10px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
 
   yAxisG = svg.append('g')
     .call(d3.axisLeft(yScale).ticks(6).tickSize(-width).tickFormat(d3.format('.1f')))
     .call(g => g.select('.domain').remove())
     .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '10px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
 
-  svg.append('text').attr('x', width / 2).attr('y', height + 36).attr('text-anchor', 'middle')
-    .attr('fill', '#484F58').attr('font-size', '12px').attr('font-family', 'Inter, sans-serif').text('Turn Number');
-  yAxisLabel = svg.append('text').attr('transform', 'rotate(-90)').attr('x', -height / 2).attr('y', -36)
-    .attr('text-anchor', 'middle').attr('fill', '#484F58').attr('font-size', '12px').attr('font-family', 'Inter, sans-serif').text('Hedging');
+  svg.append('text').attr('x', width / 2).attr('y', height + 40).attr('text-anchor', 'middle')
+    .attr('fill', '#484F58').attr('font-size', '15px').attr('font-family', 'Inter, sans-serif').text('Turn Number');
+  yAxisLabel = svg.append('text').attr('transform', 'rotate(-90)').attr('x', -height / 2).attr('y', -42)
+    .attr('text-anchor', 'middle').attr('fill', '#484F58').attr('font-size', '15px').attr('font-family', 'Inter, sans-serif').text('Hedging');
 
   lineGen = d3.line().x(d => x(d.turn)).y(d => yScale(d.mean)).curve(d3.curveMonotoneX);
 
@@ -428,7 +421,7 @@ export function init(data) {
 
     const last = cond.points[cond.points.length - 1];
     const label = g.append('text').attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)
-      .attr('fill', cond.color).attr('font-size', '11px').attr('font-weight', '600')
+      .attr('fill', cond.color).attr('font-size', '13px').attr('font-weight', '600')
       .attr('font-family', 'Inter, sans-serif')
       .text(cond.label);
 
@@ -456,12 +449,6 @@ export function init(data) {
   logTimelineCategoryRegressionStats();
   // Timeline layout rule: heading above chart, subtext in left panel only.
   if (subEl) subEl.style.display = 'none';
-  stepCards.forEach((card, i) => {
-    const h3 = card.querySelector('h3');
-    const p = card.querySelector('p');
-    if (h3) h3.textContent = '';
-    if (p) p.textContent = '';
-  });
 
   setActCopy(0, true);
 }
@@ -475,30 +462,9 @@ function setActCopy(step, immediate = false) {
   const apply = () => {
     titleEl.textContent = copy.title;
     titleEl.style.opacity = '1';
-    // Side panel text is revealed on a separate beat after line motion starts.
-    stepCards.forEach((card, i) => {
-      const h3 = card.querySelector('h3');
-      const p = card.querySelector('p');
-      if (h3) h3.textContent = '';
-      if (p) p.textContent = '';
-    });
   };
   if (immediate) apply();
   else window.setTimeout(apply, 140);
-}
-
-function revealStepSubtext(step, delay = 0) {
-  if (subtextTimer) {
-    window.clearTimeout(subtextTimer);
-    subtextTimer = null;
-  }
-  const copy = ACT_COPY[step] || ACT_COPY[3];
-  subtextTimer = window.setTimeout(() => {
-    stepCards.forEach((card, i) => {
-      const p = card.querySelector('p');
-      if (p) p.textContent = i === step ? copy.sub : '';
-    });
-  }, delay);
 }
 
 function clearLineTransitions() {
@@ -547,7 +513,7 @@ function setYAxisForMetric(mode = 'hedging', duration = 450) {
     .call(d3.axisLeft(yScale).ticks(6).tickSize(-width).tickFormat(d3.format('.1f')))
     .call(g => g.select('.domain').remove())
     .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '10px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
 }
 
 function drawLine(key, { duration = 800 } = {}) {
@@ -993,7 +959,6 @@ function enterAct0() {
   act0EntranceTimer = window.setTimeout(() => {
     if (currentStep === 0) drawLine('human_human', { duration: 600 });
   }, 120);
-  revealStepSubtext(0, 420);
 }
 
 function enterAct1() {
@@ -1007,7 +972,6 @@ function enterAct1() {
   materializeLine('human_human', { duration: 360, opacity: 1, strokeWidth: 1.5 });
   drawLine('ai_ai_combined', { duration: 800 });
   AI_AI_KEYS.forEach((key) => setVisibility(key, 0, 320));
-  revealStepSubtext(1, 340);
 }
 
 function enterAct2() {
@@ -1028,7 +992,6 @@ function enterAct2() {
     act3StartTimer = null;
     if (currentStep === 2) runAct3TrendSequence();
   }, 1800);
-  revealStepSubtext(2, 340);
 }
 
 function enterAct3() {
@@ -1077,7 +1040,6 @@ function enterAct3() {
   annotationTimer = window.setTimeout(() => {
     if (currentStep === 3) renderRevealAnnotations();
   }, 2000);
-  revealStepSubtext(3, 340);
 }
 
 export function onStep(step) {
