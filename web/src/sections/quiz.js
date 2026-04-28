@@ -351,4 +351,24 @@ export async function init() {
     tl.to(flyDot, { y: 0, scale: 1, duration: 0.32, ease: 'power2.inOut' }, impactT + 1.47);
     tl.set(chatEl, { pointerEvents: 'none' }, impactT + 0.05);
   }
+
+  // Restore the chat when the viewer scrolls back up into the quiz section
+  // after the collapse has fired, so the conversation can be re-read.
+  // Forward scroll past quiz still shows the gridReveal handoff naturally.
+  ScrollTrigger.create({
+    trigger: '#s-quiz',
+    start: 'top 60%',
+    end:   'bottom 40%',
+    onEnterBack: () => {
+      if (!armed) return;
+      const collapseFrame = document.getElementById('quiz-collapse-frame');
+      const flyDot = document.getElementById('story-red-dot');
+      gsap.killTweensOf([chatEl, ...bubbles, flyDot, collapseFrame].filter(Boolean));
+      if (collapseFrame) gsap.set(collapseFrame, { opacity: 0 });
+      if (flyDot) gsap.set(flyDot, { opacity: 0, scale: 0 });
+      gsap.set(chatEl, { opacity: 1, pointerEvents: 'auto', x: 0, y: 0, scale: 1 });
+      gsap.set(bubbles, { opacity: 1, y: 0, scale: 1, clearProps: 'transform,filter' });
+      if (resultEl) gsap.set(resultEl, { opacity: 1, y: 0 });
+    },
+  });
 }

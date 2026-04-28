@@ -19,8 +19,8 @@ export function init() {
   // Tuning knobs for the red-dot handoff feel:
   // - lower scrub => more immediate reaction to scroll
   // - higher duration => slower travel along the path
-  const HANDOFF_SCRUB = 0;
-  const DOT_TRAVEL_DURATION = 0.1;
+  const HANDOFF_SCRUB = 0.6;
+  const DOT_TRAVEL_DURATION = 0.55;
   // Layout knobs to keep JS timeline and CSS sizing in sync
   const FINAL_CHART_MAX = 550;
   const PHASE_ONE_GRID_COLUMNS = 'minmax(220px, 280px) minmax(500px, 550px) minmax(220px, 280px)';
