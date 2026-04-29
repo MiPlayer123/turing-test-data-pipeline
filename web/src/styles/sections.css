@@ -189,6 +189,60 @@
   color: #c9d1d9;
 }
 
+.grid-interactive-tooltip {
+  position: absolute;
+  min-width: 240px;
+  max-width: 300px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(88, 166, 255, 0.45);
+  background: rgba(10, 16, 28, 0.95);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+  transition: opacity 0.16s ease;
+}
+.grid-interactive-tooltip.is-visible {
+  opacity: 1;
+}
+.grid-interactive-tooltip h4 {
+  margin: 0 0 5px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: #f0f3f6;
+}
+.grid-interactive-tooltip .grid-tip-prompt {
+  margin: 0 0 7px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #9fb3c8;
+  line-height: 1.45;
+}
+.grid-interactive-tooltip .grid-tip-snippet {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.45;
+  color: #c9d1d9;
+}
+
+.subtype-grid-dot {
+  cursor: pointer;
+  /* opacity is controlled by GSAP inline style */
+  transition: opacity 0.2s ease;
+  animation: subtypeDotPulse 2.4s ease-in-out infinite;
+}
+.subtype-grid-dot.is-hovered {
+  animation-play-state: paused;
+}
+
+@keyframes subtypeDotPulse {
+  0%, 100% { filter: drop-shadow(0 0 3px var(--dot-color)); }
+  50% { filter: drop-shadow(0 0 8px var(--dot-color)); }
+}
+
 /* Side-mounted metric cards are a bit narrower & denser than the old wide ones */
 .mdef-side {
   padding: 18px 20px;
@@ -929,9 +983,9 @@
   top: 0;
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 48px 24px;
+  padding: 62px 24px 28px;
   overflow: hidden;
 }
 /* Ghost box that morphs from the AI-AI chart row into the subtypes title */
@@ -957,19 +1011,48 @@
   letter-spacing: 0.06em;
 }
 .subtypes-container {
-  max-width: 1080px;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.subtypes-body-row {
+  display: flex;
+  gap: 22px;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.subtypes-left-col {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.subtypes-right-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 .subtypes-header {
   text-align: center;
-  margin-bottom: 60px;
-  padding: 28px 36px;
+  padding: 22px 36px;
   border: 1px solid #30363D;
   border-radius: 10px;
   background: rgba(13, 17, 23, 0.5);
   max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 18px;
+  flex-shrink: 0;
 }
 .subtypes-title {
   font-family: var(--font-serif);
@@ -983,6 +1066,123 @@
   font-family: var(--font-sans);
   font-size: 14px;
   color: #8b949e;
+}
+.subtypes-stack-wrap {
+  border: 1px solid #22272e;
+  border-radius: 10px;
+  padding: 16px 20px;
+  background: rgba(11, 16, 22, 0.74);
+}
+.subtypes-stack-title {
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #8b949e;
+  text-transform: uppercase;
+}
+/* Bar is sized entirely via inline styles in subtypes.js */
+.subtypes-stacked-bar {
+  display: flex;
+  flex-direction: column;
+}
+.subtypes-stacked-legend {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.subtypes-stack-legend-item {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #c9d1d9;
+}
+.subtypes-stack-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--subtype-color);
+  box-shadow: 0 0 8px rgba(201, 209, 217, 0.4);
+}
+.subtypes-stack-legend-name {
+  color: #8b949e;
+}
+.subtypes-stack-legend-value {
+  color: #f0f3f6;
+}
+/* Dot key card (replaces dummy card) */
+.subtypes-dummy-card {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid #22272e;
+  border-radius: 8px;
+  background: rgba(9, 14, 20, 0.88);
+}
+.subtypes-key-title {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4d5966;
+}
+.subtypes-key-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.subtypes-key-row {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 6px;
+}
+.subtypes-key-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.subtypes-key-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #8b949e;
+}
+.subtypes-key-vals {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #c9d1d9;
+  white-space: nowrap;
+}
+.subtypes-plot-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid rgba(50, 88, 132, 0.45);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(9, 21, 41, 0.82) 0%, rgba(6, 14, 30, 0.76) 100%);
+  box-shadow: inset 0 0 0 1px rgba(107, 146, 192, 0.08), 0 24px 48px rgba(0, 0, 0, 0.26);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.subtypes-plot {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+.subtypes-plot-tooltip {
+  z-index: 20;
+}
+.subtypes-point-prompt,
+.subtypes-point-name {
+  pointer-events: none;
 }
 /* 6-column grid so the 2 orphan cards on row 2 can straddle center (cols 2-5). */
 .subtypes-grid {

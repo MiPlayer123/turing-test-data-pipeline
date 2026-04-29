@@ -164,6 +164,27 @@
             <h2 class="subtypes-title">Unpacking AI-AI.</h2>
             <p class="subtypes-sub">One bar, five setups. Each changes how AIs behave together.</p>
           </div>
+          <div class="subtypes-body-row">
+            <!-- Left column: stacked bar breakdown -->
+            <div class="subtypes-left-col">
+              <div class="subtypes-stack-wrap">
+                <p class="subtypes-stack-title">Hedging contribution split (AI-AI only)</p>
+                <div class="subtypes-stacked-bar" id="subtypes-stacked-bar"></div>
+                <div class="subtypes-stacked-legend" id="subtypes-stacked-legend"></div>
+              </div>
+              <article class="subtypes-dummy-card" id="subtypes-dummy-card">
+                <h3>Interactive point preview</h3>
+                <p>Each point uses measured hedging and repetitiveness from the dataset. Hover reveals type, prompt, and snippet. Click opens full transcript.</p>
+              </article>
+            </div>
+            <!-- Right column: big scatter plot -->
+            <div class="subtypes-right-col">
+              <div class="subtypes-plot-wrap" id="subtypes-plot-wrap">
+                <svg id="subtypes-plot" class="subtypes-plot" viewBox="0 0 720 560" preserveAspectRatio="xMidYMid meet"></svg>
+                <div class="grid-interactive-tooltip subtypes-plot-tooltip" id="subtypes-plot-tooltip"></div>
+              </div>
+            </div>
+          </div>
           <div class="subtypes-grid" id="subtypes-grid">
             <!-- Cards injected by subtypes.js so we can attach the mini bar charts -->
           </div>

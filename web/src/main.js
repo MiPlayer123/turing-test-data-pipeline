@@ -49,15 +49,16 @@ async function main() {
   // S1: Quiz
   quiz.init(data);
 
-  // S1.5: Grid reveal — red dot lands on 2-D Repetitiveness × Hedging axes
-  gridReveal.init();
-
   // S4: Comparison bars (H-H / H-AI / AI-AI)
   comparison.init(data);
   initScrolly('s-comparison', (step) => comparison.onStep(step));
 
   // S4.5: AI-AI subtype breakdown
   subtypes.init(data);
+
+  // S1.5: Grid reveal — red dot lands on 2-D Repetitiveness × Hedging axes.
+  // Initialize after subtypes so placeholder subtype plot points are available.
+  gridReveal.init();
 
   // S6: Timeline (Reverse Turing-focused line chart)
   timeline.init(data);
