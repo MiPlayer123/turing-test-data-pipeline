@@ -21,16 +21,17 @@
 }
 .corner-dot.is-lit { transform: scale(1); opacity: 1; pointer-events: auto; cursor: pointer; }
 .corner-dot.is-lit:hover { transform: scale(1.25); }
-/* Concept dots — hedging (red) and repetition (yellow). These are the metric
-   storylines, not condition categories. Kept in sync with CONCEPT in constants.js. */
-#corner-dot-red        { background: #E74C3C; box-shadow: 0 0 14px rgba(231, 76, 60, 0.55); }
-#corner-dot-yellow     { background: #F1C40F; box-shadow: 0 0 14px rgba(241, 196, 15, 0.55); }
+/* Concept dots — hedging (terracotta) and repetition (ochre). These are the
+   metric storylines, not condition categories. Kept in sync with CONCEPT in
+   constants.js. (DOM ids are legacy, the colors are the source of truth.) */
+#corner-dot-red        { background: #C8553D; box-shadow: 0 0 14px rgba(200, 85, 61, 0.55); }
+#corner-dot-yellow     { background: #C99A2A; box-shadow: 0 0 14px rgba(201, 154, 42, 0.55); }
 /* Subtype dots — match CONDITION_COLOR in constants.js exactly. */
-#corner-dot-freeform   { background: #FF4D6D; box-shadow: 0 0 14px rgba(255, 77, 109, 0.55); }
-#corner-dot-persona    { background: #C9184A; box-shadow: 0 0 14px rgba(201, 24, 74, 0.55); }
-#corner-dot-detective  { background: #FF7438; box-shadow: 0 0 14px rgba(255, 116, 56, 0.55); }
-#corner-dot-revturing  { background: #FF006E; box-shadow: 0 0 14px rgba(255, 0, 110, 0.55); }
-#corner-dot-structured { background: #FFAA00; box-shadow: 0 0 14px rgba(255, 170, 0, 0.55); }
+#corner-dot-freeform   { background: #7AB8C7; box-shadow: 0 0 14px rgba(122, 184, 199, 0.55); }
+#corner-dot-persona    { background: #5B8DBA; box-shadow: 0 0 14px rgba(91, 141, 186, 0.55); }
+#corner-dot-detective  { background: #4F6BC4; box-shadow: 0 0 14px rgba(79, 107, 196, 0.55); }
+#corner-dot-revturing  { background: #FB7185; box-shadow: 0 0 14px rgba(251, 113, 133, 0.55); }
+#corner-dot-structured { background: #7B6BCC; box-shadow: 0 0 14px rgba(123, 107, 204, 0.55); }
 
 /* Fly-dot: temporary element that morphs content → persistent corner dots */
 .fly-dot {
@@ -38,20 +39,20 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #E74C3C;
-  box-shadow: 0 0 24px rgba(231, 76, 60, 0.7);
+  background: #C8553D;
+  box-shadow: 0 0 24px rgba(200, 85, 61, 0.7);
   z-index: 999;
   pointer-events: none;
   opacity: 0;
   transform: translate(0, 0);
 }
 .fly-dot-yellow {
-  background: #F1C40F;
-  box-shadow: 0 0 24px rgba(241, 196, 15, 0.7);
+  background: #C99A2A;
+  box-shadow: 0 0 24px rgba(201, 154, 42, 0.7);
 }
 .fly-dot-red {
-  background: #E74C3C;
-  box-shadow: 0 0 24px rgba(231, 76, 60, 0.7);
+  background: #C8553D;
+  box-shadow: 0 0 24px rgba(200, 85, 61, 0.7);
 }
 
 /* ===== Metric cards (wide layout) ===== */
@@ -213,7 +214,7 @@
   fill: #8B949E;
 }
 .annotation-text.highlight {
-  fill: #F39C12;
+  fill: #E8B04B;
   font-weight: 600;
   font-size: 13px;
 }

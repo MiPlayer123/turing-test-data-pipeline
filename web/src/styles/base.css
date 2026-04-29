@@ -58,7 +58,7 @@ a:hover { text-decoration: underline; }
 
 /* Muted text */
 .text-muted { color: #8B949E; }
-.text-accent { color: #F39C12; font-weight: 600; }
+.text-accent { color: #E8B04B; font-weight: 600; }
 
 /* Pull quotes — conversation excerpts between sections */
 .pull-quote {

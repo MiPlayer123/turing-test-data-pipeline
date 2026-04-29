@@ -425,7 +425,7 @@
   color: #c9d1d9;
   max-width: 36ch;
 }
-.step-card p em { color: #F39C12; font-style: italic; }
+.step-card p em { color: #E8B04B; font-style: italic; }
 .step-card p strong { color: #f0f3f6; }
 
 /* ===== Metric intro overlay (inside comparison scrolly-graphic) ===== */
@@ -634,19 +634,19 @@
 #quiz-prompt-area button.quiz-word.quiz-choice-btn:disabled {
   opacity: 1;
 }
-/* After submit: Human = plot red (#corner-dot-red); AI = structured green — same pulse as Unpacking AI-AI dots */
+/* After submit: Human = warm terracotta (matches CONCEPT.hedging); AI = sage green — same pulse as Unpacking AI-AI dots */
 #quiz-prompt-area.quiz-prompt-answered button.quiz-word.quiz-choice-btn[data-answer='human'] {
-  --dot-color: #e74c3c;
-  color: #fff5f5;
-  border-color: rgba(231, 76, 60, 0.82);
-  background: rgba(231, 76, 60, 0.82);
+  --dot-color: #C8553D;
+  color: #fff5f0;
+  border-color: rgba(200, 85, 61, 0.82);
+  background: rgba(200, 85, 61, 0.82);
   animation: subtypeDotPulse 2.4s ease-in-out infinite;
 }
 #quiz-prompt-area.quiz-prompt-answered button.quiz-word.quiz-choice-btn[data-answer='ai'] {
-  --dot-color: #2ecc71;
-  color: #f0fdf4;
-  border-color: rgba(46, 204, 113, 0.82);
-  background: rgba(46, 204, 113, 0.82);
+  --dot-color: #7C9E5C;
+  color: #f4f8ee;
+  border-color: rgba(124, 158, 92, 0.82);
+  background: rgba(124, 158, 92, 0.82);
   animation: subtypeDotPulse 2.4s ease-in-out infinite;
 }
 .quiz-result-badge {
@@ -1410,7 +1410,7 @@
 .hook-reveal h2 {
   font-family: var(--font-serif);
   font-size: clamp(32px, 4vw, 48px);
-  color: #D97706;
+  color: #E8B04B;
   margin-bottom: 12px;
 }
 .reveal-sub {
@@ -1503,9 +1503,9 @@
 }
 .quiz-collapse-frame {
   position: fixed;
-  border: 2px solid #e74c3c;
+  border: 2px solid #C8553D;
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(231, 76, 60, 0.45), inset 0 0 0 1px rgba(231, 76, 60, 0.35);
+  box-shadow: 0 0 20px rgba(200, 85, 61, 0.45), inset 0 0 0 1px rgba(200, 85, 61, 0.35);
   z-index: 998;
   pointer-events: none;
   opacity: 0;
@@ -1562,14 +1562,14 @@
   background: #1c2333;
 }
 .quiz-btn.correct {
-  border-color: #2ECC71;
-  background: rgba(46, 204, 113, 0.1);
-  color: #2ECC71;
+  border-color: #7C9E5C;
+  background: rgba(124, 158, 92, 0.1);
+  color: #A8C58A;
 }
 .quiz-btn.wrong {
-  border-color: #E74C3C;
-  background: rgba(231, 76, 60, 0.1);
-  color: #E74C3C;
+  border-color: #C8553D;
+  background: rgba(200, 85, 61, 0.1);
+  color: #C8553D;
 }
 .quiz-result {
   margin-top: 28px;
@@ -1615,7 +1615,7 @@
 }
 .anim-card {
   background: #161B22;
-  border: 2px solid #E74C3C;
+  border: 2px solid #C8553D;
   border-radius: 14px;
   padding: 24px 40px;
   text-align: center;

@@ -5,26 +5,30 @@
 //   3. CONDITION — the seven dataset conditions used in legends and the explorer.
 // If a chart needs a color, it picks the layer that matches its semantic role.
 
+// Editorial palette: warm = humans, cool = AI, with Reverse Turing as the
+// only warm AI — the colors carry the narrative. Two metric concepts read
+// as ink (terracotta hedging, ochre repetition) instead of UI primaries.
+
 export const CONCEPT = {
-  hedging:    "#E74C3C",
-  repetition: "#F1C40F",
+  hedging:    "#C8553D",  // terracotta
+  repetition: "#C99A2A",  // ochre
 };
 
 export const GROUP = {
-  human_human: "#1ABC9C",
-  human_ai:    "#F1C40F",
-  ai_ai:       "#E74C3C",
-  ai_ai_combined: "#FF4D6D",
+  human_human:    "#E8B04B",  // warm amber — the human side
+  human_ai:       "#C99A2A",  // ochre — high-repetition cluster (= CONCEPT.repetition)
+  ai_ai:          "#C8553D",  // terracotta — high-hedging cluster (= CONCEPT.hedging)
+  ai_ai_combined: "#5B8DBA",  // slate blue — neutral aggregate of cool AIs
 };
 
 export const CONDITIONS = [
-  { key: "human_human",            label: "Human-Human",       color: "#1ABC9C" },
-  { key: "human_ai",               label: "Human-AI",          color: "#95A5A6" },
-  { key: "ai_ai_detective",        label: "AI Detective",      color: "#FF7438" },
-  { key: "ai_ai_freeform",         label: "AI Freeform",       color: "#FF4D6D" },
-  { key: "ai_ai_freeform_persona", label: "AI Persona",        color: "#C9184A" },
-  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing", color: "#FF006E" },
-  { key: "ai_ai_structured",       label: "AI Structured",     color: "#FFAA00" },
+  { key: "human_human",            label: "Human-Human",       color: "#E8B04B" }, // warm amber
+  { key: "human_ai",               label: "Human-AI",          color: "#9CA3AF" }, // neutral gray
+  { key: "ai_ai_freeform",         label: "AI Freeform",       color: "#7AB8C7" }, // muted teal
+  { key: "ai_ai_freeform_persona", label: "AI Persona",        color: "#5B8DBA" }, // slate blue
+  { key: "ai_ai_detective",        label: "AI Detective",      color: "#4F6BC4" }, // indigo
+  { key: "ai_ai_structured",       label: "AI Structured",     color: "#7B6BCC" }, // violet
+  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing", color: "#FB7185" }, // warm coral — the anomaly
 ];
 
 export const CONDITION_COLOR = Object.fromEntries(CONDITIONS.map(c => [c.key, c.color]));
@@ -47,6 +51,9 @@ export const UI = {
   axis_line:    "#1a1f27",
 };
 
+// Model bar colors. These intentionally use brand-recognizable hues; the
+// "human" entry is kept aligned with CONDITION_COLOR.human_human so the
+// human bar reads as the same color as the human-human condition.
 export const MODEL_COLORS = {
   "gpt-5.4":         "#10A37F",
   "gpt-5.4-mini":    "#74AA9C",
@@ -54,7 +61,7 @@ export const MODEL_COLORS = {
   "grok-4-1-fast":   "#1DA1F2",
   "claude-sonnet-4": "#D97706",
   "llama-4-scout":   "#A855F7",
-  "human":           "#1ABC9C",
+  "human":           "#E8B04B",
 };
 
 export const MODEL_LABELS = {

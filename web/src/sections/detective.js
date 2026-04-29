@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { MODEL_COLORS, MODEL_LABELS } from '../data/constants.js';
+import { MODEL_COLORS, MODEL_LABELS, CONCEPT } from '../data/constants.js';
 import * as tooltip from '../components/tooltip.js';
 
 let svg, stats, x, y, width, height;
@@ -56,7 +56,7 @@ export function init(data) {
     .attr('fill', '#484F58').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace')
     .text('50%').attr('opacity', 0);
   svg.append('rect').attr('class', 'fifty-shade').attr('x', 0).attr('y', 0).attr('width', x(50)).attr('height', height)
-    .attr('fill', '#E74C3C').attr('opacity', 0);
+    .attr('fill', CONCEPT.hedging).attr('opacity', 0);
 
   // Empty bars
   svg.selectAll('.bar').data(stats).join('rect').attr('class', 'bar')
