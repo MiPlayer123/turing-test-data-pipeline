@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { openConversation } from '../components/conversationReader.js';
+import { GROUP } from '../data/constants.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -37,6 +38,7 @@ export function init() {
   // Neutral axis colours for metric explanation phase
   const COL_X = '#e6edf3';   // off-white → Repetitiveness
   const COL_Y = '#e6edf3';   // off-white → Hedging
+  const GRID_LINE = '#1e2733';  // neutral dark grid lines (was blue-tinted)
 
   // ── Defs: glow filters for each dot colour ────────────────────────────────
   const defs = el('defs');
@@ -56,9 +58,9 @@ export function init() {
     defs.appendChild(filt);
   }
 
-  makeGlow('gridRedGlow',    '#E74C3C');
-  makeGlow('gridYellowGlow', '#F1C40F');
-  makeGlow('gridBlueGlow',   '#58A6FF');
+  makeGlow('gridRedGlow',    GROUP.ai_ai);
+  makeGlow('gridYellowGlow', GROUP.human_ai);
+  makeGlow('gridHHGlow',     GROUP.human_human);
   svg.appendChild(defs);
 
   const root = el('g', { transform: `translate(${M.left},${M.top})` });
@@ -72,8 +74,8 @@ export function init() {
   for (let i = 0; i <= TICKS; i++) {
     const x = (i / TICKS) * W;
     const y = (i / TICKS) * H;
-    const vl = el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#1e3a5f', 'stroke-width': 1 });
-    const hl = el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#1e3a5f', 'stroke-width': 1 });
+    const vl = el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: GRID_LINE, 'stroke-width': 1 });
+    const hl = el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: GRID_LINE, 'stroke-width': 1 });
     gridLinesG.appendChild(vl);
     gridLinesG.appendChild(hl);
   }
@@ -108,7 +110,7 @@ export function init() {
   const DOT_X = W * 0.14;
   const DOT_Y = H * 0.14;
   const svgDotRed = el('circle', {
-    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#E74C3C', filter: 'url(#gridRedGlow)',
+    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: GROUP.ai_ai, filter: 'url(#gridRedGlow)',
   });
   gsap.set(svgDotRed, { opacity: 0, scale: 0, transformOrigin: `${DOT_X}px ${DOT_Y}px` });
   root.appendChild(svgDotRed);
@@ -118,13 +120,13 @@ export function init() {
   const BLU_X = W * 0.16, BLU_Y = H * 0.84;
 
   const svgDotYellow = el('circle', {
-    cx: YEL_X, cy: YEL_Y, r: 9, fill: '#F1C40F', filter: 'url(#gridYellowGlow)',
+    cx: YEL_X, cy: YEL_Y, r: 9, fill: GROUP.human_ai, filter: 'url(#gridYellowGlow)',
   });
   gsap.set(svgDotYellow, { opacity: 0, scale: 0, transformOrigin: `${YEL_X}px ${YEL_Y}px` });
   root.appendChild(svgDotYellow);
 
   const svgDotBlue = el('circle', {
-    cx: BLU_X, cy: BLU_Y, r: 9, fill: '#58A6FF', filter: 'url(#gridBlueGlow)',
+    cx: BLU_X, cy: BLU_Y, r: 9, fill: GROUP.human_human, filter: 'url(#gridHHGlow)',
   });
   gsap.set(svgDotBlue, { opacity: 0, scale: 0, transformOrigin: `${BLU_X}px ${BLU_Y}px` });
   root.appendChild(svgDotBlue);

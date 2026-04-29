@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { light, unlight, getCornerRect } from '../lib/cornerDots.js';
+import { CONDITION_COLOR } from '../data/constants.js';
 
 // Detective dot delivers the chart title.
 // Orange dot flies from its corner-dot anchor to the title position,
@@ -13,8 +14,8 @@ export function init() {
 
   const dot = document.createElement('div');
   dot.className = 'fly-dot fly-dot-detective';
-  dot.style.background = '#E67E22';
-  dot.style.boxShadow  = '0 0 24px rgba(230, 126, 34, 0.7)';
+  dot.style.background = CONDITION_COLOR.ai_ai_detective;
+  dot.style.boxShadow  = `0 0 24px ${CONDITION_COLOR.ai_ai_detective}b3`;
   document.body.appendChild(dot);
 
   gsap.set(titleEl, { opacity: 0 });

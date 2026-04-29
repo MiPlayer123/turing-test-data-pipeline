@@ -1,14 +1,15 @@
 import * as d3 from 'd3';
 import { loadConversation } from '../data/loader.js';
+import { CONDITION_COLOR, GROUP, UI } from '../data/constants.js';
 
 const SHOWN_CONDITIONS = [
-  { key: 'human_human',            label: 'Human-Human',    color: '#F1C40F' },
-  { key: 'ai_ai_combined',         label: 'AI-AI (combined)', color: '#FF4D6D' },
-  { key: 'ai_ai_freeform',         label: 'Freeform',       color: '#FF4D6D' },
-  { key: 'ai_ai_freeform_persona', label: 'Persona',        color: '#C9184A' },
-  { key: 'ai_ai_detective',        label: 'Detective',      color: '#FF7438' },
-  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing', color: '#FF006E' },
-  { key: 'ai_ai_structured',       label: 'Structured',     color: '#FFAA00' },
+  { key: 'human_human',            label: 'Human-Human',      color: CONDITION_COLOR.human_human },
+  { key: 'ai_ai_combined',         label: 'AI-AI (combined)', color: GROUP.ai_ai_combined },
+  { key: 'ai_ai_freeform',         label: 'Freeform',         color: CONDITION_COLOR.ai_ai_freeform },
+  { key: 'ai_ai_freeform_persona', label: 'Persona',          color: CONDITION_COLOR.ai_ai_freeform_persona },
+  { key: 'ai_ai_detective',        label: 'Detective',        color: CONDITION_COLOR.ai_ai_detective },
+  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing',   color: CONDITION_COLOR.ai_ai_reverse_turing },
+  { key: 'ai_ai_structured',       label: 'Structured',       color: CONDITION_COLOR.ai_ai_structured },
 ];
 
 const AI_AI_KEYS = [
@@ -406,7 +407,7 @@ export function init(data) {
 
     const circles = g.selectAll('circle').data(cond.points).join('circle')
       .attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean))
-      .attr('r', 0).attr('fill', cond.color).attr('stroke', '#0D1117').attr('stroke-width', 1.5)
+      .attr('r', 0).attr('fill', cond.color).attr('stroke', UI.bg_page).attr('stroke-width', 1.5)
       .style('pointer-events', 'none');
 
     // Larger invisible hit-area so hover works around each dot (not only exact pixel hit).
@@ -669,12 +670,12 @@ function createAct3TrendOverlay() {
 
   const aiPath = g.append('path')
     .attr('fill', 'none')
-    .attr('stroke', '#FF4D6D')
+    .attr('stroke', GROUP.ai_ai_combined)
     .attr('stroke-width', 2)
     .attr('d', lineGen(aiPoints));
   const hhPath = g.append('path')
     .attr('fill', 'none')
-    .attr('stroke', '#F1C40F')
+    .attr('stroke', CONDITION_COLOR.human_human)
     .attr('stroke-width', 2)
     .attr('d', lineGen(hhPoints));
 
@@ -683,7 +684,7 @@ function createAct3TrendOverlay() {
   const aiLabel = g.append('text')
     .attr('x', x(aiLast.turn) + 10)
     .attr('y', yScale(aiLast.mean) - 10)
-    .attr('fill', '#FF4D6D')
+    .attr('fill', GROUP.ai_ai_combined)
     .attr('font-size', '11px')
     .attr('font-family', 'Inter, sans-serif')
     .text('All trending down')
@@ -691,7 +692,7 @@ function createAct3TrendOverlay() {
   const hhLabel = g.append('text')
     .attr('x', x(hhLast.turn) + 10)
     .attr('y', yScale(hhLast.mean) + 14)
-    .attr('fill', '#F1C40F')
+    .attr('fill', CONDITION_COLOR.human_human)
     .attr('font-size', '11px')
     .attr('font-family', 'Inter, sans-serif')
     .text('Human-Human trend')
@@ -771,13 +772,13 @@ function resetAct3TrendOverlay() {
   act3Trend.aiLabel.attr('opacity', 0);
   act3Trend.hhLabel.attr('opacity', 0);
   act3Trend.aiPath
-    .attr('stroke', '#FF4D6D')
+    .attr('stroke', GROUP.ai_ai_combined)
     .attr('stroke-width', 2)
     .attr('stroke-dasharray', null)
     .attr('stroke-dashoffset', null)
     .attr('d', lineGen(act3Trend.aiPoints));
   act3Trend.hhPath
-    .attr('stroke', '#F1C40F')
+    .attr('stroke', CONDITION_COLOR.human_human)
     .attr('stroke-width', 2)
     .attr('stroke-dasharray', null)
     .attr('stroke-dashoffset', null)
@@ -789,14 +790,14 @@ function createAct4TrendOverlay() {
   const g = svg.append('g').attr('class', 'act4-trendline').attr('opacity', 0);
   const path = g.append('path')
     .attr('fill', 'none')
-    .attr('stroke', '#FF006E')
+    .attr('stroke', CONDITION_COLOR.ai_ai_reverse_turing)
     .attr('stroke-width', 2)
     .attr('d', lineGen(rtPoints));
   const last = rtPoints[rtPoints.length - 1];
   const label = g.append('text')
     .attr('x', x(last.turn) + 10)
     .attr('y', yScale(last.mean) - 10)
-    .attr('fill', '#FF006E')
+    .attr('fill', CONDITION_COLOR.ai_ai_reverse_turing)
     .attr('font-size', '11px')
     .attr('font-family', 'Inter, sans-serif')
     .text('Reverse Turing trend')
@@ -809,7 +810,7 @@ function resetAct4TrendOverlay() {
   act4Trend.g.attr('opacity', 0);
   act4Trend.label.attr('opacity', 0);
   act4Trend.path
-    .attr('stroke', '#FF006E')
+    .attr('stroke', CONDITION_COLOR.ai_ai_reverse_turing)
     .attr('stroke-width', 2)
     .attr('stroke-dasharray', null)
     .attr('stroke-dashoffset', null)

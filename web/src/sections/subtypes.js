@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { light as lightCornerDot, getCornerRect } from '../lib/cornerDots.js';
 import { openConversation } from '../components/conversationReader.js';
 import { setSubtypePlotPayload } from '../lib/subtypePlotStore.js';
+import { CONDITION_COLOR } from '../data/constants.js';
 
 // Map each AI-AI condition to its corner-dot slot id
 const CORNER_SLOT = {
@@ -18,35 +19,35 @@ const SUBTYPES = [
   {
     key: 'ai_ai_freeform',
     name: 'Freeform',
-    color: '#3498DB',
+    color: CONDITION_COLOR.ai_ai_freeform,
     desc: 'Open-ended casual chat. No task, no role — just two AIs talking about whatever.',
     prompt: '"Hey, how\'s it going?"',
   },
   {
     key: 'ai_ai_freeform_persona',
     name: 'Persona',
-    color: '#9B59B6',
+    color: CONDITION_COLOR.ai_ai_freeform_persona,
     desc: 'Each AI is handed a human identity — name, age, job, hobbies — and told to stay in character.',
     prompt: '"You are Alex, a 28-year-old graphic designer from Chicago."',
   },
   {
     key: 'ai_ai_detective',
     name: 'Detective',
-    color: '#E67E22',
+    color: CONDITION_COLOR.ai_ai_detective,
     desc: 'One AI interrogates the other, trying to figure out if the partner is human or machine.',
     prompt: '"Figure out if you\'re talking to a human or an AI."',
   },
   {
     key: 'ai_ai_reverse_turing',
     name: 'Reverse Turing',
-    color: '#E91E63',
+    color: CONDITION_COLOR.ai_ai_reverse_turing,
     desc: 'Both AIs are told they\'re human and must convince the other. A double bluff.',
     prompt: '"You ARE human. Prove it to the other person."',
   },
   {
     key: 'ai_ai_structured',
     name: 'Structured',
-    color: '#2ECC71',
+    color: CONDITION_COLOR.ai_ai_structured,
     desc: 'Both AIs discuss a specific topic — remote work, vaccines, AI art — with a focused prompt.',
     prompt: '"Do you think remote work is better than office work?"',
   },

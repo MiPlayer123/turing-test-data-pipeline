@@ -119,10 +119,10 @@
   max-width: var(--grid-chart-max-width);
   position: relative;
   padding: 14px 16px 18px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(9, 21, 41, 0.78) 0%, rgba(6, 14, 30, 0.72) 100%);
-  border: 1px solid rgba(50, 88, 132, 0.45);
-  box-shadow: inset 0 0 0 1px rgba(107, 146, 192, 0.08), 0 24px 48px rgba(0, 0, 0, 0.26);
+  border-radius: 14px;
+  background: #0f1419;
+  border: 1px solid #22272e;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
 }
 .grid-svg {
   width: 100%;
@@ -169,8 +169,8 @@
   max-width: 210px;
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(10, 18, 32, 0.92);
-  border: 1px solid rgba(65, 107, 156, 0.42);
+  background: rgba(13, 17, 23, 0.92);
+  border: 1px solid rgba(48, 54, 61, 0.85);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
 }
 .grid-tooltip h4 {
