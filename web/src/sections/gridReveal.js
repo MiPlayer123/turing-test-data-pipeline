@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { openConversation } from '../components/conversationReader.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -8,6 +9,8 @@ function el(tag, attrs = {}) {
   Object.entries(attrs).forEach(([k, v]) => node.setAttribute(k, v));
   return node;
 }
+
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
 
 export function init() {
   const section = document.getElementById('s-grid');
@@ -204,6 +207,36 @@ export function init() {
   });
   if (canvasWrap) canvasWrap.appendChild(tooltipLayer);
 
+  const interactiveTip = document.createElement('article');
+  interactiveTip.className = 'grid-interactive-tooltip';
+  if (canvasWrap) canvasWrap.appendChild(interactiveTip);
+
+
+  function moveInteractiveTip(e) {
+    if (!canvasWrap) return;
+    const rect = canvasWrap.getBoundingClientRect();
+    const left = e.clientX - rect.left + 18;
+    const top = e.clientY - rect.top - 12;
+    interactiveTip.style.left = `${left}px`;
+    interactiveTip.style.top = `${top}px`;
+  }
+
+  function showInteractiveTip(point, e) {
+    interactiveTip.innerHTML = `
+      <h4>${point.type}</h4>
+      <p class="grid-tip-prompt">${point.prompt}</p>
+      <p class="grid-tip-snippet">${point.snippet}</p>
+    `;
+    moveInteractiveTip(e);
+    interactiveTip.style.opacity = '1';
+  }
+
+  function hideInteractiveTip() {
+    interactiveTip.style.opacity = '0';
+  }
+
+
+
   // Initial hidden states — phase 1
   gsap.set(headbar1, { opacity: 0, y: 10 });
   gsap.set([hedgeCard, repCard],   { opacity: 0, y: 16 });
@@ -277,6 +310,7 @@ export function init() {
         gsap.set(svgDotRed, { opacity: 0, scale: 0 });
         gsap.set(svgDotYellow, { opacity: 0, scale: 0 });
         gsap.set(svgDotBlue, { opacity: 0, scale: 0 });
+        hideInteractiveTip();
         gsap.set(tooltips.map((t) => t.node), { opacity: 0, y: 8 });
         if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
         if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
