@@ -36,12 +36,17 @@ export async function init() {
     chatEl.appendChild(bubble);
   });
 
-  // Rebuild the prompt area as plain text with clickable underlined words (above the thread)
+  // Prompt line with Human / AI as boxed buttons (above the thread)
   promptArea.classList.remove('hidden');
+  /* Use a div (not p): buttons inside <p> are invalid HTML — parsers close <p> early and styling breaks. */
   promptArea.innerHTML = `
-    <p class="quiz-prompt-line">
-      Is this <span class="quiz-word" data-answer="human">human</span> or <span class="quiz-word" data-answer="ai">AI</span>?
-    </p>
+    <div class="quiz-prompt-line" role="group" aria-label="Is this human or AI?">
+      <span class="quiz-prompt-plain">Is this</span>
+      <button type="button" class="quiz-word quiz-choice-btn" data-answer="human" aria-label="Answer: Human">human</button>
+      <span class="quiz-prompt-plain">or</span>
+      <button type="button" class="quiz-word quiz-choice-btn" data-answer="ai" aria-label="Answer: AI">AI</button>
+      <span class="quiz-prompt-plain">?</span>
+    </div>
   `;
   gsap.set(promptArea, { opacity: 0, y: 16 });
 
@@ -135,7 +140,7 @@ export async function init() {
     if (keys.includes(e.key)) e.preventDefault();
   }
 
-  // Click handling on the underlined words
+  // Click handling on the Human / AI choice buttons
   promptArea.querySelectorAll('.quiz-word').forEach(word => {
     word.addEventListener('click', () => {
       if (answered) return;
@@ -145,10 +150,10 @@ export async function init() {
       unlockScroll();
       const answer = word.dataset.answer;
       const correct = answer === 'ai';
-      promptArea.querySelectorAll('.quiz-word').forEach(w => {
+      promptArea.classList.add('quiz-prompt-answered');
+      promptArea.querySelectorAll('.quiz-word').forEach((w) => {
         w.classList.add('answered');
-        if (w.dataset.answer === answer) w.classList.add(correct ? 'correct' : 'wrong');
-        if (w.dataset.answer === 'ai') w.classList.add('is-truth');
+        w.disabled = true;
       });
       resultEl.classList.remove('hidden');
       const summary = correct
