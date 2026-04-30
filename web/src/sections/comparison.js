@@ -69,8 +69,8 @@ function buildChart() {
   const shell = document.createElement('div');
   shell.className = 'cmp-shell';
   shell.innerHTML = `
-    <div class="cmp-title">Baseline First</div>
-    <div class="cmp-sub">Human-Human vs Human-AI vs AI-AI</div>
+    <div class="cmp-title">Hedging and repetitiveness</div>
+    <div class="cmp-sub">Human–Human, Human–AI, and AI–AI — dataset means</div>
     <div class="cmp-charts"></div>
   `;
   container.appendChild(shell);
