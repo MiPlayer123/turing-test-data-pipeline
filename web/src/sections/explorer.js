@@ -205,10 +205,27 @@ export function init(data) {
   scene.add(makeLabel('Hedging', new THREE.Vector3(-0.1, -0.07, 0.5), 0.038));
   scene.add(makeLabel('Density', new THREE.Vector3(-0.07, heightScale * 0.5, -0.04), 0.038));
 
+  // Conversations shown in the 2D plot sections — their dots get a glow ring in this plot.
+  const HIGHLIGHTED_IDS = new Set([
+    // gridReveal — three archetype dots
+    'conv_ai_ai_freeform_claudesonnet4_gemini25flash_F1_1775427182',
+    'conv_human_ai_wildchat_0116',
+    'conv_human_human_personachat_0073',
+    // subtypes — one per AI-AI variant
+    'conv_ai_ai_freeform_gemini25flash_grok41fast_F3_1775428210',
+    'conv_ai_ai_freeform_persona_claudesonnet4_gemini25flash_F5_1775424545',
+    'conv_ai_ai_detective_grok41fast_claudesonnet4_D5_1775425836',
+    'conv_ai_ai_reverse_turing_claudesonnet4_gpt54mini_F2_1775423379',
+    'conv_ai_ai_structured_gpt54mini_claudesonnet4_S1_1775412302',
+    // timeline
+    // 'conv_human_human_personachat_0079',
+  ]);
+
   // Scatter dots
   const dotPositions = [];
   const dotColors = [];
   const dotConditions = [];
+  const hlIndices = []; // indices into convs[] that should glow
 
   convs.forEach((c, i) => {
     const nx = (repsJ[i]   - xMin) / (xMax - xMin);
@@ -220,6 +237,7 @@ export function init(data) {
     const col = new THREE.Color(CONDITION_COLOR[c.condition] || '#fff');
     dotColors.push(col.r, col.g, col.b);
     dotConditions.push(c.condition);
+    if (HIGHLIGHTED_IDS.has(c.id)) hlIndices.push(i);
   });
 
   // Entrance animation: points start scattered high/wide, fly into their real positions.
@@ -235,9 +253,75 @@ export function init(data) {
   const dotGeo = new THREE.BufferGeometry();
   dotGeo.setAttribute('position', new THREE.BufferAttribute(livePositions, 3));
   dotGeo.setAttribute('color', new THREE.Float32BufferAttribute(dotColors, 3));
-  const dotMat = new THREE.PointsMaterial({ size: 0.015, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: 0 });
+  const _circleCanvas = document.createElement('canvas');
+  _circleCanvas.width = _circleCanvas.height = 64;
+  const _circleCtx = _circleCanvas.getContext('2d');
+  _circleCtx.beginPath();
+  _circleCtx.arc(32, 32, 30, 0, Math.PI * 2);
+  _circleCtx.fillStyle = '#fff';
+  _circleCtx.fill();
+  const _circleTex = new THREE.CanvasTexture(_circleCanvas);
+  _circleTex.minFilter = THREE.LinearFilter;
+
+  const dotMat = new THREE.PointsMaterial({ size: 0.015, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: 0, map: _circleTex, alphaTest: 0.5 });
   const dotMesh = new THREE.Points(dotGeo, dotMat);
+  dotMesh.frustumCulled = false;
   scene.add(dotMesh);
+
+  // ── Glow layer: one ring per highlighted conversation ─────────────────────
+  const hlCount = hlIndices.length;
+  const hlLivePos = new Float32Array(hlCount * 3);
+  const hlBaseColors = new Float32Array(hlCount * 3); // full-bright colors for reset
+  const hlGeoColors  = new Float32Array(hlCount * 3);
+
+  hlIndices.forEach((srcIdx, hi) => {
+    // Start at the same scrambled position the main dot uses
+    hlLivePos[hi * 3]     = startPositions[srcIdx * 3];
+    hlLivePos[hi * 3 + 1] = startPositions[srcIdx * 3 + 1];
+    hlLivePos[hi * 3 + 2] = startPositions[srcIdx * 3 + 2];
+    const col = new THREE.Color(CONDITION_COLOR[convs[srcIdx].condition] || '#fff');
+    col.toArray(hlBaseColors, hi * 3);
+    col.toArray(hlGeoColors,  hi * 3);
+  });
+
+  const hlGeo = new THREE.BufferGeometry();
+  hlGeo.setAttribute('position', new THREE.BufferAttribute(hlLivePos, 3));
+  hlGeo.setAttribute('color',    new THREE.Float32BufferAttribute(hlGeoColors, 3));
+
+  const hlMat = new THREE.ShaderMaterial({
+    vertexColors: true,
+    transparent: true,
+    depthWrite: false,
+    uniforms: { uOpacity: { value: 0 } },
+    vertexShader: `
+      varying vec3 vColor;
+      void main() {
+        vColor = color;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        // Match Three.js PointsMaterial sizeAttenuation formula, then scale ~6x
+        // to produce a visible halo ring outside the regular dot.
+        float screenPx = projectionMatrix[1][1] * 300.0 * 0.09 / (-mv.z);
+        gl_PointSize = clamp(screenPx, 8.0, 56.0);
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: `
+      uniform float uOpacity;
+      varying vec3 vColor;
+      void main() {
+        float d = length(gl_PointCoord - vec2(0.5));
+        if (d > 0.5) discard;
+        // Soft Gaussian bloom — peaks at center, fades gently outward.
+        float bloom = exp(-d * d * 8.0) * 0.85;
+        gl_FragColor = vec4(vColor, bloom * uOpacity);
+      }
+    `,
+  });
+
+  const hlMesh = new THREE.Points(hlGeo, hlMat);
+  hlMesh.frustumCulled = false;
+  scene.add(hlMesh);
+  // ─────────────────────────────────────────────────────────────────────────
 
   // Drive the fly-in with a GSAP tween once Three.js has rendered the first frame.
   const entrance = { t: 0 };
@@ -255,6 +339,16 @@ export function init(data) {
         }
         posAttr.needsUpdate = true;
         dotMat.opacity = Math.min(1, k * 1.4);
+
+        // Keep glow dots in sync with the entrance fly-in
+        const hlArr = hlGeo.attributes.position.array;
+        hlIndices.forEach((srcIdx, hi) => {
+          hlArr[hi * 3]     = startPositions[srcIdx * 3]     + (finalPositions[srcIdx * 3]     - startPositions[srcIdx * 3])     * k;
+          hlArr[hi * 3 + 1] = startPositions[srcIdx * 3 + 1] + (finalPositions[srcIdx * 3 + 1] - startPositions[srcIdx * 3 + 1]) * k;
+          hlArr[hi * 3 + 2] = startPositions[srcIdx * 3 + 2] + (finalPositions[srcIdx * 3 + 2] - startPositions[srcIdx * 3 + 2]) * k;
+        });
+        hlGeo.attributes.position.needsUpdate = true;
+        hlMat.uniforms.uOpacity.value = Math.min(1, k * 1.4);
       },
     });
   };
@@ -266,6 +360,7 @@ export function init(data) {
   createFilterChips(filtersEl, {
     onToggle(active) {
       const colAttr = dotGeo.attributes.color;
+      const hlColAttr = hlGeo.attributes.color;
       const fadeCol = new THREE.Color(0x2b3139);
       const singleSelected = active.size === 1;
       const selectedKey = singleSelected ? Array.from(active)[0] : null;
@@ -277,6 +372,16 @@ export function init(data) {
         colAttr.setXYZ(i, col.r, col.g, col.b);
       });
       colAttr.needsUpdate = true;
+
+      // Sync glow layer colors with the same fade logic
+      hlIndices.forEach((srcIdx, hi) => {
+        const c = convs[srcIdx];
+        const base = new THREE.Color(CONDITION_COLOR[c.condition] || '#fff');
+        const isFocus = singleSelected ? c.condition === selectedKey : active.has(c.condition);
+        const col = isFocus ? base : base.clone().lerp(fadeCol, 0.78);
+        hlColAttr.setXYZ(hi, col.r, col.g, col.b);
+      });
+      hlColAttr.needsUpdate = true;
     },
   });
 
