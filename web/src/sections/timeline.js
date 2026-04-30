@@ -29,8 +29,8 @@ const HEDGE_TERMS = [
 
 const ACT_COPY = {
   0: {
-    title: 'This is what human conversation looks like.',
-    sub: "The longer humans talk, the more they hedge. Hedging isn't nervousness. It's comfort. As conversations warm up, people stop choosing their words carefully — and start talking like themselves.",
+    title: 'How hedging changes over a conversation',
+    sub: 'Hedging — words like "perhaps," "I think," "it seems" — is a signal of how certain or comfortable a speaker is. This is what it looks like when two humans talk. Notice how it increases as the conversation deepens. People stop choosing their words carefully and start talking like themselves.',
   },
   1: {
     title: 'AIs do the opposite.',

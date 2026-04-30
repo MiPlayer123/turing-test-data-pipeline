@@ -205,6 +205,7 @@ export function init() {
     tooltipLayer.appendChild(tip);
     return { ...d, node: tip };
   });
+  const redTooltipEl = tooltips.find((t) => t.key === 'ai-ai')?.node;
   if (canvasWrap) canvasWrap.appendChild(tooltipLayer);
 
   const interactiveTip = document.createElement('article');
@@ -434,6 +435,10 @@ export function init() {
   // Title only after chart + red dot are in final slot
   const titleT = handoffT + 0.14;
   tl.to(headbar1, { opacity: 1, y: 0, duration: 0.42, ease: 'power2.out' }, titleT);
+  // Same static dot label as phase 2 — show beside red AI↔AI point during metric explanation
+  if (redTooltipEl) {
+    tl.to(redTooltipEl, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, titleT + 0.22);
+  }
 
   // First axis (Y / Hedging) + hedging explainer
   const hedge0 = titleT + 0.48;
@@ -492,13 +497,7 @@ export function init() {
     }, 5.97);
   }
 
-  // 6.35 — red type context appears first (dot is already present; tooltip arrives now)
-  const redTooltip = tooltips.find((t) => t.key === 'ai-ai')?.node;
-  if (redTooltip) {
-    tl.to(redTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 6.35);
-  }
-
-  // 7.05 — AI-Human yellow dot appears a bit later
+  // 7.05 — AI-Human yellow dot appears a bit later (red dot + AI↔AI tooltip already visible from phase 1)
   tl.to(svgDotYellow, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.05);
   const yellowTooltip = tooltips.find((t) => t.key === 'ai-human')?.node;
   if (yellowTooltip) {
