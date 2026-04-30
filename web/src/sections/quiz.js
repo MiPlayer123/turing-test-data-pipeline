@@ -2,8 +2,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { loadConversation } from '../data/loader.js';
 import { HOOK_CONVERSATION_IDS, HOOK_NUM_BUBBLES } from '../data/constants.js';
-import { setConversationId } from '../lib/cornerDots.js';
-// (corner-dot helpers removed — quiz now hands the red dot off to #s-grid instead)
 
 function pickHookId() {
   return HOOK_CONVERSATION_IDS[Math.floor(Math.random() * HOOK_CONVERSATION_IDS.length)];
@@ -22,8 +20,6 @@ export async function init() {
     console.warn('Hook load failed, aborting quiz init:', err);
     return;
   }
-  setConversationId('red', hookId);
-
   const turns = (conv.turns || []).slice(0, HOOK_NUM_BUBBLES);
   if (!turns.length) return;
 

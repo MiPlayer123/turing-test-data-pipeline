@@ -3,7 +3,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as tooltip from '../components/tooltip.js';
 import { CONDITIONS } from '../data/constants.js';
-import { getCornerRect } from '../lib/cornerDots.js';
 import { renderInlineSnippet } from '../components/chatSnippet.js';
 import { loadConversation } from '../data/loader.js';
 
@@ -33,8 +32,6 @@ const METRICS = [
 let container, data;
 let currentStep = -1;
 let cachedMeans = null;
-let highlightDotRed = null, highlightDotYellow = null;
-let dotsSpawned = false;
 
 export function init(rawData) {
   data = rawData;
@@ -42,15 +39,6 @@ export function init(rawData) {
   container.innerHTML = '';
   buildChart();
   onStep(0);
-
-  // When the viewer scrolls past the section, animate the highlight dots back home
-  // to their persistent corner slots instead of leaving them stranded on the bars.
-  ScrollTrigger.create({
-    trigger: '#s-comparison',
-    start: 'bottom 85%',
-    onEnter:     () => { retireHighlights(); dotsSpawned = false; },
-    onLeaveBack: () => { /* re-entering from below; onStep handles respawn */ },
-  });
 }
 
 function computeMeans() {
@@ -206,124 +194,6 @@ export function onStep(step) {
   // Box outline around the AI-AI row appears on the final explanatory beat.
   const aiAiRows = container.querySelectorAll('.cmp-row[data-cond="ai_ai"]');
   aiAiRows.forEach(r => r.classList.toggle('is-boxed', step >= 5));
-
-  // Dot highlights: spawn once when AI-AI arrives so they're settled by the final
-  // explanation beat. Skip re-spawn later so dots don't fly in twice.
-  if (step >= 5) {
-    if (!dotsSpawned) {
-      spawnHighlight('red',    'hedging',        'ai_ai');
-      spawnHighlight('yellow', 'repetitiveness', 'human_ai');
-      dotsSpawned = true;
-    }
-  } else if (dotsSpawned) {
-    removeHighlights();
-    dotsSpawned = false;
-  }
-}
-
-function spawnHighlight(color, metric, cond) {
-  // Kill any existing highlight of this color first — prevents layering on rapid scroll
-  const slot = color === 'red' ? 'red' : 'yellow';
-  const existing = slot === 'red' ? highlightDotRed : highlightDotYellow;
-  if (existing && existing.parentNode) {
-    gsap.killTweensOf(existing);
-    existing.remove();
-  }
-
-  const fill = barFillEl(metric, cond);
-  if (!fill) return;
-
-  const dot = document.createElement('div');
-  dot.className = `fly-dot fly-dot-${color} cmp-highlight-dot`;
-  document.body.appendChild(dot);
-  if (slot === 'red') highlightDotRed = dot;
-  else                highlightDotYellow = dot;
-
-  // Start at the corner dot position
-  const corner = getCornerRect(slot) || { left: window.innerWidth - 40, top: 20, width: 14, height: 14 };
-  gsap.set(dot, {
-    left: corner.left + corner.width / 2 - 8,
-    top:  corner.top + corner.height / 2 - 8,
-    opacity: 0,
-    scale: 1,
-  });
-
-  // Wait for bars to finish the 0.7s width transition, then fly fast.
-  // Query target live so scroll-induced rect shifts stay tracked.
-  const flyTween = gsap.to(dot, {
-    left: () => fill.getBoundingClientRect().right - 8,
-    top:  () => {
-      const r = fill.getBoundingClientRect();
-      return r.top + r.height / 2 - 8;
-    },
-    scale: 1.2,
-    opacity: 1,
-    duration: 0.7,
-    delay: 0.7,
-    ease: 'power2.out',
-  });
-
-  // Recompute target on scroll to stay pinned to the bar end
-  const scrollHandler = () => flyTween.invalidate();
-  window.addEventListener('scroll', scrollHandler, { passive: true });
-  dot._scrollHandler = scrollHandler;
-
-  // Steady pulse once landed
-  gsap.to(dot, {
-    scale: 1,
-    duration: 0.5,
-    delay: 1.5,
-    ease: 'sine.inOut',
-    repeat: -1,
-    yoyo: true,
-  });
-}
-
-function removeHighlights() {
-  [highlightDotRed, highlightDotYellow].forEach(dot => {
-    if (!dot) return;
-    if (dot._scrollHandler) window.removeEventListener('scroll', dot._scrollHandler);
-    gsap.killTweensOf(dot);
-    if (dot.parentNode) {
-      gsap.to(dot, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => { if (dot.parentNode) dot.remove(); },
-      });
-    }
-  });
-  highlightDotRed = null;
-  highlightDotYellow = null;
-}
-
-// Retire: dots fly back to their persistent corner slot instead of just fading.
-function retireHighlights() {
-  [['red', highlightDotRed], ['yellow', highlightDotYellow]].forEach(([slot, dot]) => {
-    if (!dot) return;
-    if (dot._scrollHandler) window.removeEventListener('scroll', dot._scrollHandler);
-    gsap.killTweensOf(dot);
-    const corner = getCornerRect(slot);
-    if (!corner) {
-      if (dot.parentNode) dot.remove();
-      return;
-    }
-    gsap.to(dot, {
-      left: corner.left + corner.width / 2 - 8,
-      top:  corner.top  + corner.height / 2 - 8,
-      scale: 1,
-      duration: 0.9,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        gsap.to(dot, {
-          opacity: 0,
-          duration: 0.3,
-          onComplete: () => { if (dot.parentNode) dot.remove(); },
-        });
-      },
-    });
-  });
-  highlightDotRed = null;
-  highlightDotYellow = null;
 }
 
 // ----- Inline transcript snippet on bar hover -----

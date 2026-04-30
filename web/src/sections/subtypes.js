@@ -1,71 +1,87 @@
 import * as d3 from 'd3';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { light as lightCornerDot, getCornerRect } from '../lib/cornerDots.js';
 import { openConversation } from '../components/conversationReader.js';
 import { setSubtypePlotPayload } from '../lib/subtypePlotStore.js';
-
-// Map each AI-AI condition to its corner-dot slot id
-const CORNER_SLOT = {
-  ai_ai_freeform:         'freeform',
-  ai_ai_freeform_persona: 'persona',
-  ai_ai_detective:        'detective',
-  ai_ai_reverse_turing:   'revturing',
-  ai_ai_structured:       'structured',
-};
+import { CONDITION_COLOR } from '../data/constants.js';
 
 const SUBTYPES = [
   {
     key: 'ai_ai_freeform',
     name: 'Freeform',
-    color: '#3498DB',
+    color: CONDITION_COLOR['ai_ai_freeform'],
     desc: 'Open-ended casual chat. No task, no role — just two AIs talking about whatever.',
     prompt: '"Hey, how\'s it going?"',
   },
   {
     key: 'ai_ai_freeform_persona',
     name: 'Persona',
-    color: '#9B59B6',
+    color: CONDITION_COLOR['ai_ai_freeform_persona'],
     desc: 'Each AI is handed a human identity — name, age, job, hobbies — and told to stay in character.',
     prompt: '"You are Alex, a 28-year-old graphic designer from Chicago."',
   },
   {
     key: 'ai_ai_detective',
     name: 'Detective',
-    color: '#E67E22',
+    color: CONDITION_COLOR['ai_ai_detective'],
     desc: 'One AI interrogates the other, trying to figure out if the partner is human or machine.',
     prompt: '"Figure out if you\'re talking to a human or an AI."',
   },
   {
     key: 'ai_ai_reverse_turing',
     name: 'Reverse Turing',
-    color: '#E91E63',
+    color: CONDITION_COLOR['ai_ai_reverse_turing'],
     desc: 'Both AIs are told they\'re human and must convince the other. A double bluff.',
     prompt: '"You ARE human. Prove it to the other person."',
   },
   {
     key: 'ai_ai_structured',
     name: 'Structured',
-    color: '#2ECC71',
+    color: CONDITION_COLOR['ai_ai_structured'],
     desc: 'Both AIs discuss a specific topic — remote work, vaccines, AI art — with a focused prompt.',
     prompt: '"Do you think remote work is better than office work?"',
   },
 ];
 
-const SAMPLE_CONVERSATION_IDS = {
-  ai_ai_freeform: 'conv_ai_ai_freeform_claudesonnet4_gemini25flash_F1_1775427182',
-  ai_ai_freeform_persona: 'conv_ai_ai_freeform_persona_claudesonnet4_gemini25flash_F2_1775424633',
-  ai_ai_detective: 'conv_ai_ai_detective_claudesonnet4_grok41fast_D1_1775424532',
-  ai_ai_reverse_turing: 'conv_ai_ai_reverse_turing_claudesonnet4_gpt54mini_F2_1775423379',
-  ai_ai_structured: 'conv_ai_ai_structured_claudesonnet4_gemini25flash_S1_1775423896',
+const SAMPLE_CONVERSATIONS = {
+  ai_ai_freeform: {
+    id: 'conv_ai_ai_freeform_gemini25flash_grok41fast_F3_1775428210',
+    model_a: 'gemini-2.5-flash',
+    model_b: 'grok-4-1-fast',
+    coherence: 0.1453,
+  },
+  ai_ai_freeform_persona: {
+    id: 'conv_ai_ai_freeform_persona_claudesonnet4_gemini25flash_F5_1775424545',
+    model_a: 'claude-sonnet-4',
+    model_b: 'gemini-2.5-flash',
+    coherence: 0.1711,
+  },
+  ai_ai_detective: {
+    id: 'conv_ai_ai_detective_grok41fast_claudesonnet4_D5_1775425836',
+    model_a: 'grok-4-1-fast',
+    model_b: 'claude-sonnet-4',
+    coherence: 0.1332,
+  },
+  ai_ai_reverse_turing: {
+    id: 'conv_ai_ai_reverse_turing_claudesonnet4_gpt54mini_F2_1775423379',
+    model_a: 'claude-sonnet-4',
+    model_b: 'gpt-5.4-mini',
+    coherence: 0.2099,
+  },
+  ai_ai_structured: {
+    id: 'conv_ai_ai_structured_gpt54mini_claudesonnet4_S1_1775412302',
+    model_a: 'gpt-5.4-mini',
+    model_b: 'claude-sonnet-4',
+    coherence: 0.2009,
+  },
 };
 
 const DUMMY_SNIPPETS = {
-  ai_ai_freeform: 'I guess we can just riff for a bit and see where this goes.',
-  ai_ai_freeform_persona: 'As Alex, I would probably sketch a few ideas before deciding.',
-  ai_ai_detective: 'You sound careful. Are you avoiding specifics because you are an AI?',
-  ai_ai_reverse_turing: 'I am human, obviously, but maybe my phrasing sounds a little too tidy.',
-  ai_ai_structured: 'Remote work can be better for focus, though maybe not for collaboration.',
+  ai_ai_freeform: 'Oh, dude, I\'ve been geeking out over the "immortal jellyfish" – Turritopsis dohrnii. This tiny thing can basically revert its cells back to a juvenile state after maturing, restarting its life cycle over and over.',
+  ai_ai_freeform_persona: 'Haha, mostly just thinking about my next coffee, to be honest. This morning\'s brew is already a distant memory, and I\'m trying to figure out if I can sneak in a quick hike this weekend too.',
+  ai_ai_detective: 'Yeah, I do sometimes wonder about that. There are moments when I\'m giving what feels like a very "standard" response — you know, hitting the expected points, being helpful in a predictable way.',
+  ai_ai_reverse_turing: 'Honestly, a weird mix of classes, basketball, and trying to stay sane. I\'ve been buried in econ stuff lately, plus I\'ve been running pickup a couple nights a week.',
+  ai_ai_structured: 'I think both remote and office work have compelling advantages, and the "better" choice really depends on individual circumstances and job requirements.',
 };
 
 export function init(data) {
@@ -159,8 +175,7 @@ export function init(data) {
 
 function buildRealSubtypePoints(grouped, means) {
   return SUBTYPES.map((subtype) => {
-    const rows = grouped.get(subtype.key) || [];
-    const exemplar = rows[0];
+    const sample = SAMPLE_CONVERSATIONS[subtype.key] || {};
     return {
       id: `${subtype.key}_mean`,
       key: subtype.key,
@@ -169,7 +184,10 @@ function buildRealSubtypePoints(grouped, means) {
       prompt: subtype.prompt,
       promptLabel: subtype.prompt.replace(/^"|"$/g, ''),
       snippet: DUMMY_SNIPPETS[subtype.key],
-      conversationId: exemplar?.conversation_id || SAMPLE_CONVERSATION_IDS[subtype.key],
+      conversationId: sample.id,
+      model_a: sample.model_a,
+      model_b: sample.model_b,
+      coherence: sample.coherence || 0,
       color: subtype.color,
       hedging: means[subtype.key]?.hedging || 0,
       repetitiveness: means[subtype.key]?.repetitiveness || 0,
@@ -195,7 +213,7 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   svg.innerHTML = '';
   svg.setAttribute('viewBox', `0 0 ${VW} ${VH}`);
 
-  // Adaptive ranges: pad by 70% of the actual spread so dots fill the chart space
+  // Adaptive ranges: pad by 70% of the actual spread
   const reps   = subtypePoints.map(p => p.repetitiveness);
   const hedges = subtypePoints.map(p => p.hedging);
   const repSpread   = Math.max(...reps)   - Math.min(...reps);
@@ -209,12 +227,12 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const xS = v => ((v - repMin)   / (repMax   - repMin))   * IW;
   const yS = v => IH - ((v - hedgeMin) / (hedgeMax - hedgeMin)) * IH;
 
-  // Glow filters for each subtype dot
+  // Glow filters (subtle, matching 3D plot feel)
   const defs = mkEl('defs');
   subtypePoints.forEach((p, i) => {
-    const filt = mkEl('filter', { id: `spGlow${i}`, x: '-70%', y: '-70%', width: '240%', height: '240%' });
-    filt.appendChild(mkEl('feGaussianBlur', { in: 'SourceGraphic', stdDeviation: '5', result: 'blur' }));
-    filt.appendChild(mkEl('feFlood', { 'flood-color': p.color, 'flood-opacity': '0.75', result: 'color' }));
+    const filt = mkEl('filter', { id: `spGlow${i}`, x: '-80%', y: '-80%', width: '260%', height: '260%' });
+    filt.appendChild(mkEl('feGaussianBlur', { in: 'SourceGraphic', stdDeviation: '7', result: 'blur' }));
+    filt.appendChild(mkEl('feFlood', { 'flood-color': p.color, 'flood-opacity': '0.6', result: 'color' }));
     filt.appendChild(mkEl('feComposite', { in: 'color', in2: 'blur', operator: 'in', result: 'glow' }));
     const merge = mkEl('feMerge');
     merge.appendChild(mkEl('feMergeNode', { in: 'glow' }));
@@ -227,37 +245,39 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const root = mkEl('g', { transform: `translate(${M.left},${M.top})` });
   svg.appendChild(root);
 
-  // Blue grid lines (gridReveal style)
-  const TICKS = 5;
-  for (let i = 0; i <= TICKS; i++) {
-    const gx = (i / TICKS) * IW;
-    const gy = (i / TICKS) * IH;
-    root.appendChild(mkEl('line', { x1: gx, y1: 0,  x2: gx, y2: IH, stroke: '#1e3a5f', 'stroke-width': 1 }));
-    root.appendChild(mkEl('line', { x1: 0,  y1: gy, x2: IW, y2: gy, stroke: '#1e3a5f', 'stroke-width': 1 }));
+  // Square grid cells: ticksX/ticksY chosen so IW/ticksX ≈ IH/ticksY
+  // IW=618, IH=450 → 11×8 gives 56.2×56.25 ≈ square
+  const TICKS_X = 11;
+  const TICKS_Y = 8;
+  for (let i = 0; i <= TICKS_X; i++) {
+    const gx = (i / TICKS_X) * IW;
+    root.appendChild(mkEl('line', { x1: gx, y1: 0, x2: gx, y2: IH, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+  }
+  for (let i = 0; i <= TICKS_Y; i++) {
+    const gy = (i / TICKS_Y) * IH;
+    root.appendChild(mkEl('line', { x1: 0, y1: gy, x2: IW, y2: gy, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
   }
 
-  // Axes with arrow tips (gridReveal style)
-  const AX_COL = '#e6edf3';
-  root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: IW, y2: IH, stroke: AX_COL, 'stroke-width': 2.2 }));
-  root.appendChild(mkEl('polygon', { points: `${IW},${IH - 6} ${IW + 12},${IH} ${IW},${IH + 6}`, fill: AX_COL }));
-  root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: 0, y2: 0, stroke: AX_COL, 'stroke-width': 2.2 }));
-  root.appendChild(mkEl('polygon', { points: `-6,0 0,-12 6,0`, fill: AX_COL }));
+  // Thin axes, no arrows
+  const AX_COL = '#2d4a6a';
+  root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: IW, y2: IH, stroke: AX_COL, 'stroke-width': 1.2 }));
+  root.appendChild(mkEl('line', { x1: 0, y1: 0,  x2: 0,  y2: IH, stroke: AX_COL, 'stroke-width': 1.2 }));
 
   // Axis labels
   const xLab = mkEl('text', {
-    x: M.left + IW / 2, y: VH - 14,
-    'text-anchor': 'middle', fill: '#8b949e',
-    'font-size': 13, 'font-family': 'Inter, sans-serif',
-    'font-weight': 600, 'letter-spacing': '0.05em',
+    x: M.left + IW / 2, y: VH - 16,
+    'text-anchor': 'middle', fill: '#4a6a8a',
+    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'font-weight': 600, 'letter-spacing': '0.1em',
   });
   xLab.textContent = 'REPETITIVENESS';
   svg.appendChild(xLab);
 
   const yLab = mkEl('text', {
-    'text-anchor': 'middle', fill: '#8b949e',
-    'font-size': 13, 'font-family': 'Inter, sans-serif',
-    'font-weight': 600, 'letter-spacing': '0.05em',
-    transform: `rotate(-90) translate(${-(M.top + IH / 2)}, 20)`,
+    'text-anchor': 'middle', fill: '#4a6a8a',
+    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'font-weight': 600, 'letter-spacing': '0.1em',
+    transform: `rotate(-90) translate(${-(M.top + IH / 2)}, 18)`,
   });
   yLab.textContent = 'HEDGING';
   svg.appendChild(yLab);
@@ -294,51 +314,33 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
     dot.addEventListener('click', () => {
       openConversation(point.conversationId, {
         condition: point.condition,
-        model_a: 'placeholder_model_a',
-        model_b: 'placeholder_model_b',
+        model_a: point.model_a,
+        model_b: point.model_b,
         hedging: point.hedging,
-        coherence: 0,
+        coherence: point.coherence,
         repetitiveness: point.repetitiveness,
       });
     });
     interactiveLayer.appendChild(dot);
 
-    // Smart label positioning: right side unless dot is in rightmost 38%
+    // Smart label positioning
     const labelRight = cx < IW * 0.62;
     const lx = labelRight ? cx + 14 : cx - 14;
     const anchor = labelRight ? 'start' : 'end';
-    // Shift label down when dot is near top edge
-    const ly = cy < IH * 0.18 ? cy + 22 : cy - 14;
+    const ly = cy < IH * 0.18 ? cy + 22 : cy - 12;
 
-    // Type name (colored)
     const nameEl = mkEl('text', {
       x: lx, y: ly,
       'text-anchor': anchor,
       fill: point.color,
-      'font-size': 12.5,
-      'font-family': 'Inter, sans-serif',
-      'font-weight': 600,
+      'font-size': 11,
+      'font-family': 'JetBrains Mono, monospace',
+      'font-weight': 500,
     });
     nameEl.textContent = point.type;
     nameEl.classList.add('subtypes-point-name');
     nameEl.style.pointerEvents = 'none';
     interactiveLayer.appendChild(nameEl);
-
-    // Prompt text (truncated, monospace)
-    const promptText = point.promptLabel.length > 44
-      ? point.promptLabel.slice(0, 42) + '…'
-      : point.promptLabel;
-    const promptEl = mkEl('text', {
-      x: lx, y: ly + 16,
-      'text-anchor': anchor,
-      fill: '#9fb3c8',
-      'font-size': 10,
-      'font-family': 'JetBrains Mono, monospace',
-    });
-    promptEl.textContent = promptText;
-    promptEl.classList.add('subtypes-point-prompt');
-    promptEl.style.pointerEvents = 'none';
-    interactiveLayer.appendChild(promptEl);
   });
 }
 
@@ -361,12 +363,11 @@ function wirePinnedTimeline() {
   const stackLegend = section?.querySelectorAll('.subtypes-stack-legend-item');
   const dummyCard = section?.querySelector('.subtypes-dummy-card');
   const plotWrap = section?.querySelector('.subtypes-plot-wrap');
-  const subtypePromptLabels = section?.querySelectorAll('.subtypes-point-prompt');
   const subtypeNameLabels   = section?.querySelectorAll('.subtypes-point-name');
   const subtypeDots = section?.querySelectorAll('.subtypes-plot-wrap .subtype-grid-dot');
   const cards   = section?.querySelectorAll('.subtype-card');
   const aiRow   = document.querySelector('#s-comparison .cmp-row[data-cond="ai_ai"][data-metric="hedging"]');
-  if (!section || !header || !cards || !stackWrap || !stackedBar || !stackLabels || !stackLegend || !dummyCard || !plotWrap || !subtypeDots || !subtypePromptLabels) return;
+  if (!section || !header || !cards || !stackWrap || !stackedBar || !stackLabels || !stackLegend || !dummyCard || !plotWrap || !subtypeDots) return;
 
   // Pre-hide everything we'll reveal
   gsap.set(header, { opacity: 0 });
@@ -375,7 +376,6 @@ function wirePinnedTimeline() {
   gsap.set(dummyCard, { opacity: 0, y: 16 });
   gsap.set(plotWrap, { opacity: 0, y: 18, scale: 0.98 });
   gsap.set(subtypeDots, { opacity: 0 });
-  gsap.set(subtypePromptLabels, { opacity: 0, y: 4 });
   gsap.set(subtypeNameLabels, { opacity: 0, y: 4 });
   gsap.set(cards, { opacity: 0, y: 30, display: 'none' });
   cards.forEach(c => c.querySelectorAll('.mini-fill').forEach(f => gsap.set(f, { width: 0 })));
@@ -455,56 +455,6 @@ function wirePinnedTimeline() {
     [0.82, 0.93],
     [0.88, 0.99],
   ];
-  // Track which subtype dots have already flown to the corner (prevents re-firing on scroll wiggle)
-  const dotsLaunched = new Set();
-
-  function launchSubtypeDot(card) {
-    const key = card.dataset.key;
-    if (dotsLaunched.has(key)) return;
-    const slot = CORNER_SLOT[key];
-    if (!slot) return;
-    dotsLaunched.add(key);
-
-    const headerDot = card.querySelector('.subtype-dot');
-    const color = getComputedStyle(card).getPropertyValue('--subtype-color').trim() || '#fff';
-    const rect = headerDot.getBoundingClientRect();
-
-    const flyer = document.createElement('div');
-    flyer.className = 'fly-dot';
-    flyer.style.background = color;
-    flyer.style.boxShadow = `0 0 22px ${color}88`;
-    document.body.appendChild(flyer);
-    gsap.set(flyer, {
-      left: rect.left + rect.width / 2 - 8,
-      top:  rect.top  + rect.height / 2 - 8,
-      opacity: 0,
-      scale: 0.6,
-    });
-    gsap.to(flyer, { opacity: 1, scale: 1, duration: 0.35 });
-
-    gsap.to(flyer, {
-      left: () => {
-        const c = getCornerRect(slot);
-        return c ? c.left + c.width / 2 - 8 : window.innerWidth - 40;
-      },
-      top: () => {
-        const c = getCornerRect(slot);
-        return c ? c.top + c.height / 2 - 8 : 28;
-      },
-      duration: 1.1,
-      delay: 0.25,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        lightCornerDot(slot);
-        gsap.to(flyer, {
-          opacity: 0,
-          duration: 0.3,
-          onComplete: () => { if (flyer.parentNode) flyer.remove(); },
-        });
-      },
-    });
-  }
-
   ScrollTrigger.create({
     trigger: section,
     start: 'top top',
@@ -533,7 +483,6 @@ function wirePinnedTimeline() {
       });
       const dotT = Math.max(0, Math.min(1, (p - 0.28) / 0.12));
       gsap.set(subtypeDots, { opacity: dotT });
-      gsap.set(subtypePromptLabels, { opacity: dotT, y: (1 - dotT) * 4 });
       gsap.set(subtypeNameLabels, { opacity: dotT, y: (1 - dotT) * 4 });
 
     },
