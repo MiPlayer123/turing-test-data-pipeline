@@ -8,7 +8,6 @@ import { loadData } from './data/loader.js';
 
 gsap.registerPlugin(ScrollTrigger);
 import * as quiz from './sections/quiz.js';
-import * as comparison from './sections/comparison.js';
 import * as subtypes from './sections/subtypes.js';
 import * as timeline from './sections/timeline.js';
 import * as timelineMorph from './sections/timelineMorph.js';
@@ -37,10 +36,6 @@ async function main() {
 
   // S1: Quiz
   quiz.init(data);
-
-  // S4: Comparison bars (H-H / H-AI / AI-AI)
-  comparison.init(data);
-  initScrolly('s-comparison', (step) => comparison.onStep(step));
 
   // S4.5: AI-AI subtype breakdown
   subtypes.init(data);

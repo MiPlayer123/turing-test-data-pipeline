@@ -66,6 +66,8 @@
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+  width: min(100%, var(--grid-chart-max-width));
+  max-width: var(--grid-chart-max-width);
 }
 .grid-headline {
   font-family: var(--font-serif);
@@ -79,7 +81,8 @@
   font-family: var(--font-sans);
   font-size: 14px;
   color: #8b949e;
-  margin: 0;
+  line-height: 1.45;
+  margin: 0 0 28px;
 }
 
 /* Body: [hedging card] [grid] [repetitiveness card] */
@@ -121,6 +124,7 @@
   padding: 14px 16px 18px;
   border-radius: 18px;
   border: 1px solid #22272e;
+  transform: translateX(-14px);
 }
 .grid-svg {
   width: 100%;
@@ -217,6 +221,16 @@
   font-size: 10.5px;
   color: #9fb3c8;
   line-height: 1.45;
+}
+.grid-interactive-tooltip .grid-tip-scores {
+  margin: 0 0 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #9fb3c8;
+  line-height: 1.45;
+}
+.grid-interactive-tooltip .grid-tip-scores strong {
+  font-weight: 700;
 }
 .grid-interactive-tooltip .grid-tip-snippet {
   margin: 0;

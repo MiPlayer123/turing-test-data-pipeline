@@ -25,6 +25,8 @@ export function init() {
   // - higher duration => slower travel along the path
   const HANDOFF_SCRUB = 0.6;
   const DOT_TRAVEL_DURATION = 0.55;
+  const PHASE_TWO_BLOCK_OFFSET_Y = 28;
+  const PHASE_TWO_PLOT_GAP_Y = 26;
   // Layout knobs to keep JS timeline and CSS sizing in sync
   const FINAL_CHART_MAX = 550;
   const PHASE_ONE_GRID_COLUMNS = 'minmax(220px, 280px) minmax(500px, 550px) minmax(220px, 280px)';
@@ -34,6 +36,9 @@ export function init() {
   const M = { top: 48, right: 48, bottom: 64, left: 64 };
   const W = VW - M.left - M.right;
   const H = VH - M.top  - M.bottom;
+  const X_AXIS_MAX = 0.12;
+  const repToX = (v) => (v / X_AXIS_MAX) * W;
+  const hedgeToY = (v) => (1 - v) * H;
 
   // Neutral axis colours for metric explanation phase
   const COL_X = '#c9d1d9';   // off-white → Repetitiveness
@@ -104,26 +109,28 @@ export function init() {
   // ── Axis tick marks + number labels ──────────────────────────────────────
   const xTicksG = el('g', { class: 'axis-ticks-x' });
   const yTicksG = el('g', { class: 'axis-ticks-y' });
-  const TICK_VALS = [0, 0.25, 0.5, 0.75, 1.0];
-  const TICK_LABELS = ['0', '.25', '.50', '.75', '1'];
-  TICK_VALS.forEach((v, i) => {
-    const x = v * W;
+  const X_TICK_VALS = [0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12];
+  const X_TICK_LABELS = ['0', '0.02', '0.04', '0.06', '0.08', '0.10', '0.12'];
+  const Y_TICK_VALS = [0, 0.25, 0.5, 0.75, 1.0];
+  const Y_TICK_LABELS = ['0', '.25', '.50', '.75', '1'];
+  X_TICK_VALS.forEach((v, i) => {
+    const x = repToX(v);
     xTicksG.appendChild(el('line', { x1: x, y1: H, x2: x, y2: H + 5, stroke: '#2d4a6a', 'stroke-width': 1 }));
     const lbl = el('text', {
       x, y: H + 18, 'text-anchor': 'middle', fill: '#4a6a8a',
       'font-size': 9, 'font-family': 'Inter, sans-serif', 'font-weight': 500,
     });
-    lbl.textContent = TICK_LABELS[i];
+    lbl.textContent = X_TICK_LABELS[i];
     xTicksG.appendChild(lbl);
   });
-  TICK_VALS.forEach((v, i) => {
+  Y_TICK_VALS.forEach((v, i) => {
     const y = H - v * H;
     yTicksG.appendChild(el('line', { x1: -5, y1: y, x2: 0, y2: y, stroke: '#2d4a6a', 'stroke-width': 1 }));
     const lbl = el('text', {
       x: -10, y: y + 3.5, 'text-anchor': 'end', fill: '#4a6a8a',
       'font-size': 9, 'font-family': 'Inter, sans-serif', 'font-weight': 500,
     });
-    lbl.textContent = TICK_LABELS[i];
+    lbl.textContent = Y_TICK_LABELS[i];
     yTicksG.appendChild(lbl);
   });
 
@@ -147,6 +154,11 @@ export function init() {
   // ── Phase-2 dots: AI-Human (yellow) and Human-Human (blue) ───────────────
   const YEL_X = W * 0.42, YEL_Y = H * 0.52;
   const BLU_X = W * 0.16, BLU_Y = H * 0.84;
+  const PHASE_TWO_TARGETS = {
+    blue: { x: repToX(0.003), y: hedgeToY(0.515) },   // Human-Human
+    yellow: { x: repToX(0.092), y: hedgeToY(0.155) }, // Human-AI
+    red: { x: repToX(0.012), y: hedgeToY(0.782) },    // AI-AI
+  };
 
   const svgDotYellow = el('circle', {
     cx: YEL_X, cy: YEL_Y, r: 9, fill: CONDITION_COLOR.human_ai,
@@ -170,7 +182,7 @@ export function init() {
       id: 'conv_ai_ai_freeform_claudesonnet4_gemini25flash_F1_1775427182',
       condition: 'ai_ai_freeform',
       model_a: 'claude-sonnet-4', model_b: 'gemini-2.5-flash', coherence: 1.0246,
-      hedging: 0.2131, repetitiveness: 0.005,
+      hedging: 0.782, repetitiveness: 0.012,
       type: 'AI ↔ AI',
       desc: 'Generated AI-only conversations between models.',
       snippet: "Hey! I'm doing pretty good, thanks for asking. Just enjoying the day. How about you? What's new?",
@@ -178,8 +190,8 @@ export function init() {
     yellow: {
       id: 'conv_human_ai_wildchat_0116',
       condition: 'human_ai',
-      model_a: 'human', model_b: 'gpt-4-0314', coherence: 0.062,
-      hedging: 0.179, repetitiveness: 0.0560,
+      model_a: 'human', model_b: 'gpt-4-0314', coherence: 0.2714,
+      hedging: 0.155, repetitiveness: 0.092,
       type: 'AI ↔ Human',
       desc: 'Conversations between a model and a human participant.',
       snippet: 'what is the impact to third parties which are neither buyers of the output nor suppliers of inputs of a clothing business that offers locally woven textiles?',
@@ -187,8 +199,8 @@ export function init() {
     blue: {
       id: 'conv_human_human_personachat_0073',
       condition: 'human_human',
-      model_a: 'human', model_b: 'human', coherence: 0.060,
-      hedging: 0.000, repetitiveness: 0.000,
+      model_a: 'human', model_b: 'human', coherence: 1.2195,
+      hedging: 0.515, repetitiveness: 0.003,
       type: 'Human ↔ Human',
       desc: 'Real human-to-human conversations from the dataset.',
       snippet: 'on occasion i like to drive quickly',
@@ -299,6 +311,21 @@ export function init() {
   });
   const [redLabel, yellowLabel, blueLabel] = labelEls;
   gsap.set(labelEls, { opacity: 0 });
+  function syncLabelPositions() {
+    const redX = Number(svgDotRed.getAttribute('cx'));
+    const redY = Number(svgDotRed.getAttribute('cy'));
+    const yelX = Number(svgDotYellow.getAttribute('cx'));
+    const yelY = Number(svgDotYellow.getAttribute('cy'));
+    const bluX = Number(svgDotBlue.getAttribute('cx'));
+    const bluY = Number(svgDotBlue.getAttribute('cy'));
+    redLabel.setAttribute('x', redX + 15);
+    redLabel.setAttribute('y', redY + 4);
+    yellowLabel.setAttribute('x', yelX + 15);
+    yellowLabel.setAttribute('y', yelY + 4);
+    blueLabel.setAttribute('x', bluX + 15);
+    blueLabel.setAttribute('y', bluY + 4);
+  }
+  syncLabelPositions();
 
   const interactiveTip = document.createElement('article');
   interactiveTip.className = 'grid-interactive-tooltip';
@@ -314,9 +341,14 @@ export function init() {
   }
 
   function showInteractiveTip(point, e) {
+    const scoreRows = `
+      <p class="grid-tip-scores">Repetitiveness: <strong>${point.repetitiveness.toFixed(3)}</strong></p>
+      <p class="grid-tip-scores">Hedging: <strong>${point.hedging.toFixed(3)}</strong></p>
+      `;
     interactiveTip.innerHTML = `
       <h4>${point.type}</h4>
       <p class="grid-tip-prompt">${point.desc}</p>
+      ${scoreRows}
       <p class="grid-tip-snippet">${point.snippet}</p>
     `;
     moveInteractiveTip(e);
@@ -393,13 +425,20 @@ export function init() {
         gsap.set(gridLinesG, { opacity: 0 });
         gsap.set([xTicksG, yTicksG], { opacity: 0 });
         if (headbar1) gsap.set(headbar1, { opacity: 0, y: 10 });
-        if (headbar2) gsap.set(headbar2, { clearProps: 'height,paddingTop,paddingBottom,overflow' });
+        if (headbar2) gsap.set(headbar2, { opacity: 0, y: 10, clearProps: 'height,paddingTop,paddingBottom,overflow' });
         gsap.set(svgDotRed, { opacity: 0, scale: 0 });
         gsap.set(svgDotYellow, { opacity: 0, scale: 0 });
         gsap.set(svgDotBlue, { opacity: 0, scale: 0 });
+        svgDotRed.setAttribute('cx', DOT_X);
+        svgDotRed.setAttribute('cy', DOT_Y);
+        svgDotYellow.setAttribute('cx', YEL_X);
+        svgDotYellow.setAttribute('cy', YEL_Y);
+        svgDotBlue.setAttribute('cx', BLU_X);
+        svgDotBlue.setAttribute('cy', BLU_Y);
+        syncLabelPositions();
         hideInteractiveTip();
         gsap.set(labelEls, { opacity: 0 });
-        if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
+        if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12, marginTop: 0 });
         if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
         if (gridSideRight) gsap.set(gridSideRight, { autoAlpha: 0 });
         if (gridBottom) gsap.set(gridBottom, { autoAlpha: 0 });
@@ -418,6 +457,7 @@ export function init() {
             transformOrigin: '50% 50%',
           });
         }
+        if (gridShell) gsap.set(gridShell, { y: 0 });
         positionTooltips();
       },
     },
@@ -553,11 +593,6 @@ export function init() {
   // 5.85 — metric cards slide out
   tl.to([hedgeCard, repCard], { opacity: 0, y: 10, duration: 0.5 }, 5.85);
 
-  // 6.0 — collapse headbar-2's layout height so the flex parent re-centers the chart
-  if (headbar2) {
-    tl.to(headbar2, { height: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden', duration: 0.7, ease: 'power2.inOut' }, 6.0);
-  }
-
   // 5.9+ — smooth continuous morph into the "types" map:
   // fade/slide cards out while the grid recenters and expands.
   if (gridSideLeft) {
@@ -573,6 +608,7 @@ export function init() {
     tl.to(gridBody, {
       gridTemplateColumns: '0fr minmax(0, 1fr) 0fr',
       gap: 0,
+      marginTop: PHASE_TWO_PLOT_GAP_Y,
       duration: 1.1,
       ease: 'power2.inOut',
     }, 5.93);
@@ -585,17 +621,25 @@ export function init() {
       onUpdate: positionTooltips,
     }, 5.97);
   }
+  if (gridShell) {
+    tl.to(gridShell, {
+      y: PHASE_TWO_BLOCK_OFFSET_Y,
+      duration: 1.1,
+      ease: 'power2.inOut',
+      onUpdate: positionTooltips,
+    }, 5.93);
+  }
 
-  // 6.35 — red label appears beside the dot that's already present
-  tl.to(redLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 6.35);
+  // Show phase-2 heading centered above the three-type plot.
+  tl.to(headbar2, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 6.12);
 
-  // 7.05 — AI-Human yellow dot + label
-  tl.to(svgDotYellow, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.05);
-  tl.to(yellowLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 7.35);
-
-  // 7.6 — Human-Human blue dot + label
-  tl.to(svgDotBlue, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.6);
-  tl.to(blueLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 7.9);
+  // Place all three dots directly at their final coordinates for this phase.
+  tl.set(svgDotRed, { attr: { cx: PHASE_TWO_TARGETS.red.x, cy: PHASE_TWO_TARGETS.red.y } }, 6.3);
+  tl.set(svgDotYellow, { attr: { cx: PHASE_TWO_TARGETS.yellow.x, cy: PHASE_TWO_TARGETS.yellow.y } }, 6.3);
+  tl.set(svgDotBlue, { attr: { cx: PHASE_TWO_TARGETS.blue.x, cy: PHASE_TWO_TARGETS.blue.y } }, 6.3);
+  tl.call(syncLabelPositions, null, 6.3);
+  tl.to([svgDotRed, svgDotYellow, svgDotBlue], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
+  tl.to([redLabel, yellowLabel, blueLabel], { opacity: 1, duration: 0.4, ease: 'power2.out' }, 6.9);
 
   // Keep refs used so lint doesn't strip while preserving future extensibility.
   void gridShell;

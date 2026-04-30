@@ -10,8 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="app">
-
     <!-- S0: TITLE SLIDE -->
     <section id="s-title" class="act full-screen center-content">
       <div class="title-block">
@@ -77,7 +75,10 @@
           <!-- Phase 2 headline (conversation types) -->
           <div class="grid-headbar grid-headbar-2" id="grid-headbar-2">
             <h2 class="grid-headline">Three kinds of conversation.</h2>
-            <p class="grid-headline-sub">Each type sits in a different part of the map.</p>
+            <p class="grid-headline-sub">We looked at what happens when the mix of human and AI changes — and whether you can tell the difference.</p>
+          </div>
+          <div class="grid-headbar" id="grid-headbar-1">
+            <h2 class="grid-headline">Two numbers that reveal who's talking.</h2>
           </div>
 
           <div class="grid-body">
@@ -151,41 +152,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- S4: COMPARISON BARS — all 7 conditions, white/gray bars, colored condition legend -->
-    <section id="s-comparison" class="act scrolly">
-      <div class="scrolly-graphic">
-        <div id="comparison-viz" class="scrolly-viz"></div>
-      </div>
-      <div class="scrolly-steps">
-        <div class="step step-quiet" data-step="0" aria-hidden="true"></div>
-        <div class="step step-quiet" data-step="1" aria-hidden="true"></div>
-        <div class="step" data-step="2">
-          <!-- <div class="step-card">
-            <h3>Start with the baseline.</h3>
-            <p>This is real human-to-human conversation data. Low hedging and low repetition set the reference point for everything that follows.</p>
-          </div>
-        </div>
-        <div class="step" data-step="3">
-          <div class="step-card">
-            <h3>Now add AI.</h3>
-            <p>A human talking to an AI. Hedging actually <em>drops</em> — people are more direct with machines.</p>
-          </div>
-        </div>
-        <div class="step" data-step="4">
-          <div class="step-card">
-            <h3>AIs alone together.</h3>
-            <p>Put two AIs in a room — no human in the loop. Hedging jumps. Repetition climbs. They behave differently than when a human's around.</p>
-          </div>
-        </div>
-        <div class="step" data-step="5">
-          <div class="step-card">
-            <h3>Your dots live here.</h3>
-            <p>Red marks <strong>hedging in AI-AI</strong>. Yellow marks <strong>repetition in human-AI</strong>. But "AI-AI" is actually <em>five different setups</em> — keep scrolling.</p>
-          </div>
-        </div> -->
       </div>
     </section>
 
@@ -282,8 +248,6 @@
         <div class="filter-chips" id="explorer-filters" style="max-width:900px; margin:12px auto 0;"></div>
       </div>
     </section>
-
-  </div>
 
   <!-- Shared UI -->
   <div class="tooltip" id="tooltip"></div>
