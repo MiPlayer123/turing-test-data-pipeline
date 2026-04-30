@@ -1634,6 +1634,37 @@
   white-space: nowrap;
 }
 
+/* ===== Explorer pipeline legend ===== */
+.explorer-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 7px 14px;
+  background: #161B22;
+  border: 1px solid #21262D;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #6e7681;
+}
+.pipeline-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #484F58;
+  margin-right: 4px;
+}
+.pipeline-metric { color: #58A6FF; }
+.pipeline-op     { color: #8B949E; }
+.pipeline-range  { color: #3FB950; }
+.pipeline-sep    { color: #30363D; }
+.pipeline-note   { color: #484F58; font-family: 'Inter', sans-serif; font-size: 10px; }
+
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
 }
