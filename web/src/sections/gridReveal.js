@@ -521,10 +521,8 @@ export function init() {
   // Title only after chart + red dot are in final slot
   const titleT = handoffT + 0.14;
   tl.to(headbar1, { opacity: 1, y: 0, duration: 0.42, ease: 'power2.out' }, titleT);
-  // Same static dot label as phase 2 — show beside red AI↔AI point during metric explanation
-  if (redTooltipEl) {
-    tl.to(redTooltipEl, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, titleT + 0.22);
-  }
+  // Show red label beside the AI↔AI dot during metric explanation phase too
+  tl.to(redLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, titleT + 0.22);
 
   // First axis (Y / Hedging) + hedging explainer
   const hedge0 = titleT + 0.48;

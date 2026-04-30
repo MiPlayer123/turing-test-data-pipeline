@@ -1,6 +1,6 @@
 export const CONDITIONS = [
   { key: "human_human",            label: "Human-Human",     color: "#1ABC9C" },
-  { key: "human_ai",               label: "Human-AI",        color: "#95A5A6" },
+  { key: "human_ai",               label: "Human-AI",        color: "#A855F7" },
   { key: "ai_ai_detective",        label: "AI Detective",    color: "#FF7438" },
   { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#FF4D6D" },
   { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#C9184A" },
