@@ -228,13 +228,13 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const root = mkEl('g', { transform: `translate(${M.left},${M.top})` });
   svg.appendChild(root);
 
-  // Blue grid lines (gridReveal style)
+  // Neutral grid lines (matches gridReveal post-redesign)
   const TICKS = 5;
   for (let i = 0; i <= TICKS; i++) {
     const gx = (i / TICKS) * IW;
     const gy = (i / TICKS) * IH;
-    root.appendChild(mkEl('line', { x1: gx, y1: 0,  x2: gx, y2: IH, stroke: '#1e3a5f', 'stroke-width': 1 }));
-    root.appendChild(mkEl('line', { x1: 0,  y1: gy, x2: IW, y2: gy, stroke: '#1e3a5f', 'stroke-width': 1 }));
+    root.appendChild(mkEl('line', { x1: gx, y1: 0,  x2: gx, y2: IH, stroke: '#1e2733', 'stroke-width': 1 }));
+    root.appendChild(mkEl('line', { x1: 0,  y1: gy, x2: IW, y2: gy, stroke: '#1e2733', 'stroke-width': 1 }));
   }
 
   // Axes with arrow tips (gridReveal style)
@@ -332,7 +332,7 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
     const promptEl = mkEl('text', {
       x: lx, y: ly + 16,
       'text-anchor': anchor,
-      fill: '#9fb3c8',
+      fill: '#8B949E',
       'font-size': 10,
       'font-family': 'JetBrains Mono, monospace',
     });
