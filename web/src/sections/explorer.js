@@ -306,7 +306,6 @@ export function init(data) {
     const idx = hits[0].index;
     const conv = convs[idx];
     if (!conv) return;
-    // `convs` come from trajectories.json — enrich with metrics from the CSV row if available.
     const csvRow = (data.conversations || []).find(r => r.conversation_id === conv.id);
     openTranscriptPanel({
       conversation_id: conv.id,

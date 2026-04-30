@@ -20,7 +20,7 @@ export async function loadData() {
       row.word_count = +row.word_count;
       return row;
     }),
-    fetch('/data/test_trajs.json').then(r => r.json()),
+    fetch('/data/trajectories.json').then(r => r.json()),
   ]);
 
   return { conversations, turnMetrics, trajectories };
