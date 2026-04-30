@@ -40,9 +40,10 @@ export async function init() {
   promptArea.classList.remove('hidden');
   /* Use a div (not p): buttons inside <p> are invalid HTML — parsers close <p> early and styling breaks. */
   promptArea.innerHTML = `
+    <p class="quiz-prompt-overline">read the thread, then choose</p>
     <div class="quiz-prompt-line" role="group" aria-label="Is this human or AI?">
       <span class="quiz-prompt-plain">Is this</span>
-      <button type="button" class="quiz-word quiz-choice-btn" data-answer="human" aria-label="Answer: Human">human</button>
+      <button type="button" class="quiz-word quiz-choice-btn" data-answer="human" aria-label="Answer: Human">Human</button>
       <span class="quiz-prompt-plain">or</span>
       <button type="button" class="quiz-word quiz-choice-btn" data-answer="ai" aria-label="Answer: AI">AI</button>
       <span class="quiz-prompt-plain">?</span>
