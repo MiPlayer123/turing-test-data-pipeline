@@ -1,0 +1,151 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0158",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 14,
+  "timestamp_start": "2023-04-09 17:37:10+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Can you write me an instagram caption for a school called St Fatima celebrating the national division's seniors day",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Celebrating the brilliant minds of St. Fatima on National Seniors Day! #StFatima #NationalSeniorsDay #ClassOf2022",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "No no no it's not a national holiday the school has a national division and an American division",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Celebrating the incredible seniors of St. Fatima's National Division on their upcoming graduation! #StFatima #NationalDivision #ClassOf2022",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Make it longer",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Congratulations to the amazing seniors of St. Fatima's National Division on their upcoming graduation! Your time at St. Fatima has been filled with hard work, determination, and so many unforgettable memories. As you prepare to move on to the next chapter of your lives, remember that you will always be a part of the St. Fatima family. We can't wait to see all the incredible things you will accomplish in the future! #StFatima #NationalDivision #ClassOf2022 #Graduation #Congratulations",
+      "token_count": 77,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Congratulations to our amazing National Division seniors on their graduation! Your time at St. Fatima has been filled with hard work, determination, and so many unforgettable memories. We can\u2019t wait to see all the incredible things you will accomplish in the future!\nCan you rewrite this without the word congratulations",
+      "token_count": 50,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "We celebrate the amazing National Division seniors of St. Fatima on their graduation day! Your incredible journey at our school has been an inspiration to all of us, filled with devotion, perseverance, and countless treasured memories. We eagerly anticipate the magnificent future awaiting you as you embark on the next phase of your journey. Always remember that you are a part of the St. Fatima family. We are immensely proud of your achievements! #StFatima #NationalDivision #GraduationDay #ClassOf2022",
+      "token_count": 77,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Do you know about a medication called bravamaz",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I am not aware of a medication called \"bravamaz.\" It is possible that the spelling might be incorrect or that the medication is only available in certain countries. If you can provide more information about the medication, I may be able to assist you better.",
+      "token_count": 45,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Bravamax",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I'm sorry, but I still cannot find any information about a medication called \"Bravamax\". It is possible that the name is spelled or pronounced differently, or that it is not approved by regulatory agencies for medical use. If you can provide more details such as the manufacturer or indication, I may be able to help you further.",
+      "token_count": 57,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Brovamax",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I apologize for the previous confusion. However, I still can not find any reliable sources or information about the medication called \"Brovamax\". It's possible that the name is spelled incorrectly or the medication is only available in specific countries. If you can provide more details about the medication, such as manufacturer or indication, I may be able to assist you better.",
+      "token_count": 61,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 447,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

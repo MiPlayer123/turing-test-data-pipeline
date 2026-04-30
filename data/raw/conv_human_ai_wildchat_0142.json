@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0142",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 15:39:57+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Hello, now you are a linguist, and I am going to give you some paragraphs consecutively, please help me picking up the attributive clauses in the texts. if you understands my instructions, please reply me \"ok\"",
+      "token_count": 36,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Ok, I am ready to help you.",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Failure to recognize that the American is at heart an idealist is to lack understanding of our national character. Two of our greatest interpreters proclaimed it, Emerson and William James. In a recent address at the Paris Sorbonne on \"American Idealism,\" M. Firmin Roz observed that a people is rarely justly estimated by its contemporaries. The French, he says, have been celebrated chiefly for the skill of their chefs and their vaudeville actors, while in the disturbed 'speculum mundi' Americans have appeared as a collection of money grabbers whose philosophy is the dollar. It remained for the war to reveal the true nature of both peoples. The American colonists, M. Roz continues, unlike other colonists, were animated not by material motives, but by the desire to safeguard and realize an ideal; our inherent characteristic today is a belief in the virtue and power of ideas, of a national, indeed, of a universal, mission. In the Eighteenth Century we proposed a Philosophy and adopted a Constitution far in advance of the political practice of the day, and set up a government of which Europe predicted the early downfall. Nevertheless, thanks partly to good fortune, and to the farseeing wisdom of our early statesmen who perceived that the success of our experiment depended upon the maintenance of an isolation from European affairs, we established democracy as a practical form of government.\n\n\nWe have not always lived up to our beliefs in ideas. In our dealings with other nations, we yielded often to imperialistic ambitions and thus, to a certain extent, justified the cynicism of Europe. We took what we wanted\u2014and more. From Spain we seized western Florida; the annexation of Texas and the subsequent war with Mexico are acts upon which we cannot look back with unmixed democratic pride; while more than once we professed a naive willingness to fight England in order to push our boundaries further north. We regarded the Monroe Doctrine as altruistic, while others smiled. But it suited England, and her sea power gave it force.",
+      "token_count": 338,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "- \"that the American is at heart an idealist\" \n- \"whose philosophy is the dollar\" \n- \"that Europe predicted the early downfall\" \n- \"that the success of our experiment depended upon the maintenance of an isolation from European affairs\"\n- \"In our dealings with other nations, we yielded often to imperialistic ambitions\" \n- \"upon which we cannot look back with unmixed democratic pride\"\n- \"while more than once we professed a naive willingness to fight England\" \n- \"while others smiled\"",
+      "token_count": 80,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "thank you for your selection, so how many attributive clauses are there in the paragraphs?",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "There are 8 attributive clauses in the paragraphs.",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "could you please tell me which are the attributive clauses?",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, the attributive clauses in the paragraphs are: \n\n1. \"that the American is at heart an idealist\" \n2. \"whose philosophy is the dollar\" \n3. \"that Europe predicted the early downfall\" \n4. \"that the success of our experiment depended upon the maintenance of an isolation from European affairs\" \n5. \"In our dealings with other nations, we yielded often to imperialistic ambitions\" \n6. \"upon which we cannot look back with unmixed democratic pride\" \n7. \"while more than once we professed a naive willingness to fight England\" \n8. \"while others smiled\"",
+      "token_count": 88,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 582,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

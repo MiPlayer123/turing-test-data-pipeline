@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0115",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 12:36:52+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Can you write an instagram caption for a hotel called Semiramis InterContinental that are hosting a an easter lunch on April 16th in their Night and Day restaurant from 2:30 to 4 pm with an all inclusive price of 1015 EGP per person, for reservations call xxxxxx",
+      "token_count": 47,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\"Indulge in an egg-cellent Easter feast at Semiramis InterContinental's Night and Day restaurant! Join us on April 16th from 2:30 to 4 pm for a delectable holiday lunch experience. With an all inclusive price of 1015 EGP per person, it's the perfect way to celebrate with family and friends. Book your reservation now by calling xxxxxx. Hop on over and let us treat you to a memorable Easter celebration!\" \ud83d\udc30\ud83c\udf7d\ufe0f\ud83e\udd42 #SemiramisInterContinental #EasterLunch #NightandDayRestaurant #AllInclusive #ReservationsOpen #FamilyCelebration #HolidayFeast",
+      "token_count": 77,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Can you rewrite that without the word induldge and less easter wordplay",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\"Join us for an exquisite holiday feast at Semiramis InterContinental's Night and Day restaurant! On April 16th from 2:30 to 4 pm, savor a delicious lunch experience specially curated for the occasion. For an all-inclusive price of 1015 EGP per person, gather with your loved ones and feast to your heart's content. Reserve your spot now by calling xxxxxx. Let us make your holiday celebration a truly special one at Semiramis InterContinental!\" \ud83c\udf7d\ufe0f\ud83e\udd42 #SemiramisInterContinental #HolidayCelebration #NightandDayRestaurant #AllInclusive #ReserveNow #FamilyGathering #MemorableExperience",
+      "token_count": 80,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Can you answer questions?",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, I can try my best to answer your questions.",
+      "token_count": 10,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Do you know about aderall or concerta ?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, I am aware of Adderall and Concerta. They are prescription medications used to treat ADHD (Attention Deficit Hyperactivity Disorder) and narcolepsy. They are both stimulant medications that affect chemicals in the brain and nerves that contribute to hyperactivity and impulse control. Adderall is a combination of amphetamine and dextroamphetamine, while Concerta contains methylphenidate. These medications should only be used under the supervision of a qualified healthcare provider.",
+      "token_count": 68,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Does smoking weed effect concerta?",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The effects of smoking weed (cannabis) can interact differently with Concerta for different people. Some people may experience a positive effect while others may have negative reactions. Therefore, it is not safe to mix marijuana with Concerta or any other prescribed medication without a doctor's recommendation or guidance. Additionally, mixing marijuana with Concerta may lead to increased side effects such as dry mouth, dizziness, anxiety, and an increased heart rate, among others. It is always best to talk to a healthcare provider about the potential risks and benefits of using any type of medication, including Concerta, in combination with other substances.",
+      "token_count": 101,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 412,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

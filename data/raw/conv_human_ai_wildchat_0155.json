@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0155",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 17:22:35+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "I want to do a comparison of the s&500 vs holding bitcoin, up to what year are you able to gather data?",
+      "token_count": 22,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "I can gather data on the S&P 500 index up to the present day of 2021 since its inception in 1957. For Bitcoin, as it was created in 2009, I can gather data from its inception up to the present day of 2021.",
+      "token_count": 43,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "great! here is the scenario: Say I put $2500 into a S&P500 tracking index fund and then I bought $2500 worth of Bitcoin both on the same date of April 2, 2018 with an end date of November 1 2021. Which asset performed better?",
+      "token_count": 44,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "On April 2, 2018, the S&P 500 index closed at 2,582.20 points. On November 1, 2021, the S&P 500 index closed at 4,598.30 points. The percentage gain for the S&P 500 is approximately 78.1% during this period.\n\nNow, let's look at Bitcoin. On April 2, 2018, the price of one Bitcoin was approximately $7,000. On November 1, 2021, the price of one Bitcoin was approximately $63,800. The percentage gain for Bitcoin is approximately 811.4% during this period.\n\nIn this scenario, if you had invested $2,500 in each asset, your S&P 500 investment would have grown to $2,500 * (1 + 0.781) = $4,452.50, whereas your Bitcoin investment would have grown to $2,500 * (1 + 8.114) = $22,785.\n\nTherefore, Bitcoin performed significantly better than the S&P 500 from April 2, 2018, to November 1, 2021.",
+      "token_count": 135,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "ok, for this analysis can you stretch it out to April 7 2023?",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "I am an AI language model and cannot predict future values. To make projections for the S&P 500 and Bitcoin prices up to April 7, 2023, the best approach is to use historical data as a reference point and take into account potential factors that might affect future prices. However, it's important to note that any projection would be speculative and not guaranteed, as both the stock market and cryptocurrency prices can be significantly influenced by unforeseen events and market sentiment.",
+      "token_count": 81,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "ok, here is some data that may help - On April 7 2023 the Bitcoin price closed at 28,044.14 and the S&P500 closed at 4,105.02. with this in mind can your recalculate to show which asset did better as of April 6, 2023?",
+      "token_count": 43,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "From the provided data, let's calculate the performance of S&P 500 and Bitcoin from April 2, 2018, to April 6, 2023.\n\nOn April 2, 2018, the S&P 500 index closed at 2,582.20 points. On April 6, 2023, the S&P 500 closed at 4,105.02 points. The percentage gain for the S&P 500 is approximately 58.9% during this period.\n\nNow, let's look at Bitcoin. On April 2, 2018, the price of one Bitcoin was approximately $7,000. On April 6, 2023, the price of one Bitcoin was $28,044.14. The percentage gain for Bitcoin is approximately 300.63% during this period.\n\nIn this updated scenario, if you had invested $2,500 in each asset, your S&P 500 investment would have grown to $2,500 * (1 + 0.589) = $3,972.50, whereas your Bitcoin investment would have grown to $2,500 * (1 + 3.0063) = $10,015.75.\n\nTherefore, Bitcoin performed significantly better than the S&P 500 from April 2, 2018, to April 6, 2023, based on the given data.",
+      "token_count": 160,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 541,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

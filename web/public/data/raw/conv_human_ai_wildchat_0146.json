@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0146",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 16:09:10+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "write a 50 words A2 description of a fantasy animal half elephant half mouse",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "This imaginary creature is a unique blend of two worlds, half-elephant and half-mouse. It has the distinct features of both animals, with fuzzy ears and a long trunk. Despite its small size, it possesses the mighty strength of an elephant and the agility of a mouse.",
+      "token_count": 46,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "write a 100 words A2 description of a fantasy animal half elephant half mouse",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Introducing the magnificent creature, a magnificent blend of a majestic elephant and a humble mouse. Residing in the enchanted forest, this half-elephant, half-mouse creature exudes an aura of contrasting strength and agility. It boasts large floppy ears and a long, dexterous proboscis that can reach out to grab even the smallest morsel of food. Despite its small size, it carries the same muscular power as a full-grown elephant, able to lift weight many times its size. With its ability to scamper and climb around easily, this fascinating creature is revered by most creatures in the forest, as its hybrid nature imbues it with a unique set of qualities that make it one of a kind.",
+      "token_count": 115,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "simplify",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "This creature is a mix of an elephant and a mouse, residing in the enchanted forest. It has characteristics of both, with big ears and a long trunk, as well as strength and agility. It can lift heavy weight despite its small size and easily climb around. Other creatures in the forest admire it for its distinctive qualities.",
+      "token_count": 58,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "re-write at A2 level: Introducing the magnificent creature, a magnificent blend of a majestic elephant and a humble mouse. Residing in the enchanted forest, this half-elephant, half-mouse creature exudes an aura of contrasting strength and agility. It boasts large floppy ears and a long, dexterous proboscis that can reach out to grab even the smallest morsel of food. Despite its small size, it carries the same muscular power as a full-grown elephant, able to lift weight many times its size. With its ability to scamper and climb around easily, this fascinating creature is revered by most creatures in the forest, as its hybrid nature imbues it with a unique set of qualities that make it one of a kind.",
+      "token_count": 119,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Meet the fantastic creature - a blend of an elephant and a mouse, living in the magical forest. It has features of both animals, including big ears and a long and flexible nose that can grab small things to eat. Despite its small size, it has the same muscular strength as a full-grown elephant and can lift heavy things with ease. It is also agile and can climb around easily. Many other creatures in the forest admire it for its one-of-a-kind qualities due to its hybrid nature.",
+      "token_count": 87,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 454,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

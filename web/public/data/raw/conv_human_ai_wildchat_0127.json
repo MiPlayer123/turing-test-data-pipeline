@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0127",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 14:25:10+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "do you know the game arknight",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, Arknight is a popular mobile game developed by Chinese game developer, Yostar Limited. It is a tactical role-playing game where players take the role of a medical officer in a world where a mysterious substance called Originium has disrupted the balance of power. Players must recruit and train Operators to fight against infected creatures and restore order to the world. The game features unique strategic gameplay with stunning graphics and anime-style character designs.",
+      "token_count": 74,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "I need a resource from the game but it says I need a workshop lv 3",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "In Arknight, workshops are necessary for crafting, trading, and base building. The first workshop is available right from the start, but to upgrade it, you need to complete specific base operations and meet specific requirements that vary from one workshop level to another.\n\nIf you need a resource that requires a Workshop Lv. 3, you will need to upgrade your workshop to level 3. To do that, you will first need to check if you have completed all the necessary base operations and requirements for upgrading your workshop.\n\nOnce you have met the requirements, you can go to the building menu and select the workshop. From there, you should see the option to upgrade to level 3. Selecting this option will take you to the upgrade screen, where you can see the cost and required materials to upgrade your workshop. Once you have gathered all the materials, you can proceed with the upgrade, and your workshop will be upgraded to Lv. 3.",
+      "token_count": 162,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "I don't see any workshop in my base",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "In Arknight, players can access their base by clicking on the \"Base\" button on the main menu screen. If you cannot see the Workshop in your base, it's possible that you have not yet unlocked it.\n\nTo unlock the workshop, you need to build the reception room, which is the central hub of your base. Once you have built the reception room, you will unlock the workshop building option in your \"Base\" menu.\n\nTo build the workshop, click on the \"Base\" button, and then scroll down to find the \"Workshop\" option. Click on the \"Workshop\" button, and you will see a blue print of the workshop building on your base layout. You can drag and drop the workshop blue print to a free spot on your base layout and then confirm the placement.\n\nOnce the workshop is placed, you will need to wait for a certain amount of time for it to be constructed. After the construction is complete, you can click on the workshop to access its functions, such as building and upgrading other facilities in your base, trading for resources, and crafting items.",
+      "token_count": 185,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Ok so I clicked the base button and now I see my base I have trading post, factory and power plant and a control center what should I do",
+      "token_count": 29,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Based on what you said, it seems that you haven't unlocked the workshop yet. The workshop is an important building in your base that allows you to craft items, upgrade your other facilities, and trade resources.\n\nTo unlock the workshop, you need to build the reception room, which is the central hub of your base. Once you have built the reception room, you will unlock the workshop building option in your \"Base\" menu. \n\nSo, the first thing you need to do is to build the reception room. The reception room is the first building that you should construct when starting out in Arknight. To build the reception room, you need to click on the \"Base\" button, then select the \"Reception Room\" button, and place the blue print of the reception room in a free spot in your base layout. Once you place the reception room blueprint, you will need to wait for the construction to complete.\n\nAfter the reception room is built, you will unlock the workshop and other important facilities that you can build to improve your base operations.",
+      "token_count": 180,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "by reception room you mean control center?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I apologize for the confusion. Yes, the control center is the same as the reception room in Arknight. The control center is the central hub of your base, and building it is necessary to unlock the workshop and other important facilities that you can build to improve your base operations.\n\nSo, if you have already built the control center, then you should be able to see the workshop option in your \"Base\" menu. From there, you can select the workshop and place it in your base layout. Once the workshop construction is complete, you can use it to craft items and upgrade your other facilities.",
+      "token_count": 105,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 772,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

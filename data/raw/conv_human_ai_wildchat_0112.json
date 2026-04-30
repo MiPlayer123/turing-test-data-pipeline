@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0112",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 12:27:34+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\u7ffb\u8bd1\u201cFunRich version 3 (http://www.funrich.\norg/) was used for Gene Ontology (GO)\nand Kyoto Encyclopedia of Genes and\nGenomics (KEGG) analysis, a common\nmethod to annotate genes and explore\ntheir biological attributes. Statistically sig\u0002nificant biological process terms and bio\u0002logical pathway terms for DEGs were\nillustrated.\u201d",
+      "token_count": 44,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u4f7f\u7528FunRich\u7248\u672c3\uff08http://www.funrich.org/\uff09\u8fdb\u884c\u57fa\u56e0\u672c\u4f53\u5b66\uff08GO\uff09\u548c\u57fa\u4e8e\u57fa\u56e0\u7ec4\u5b66\u7684\u4eac\u90fd\u767e\u79d1\u5168\u4e66\uff08KEGG\uff09\u5206\u6790\uff0c\u8fd9\u662f\u6ce8\u91ca\u57fa\u56e0\u548c\u63a2\u7d22\u5176\u751f\u7269\u5c5e\u6027\u666e\u904d\u91c7\u7528\u7684\u65b9\u6cd5\u3002\u663e\u8457\u7684\u751f\u7269\u8fc7\u7a0b\u672f\u8bed\u548c\u751f\u7269\u901a\u8def\u672f\u8bed\u7528\u4e8e\u8bf4\u660e\u5dee\u5f02\u8868\u8fbe\u57fa\u56e0\uff08DEGs\uff09\u7684\u751f\u7269\u5b66\u7279\u5f81\u3002",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\u7ffb\u8bd1\u201cWe explored the biofunctions of the DEGs Gene Ontology\n[GO; we can get what our target gene is mainly related to the\nthree levels of cellular component (CC), molecular function\n(MF), and biological process (BP)] enrichment and Kyoto\nEncyclopedia of Genes and Genomes (KEGG; we can know\nwhich signal pathways of the target gene are involved) pathways\nusing the \u201cBioconductor\u201d and \u201cCluster Profiler\u201d package in R\n3.6.1 software\u201d",
+      "token_count": 68,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u6211\u4eec\u4f7f\u7528R 3.6.1\u8f6f\u4ef6\u4e2d\u7684\u201cBioconductor\u201d\u548c\u201cCluster Profiler\u201d\u5305\u63a2\u7d22\u5dee\u5f02\u8868\u8fbe\u57fa\u56e0\uff08DEGs\uff09\u7684\u57fa\u56e0\u672c\u4f53\uff08GO\uff1b\u6211\u4eec\u53ef\u4ee5\u83b7\u5f97\u76ee\u6807\u57fa\u56e0\u4e0e\u7ec6\u80de\u7ec4\u5206\uff08CC\uff09\u3001\u5206\u5b50\u529f\u80fd\uff08MF\uff09\u548c\u751f\u7269\u8fc7\u7a0b\uff08BP\uff09\u4e09\u4e2a\u7ea7\u522b\u7684\u4e3b\u8981\u5173\u7cfb\uff09\u4e30\u5ea6\u4ee5\u53ca\u57fa\u4e8e\u57fa\u56e0\u7ec4\u7684\u4eac\u90fd\u767e\u79d1\u5168\u4e66\uff08KEGG\uff1b\u6211\u4eec\u53ef\u4ee5\u4e86\u89e3\u76ee\u6807\u57fa\u56e0\u6240\u6d89\u53ca\u7684\u4fe1\u53f7\u901a\u8def\uff09\u901a\u8def\uff0c\u4ece\u800c\u63a2\u7d22DEGs\u7684\u751f\u7269\u5b66\u529f\u80fd\u3002",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\u6539\u5199\u201cWe explored the biofunctions of the DEGs Gene Ontology\n[GO; we can get what our target gene is mainly related to the\nthree levels of cellular component (CC), molecular function\n(MF), and biological process (BP)] enrichment and Kyoto\nEncyclopedia of Genes and Genomes (KEGG; we can know\nwhich signal pathways of the target gene are involved) pathways\nusing the \u201cBioconductor\u201d and \u201cCluster Profiler\u201d package in R\n3.6.1 software\u201d",
+      "token_count": 68,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u6211\u4eec\u91c7\u7528R 3.6.1\u8f6f\u4ef6\u4e2d\u7684\u201cBioconductor\u201d\u548c\u201cCluster Profiler\u201d\u5305\uff0c\u63a2\u7d22\u5dee\u5f02\u8868\u8fbe\u57fa\u56e0\uff08DEGs\uff09\u7684Gene Ontology\uff08GO\uff09\uff0c\u5728\u7ec6\u80de\u7ec4\u5206\uff08CC\uff09\u3001\u5206\u5b50\u529f\u80fd\uff08MF\uff09\u548c\u751f\u7269\u8fc7\u7a0b\uff08BP\uff09\u4e09\u4e2a\u7ea7\u522b\u4e2d\u67e5\u627e\u76ee\u6807\u57fa\u56e0\u7684\u4e3b\u8981\u76f8\u5173\u6027\uff0c\u4ee5\u53ca\u57fa\u4e8e\u57fa\u56e0\u7ec4\u7684\u4eac\u90fd\u767e\u79d1\u5168\u4e66\uff08KEGG\uff09\u901a\u8def\uff0c\u4e86\u89e3\u76ee\u6807\u57fa\u56e0\u6d89\u53ca\u7684\u4fe1\u53f7\u901a\u8def\uff0c\u4ee5\u63a2\u8ba8DEGs\u7684\u751f\u7269\u5b66\u529f\u80fd\u3002",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\u540c\u4e49\u6539\u5199\u201cWe explored the biofunctions of the DEGs Gene Ontology\n[GO; we can get what our target gene is mainly related to the\nthree levels of cellular component (CC), molecular function\n(MF), and biological process (BP)] enrichment and Kyoto\nEncyclopedia of Genes and Genomes (KEGG; we can know\nwhich signal pathways of the target gene are involved) pathways\nusing the \u201cBioconductor\u201d and \u201cCluster Profiler\u201d package in R\n3.6.1 software\u201d",
+      "token_count": 68,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u6211\u4eec\u4f7f\u7528R 3.6.1\u8f6f\u4ef6\u4e2d\u7684\u201cBioconductor\u201d\u548c\u201cCluster Profiler\u201d\u5305\uff0c\u63a2\u7d22\u5dee\u5f02\u8868\u8fbe\u57fa\u56e0\uff08DEGs\uff09\u7684Gene Ontology\uff08GO\uff09\uff0c\u4ee5\u4fbf\u83b7\u53d6\u76ee\u6807\u57fa\u56e0\u5728\u7ec6\u80de\u7ec4\u5206\uff08CC\uff09\u3001\u5206\u5b50\u529f\u80fd\uff08MF\uff09\u548c\u751f\u7269\u8fc7\u7a0b\uff08BP\uff09\u4e09\u4e2a\u7ea7\u522b\u4e2d\u7684\u4e3b\u8981\u76f8\u5173\u6027\uff0c\u5e76\u4e14\u901a\u8fc7\u57fa\u4e8e\u57fa\u56e0\u7ec4\u7684\u4eac\u90fd\u767e\u79d1\u5168\u4e66\uff08KEGG\uff09\u901a\u8def\u4e86\u89e3\u76ee\u6807\u57fa\u56e0\u6d89\u53ca\u7684\u4fe1\u53f7\u901a\u8def\uff0c\u4ee5\u7814\u7a76DEGs\u7684\u751f\u7269\u5b66\u529f\u80fd\u3002",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 260,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

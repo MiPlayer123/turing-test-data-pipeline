@@ -23,13 +23,18 @@ from datetime import datetime, timezone
 import config
 
 
-def ingest_persona_chat(limit=100):
-    """Download human-human conversations from PersonaChat."""
+def ingest_persona_chat(limit=100, offset=0):
+    """Download human-human conversations from PersonaChat.
+
+    offset: skip the first `offset` qualifying samples (already saved in a
+    prior run) and start indexing new conv_ids at `offset`.
+    """
     from datasets import load_dataset
 
-    print(f"Loading PersonaChat (human-human)...")
+    print(f"Loading PersonaChat (human-human)... offset={offset}, limit={limit}")
     ds = load_dataset("AlekseyKorshuk/persona-chat", split="train", streaming=True)
 
+    qualified = 0  # count of samples that pass filters
     saved = 0
     for i, sample in enumerate(ds):
         if saved >= limit:
@@ -45,6 +50,12 @@ def ingest_persona_chat(limit=100):
         if len(history) < 6:
             continue  # skip very short conversations
 
+        # Skip samples already covered by a prior run
+        if qualified < offset:
+            qualified += 1
+            continue
+        qualified += 1
+
         # Build turns
         turns = []
         for j, text in enumerate(history):
@@ -59,7 +70,7 @@ def ingest_persona_chat(limit=100):
                 "is_opening_prompt": j == 0,
             })
 
-        conv_id = f"conv_human_human_personachat_{saved:04d}"
+        conv_id = f"conv_human_human_personachat_{offset + saved:04d}"
 
         conv = {
             "conversation_id": conv_id,
@@ -97,13 +108,18 @@ def ingest_persona_chat(limit=100):
     return saved
 
 
-def ingest_wildchat(limit=100):
-    """Download human-AI conversations from WildChat."""
+def ingest_wildchat(limit=100, offset=0):
+    """Download human-AI conversations from WildChat.
+
+    offset: skip the first `offset` qualifying samples (already saved in a
+    prior run) and start indexing new conv_ids at `offset`.
+    """
     from datasets import load_dataset
 
-    print(f"Loading WildChat (human-AI)...")
+    print(f"Loading WildChat (human-AI)... offset={offset}, limit={limit}")
     ds = load_dataset("allenai/WildChat-1M", split="train", streaming=True)
 
+    qualified = 0  # count of samples that pass filters (pre-turn-count check)
     saved = 0
     skipped = 0
 
@@ -147,7 +163,13 @@ def ingest_wildchat(limit=100):
         # Cap at 20 turns to match AI-AI conversations
         turns = turns[:20]
 
-        conv_id = f"conv_human_ai_wildchat_{saved:04d}"
+        # Skip samples already covered by a prior run
+        if qualified < offset:
+            qualified += 1
+            continue
+        qualified += 1
+
+        conv_id = f"conv_human_ai_wildchat_{offset + saved:04d}"
 
         conv = {
             "conversation_id": conv_id,
@@ -190,15 +212,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ingest human conversation data")
     parser.add_argument("--source", choices=["human", "ai", "both"], default="both")
     parser.add_argument("--limit", type=int, default=100)
+    parser.add_argument("--offset", type=int, default=0,
+                        help="Skip the first N qualifying samples (for resuming/extending an existing dataset)")
     args = parser.parse_args()
 
     os.makedirs(config.DATA_RAW_DIR, exist_ok=True)
 
     total = 0
     if args.source in ("human", "both"):
-        total += ingest_persona_chat(limit=args.limit)
+        total += ingest_persona_chat(limit=args.limit, offset=args.offset)
     if args.source in ("ai", "both"):
-        total += ingest_wildchat(limit=args.limit)
+        total += ingest_wildchat(limit=args.limit, offset=args.offset)
 
     print(f"\nTotal: {total} conversations ingested")
     print(f"Run 'python analyze.py' to recompute metrics with human data included")

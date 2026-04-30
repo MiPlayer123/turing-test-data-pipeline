@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0149",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 16:40:31+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "make the following letter 400 words long: Tere!\n\nMu nimi on Kelli Pala ja ma kandideerin v\u00f5imaluseks t\u00f6\u00f6tada P\u00f5lva S\u00f5bralt S\u00f5brale poes. Mul ei ole varasemat t\u00f6\u00f6kogemust, kuid ma olen valmis uusi v\u00e4ljakutseid vastu v\u00f5tma ning end t\u00f5estama.\n\nOlen alati olnud huvitatud ideest, millel on positiivne m\u00f5ju meie planeedile. Seet\u00f5ttu soovin v\u00e4ga kandideerida v\u00f5imaluse nimel t\u00f6\u00f6tada S\u00f5bralt S\u00f5brale taaskasutuspoes. Olen alati austanud organisatsiooni missiooni aidata luua positiivset m\u00f5ju keskkonnale ja usun, et saan kasutada oma oskusi ning panustada selle eesm\u00e4rgi saavutamisse.\n\nHoian ennast pidevalt kursis keskkonnas\u00e4\u00e4stu ja j\u00e4tkusuutlikkuse arengutega, ning on minu siiras soov olla saavutuste otseses kaasosaline. Usun, et t\u00f6\u00f6 taaskasutuspoes on suurep\u00e4rane v\u00f5imalus aidata kaasa \u00fchiskonna ja looduse j\u00e4tkusuutlikule arengule. T\u00f6\u00f6d tehes seaksin endale eesm\u00e4rgi anda endast parim, et pakkuda klientidele p\u00f5hjalikku teenindust ning samal ajal teadvustada nende endi v\u00f5imalusi keskkonnale positiivset m\u00f5ju avaldada.\n\nMinu loovus ja suur kujutlusv\u00f5ime on samuti tugevuseks. Mul on ka loomulikult s\u00f5bralik iseloom, mis aitab luua positiivset suhtlemist klientidega. Olen ka v\u00e4ga kiire \u00f5ppija, suudan kiiresti kohaneda uute olukordadega ja omandada teadmisi, mis on t\u00f6\u00f6kohal vajalikud.\n\nMul on hea meel \u00f6elda, et olen alati olnud huvitatud taaskasutamisest ja armastan parandada asju, mis on katki l\u00e4inud. Seet\u00f5ttu arvan, et see on suurep\u00e4rane eelis, kui t\u00f6\u00f6tan S\u00f5bralt S\u00f5brale poes. Kogu oma s\u00fcdamest usun, et t\u00f6\u00f6tamine taaskasutuskaupluses on boonuseks minu elulisele kutsumusele ja elu meeldivaim osa.\n\nKui saan v\u00f5imaluse teie poes t\u00f6\u00f6tada, luban, et panustan maksimaalselt, et teie kliendid saaksid parimat teenindust. Samuti panustan poe ja selle laoruumide korrashoiule.\n\nT\u00e4nan teid v\u00e4ga, et v\u00f5imaldasite mul kandideerida sellele p\u00f5nevale v\u00f5imalusele ning olen lootusrikas, et saan teiega \u00fchineda.\n\nParimate soovidega,\n\nKelli Pala",
+      "token_count": 264,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Dear Hiring Manager,\n\nMy name is <PRESIDIO_ANONYMIZED_PERSON> and I am excited to apply for the opportunity to work at the P\u00f5lva S\u00f5bralt S\u00f5brale store. Although I have no prior work experience, I am ready to take on new challenges and prove myself in this role.\n\nI have always been interested in the idea of having a positive impact on our planet. Therefore, I am eager to apply for the opportunity to work at S\u00f5bralt S\u00f5brale thrift store. I have always admired the company's mission to help create a positive impact on the environment and I believe that I can use my skills to contribute to this goal.\n\nI keep myself updated on the latest developments in environmental sustainability and believe that working at a thrift store is an excellent opportunity to contribute to society's and nature's sustainable development. It is my goal to provide thorough customer service while also raising awareness about environmental sustainability.\n\nCreativity and imagination are also strengths of mine, and I have a naturally friendly personality that allows me to interact positively with customers. Additionally, I am a quick learner and can adapt to new situations and acquire the necessary knowledge for the job.\n\nI am pleased to say that I have always been interested in recycling and repairing items that are broken. Therefore, I believe that working at S\u00f5bralt S\u00f5brale store is an excellent fit for me, and I am confident that this job would be a perfect addition to my life's calling.\n\nIf given the opportunity to work at your store, I promise to put forth my maximum effort to provide your customers with exceptional service. I will also contribute to the maintenance of the store and its inventory.\n\nThank you for considering my application for this exciting opportunity, and I look forward to joining your team.\n\nBest regards,\n\n<PRESIDIO_ANONYMIZED_PERSON>",
+      "token_count": 305,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "translate to estonian and make it longer",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I am not able to translate without specificity. Please provide the text that needs to be translated into Estonian so that I can assist you better.",
+      "token_count": 31,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "make the following letter 400 words long: Tere!\n\nMu nimi on Kelli Pala ja ma kandideerin v\u00f5imaluseks t\u00f6\u00f6tada P\u00f5lva S\u00f5bralt S\u00f5brale poes. Mul ei ole varasemat t\u00f6\u00f6kogemust, kuid ma olen valmis uusi v\u00e4ljakutseid vastu v\u00f5tma ning end t\u00f5estama.\n\nOlen alati olnud huvitatud ideest, millel on positiivne m\u00f5ju meie planeedile. Seet\u00f5ttu soovin v\u00e4ga kandideerida v\u00f5imaluse nimel t\u00f6\u00f6tada S\u00f5bralt S\u00f5brale taaskasutuspoes. Olen alati austanud organisatsiooni missiooni aidata luua positiivset m\u00f5ju keskkonnale ja usun, et saan kasutada oma oskusi ning panustada selle eesm\u00e4rgi saavutamisse.\n\nHoian ennast pidevalt kursis keskkonnas\u00e4\u00e4stu ja j\u00e4tkusuutlikkuse arengutega, ning on minu siiras soov olla saavutuste otseses kaasosaline. Usun, et t\u00f6\u00f6 taaskasutuspoes on suurep\u00e4rane v\u00f5imalus aidata kaasa \u00fchiskonna ja looduse j\u00e4tkusuutlikule arengule. T\u00f6\u00f6d tehes seaksin endale eesm\u00e4rgi anda endast parim, et pakkuda klientidele p\u00f5hjalikku teenindust ning samal ajal teadvustada nende endi v\u00f5imalusi keskkonnale positiivset m\u00f5ju avaldada.\n\nMinu loovus ja suur kujutlusv\u00f5ime on samuti tugevuseks. Mul on ka loomulikult s\u00f5bralik iseloom, mis aitab luua positiivset suhtlemist klientidega. Olen ka v\u00e4ga kiire \u00f5ppija, suudan kiiresti kohaneda uute olukordadega ja omandada teadmisi, mis on t\u00f6\u00f6kohal vajalikud.\n\nMul on hea meel \u00f6elda, et olen alati olnud huvitatud taaskasutamisest ja armastan parandada asju, mis on katki l\u00e4inud. Seet\u00f5ttu arvan, et see on suurep\u00e4rane eelis, kui t\u00f6\u00f6tan S\u00f5bralt S\u00f5brale poes. Kogu oma s\u00fcdamest usun, et t\u00f6\u00f6tamine taaskasutuskaupluses on boonuseks minu elulisele kutsumusele ja elu meeldivaim osa.\n\nKui saan v\u00f5imaluse teie poes t\u00f6\u00f6tada, luban, et panustan maksimaalselt, et teie kliendid saaksid parimat teenindust. Samuti panustan poe ja selle laoruumide korrashoiule.\n\nT\u00e4nan teid v\u00e4ga, et v\u00f5imaldasite mul kandideerida sellele p\u00f5nevale v\u00f5imalusele ning olen lootusrikas, et saan teiega \u00fchineda.\n\nParimate soovidega,\n\nKelli Pala",
+      "token_count": 264,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Tere!\n\nSoovin avaldada oma tugevat soovi taotleda t\u00f6\u00f6d P\u00f5lva S\u00f5bralt S\u00f5brale poes. Lubage teil minu visioon edasi anda, mis puudutab keskkonnamurede lahendamist ja \u00fchiskonna heaolu edendamist. Minu nimi on Kelli Pala ja nagu v\u00f5ib aimata minu kandideerimisest, tunnen suurt kutsumust tegutseda positiivse muutuse loomise nimel.\n\nTegelikult on minu \u00f5ige aeg teostada edasi oma ettev\u00f5tlikku hinge, millega olen alati olnud seotud keskkonnateadlikuse edendamisel. P\u00f5hjus, miks ma soovin oma karj\u00e4\u00e4ri alustada P\u00f5lva S\u00f5bralt S\u00f5brale poes on lihtne \u2013 see on minu ellu sobivaim koht, et rakendada oma teadmisi ning panustada oma oskusi ning on justkui iseteostuse meeldivaim osa.\n\nKuigi mul puudub varasem t\u00f6\u00f6kogemus, on mul entusiasm, mis v\u00f5imaldab mind iseseisvalt t\u00f6\u00f6\u00fclesannetega toime tulla ja arendada ennast uuteks v\u00e4ljakutseteks.\n\nOlen p\u00f5hjalikult tutvunud S\u00f5bralt S\u00f5brale organisatsiooni missiooniga, ja olen alati olnud p\u00fchendunud edendama s\u00e4\u00e4stlikku eluviisi ja j\u00e4tkusuutlikku tarbimist. Seet\u00f5ttu on minu s\u00fcdamesoov rakendada ja tugevdada oma teadmisi ning oskusi keskkondlikult t\u00e4hendusrikkal viisil - taaskasutus- ja vintage poes.\n\nOleksin erakordselt \u00f5nnelik, kui antakse mulle v\u00f5imalus t\u00f6\u00f6tada P\u00f5lva S\u00f5bralt S\u00f5brale poes, kuna see on just minu elu pisut kirevamaks muutev lahendus. Seel\u00e4bi loon t\u00e4henduslikmuutuse \u00fchiskonnas, milles me elame.\n\nLisaks sellele, et ma armastan luua t\u00e4henduslikke v\u00e4\u00e4rtusi, on minul ka h\u00e4sti arenenud sotsiaalne kompetentsus ning loomulikult s\u00f5bralik iseloom. Saan kiiresti kohaneda uue keskkonnaga ja \u00f5ppida k\u00f5iki poes olemise vajalikke oskuseid. Lisaks sellele on mul r\u00f5\u00f5m teatada, et olen hea praktilise m\u00f5tlemisega ning suudan t\u00f6\u00f6tada iseseisvalt, kui vaja.\n\nKui mind valitakse v\u00f5imaluse saada osa Teie suurep\u00e4rasest meeskonnast, annan 100% endast parima, et pakkuda v\u00f5rratut teenindust Teie klientidele. Lisaks sellele v\u00f5tan endale s\u00fcdameasjaks poe ja laoruumide korrashoiu.\n\nT\u00e4nan Teid v\u00e4ga, et andsite mulle v\u00f5imaluse kandideerida ning olen lootusrikas, et saaksin olla osa Teie meeskonnast.\n\nParimate soovidega,\n\nKelli Pala",
+      "token_count": 279,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "make the following text longer and more casual:",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Hey there!\n\nI'm <PRESIDIO_ANONYMIZED_PERSON> and I'm super stoked about the opportunity to work at the P\u00f5lva S\u00f5bralt S\u00f5brale store. Honestly, I don't have any official work experience, but I am totally down to take on new challenges and show you what I've got.\n\nSo, I am all about anything that has a positive impact on our planet, and that's why I'm so excited to apply for this job at the S\u00f5bralt S\u00f5brale thrift store. I've always had mad respect for the company's mission to make a positive impact on the environment, and I believe I can contribute my skills to that cause.\n\nI'm always keeping up to date on environmental sustainability and am pumped to be a part of the action, making a difference in society and nature. So while I'm working, I'm going to make it my goal to provide top-of-the-line customer service while spreading the message about the importance of having a positive impact on the environment.\n\nAnd check this out, I've got some serious creativity and huge imagination to bring to the table. Plus, I am a totally friendly person, which is going to make my interaction with customers super chill. Oh, and I'm a quick learner, so I can adapt to whatever's new or changing in the job, no problem.\n\nI've always been into recycling and fixing things that are broken, which is why I think I'm such a good fit for this job at S\u00f5bralt S\u00f5brale. I swear, I feel like this job is my calling, and it's going to be the most legit part of my life.\n\nSo, If I get the chance to work at your store, I guarantee that your customers are going to have the raddest service ever. Plus, I'm definitely going to take care of the store and the inventory like it's my own.\n\nThanks for allowing me to apply for this opportunity. I'm totally psyched and hope to hear back from you soon.\n\nLater,\n\nKelli Pala",
+      "token_count": 327,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "make the following text longer and more casual:  Tere!\n\nSoovin avaldada oma tugevat soovi taotleda t\u00f6\u00f6d P\u00f5lva S\u00f5bralt S\u00f5brale poes. Lubage teil minu visioon edasi anda, mis puudutab keskkonnamurede lahendamist ja \u00fchiskonna heaolu edendamist. Minu nimi on Kelli Pala ja nagu v\u00f5ib aimata minu kandideerimisest, tunnen suurt kutsumust tegutseda positiivse muutuse loomise nimel.\n\nTegelikult on minu \u00f5ige aeg teostada edasi oma ettev\u00f5tlikku hinge, millega olen alati olnud seotud keskkonnateadlikuse edendamisel. P\u00f5hjus, miks ma soovin oma karj\u00e4\u00e4ri alustada P\u00f5lva S\u00f5bralt S\u00f5brale poes on lihtne \u2013 see on minu ellu sobivaim koht, et rakendada oma teadmisi ning panustada oma oskusi ning on justkui iseteostuse meeldivaim osa.\n\nKuigi mul puudub varasem t\u00f6\u00f6kogemus, on mul entusiasm, mis v\u00f5imaldab mind iseseisvalt t\u00f6\u00f6\u00fclesannetega toime tulla ja arendada ennast uuteks v\u00e4ljakutseteks.\n\nOlen p\u00f5hjalikult tutvunud S\u00f5bralt S\u00f5brale organisatsiooni missiooniga, ja olen alati olnud p\u00fchendunud edendama s\u00e4\u00e4stlikku eluviisi ja j\u00e4tkusuutlikku tarbimist. Seet\u00f5ttu on minu s\u00fcdamesoov rakendada ja tugevdada oma teadmisi ning oskusi keskkondlikult t\u00e4hendusrikkal viisil - taaskasutus- ja vintage poes.\n\nOleksin erakordselt \u00f5nnelik, kui antakse mulle v\u00f5imalus t\u00f6\u00f6tada P\u00f5lva S\u00f5bralt S\u00f5brale poes, kuna see on just minu elu pisut kirevamaks muutev lahendus. Seel\u00e4bi loon t\u00e4henduslikmuutuse \u00fchiskonnas, milles me elame.\n\nLisaks sellele, et ma armastan luua t\u00e4henduslikke v\u00e4\u00e4rtusi, on minul ka h\u00e4sti arenenud sotsiaalne kompetentsus ning loomulikult s\u00f5bralik iseloom. Saan kiiresti kohaneda uue keskkonnaga ja \u00f5ppida k\u00f5iki poes olemise vajalikke oskuseid. Lisaks sellele on mul r\u00f5\u00f5m teatada, et olen hea praktilise m\u00f5tlemisega ning suudan t\u00f6\u00f6tada iseseisvalt, kui vaja.\n\nKui mind valitakse v\u00f5imaluse saada osa Teie suurep\u00e4rasest meeskonnast, annan 100% endast parima, et pakkuda v\u00f5rratut teenindust Teie klientidele. Lisaks sellele v\u00f5tan endale s\u00fcdameasjaks poe ja laoruumide korrashoiu.\n\nT\u00e4nan Teid v\u00e4ga, et andsite mulle v\u00f5imaluse kandideerida ning olen lootusrikas, et saaksin olla osa Teie meeskonnast.\n\nParimate soovidega,\n\nKelli Pala",
+      "token_count": 287,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Hi there!\n\nI'm <PRESIDIO_ANONYMIZED_PERSON> and I'm super pumped to apply for the opportunity to work at the P\u00f5lva S\u00f5bralt S\u00f5brale store. Let me tell you why I'm so hyped about this chance to make a positive impact on the environment and society.\n\nSo, first of all, I've always had a deep passion for anything that has a positive impact on the planet, and that's why I'm so excited about the possibility of working at S\u00f5bralt",
+      "token_count": 75,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 1847,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

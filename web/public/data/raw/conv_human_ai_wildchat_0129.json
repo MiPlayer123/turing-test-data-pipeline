@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0129",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 14:34:14+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\nAlibaba announced a major restructuring plan to split its US$257 billion empire into six independent entities last Tuesday, saying it would lead to quicker decision-making and give each unit greater operational independence.\nEach company will be allowed to \u201cpursue fundraising from third parties and IPOs when they are ready,\u201d said Daniel Zhang Yong, chairman and chief executive of Alibaba, which also owns the South China Morning Post.\nThe other five units to be devolved are Cloud Intelligence Group, Taobao Tmall Commerce Group, Local Services Group, Global Digital Commerce Group and the Digital Media and Entertainment Group.",
+      "token_count": 112,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "\u963f\u91cc\u5df4\u5df4\u4e0a\u5468\u4e8c\u5ba3\u5e03\u4e00\u9879\u91cd\u5927\u91cd\u7ec4\u8ba1\u5212\uff0c\u5c06\u5176\u4ef7\u503c2570\u4ebf\u7f8e\u5143\u7684\u5e1d\u56fd\u5206\u4e3a\u516d\u4e2a\u72ec\u7acb\u5b9e\u4f53\uff0c\u79f0\u8fd9\u5c06\u5e26\u6765\u66f4\u5feb\u7684\u51b3\u7b56\u5e76\u8d4b\u4e88\u6bcf\u4e2a\u5355\u4f4d\u66f4\u5927\u7684\u8fd0\u8425\u72ec\u7acb\u6027\u3002\n\u963f\u91cc\u5df4\u5df4\u8463\u4e8b\u957f\u517c\u9996\u5e2d\u6267\u884c\u5b98\u5f20\u52c7\u8868\u793a\uff0c\u6bcf\u5bb6\u516c\u53f8\u5c06\u88ab\u5141\u8bb8\u201c\u5728\u51c6\u5907\u597d\u540e\u4ece\u7b2c\u4e09\u65b9\u7b79\u96c6\u8d44\u91d1\u5e76\u8fdb\u884c\u9996\u6b21\u516c\u5f00\u52df\u80a1(IPO)\u3002\u201d\u963f\u91cc\u5df4\u5df4\u8fd8\u62e5\u6709\u300a\u5357\u534e\u65e9\u62a5\u300b\u3002\n\u5176\u4ed6\u4e94\u4e2a\u5c06\u88ab\u5265\u79bb\u7684\u5355\u4f4d\u5206\u522b\u662f\u4e91\u667a\u80fd\u96c6\u56e2\u3001\u6dd8\u5b9d\u5929\u732b\u5546\u52a1\u96c6\u56e2\u3001\u672c\u5730\u670d\u52a1\u96c6\u56e2\u3001\u5168\u7403\u6570\u5b57\u5546\u52a1\u96c6\u56e2\u548c\u6570\u5b57\u5a92\u4f53\u4e0e\u5a31\u4e50\u96c6\u56e2\u3002",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\n\u201cAlibaba\u2019s future growth will come primarily from new overseas customers, and Cainiao is continuously tapping the overseas market by building logistics hubs, warehouses, distribution centres and other infrastructure,\u201d said Wei Jianhui, a senior analyst at Analysys, a Beijing-based research firm.\n\u201cCainiao\u2019s Hong Kong IPO, if confirmed, will help improve its logistics supply chain ecosystem and \u2026 provide better opportunities to develop international markets.\u201d",
+      "token_count": 79,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "\u5317\u4eac\u7814\u7a76\u516c\u53f8Analysys\u7684\u9ad8\u7ea7\u5206\u6790\u5e08\u9b4f\u5efa\u8f89\u8868\u793a\uff1a\u201c\u963f\u91cc\u5df4\u5df4\u672a\u6765\u7684\u589e\u957f\u4e3b\u8981\u5c06\u6765\u81ea\u4e8e\u65b0\u589e\u6d77\u5916\u5ba2\u6237\uff0c\u800c\u83dc\u9e1f\u6b63\u901a\u8fc7\u5efa\u7acb\u7269\u6d41\u67a2\u7ebd\u3001\u4ed3\u5e93\u3001\u914d\u9001\u4e2d\u5fc3\u548c\u5176\u4ed6\u57fa\u7840\u8bbe\u65bd\u6765\u4e0d\u65ad\u5f00\u53d1\u6d77\u5916\u5e02\u573a\u3002\u201d\n\u201c\u5982\u679c\u786e\u8ba4\u4e86\u83dc\u9e1f\u7684\u9999\u6e2fIPO\uff0c\u5c06\u6709\u52a9\u4e8e\u6539\u5584\u5176\u7269\u6d41\u4f9b\u5e94\u94fe\u751f\u6001\u7cfb\u7edf\uff0c\u5e76\u4e3a\u5f00\u53d1\u56fd\u9645\u5e02\u573a\u63d0\u4f9b\u66f4\u597d\u7684\u673a\u4f1a\u3002\u201d",
+      "token_count": 2,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\nWei said that Cloud Intelligence Group, Alibaba\u2019s digital technology and intelligence business founded in 2009, is also likely to go public early as it is \u201cthe underlying driving force behind Alibaba\u2019s entire business development\u201d.\nWhen assessing IPO prospects, iiMedia\u2019s Zhang said two factors should be taken into consideration: the financial performance of the unit and the need for capital investment.\n\u201cThe market will give it [business unit] a better evaluation if it has a good record of revenue and profits, and if it requires a large amount of capital investment, meaning that the parent company wants it to attract public funds to drive business growth instead of investing itself,\u201d he said.",
+      "token_count": 127,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "\u9b4f\u5efa\u8f89\u8868\u793a\uff0c\u6210\u7acb\u4e8e2009\u5e74\u7684\u963f\u91cc\u5df4\u5df4\u6570\u5b57\u79d1\u6280\u548c\u667a\u80fd\u4e1a\u52a1\u90e8\u95e8\u2014\u2014\u4e91\u667a\u80fd\u96c6\u56e2\u4e5f\u6709\u53ef\u80fd\u6700\u65e9\u4e0a\u5e02\uff0c\u56e0\u4e3a\u5b83\u662f\u201c\u963f\u91cc\u5df4\u5df4\u6574\u4e2a\u4e1a\u52a1\u53d1\u5c55\u80cc\u540e\u7684\u57fa\u672c\u9a71\u52a8\u529b\u201d\u3002\n\u5728\u8bc4\u4f30IPO\u524d\u666f\u65f6\uff0ciiMedia\u7684\u5f20\u8bf4\uff0c\u5e94\u8003\u8651\u4e24\u4e2a\u56e0\u7d20\uff1a\u8be5\u4e1a\u52a1\u90e8\u95e8\u7684\u8d22\u52a1\u4e1a\u7ee9\u548c\u5bf9\u8d44\u672c\u6295\u8d44\u7684\u9700\u6c42\u3002\n\u4ed6\u8bf4\uff1a\u201c\u5982\u679c\u8fd9\u4e2a\u4e1a\u52a1\u90e8\u95e8\u6709\u826f\u597d\u7684\u6536\u5165\u548c\u5229\u6da6\u8bb0\u5f55\uff0c\u5e76\u4e14\u9700\u8981\u5927\u91cf\u7684\u8d44\u672c\u6295\u8d44\uff0c\u90a3\u4e48\u5e02\u573a\u4f1a\u7ed9\u4e88\u5176\u66f4\u597d\u7684\u8bc4\u4f30\uff0c\u8fd9\u610f\u5473\u7740\u6bcd\u516c\u53f8\u5e0c\u671b\u5b83\u5438\u5f15\u516c\u5171\u8d44\u91d1\u63a8\u52a8\u4e1a\u52a1\u589e\u957f\uff0c\u800c\u4e0d\u662f\u81ea\u5df1\u6295\u8d44\u3002\u201d",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Use simple Chinese to re-describe the following content without repeated descriptions\n\nNio\u2019s ET7 sedan topped the list, followed by Xpeng\u2019s G9 sport utility vehicle (SUV) in second place and Li Auto\u2019s L9, another SUV, in sixth place, according to the survey, which also assessed the vehicles\u2019 on-board technology and entertainment capabilities. JD Power did not reveal the number of respondents it surveyed.\n\u201cTesla has been highly successful in China, based on its sales volume and brand recognition,\u201d said David Zhang, an analyst with the research centre for automobile industry innovation at the North China University of Technology. \u201cBut it is now facing the hard question of [how] it can stay ahead of the competition.\u201d",
+      "token_count": 114,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "\u6839\u636e\u4e00\u9879\u8bc4\u4f30\u8f66\u8f86\u8f66\u8f7d\u6280\u672f\u548c\u5a31\u4e50\u529f\u80fd\u7684\u8c03\u67e5\uff0c\u851a\u6765ET7\u8f7f\u8f66\u540d\u5217\u699c\u9996\uff0c\u63a5\u4e0b\u6765\u662f\u7b2c\u4e8c\u540d\u7684\u5c0f\u9e4fG9 SUV\u548c\u7b2c\u516d\u540d\u7684\u7406\u60f3\u6c7d\u8f66L9 SUV\u3002\u4eac\u4e1c\u7535\u529b\u6ca1\u6709\u900f\u9732\u8c03\u67e5\u7684\u53d7\u8bbf\u8005\u6570\u91cf\u3002\n\u534e\u5317\u7406\u5de5\u5927\u5b66\u6c7d\u8f66\u4ea7\u4e1a\u521b\u65b0\u7814\u7a76\u4e2d\u5fc3\u5206\u6790\u5e08David Zhang\u8868\u793a\uff1a\u201c\u7279\u65af\u62c9\u5728\u4e2d\u56fd\u7684\u9500\u552e\u91cf\u548c\u54c1\u724c\u77e5\u540d\u5ea6\u4e0a\u53d6\u5f97\u4e86\u5f88\u9ad8\u7684\u6210\u529f\u3002\u4f46\u73b0\u5728\uff0c\u5b83\u9762\u4e34\u7740\u5982\u4f55\u4fdd\u6301\u9886\u5148\u7ade\u4e89\u5bf9\u624b\u7684\u96be\u9898\u3002\u201d",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Use simple Chinese to re-describe the following content without repeated descriptions\n\nThe Texas-based carmaker was once viewed by Chinese drivers as synonymous with intelligent EVs. After its Shanghai-made Model 3s hit the mainland market in January 2020, it drew rave reviews from Chinese drivers, even as Covid-19 wreaked havoc on the country\u2019s economy and hit consumption. The Model 3 was the mainland\u2019s bestselling EV until it was dethroned in September 2020 by a mini EV assembled by SAIC-GM-Wuling.\nTesla remains very popular. Last year, it delivered more than 710,000 Model 3s and Model Ys to customers on the mainland, a year-on-year increase of 50 per cent. In comparison, Beijing-based Li Auto, Tesla\u2019s nearest rival, handed over just 133,246 units to customers last year, but a year-on-year increase of 47 per cent for the Chinese carmaker.",
+      "token_count": 135,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "\u8fd9\u5bb6\u603b\u90e8\u4f4d\u4e8e\u5fb7\u514b\u8428\u65af\u5dde\u7684\u6c7d\u8f66\u5236\u9020\u5546\u66fe\u88ab\u4e2d\u56fd\u9a7e\u9a76\u8005\u89c6\u4e3a\u667a\u80fd\u7535\u52a8\u6c7d\u8f66\u7684\u4ee3\u540d\u8bcd\u30022020\u5e741\u6708\uff0c\u7531\u4e0a\u6d77\u5236\u9020\u7684Model 3\u8fdb\u5165\u5185\u5730\u5e02\u573a\u540e\uff0c\u5b83\u83b7\u5f97\u4e86\u4e2d\u56fd\u9a7e\u9a76\u8005\u7684\u9ad8\u5ea6\u8bc4\u4ef7\uff0c\u5c3d\u7ba1\u5f53\u65f6\u65b0\u51a0\u75c5\u6bd2\u5bf9\u4e2d\u56fd\u7ecf\u6d4e\u9020\u6210\u4e25\u91cd\u5f71\u54cd\uff0c\u635f\u5bb3\u4e86\u6d88\u8d39\u3002Model 3\u66fe\u662f\u5185\u5730\u6700\u7545\u9500\u7684\u7535\u52a8\u6c7d\u8f66\uff0c\u4f46\u57282020\u5e749\u6708\u88ab\u4e0a\u6c7d\u901a\u7528\u4e94\u83f1\u7ec4\u88c5\u7684\u4e00\u6b3e\u8ff7\u4f60\u7535\u52a8\u6c7d\u8f66\u6240\u53d6\u4ee3\u3002\n\u7279\u65af\u62c9\u4f9d\u7136\u975e\u5e38\u53d7\u6b22\u8fce\u3002\u53bb\u5e74\uff0c\u5b83\u5728\u5185\u5730\u5411\u5ba2\u6237\u4ea4\u4ed8\u4e86\u8d85\u8fc771\u4e07\u8f86Model 3\u548cModel Y\uff0c\u540c\u6bd4\u589e\u957f50%\u3002\u76f8\u6bd4\u4e4b\u4e0b\uff0c\u603b\u90e8\u4f4d\u4e8e\u5317\u4eac\u7684\u7279\u65af\u62c9\u6700\u63a5\u8fd1\u7684\u7ade\u4e89\u5bf9\u624b\u7406\u60f3\u6c7d\u8f66\u53bb\u5e74\u4ec5\u5411\u5ba2\u6237\u4ea4\u4ed8\u4e86133,246\u8f86\u6c7d\u8f66\uff0c\u4f46\u8fd9\u5bf9\u4e2d\u56fd\u6c7d\u8f66\u5236\u9020\u5546\u6765\u8bf4\u5df2\u7ecf\u662f\u540c\u6bd4\u589e\u957f47%\u3002",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 586,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

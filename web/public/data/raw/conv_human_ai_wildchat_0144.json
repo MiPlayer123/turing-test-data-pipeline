@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0144",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 15:46:06+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "meaning of books pythian odes, nemean odes, isthmian odes, olympian odes separated with lines. each one has 50 words",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Pythian Odes, written by Pindar, were a collection of poems that celebrated the victors in athletic contests held at the Pythian Games. These poems were centered around themes like fame, glory, pride, and victory. They were considered masterpieces of Greek lyric poetry.\n\nNemean Odes, also written by Pindar, were songs of praise for the victors of the Nemean Games. These poems celebrated the strength and prowess of the athletes and were focused on themes like courage, perseverance, and excellence. They were a testament to the glory of athletic achievement in ancient Greece.\n\nIsthmian Odes, written by various poets, honored the victors of the Isthmian Games. These poems were created to sing the praises of the athletic competitors who competed in wrestling, boxing, and other events. They were considered to be an important part of Greek religious and cultural life.\n\nOlympian Odes, another collection by Pindar, were written to honor the gods and goddesses of ancient Greece, as well as the victors of the Olympic Games. These poems celebrated the physical and mental strength of the athletes and highlighted the heroic qualities of their victories. These odes were considered to be some of the most impressive and memorable examples of Greek literature.",
+      "token_count": 201,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "meaning of books pythian odes, nemean odes, isthmian odes, olympian odes separated with lines. each one has 50 words . No introduction with title and writer, straight to the point.",
+      "token_count": 30,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Pythian Odes: poems celebrating winners of athletic contests at Pythian Games, centered on themes of fame, glory, pride, and victory; considered masterpieces of Greek lyric poetry.\n\nNemean Odes: songs of praise for victors of Nemean Games, celebrating their strength and prowess; focused on themes of courage, perseverance, and excellence; testament to glory of athletic achievement in ancient Greece.\n\nIsthmian Odes: poems honoring victors of Isthmian Games, created to sing praises of competitors in wrestling, boxing, and other events; an important part of Greek religious and cultural life.\n\nOlympian Odes: collection of poems by Pindar praising gods and goddesses of ancient Greece and winners of Olympic Games; celebrates physical and mental strength of athletes and heroic qualities of their victories; considered impressive and memorable examples of Greek literature.",
+      "token_count": 127,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "meaning of books isthmian odes, nemean odes, olympian odes, pythian odes with ids of 22,23,24,25 respectively. each one has 50 words . No introduction with title and writer, straight to the point. answer with ids and response inside description=\"\"",
+      "token_count": 39,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "description=\"22\" Isthmian Odes: poems honoring victors of Isthmian Games, created to sing praises of competitors in wrestling, boxing, and other events; an important part of Greek religious and cultural life.\n\ndescription=\"23\" Nemean Odes: songs of praise for victors of Nemean Games, celebrating their strength and prowess; focused on themes of courage, perseverance, and excellence; testament to glory of athletic achievement in ancient Greece.\n\ndescription=\"24\" Olympian Odes: collection of poems by Pindar praising gods and goddesses of ancient Greece and winners of Olympic Games; celebrates physical and mental strength of athletes and heroic qualities of their victories; considered impressive and memorable examples of Greek literature.\n\ndescription=\"25\" Pythian Odes: poems celebrating winners of athletic contests at Pythian Games, centered on themes of fame, glory, pride, and victory; considered masterpieces of Greek lyric poetry.",
+      "token_count": 131,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "meaning of books isthmian odes, nemean odes, olympian odes, pythian odes with ids of 22,23,24,25 respectively. each one has 50 words . No introduction with title and writer, straight to the point.  answer format is id:{id}, description:{answer}",
+      "token_count": 37,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "id:22, description: Poems honoring victors of Isthmian Games, created to sing praises of competitors in wrestling, boxing, and other events; an important part of Greek religious and cultural life.\n\nid:23, description: Songs of praise for victors of Nemean Games, celebrating their strength and prowess; focused on themes of courage, perseverance, and excellence; testament to glory of athletic achievement in ancient Greece.\n\nid:24, description: Collection of poems by Pindar praising gods and goddesses of ancient Greece and winners of Olympic Games; celebrates physical and mental strength of athletes and heroic qualities of their victories; considered impressive and memorable examples of Greek literature.\n\nid:25, description: Poems celebrating winners of athletic contests at Pythian Games, centered on themes of fame, glory, pride, and victory; considered masterpieces of Greek lyric poetry.",
+      "token_count": 127,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 711,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

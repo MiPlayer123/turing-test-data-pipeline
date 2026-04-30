@@ -1,0 +1,205 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0124",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 20,
+  "timestamp_start": "2023-04-09 14:07:40+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "A sample that does not provide a good representation of the population from which it was collected is referred to as a(n) ________ sample.\n\nSelect one:\n\na.\nBiased\n\n\nb.\nUnbiased",
+      "token_count": 30,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "a. Biased",
+      "token_count": 2,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "The Central Limit Theorem is important in statistics because\n\nSelect one:\n\na.\nfor a large n, it says the population is approximately normal.\n\n\nb.\nfor any sized sample, it says the sampling distribution of the sample mean is approximately normal.\n\n\nc.\nfor any population, it says the sampling distribution of the sample mean is approximately normal, regardless of the sample size.\n\n\nd.\nfor a large n, it says the sampling distribution of the sample mean is approximately normal, regardless of the shape of the population.",
+      "token_count": 85,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "d. for a large n, it says the sampling distribution of the sample mean is approximately normal, regardless of the shape of the population.",
+      "token_count": 24,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "According to the empirical rule, if the data form a \"bell-shaped\" normal distribution, ________ percent of the observations will be contained within 2 standard deviations around the arithmetic mean.\n\nSelect one:\n\na.\napproximately 68%\n\n\nb.\napproximately 95%\n\n\nc.\napproximately 93%\n\n\nd.\napproximately 89%",
+      "token_count": 43,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "b. approximately 95%",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Sampling distributions describe the distribution of\n\nSelect one:\n\na.\npopulation parameters.\n\n\nb.\nsample statistics.\n\n\nc.\nboth population parameters and sample statistics.\n\n\nd.\nneither population parameters nor sample statistics.",
+      "token_count": 28,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "b. sample statistics.",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "True or False: As the sample size increases, the standard error of the mean increases.\n\nSelect one:\nTrue\nFalse",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "False.",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "The standard error of the mean is population standard deviation divided by square root of sample size.\n\nSelect one:\nTrue\nFalse",
+      "token_count": 21,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "False. The standard error of the mean is sample standard deviation divided by square root of sample size.",
+      "token_count": 18,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "The standard error of the mean will be reduced when sample size increases.\n\nSelect one:\nTrue\nFalse",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "True.",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "The standard error of the mean measures the variability of the sample means.\n\nSelect one:\nTrue\nFalse",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 16,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "True.",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 17,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "the sampling distribution of the sample mean is approximately normal whenever the sample size is sufficiently large (n \u2265 30).\n\nSelect one:\nTrue\nFalse",
+      "token_count": 24,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 18,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "True.",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 19,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "The mean of the sampling distribution of the sample mean is always equal to \u03bc.\n\nSelect one:\nTrue\nFalse",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 20,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "True.",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 358,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

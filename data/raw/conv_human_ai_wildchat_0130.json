@@ -1,0 +1,169 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0130",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 16,
+  "timestamp_start": "2023-04-09 14:34:45+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Use simple Chinese to re-describe the following content without repeated descriptions\n\nAlibaba announced a major restructuring plan to split its US$257 billion empire into six independent entities last Tuesday, saying it would lead to quicker decision-making and give each unit greater operational independence.\nEach company will be allowed to \u201cpursue fundraising from third parties and IPOs when they are ready,\u201d said Daniel Zhang Yong, chairman and chief executive of Alibaba, which also owns the South China Morning Post.\nThe other five units to be devolved are Cloud Intelligence Group, Taobao Tmall Commerce Group, Local Services Group, Global Digital Commerce Group and the Digital Media and Entertainment Group.",
+      "token_count": 107,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Alibaba will divide into six independently operated entities to speed up decision-making and give each unit more independence. Each company can seek funding and IPOs when they are prepared. The five other units are Cloud Intelligence Group, Taobao Tmall Commerce Group, Local Services Group, Global Digital Commerce Group, and Digital Media and Entertainment Group.",
+      "token_count": 54,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\nCainiao has become the hot favourite to conduct an IPO first, with analysts saying it has played \u201ca critical role\u201d in supporting Alibaba\u2019s e-commerce operations at home and abroad.\n\u201cWithin the Alibaba ecosystem, Cainiao has provided significant support for [the e-commerce business] of Taobao and Tmall,\u201d said Zhang Yi, CEO and chief analyst at iiMedia Research. \u201cAs an open logistics system, it also has significant growth potential [as a stand-alone company].\u201d\nAnalysts also noted Cainiao\u2019s critical role in overseas markets.",
+      "token_count": 96,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u83dc\u9e1f\u516c\u53f8\u6210\u4e3a\u9996\u9009\u7684IPO\u516c\u53f8\uff0c\u5206\u6790\u5e08\u8868\u793a\uff0c\u83dc\u9e1f\u5728\u652f\u6301\u963f\u91cc\u5df4\u5df4\u56fd\u5185\u5916\u7535\u5b50\u5546\u52a1\u8fd0\u8425\u65b9\u9762\u53d1\u6325\u4e86\u201c\u81f3\u5173\u91cd\u8981\u7684\u4f5c\u7528\u201d\u3002iiMedia Research\u7684CEO\u548c\u9996\u5e2d\u5206\u6790\u5e08\u5f20\u6bc5\u8868\u793a\uff1a\u201c\u5728\u963f\u91cc\u5df4\u5df4\u751f\u6001\u7cfb\u7edf\u5185\uff0c\u83dc\u9e1f\u4e3a\u6dd8\u5b9d\u548c\u5929\u732b\u7684\u7535\u5b50\u5546\u52a1\u4e1a\u52a1\u63d0\u4f9b\u4e86\u91cd\u8981\u652f\u6301\u3002\u4f5c\u4e3a\u4e00\u4e2a\u5f00\u653e\u7684\u7269\u6d41\u7cfb\u7edf\uff0c\u5b83\u8fd8\u5177\u6709\u5de8\u5927\u7684\u589e\u957f\u6f5c\u529b\uff08\u4f5c\u4e3a\u72ec\u7acb\u516c\u53f8\uff09\u3002 \"\u5206\u6790\u5e08\u8fd8\u6307\u51fa\uff0c\u83dc\u9e1f\u5728\u6d77\u5916\u5e02\u573a\u53d1\u6325\u4e86\u5173\u952e\u4f5c\u7528\u3002",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\nAlibaba announced a major restructuring plan to split its US$257 billion empire into six independent entities last Tuesday, saying it would lead to quicker decision-making and give each unit greater operational independence.\nEach company will be allowed to \u201cpursue fundraising from third parties and IPOs when they are ready,\u201d said Daniel Zhang Yong, chairman and chief executive of Alibaba, which also owns the South China Morning Post.\nThe other five units to be devolved are Cloud Intelligence Group, Taobao Tmall Commerce Group, Local Services Group, Global Digital Commerce Group and the Digital Media and Entertainment Group.",
+      "token_count": 112,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u4e0a\u5468\u4e8c\uff0c\u963f\u91cc\u5df4\u5df4\u5ba3\u5e03\u4e86\u4e00\u9879\u91cd\u5927\u91cd\u7ec4\u8ba1\u5212\uff0c\u5c06\u5176\u4ef7\u503c2570\u4ebf\u7f8e\u5143\u7684\u5e1d\u56fd\u5206\u4e3a\u516d\u4e2a\u72ec\u7acb\u7684\u5b9e\u4f53\uff0c\u79f0\u8fd9\u5c06\u5bfc\u81f4\u66f4\u5feb\u7684\u51b3\u7b56\uff0c\u5e76\u4f7f\u6bcf\u4e2a\u5355\u4f4d\u83b7\u5f97\u66f4\u5927\u7684\u8fd0\u8425\u72ec\u7acb\u6027\u3002\n\u963f\u91cc\u5df4\u5df4\u8463\u4e8b\u957f\u517cCEO\u5f20\u52c7\u8868\u793a\uff0c\u6bcf\u4e2a\u516c\u53f8\u90fd\u5c06\u88ab\u5141\u8bb8\u201c\u5728\u51c6\u5907\u5c31\u7eea\u65f6\u8ffd\u6c42\u7b2c\u4e09\u65b9\u878d\u8d44\u548cIPO\u201d\u3002\u963f\u91cc\u5df4\u5df4\u8fd8\u62e5\u6709\u300a\u5357\u534e\u65e9\u62a5\u300b\u3002\n\u53e6\u5916\u8981\u5265\u79bb\u7684\u4e94\u5bb6\u516c\u53f8\u662f\u4e91\u667a\u80fd\u4e8b\u4e1a\u7fa4\u3001\u6dd8\u5b9d\u5929\u732b\u6d88\u8d39\u8005\u4e8b\u4e1a\u7fa4\u3001\u672c\u5730\u670d\u52a1\u4e8b\u4e1a\u7fa4\u3001\u5168\u7403\u6570\u5b57\u8d38\u6613\u4e8b\u4e1a\u7fa4\u548c\u6570\u5b57\u5a92\u4f53\u548c\u5a31\u4e50\u4e8b\u4e1a\u7fa4\u3002",
+      "token_count": 3,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\nHong Kong recently eased its listing rules for tech start-ups, allowing companies with a valuation of at least HK$10 billion (US$1.3 billion) to sell shares, even if they have not yet generated any sales revenue.\nIn addition, the minimum valuation for companies with at least HK$250 million in sales in the previous financial year has been lowered from HK$8 billion to HK$6 billion. This means that Cainiao meets the requirements to be listed under Hong Kong\u2019s regulations, which came into effect on March 31.",
+      "token_count": 100,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u9999\u6e2f\u6700\u8fd1\u653e\u5bbd\u4e86\u79d1\u6280\u521d\u521b\u4f01\u4e1a\u7684\u4e0a\u5e02\u89c4\u5b9a\uff0c\u5141\u8bb8\u4f30\u503c\u81f3\u5c11\u8fbe\u5230100\u4ebf\u6e2f\u5143\uff08\u540813\u4ebf\u7f8e\u5143\uff09\u7684\u516c\u53f8\u51fa\u552e\u80a1\u7968\uff0c\u5373\u4f7f\u5b83\u4eec\u5c1a\u672a\u4ea7\u751f\u4efb\u4f55\u9500\u552e\u6536\u5165\u3002\n\u6b64\u5916\uff0c\u5bf9\u4e8e\u4e0a\u4e00\u4e2a\u8d22\u5e74\u9500\u552e\u989d\u81f3\u5c11\u8fbe\u52302.5\u4ebf\u6e2f\u5143\u7684\u516c\u53f8\uff0c\u6700\u4f4e\u4f30\u503c\u4ece80\u4ebf\u6e2f\u5143\u964d\u81f360\u4ebf\u6e2f\u5143\u3002\u8fd9\u610f\u5473\u7740\uff0c\u83dc\u9e1f\u7b26\u5408\u9999\u6e2f\u89c4\u5b9a\u7684\u6761\u4ef6\uff0c\u57283\u670831\u65e5\u751f\u6548\u7684\u89c4\u5b9a\u4e0b\u53ef\u4ee5\u5728\u9999\u6e2f\u4e0a\u5e02\u3002",
+      "token_count": 2,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Cannot carry the above translation content, please help me translate the following content into Simplified Chinese\n\niiMedia\u2019s Zhang said the developments reflect the fact that Big Tech companies in China \u201chave grown to a certain level and face development bottlenecks\u201d, hence it is an \u201cinevitable choice\u201d.\nWei from Analysys agrees, seeing spin-off plans as \u201cbeneficial for improving regulation at the national level\u201d, while also enabling companies to \u201cshed the burden of the group\u201d and better serve customers.",
+      "token_count": 77,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u827e\u5a92\u54a8\u8be2\u7684\u5f20\u6bc5\u8868\u793a\uff0c\u8fd9\u4e9b\u53d1\u5c55\u53cd\u6620\u4e86\u4e2d\u56fd\u5927\u578b\u79d1\u6280\u516c\u53f8\u201c\u5df2\u7ecf\u53d1\u5c55\u5230\u4e00\u5b9a\u7a0b\u5ea6\uff0c\u9762\u4e34\u53d1\u5c55\u74f6\u9888\u201d\uff0c\u56e0\u6b64\u8fd9\u662f\u4e00\u4e2a\u201c\u5fc5\u7136\u7684\u9009\u62e9\u201d\u3002\n\u6613\u89c2\u56fd\u9645\u7684\u9b4f\u4f20\u5b9d\u4e5f\u540c\u610f\u8fd9\u4e00\u770b\u6cd5\uff0c\u4ed6\u8ba4\u4e3a\u62c6\u5206\u8ba1\u5212\u201c\u6709\u5229\u4e8e\u63d0\u9ad8\u56fd\u5bb6\u5c42\u9762\u7684\u76d1\u7ba1\u201d\uff0c\u540c\u65f6\u4f7f\u4f01\u4e1a\u201c\u6446\u8131\u96c6\u56e2\u7684\u8d1f\u62c5\u201d\uff0c\u66f4\u597d\u5730\u670d\u52a1\u5ba2\u6237\u3002",
+      "token_count": 2,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Use simple Chinese to re-describe the following content without repeated descriptions\n\nThe research fellow at Shanghai Jiao Tong University trawled websites for reviews, kicked tyres at half a dozen showrooms and asked detailed questions about resale values, add-on services and enhancements before settling on a P7 sedan made by electric-vehicle (EV) start-up Xpeng in early March.\nWhat sold him on the P7 was the EV\u2019s driver-assistance system and its voice-command functions. He paid 250,000 yuan (US$36,340) for the EV by the Guangzhou-based carmaker.",
+      "token_count": 83,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u8fd9\u4f4d\u4e0a\u6d77\u4ea4\u901a\u5927\u5b66\u7684\u7814\u7a76\u5458\u5728\u4e09\u6708\u521d\u67e5\u9605\u4e86\u8bb8\u591a\u7f51\u7ad9\u7684\u8bc4\u8bba\uff0c\u5728\u534a\u6253\u5c55\u5385\u5b9e\u5730\u8003\u5bdf\u5e76\u63d0\u51fa\u4e86\u5173\u4e8e\u518d\u9500\u552e\u4ef7\u503c\u3001\u9644\u52a0\u670d\u52a1\u548c\u589e\u5f3a\u5b9e\u7528\u6027\u7684\u8be6\u7ec6\u95ee\u9898\uff0c\u6700\u7ec8\u9009\u62e9\u4e86\u7531\u7535\u52a8\u6c7d\u8f66\u521d\u521b\u4f01\u4e1a\u5c0f\u9e4f\u6c7d\u8f66\u5236\u9020\u7684P7\u8f7f\u8f66\u3002\n\u8ba9\u4ed6\u51b3\u5b9a\u8d2d\u4e70P7\u7684\u662f\u8fd9\u6b3e\u7535\u52a8\u6c7d\u8f66\u7684\u9a7e\u9a76\u8f85\u52a9\u7cfb\u7edf\u548c\u8bed\u97f3\u6307\u4ee4\u529f\u80fd\u3002\u4ed6\u4e3a\u8fd9\u6b3e\u7531\u4f4d\u4e8e\u5e7f\u5dde\u7684\u6c7d\u8f66\u5236\u9020\u5546\u751f\u4ea7\u7684\u7535\u52a8\u6c7d\u8f66\u652f\u4ed8\u4e8625\u4e07\u5143\u4eba\u6c11\u5e01\uff08\u7ea6\u540836340\u7f8e\u5143\uff09\u3002",
+      "token_count": 2,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Use simple Chinese to re-describe the following content without repeated descriptions\n\n\u201cFor example, they prefer strong voice-command functions, which is very different from western drivers. Indeed, some Chinese smart-car assemblers have proved to be superior to global rivals in terms of digital cockpit development.\u201d\nNio\u2019s ET7 comes equipped with PanoCinema, a panoramic and immersive digital cockpit boasting augmented-reality (AR) and virtual-reality (VR) technologies. The PanoCinema system is powered by 256-colour curtain ambient lighting and a Dolby Atmos 7.1.4 surround-sound system.\nTesla\u2019s theatre function allows various video-streaming services to be played on its controls screen while parked. Model Y users are also able to use the steering wheel buttons to play video games through its Arcade system.",
+      "token_count": 116,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u4f8b\u5982\uff0c\u4e2d\u56fd\u6d88\u8d39\u8005\u559c\u6b22\u5f3a\u5927\u7684\u8bed\u97f3\u6307\u4ee4\u529f\u80fd\uff0c\u8fd9\u4e0e\u897f\u65b9\u9a7e\u9a76\u5458\u975e\u5e38\u4e0d\u540c\u3002\u4e8b\u5b9e\u4e0a\uff0c\u4e00\u4e9b\u4e2d\u56fd\u667a\u80fd\u6c7d\u8f66\u5236\u9020\u516c\u53f8\u5728\u6570\u5b57\u9a7e\u9a76\u8231\u5f00\u53d1\u65b9\u9762\u5df2\u7ecf\u8bc1\u660e\u6bd4\u5168\u7403\u7ade\u4e89\u5bf9\u624b\u66f4\u4e3a\u4f18\u79c0\u3002\n\u851a\u6765\u516c\u53f8\u7684ET7\u914d\u5907\u4e86PanoCinema\uff0c\u8fd9\u662f\u4e00\u4e2a\u5168\u666f\u548c\u6c89\u6d78\u5f0f\u6570\u5b57\u9a7e\u9a76\u8231\uff0c\u62e5\u6709\u589e\u5f3a\u73b0\u5b9e\uff08AR\uff09\u548c\u865a\u62df\u73b0\u5b9e\uff08VR\uff09\u6280\u672f\u3002PanoCinema\u7cfb\u7edf\u7531256\u8272\u5e55\u5e03\u73af\u5883\u7167\u660e\u548c\u675c\u6bd4\u5168\u666f\u58f07.1.4\u73af\u7ed5\u58f0\u7cfb\u7edf\u9a71\u52a8\u3002\n\u7279\u65af\u62c9\u7684\u5267\u9662\u529f\u80fd\u5141\u8bb8\u5728\u505c\u8f66\u65f6\u901a\u8fc7\u5176\u63a7\u5236\u5c4f\u5e55\u64ad\u653e\u5404\u79cd\u89c6\u9891\u6d41\u670d\u52a1\u3002 Model Y\u7528\u6237\u8fd8\u53ef\u4ee5\u901a\u8fc7\u5176Arcade\u7cfb\u7edf\u4f7f\u7528\u65b9\u5411\u76d8\u6309\u94ae\u73a9\u89c6\u9891\u6e38\u620f\u3002",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Use simple Chinese to re-describe the following content without repeated descriptions\n\n\u201cThey are not designed for Chinese drivers and passengers, and they are not the up-to-date smart vehicles that many rich Chinese consumers desire,\u201d said Eric Han, a senior manager at Suolei, an advisory firm in Shanghai. \u201cBut the cars are still deemed high-quality and value-for-money products in China, because of Tesla\u2019s strong brand awareness.\u201d\nTesla\u2019s main Chinese competitors \u2013 Nio, Xpeng and Li Auto \u2013 have developed battery-powered cars ranging from sedans and coupes to full-size SUVs with longer driving ranges than the Model 3 and Model Y.",
+      "token_count": 99,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 16,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "\u4e0a\u6d77\u54a8\u8be2\u516c\u53f8\u901f\u7acb\u7684\u9ad8\u7ea7\u7ecf\u7406Eric Han\u8868\u793a\uff1a\u201c\u8fd9\u4e9b\u8f66\u4e0d\u662f\u4e3a\u4e2d\u56fd\u9a7e\u9a76\u5458\u548c\u4e58\u5ba2\u8bbe\u8ba1\u7684\uff0c\u4e5f\u4e0d\u662f\u8bb8\u591a\u5bcc\u88d5\u7684\u4e2d\u56fd\u6d88\u8d39\u8005\u6240\u6e34\u671b\u7684\u667a\u80fd\u6c7d\u8f66\uff0c\u4f46\u7531\u4e8e\u7279\u65af\u62c9\u54c1\u724c\u7684\u5f3a\u5927\u77e5\u540d\u5ea6\uff0c\u8fd9\u4e9b\u6c7d\u8f66\u5728\u4e2d\u56fd\u4ecd\u88ab\u8ba4\u4e3a\u662f\u9ad8\u8d28\u91cf\u7684\u7269\u6709\u6240\u503c\u7684\u4ea7\u54c1\u3002\u201d\n\u7279\u65af\u62c9\u7684\u4e3b\u8981\u4e2d\u56fd\u7ade\u4e89\u5bf9\u624b\uff0c\u5305\u62ecNio\u3001\u5c0f\u9e4f\u6c7d\u8f66\u548c\u7406\u60f3\u6c7d\u8f66\u7b49\uff0c\u5df2\u7ecf\u63a8\u51fa\u4e86\u4ece\u8f7f\u8f66\u548c\u8dd1\u8f66\u5230\u5927\u578bSUV\u7684\u7535\u6c60\u9a71\u52a8\u6c7d\u8f66\uff0c\u8fd9\u4e9b\u7535\u52a8\u6c7d\u8f66\u7684\u7eed\u822a\u91cc\u7a0b\u6bd4Model 3\u548cModel Y\u957f\u3002",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 866,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}
