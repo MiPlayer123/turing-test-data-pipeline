@@ -218,21 +218,21 @@ export function init() {
     });
   });
 
-  // ── Pick up the story-red-dot handed off by quiz.js ────────────────────────
-  // If the user scrolled past the quiz without answering, create one HIDDEN
-  // at viewport centre — the timeline below will make it visible.
+  // ── Spawn the red story-dot at viewport centre ────────────────────────────
+  // The quiz used to hand this off; now the dot belongs entirely to this section.
+  // Created hidden — the timeline below fades it in and flies it to the chart corner.
   let flyDot = document.getElementById('story-red-dot');
   if (!flyDot) {
     flyDot = document.createElement('div');
     flyDot.id = 'story-red-dot';
     flyDot.className = 'fly-dot fly-dot-red';
     document.body.appendChild(flyDot);
-    gsap.set(flyDot, {
-      left: window.innerWidth / 2 - 8,
-      top:  window.innerHeight / 2 - 8,
-      opacity: 0, scale: 1,
-    });
   }
+  gsap.set(flyDot, {
+    left: window.innerWidth / 2 - 8,
+    top:  window.innerHeight / 2 - 8,
+    opacity: 0, scale: 1,
+  });
 
   // Helper: SVG viewBox coords → screen coords for the DOM fly-dot (guarded: bad rects → no jump to 0,0)
   const lastGoodScreen = { left: window.innerWidth / 2 - 8, top: window.innerHeight / 2 - 8 };

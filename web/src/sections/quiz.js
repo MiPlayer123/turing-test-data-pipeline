@@ -167,35 +167,12 @@ export async function init() {
         w.disabled = true;
       });
       resultEl.classList.remove('hidden');
-      const summary = correct
-        ? 'You chose <strong>AI</strong>. This thread is model-generated — that matches the dataset label.'
-        : 'You chose <strong>Human</strong>. The label for this thread is <strong>AI</strong> — it is model-generated.';
-        // <p class="quiz-result-badge" aria-hidden="true">Answer</p>
-        // <p class="quiz-result-truth">AI</p>
-        // <p class="quiz-result-verdict">${correct ? 'Nice — you got it.' : 'Not quite this time.'}</p>
-        // <p class="quiz-result-summary">${summary}</p>
-        resultEl.innerHTML = `
-        <div class="others-bar">
-          <p class="others-bar-label">How others answered</p>
-          <div class="others-row">
-            <span class="others-row-label">AI</span>
-            <div class="others-row-track"><div class="others-row-fill" data-pct="74"></div></div>
-            <span class="others-row-pct">74%</span>
-          </div>
-          <div class="others-row">
-            <span class="others-row-label">Human</span>
-            <div class="others-row-track"><div class="others-row-fill" data-pct="26"></div></div>
-            <span class="others-row-pct">26%</span>
-          </div>
-        </div>
+      resultEl.innerHTML = `
+        <p class="quiz-result-line">
+          You chose <strong>${correct ? 'AI' : 'Human'}</strong>${correct ? '' : ' — the label for this thread is <strong>AI</strong>'}.
+        </p>
       `;
       gsap.fromTo(resultEl, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 });
-      // Animate the bars filling in after verdict lands
-      const fills = resultEl.querySelectorAll('.others-row-fill');
-      gsap.fromTo(fills,
-        { width: 0 },
-        { width: (_, el) => `${el.dataset.pct}%`, duration: 0.9, ease: 'power2.out', delay: 0.5, stagger: 0.12 }
-      );
       // Collapse only after explicit “continue” intent (scroll or wheel), not immediately.
       const scrollYAtAnswer = window.scrollY;
       // Lower thresholds so "continue" triggers with less extra scrolling.
@@ -221,7 +198,7 @@ export async function init() {
         revealTl.kill();
         gsap.set(bubbles, { clearProps: 'transform' });
         gsap.set(bubbles, { opacity: 1, y: 0 });
-        requestAnimationFrame(() => playBlopIntoDot());
+        requestAnimationFrame(() => playCollapseIntoChart());
       }
 
       function onScrollContinue() {
@@ -244,10 +221,13 @@ export async function init() {
     });
   });
 
-  // ----- Continue-triggered collapse: conversation frame (chat bubbles only)
-  //       converges into one red dot. Dot is owned here; #s-grid finds #story-red-dot.
+  // ----- Continue-triggered collapse: chat frame morphs into the size/aspect of the
+  //       detective chart that lives in the next section. The frame stays on-screen
+  //       (not chasing the offscreen detective container) and fades out as we scroll
+  //       the page into the detective section, so the chart appears to "open out" of
+  //       the same rectangle the chat just shrank into.
   let armed = false;
-  function playBlopIntoDot() {
+  function playCollapseIntoChart() {
     if (armed) return;
 
     const section = document.getElementById('s-quiz');
@@ -255,31 +235,36 @@ export async function init() {
 
     armed = true;
 
-    // Persistent red story-dot shared with #s-grid
-    let flyDot = document.getElementById('story-red-dot');
-    if (!flyDot) {
-      flyDot = document.createElement('div');
-      flyDot.id = 'story-red-dot';
-      flyDot.className = 'fly-dot fly-dot-red';
-      document.body.appendChild(flyDot);
-    }
-
     const chatRect = chatEl.getBoundingClientRect();
-    const frameTop = chatRect.top;
-    const frameBottom = chatRect.bottom;
-    const frameLeft = chatRect.left;
-    const frameRight = chatRect.right;
     const framePad = 12;
     const frameRect = {
-      left: frameLeft - framePad,
-      top: frameTop - framePad,
-      width: Math.max(40, frameRight - frameLeft + framePad * 2),
-      height: Math.max(40, frameBottom - frameTop + framePad * 2),
+      left: chatRect.left - framePad,
+      top: chatRect.top - framePad,
+      width: Math.max(40, chatRect.width + framePad * 2),
+      height: Math.max(40, chatRect.height + framePad * 2),
     };
-    const targetX = frameRect.left + frameRect.width / 2;
-    const targetY = frameRect.top + frameRect.height / 2;
-    const cx = targetX - 8;
-    const cy = targetY - 8;
+
+    // Target dimensions: match the detective chart svg (its natural rendered size).
+    // Fall back to the SVG's intrinsic 600×280 viewBox if it hasn't laid out yet.
+    const detectiveSvg = document.querySelector('#detective-viz svg');
+    let targetW = 600, targetH = 280;
+    if (detectiveSvg) {
+      const r = detectiveSvg.getBoundingClientRect();
+      if (r.width > 40 && r.height > 40) {
+        targetW = r.width;
+        targetH = r.height;
+      }
+    }
+    // Center the target rect on screen at the chat's current vertical centre so the
+    // morph reads as in-place reshape rather than a flying box.
+    const chatCenterX = chatRect.left + chatRect.width / 2;
+    const chatCenterY = chatRect.top + chatRect.height / 2;
+    const targetRect = {
+      left: chatCenterX - targetW / 2,
+      top:  chatCenterY - targetH / 2,
+      width:  targetW,
+      height: targetH,
+    };
 
     lockScroll();
 
@@ -302,78 +287,64 @@ export async function init() {
     gsap.set(chatEl, { transformOrigin: '50% 50%', x: 0, y: 0, scale: 1 });
     gsap.set(bubbles, { transformOrigin: '50% 50%', clearProps: 'filter' });
 
-    // Pre-position the dot at impact centre (hidden until stack nearly vanishes)
-    gsap.set(flyDot, {
-      left: cx, top: cy,
-      opacity: 0, scale: 0, y: 0,
-      transformOrigin: '50% 50%',
-    });
-
-    const squeezeDur = 0.92;
-    const easeSqueeze = 'power4.in';
+    const squeezeDur = 0.78;
+    const easeSqueeze = 'power3.inOut';
 
     const tl = gsap.timeline({
       delay: 0.06,
       onComplete: () => {
-        gsap.set(collapseFrame, { opacity: 0 });
         unlockScroll();
-        // Nudge into the next section so the handoff feels immediate.
-        const gridSection = document.getElementById('s-grid');
-        if (gridSection) gridSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Hand off to the detective section. The frame fades as the page begins
+        // scrolling so the chart appears to emerge from where the rectangle was.
+        const detectiveSection = document.getElementById('s-detective');
+        if (detectiveSection) detectiveSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        gsap.to(collapseFrame, {
+          opacity: 0,
+          duration: 0.55,
+          delay: 0.25,
+          ease: 'power1.out',
+          onComplete: () => gsap.set(collapseFrame, { display: 'none' }),
+        });
       },
     });
 
-    tl.to(collapseFrame, { opacity: 1, duration: 0.12, ease: 'power1.out' }, 0);
+    tl.to(collapseFrame, { opacity: 1, duration: 0.18, ease: 'power1.out' }, 0);
 
-    // Micro “gather” so motion reads before the hard squeeze
+    // Micro “gather” so motion reads before the morph
     tl.to(bubbles, {
       scale: 0.92,
       duration: 0.12,
       stagger: 0.02,
       ease: 'power1.out',
     }, 0);
-    // Only the conversation area collapses into one point.
+
+    // Frame morphs from chat rect → detective chart rect (in place, on-screen)
     tl.to(collapseFrame, {
-      scale: 0.04,
-      opacity: 0.2,
+      left: targetRect.left,
+      top:  targetRect.top,
+      width:  targetRect.width,
+      height: targetRect.height,
       duration: squeezeDur,
       ease: easeSqueeze,
     }, 0.14);
+
     tl.to(bubbles, {
       opacity: 0,
-      scale: 0.35,
-      duration: squeezeDur * 0.65,
+      scale: 0.6,
+      duration: squeezeDur * 0.55,
       stagger: 0.015,
       ease: easeSqueeze,
     }, 0.18);
     tl.to(chatEl, {
       opacity: 0,
-      duration: squeezeDur * 0.62,
+      duration: squeezeDur * 0.55,
       ease: easeSqueeze,
     }, 0.2);
-
-    const impactT = 0.14 + squeezeDur * 0.82;
-    tl.set(flyDot, { opacity: 1, scale: 0.12, y: 0 }, impactT);
-    tl.to(flyDot, {
-      scale: 2.05,
-      duration: 0.14,
-      ease: 'power3.out',
-    }, impactT);
-    tl.to(flyDot, {
-      scale: 1,
-      duration: 0.52,
-      ease: 'elastic.out(1.15, 0.48)',
-    }, impactT + 0.14);
-    tl.to(flyDot, { y: -16, duration: 0.2, ease: 'power2.out' }, impactT + 0.56);
-    tl.to(flyDot, { y: 0, duration: 0.55, ease: 'bounce.out(1.35)' }, impactT + 0.76);
-    tl.to(flyDot, { y: -6, duration: 0.14, ease: 'power2.out' }, impactT + 1.33);
-    tl.to(flyDot, { y: 0, scale: 1, duration: 0.32, ease: 'power2.inOut' }, impactT + 1.47);
-    tl.set(chatEl, { pointerEvents: 'none' }, impactT + 0.05);
+    tl.set(chatEl, { pointerEvents: 'none' }, 0.25);
   }
 
   // Restore the chat when the viewer scrolls back up into the quiz section
   // after the collapse has fired, so the conversation can be re-read.
-  // Forward scroll past quiz still shows the gridReveal handoff naturally.
   ScrollTrigger.create({
     trigger: '#s-quiz',
     start: 'top 60%',
@@ -381,10 +352,8 @@ export async function init() {
     onEnterBack: () => {
       if (!armed) return;
       const collapseFrame = document.getElementById('quiz-collapse-frame');
-      const flyDot = document.getElementById('story-red-dot');
-      gsap.killTweensOf([chatEl, ...bubbles, flyDot, collapseFrame].filter(Boolean));
-      if (collapseFrame) gsap.set(collapseFrame, { opacity: 0 });
-      if (flyDot) gsap.set(flyDot, { opacity: 0, scale: 0 });
+      gsap.killTweensOf([chatEl, ...bubbles, collapseFrame].filter(Boolean));
+      if (collapseFrame) gsap.set(collapseFrame, { opacity: 0, display: 'none' });
       gsap.set(chatEl, { opacity: 1, pointerEvents: 'auto', x: 0, y: 0, scale: 1 });
       gsap.set(bubbles, { opacity: 1, y: 0, scale: 1, clearProps: 'transform,filter' });
       if (resultEl) gsap.set(resultEl, { opacity: 1, y: 0 });
