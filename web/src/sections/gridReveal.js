@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { openConversation } from '../components/conversationReader.js';
+import { CONDITION_COLOR } from '../data/constants.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 
@@ -35,8 +36,8 @@ export function init() {
   const H = VH - M.top  - M.bottom;
 
   // Neutral axis colours for metric explanation phase
-  const COL_X = '#e6edf3';   // off-white → Repetitiveness
-  const COL_Y = '#e6edf3';   // off-white → Hedging
+  const COL_X = '#c9d1d9';   // off-white → Repetitiveness
+  const COL_Y = '#c9d1d9';   // off-white → Hedging
 
   // ── Defs: glow filters for each dot colour ────────────────────────────────
   const defs = el('defs');
@@ -56,49 +57,77 @@ export function init() {
     defs.appendChild(filt);
   }
 
-  makeGlow('gridRedGlow',    '#E74C3C');
-  makeGlow('gridYellowGlow', '#F1C40F');
-  makeGlow('gridBlueGlow',   '#58A6FF');
+  makeGlow('gridRedGlow',       '#E74C3C');
+  makeGlow('gridYellowGlow',   CONDITION_COLOR.human_ai);
+  makeGlow('gridBlueGlow',     CONDITION_COLOR.human_human);
   svg.appendChild(defs);
 
   const root = el('g', { transform: `translate(${M.left},${M.top})` });
   svg.appendChild(root);
 
-  // ── Grid lines — blue like the 3D scatter (one <g> fade = smoother than 22 staggered lines)
-  const TICKS = 5;
+  // Square grid cells: ticksX/ticksY chosen so W/ticksX ≈ H/ticksY
+  // W=528, H=408 → 13×10 gives 40.6×40.8 ≈ square
+  const TICKS_X = 13;
+  const TICKS_Y = 10;
   const gridLinesG = el('g', { class: 'grid-lines-layer' });
   gsap.set(gridLinesG, { opacity: 0 });
   root.appendChild(gridLinesG);
-  for (let i = 0; i <= TICKS; i++) {
-    const x = (i / TICKS) * W;
-    const y = (i / TICKS) * H;
-    const vl = el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#1e3a5f', 'stroke-width': 1 });
-    const hl = el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#1e3a5f', 'stroke-width': 1 });
-    gridLinesG.appendChild(vl);
-    gridLinesG.appendChild(hl);
+  for (let i = 0; i <= TICKS_X; i++) {
+    const x = (i / TICKS_X) * W;
+    gridLinesG.appendChild(el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+  }
+  for (let i = 0; i <= TICKS_Y; i++) {
+    const y = (i / TICKS_Y) * H;
+    gridLinesG.appendChild(el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
   }
 
   // ── Axes + arrows + labels ────────────────────────────────────────────────
-  const xAxis  = el('line', { x1: 0, y1: H, x2: W, y2: H, stroke: COL_X, 'stroke-width': 2.2 });
-  const xArrow = el('polygon', { points: `${W},${H - 6} ${W + 12},${H} ${W},${H + 6}`, fill: COL_X });
+  const xAxis  = el('line', { x1: 0, y1: H, x2: W, y2: H, stroke: '#2d4a6a', 'stroke-width': 1.2 });
+  const xArrow = el('polygon', { points: `${W},${H - 6} ${W + 12},${H} ${W},${H + 6}`, fill: '#2d4a6a' });
   const xLabel = el('text', {
-    x: W / 2, y: H + 52, 'text-anchor': 'middle', fill: COL_X,
-    'font-size': 15, 'font-family': 'Inter, sans-serif',
-    'font-weight': 600, 'letter-spacing': '0.05em',
+    x: W / 2, y: H + 52, 'text-anchor': 'middle', fill: '#4a6a8a',
+    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'font-weight': 600, 'letter-spacing': '0.1em',
   });
   xLabel.textContent = 'REPETITIVENESS';
 
-  const yAxis  = el('line', { x1: 0, y1: H, x2: 0, y2: 0, stroke: COL_Y, 'stroke-width': 2.2 });
-  const yArrow = el('polygon', { points: `-6,0 0,-12 6,0`, fill: COL_Y });
+  const yAxis  = el('line', { x1: 0, y1: H, x2: 0, y2: 0, stroke: '#2d4a6a', 'stroke-width': 1.2 });
+  const yArrow = el('polygon', { points: `-6,0 0,-12 6,0`, fill: '#2d4a6a' });
   const yLabel = el('text', {
-    x: -H / 2, y: -46, 'text-anchor': 'middle', fill: COL_Y,
-    'font-size': 15, 'font-family': 'Inter, sans-serif',
-    'font-weight': 600, 'letter-spacing': '0.05em',
+    x: -H / 2, y: -46, 'text-anchor': 'middle', fill: '#4a6a8a',
+    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'font-weight': 600, 'letter-spacing': '0.1em',
     transform: 'rotate(-90)',
   });
   yLabel.textContent = 'HEDGING';
 
-  [xAxis, xArrow, xLabel, yAxis, yArrow, yLabel].forEach(n => {
+  // ── Axis tick marks + number labels ──────────────────────────────────────
+  const xTicksG = el('g', { class: 'axis-ticks-x' });
+  const yTicksG = el('g', { class: 'axis-ticks-y' });
+  const TICK_VALS = [0, 0.25, 0.5, 0.75, 1.0];
+  const TICK_LABELS = ['0', '.25', '.50', '.75', '1'];
+  TICK_VALS.forEach((v, i) => {
+    const x = v * W;
+    xTicksG.appendChild(el('line', { x1: x, y1: H, x2: x, y2: H + 5, stroke: '#2d4a6a', 'stroke-width': 1 }));
+    const lbl = el('text', {
+      x, y: H + 18, 'text-anchor': 'middle', fill: '#4a6a8a',
+      'font-size': 9, 'font-family': 'Inter, sans-serif', 'font-weight': 500,
+    });
+    lbl.textContent = TICK_LABELS[i];
+    xTicksG.appendChild(lbl);
+  });
+  TICK_VALS.forEach((v, i) => {
+    const y = H - v * H;
+    yTicksG.appendChild(el('line', { x1: -5, y1: y, x2: 0, y2: y, stroke: '#2d4a6a', 'stroke-width': 1 }));
+    const lbl = el('text', {
+      x: -10, y: y + 3.5, 'text-anchor': 'end', fill: '#4a6a8a',
+      'font-size': 9, 'font-family': 'Inter, sans-serif', 'font-weight': 500,
+    });
+    lbl.textContent = TICK_LABELS[i];
+    yTicksG.appendChild(lbl);
+  });
+
+  [xAxis, xArrow, xLabel, xTicksG, yAxis, yArrow, yLabel, yTicksG].forEach(n => {
     gsap.set(n, { opacity: 0 });
     root.appendChild(n);
   });
@@ -108,8 +137,10 @@ export function init() {
   const DOT_X = W * 0.14;
   const DOT_Y = H * 0.14;
   const svgDotRed = el('circle', {
-    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#E74C3C', filter: 'url(#gridRedGlow)',
+    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#E74C3C',
+    class: 'subtype-grid-dot',
   });
+  svgDotRed.style.setProperty('--dot-color', '#E74C3C');
   gsap.set(svgDotRed, { opacity: 0, scale: 0, transformOrigin: `${DOT_X}px ${DOT_Y}px` });
   root.appendChild(svgDotRed);
 
@@ -118,16 +149,74 @@ export function init() {
   const BLU_X = W * 0.16, BLU_Y = H * 0.84;
 
   const svgDotYellow = el('circle', {
-    cx: YEL_X, cy: YEL_Y, r: 9, fill: '#F1C40F', filter: 'url(#gridYellowGlow)',
+    cx: YEL_X, cy: YEL_Y, r: 9, fill: CONDITION_COLOR.human_ai,
+    class: 'subtype-grid-dot',
   });
+  svgDotYellow.style.setProperty('--dot-color', CONDITION_COLOR.human_ai);
   gsap.set(svgDotYellow, { opacity: 0, scale: 0, transformOrigin: `${YEL_X}px ${YEL_Y}px` });
   root.appendChild(svgDotYellow);
 
   const svgDotBlue = el('circle', {
-    cx: BLU_X, cy: BLU_Y, r: 9, fill: '#58A6FF', filter: 'url(#gridBlueGlow)',
+    cx: BLU_X, cy: BLU_Y, r: 9, fill: CONDITION_COLOR.human_human,
+    class: 'subtype-grid-dot',
   });
+  svgDotBlue.style.setProperty('--dot-color', CONDITION_COLOR.human_human);
   gsap.set(svgDotBlue, { opacity: 0, scale: 0, transformOrigin: `${BLU_X}px ${BLU_Y}px` });
   root.appendChild(svgDotBlue);
+
+  // ── Dummy conversation data for each dot ──────────────────────────────────
+  const DOT_CONVOS = {
+    red: {
+      id: 'conv_ai_ai_freeform_claudesonnet4_gemini25flash_F1_1775427182',
+      condition: 'ai_ai_freeform',
+      model_a: 'claude-sonnet-4', model_b: 'gemini-2.5-flash', coherence: 1.0246,
+      hedging: 0.2131, repetitiveness: 0.005,
+      type: 'AI ↔ AI',
+      desc: 'Generated AI-only conversations between models.',
+      snippet: "Hey! I'm doing pretty good, thanks for asking. Just enjoying the day. How about you? What's new?",
+    },
+    yellow: {
+      id: 'conv_human_ai_wildchat_0000',
+      condition: 'human_ai',
+      model_a: 'human', model_b: 'gpt-4-0314', coherence: 0.2714,
+      hedging: 0.52, repetitiveness: 0.031,
+      type: 'AI ↔ Human',
+      desc: 'Conversations between a model and a human participant.',
+      snippet: 'To find the smallest possible value for P[A ∩ B ∩ C], we need to look for the case when the events have the least overlap...',
+    },
+    blue: {
+      id: 'conv_human_human_personachat_0000',
+      condition: 'human_human',
+      model_a: 'human', model_b: 'human', coherence: 1.2195,
+      hedging: 0.21, repetitiveness: 0.018,
+      type: 'Human ↔ Human',
+      desc: 'Real human-to-human conversations from the dataset.',
+      snippet: 'you must be very fast. hunting is one of my favorite hobbies.',
+    },
+  };
+
+  // ── Interactive tooltip event handlers ────────────────────────────────────
+  [[svgDotRed, DOT_CONVOS.red], [svgDotYellow, DOT_CONVOS.yellow], [svgDotBlue, DOT_CONVOS.blue]].forEach(([dot, data]) => {
+    dot.addEventListener('mouseenter', (e) => {
+      dot.classList.add('is-hovered');
+      showInteractiveTip(data, e);
+    });
+    dot.addEventListener('mousemove', (e) => moveInteractiveTip(e));
+    dot.addEventListener('mouseleave', () => {
+      dot.classList.remove('is-hovered');
+      hideInteractiveTip();
+    });
+    dot.addEventListener('click', () => {
+      openConversation(data.id, {
+        condition: data.condition,
+        model_a: data.model_a,
+        model_b: data.model_b,
+        hedging: data.hedging,
+        repetitiveness: data.repetitiveness,
+        coherence: data.coherence,
+      });
+    });
+  });
 
   // ── Pick up the story-red-dot handed off by quiz.js ────────────────────────
   // If the user scrolled past the quiz without answering, create one HIDDEN
@@ -189,28 +278,31 @@ export function init() {
   const convoLegend = document.querySelector('.convo-legend');
   const convoChips  = document.querySelectorAll('.convo-chip');
 
-  // Always-visible phase-2 tooltips positioned beside each dot.
-  const tooltipLayer = document.createElement('div');
-  tooltipLayer.className = 'grid-tooltips';
-  const tooltipData = [
-    { key: 'ai-ai', x: DOT_X, y: DOT_Y, dx: 22,  dy: -34, title: 'AI ↔ AI', body: 'Generated AI-only conversations between models.' },
-    { key: 'ai-human', x: YEL_X, y: YEL_Y, dx: 22, dy: -24, title: 'AI ↔ Human', body: 'Conversations between a model and a human participant.' },
-    { key: 'human-human', x: BLU_X, y: BLU_Y, dx: 22, dy: -62, title: 'Human ↔ Human', body: 'Real human-to-human conversations from the dataset.' },
+  // SVG labels: show just the type name beside each dot; hover reveals description + snippet.
+  const labelsG = el('g', { class: 'dot-labels' });
+  root.appendChild(labelsG);
+  const LABEL_DEFS = [
+    { cx: DOT_X, cy: DOT_Y,  text: 'AI ↔ AI',         key: 'red'    },
+    { cx: YEL_X, cy: YEL_Y,  text: 'AI ↔ Human',      key: 'yellow' },
+    { cx: BLU_X, cy: BLU_Y,  text: 'Human ↔ Human',   key: 'blue'   },
   ];
-  const tooltips = tooltipData.map((d) => {
-    const tip = document.createElement('div');
-    tip.className = 'grid-tooltip';
-    tip.dataset.type = d.key;
-    tip.innerHTML = `<h4>${d.title}</h4><p>${d.body}</p>`;
-    tooltipLayer.appendChild(tip);
-    return { ...d, node: tip };
+  const labelEls = LABEL_DEFS.map(({ cx, cy, text }) => {
+    const lbl = el('text', {
+      x: cx + 15, y: cy + 4,
+      'text-anchor': 'start', fill: '#c9d1d9',
+      'font-family': 'JetBrains Mono, monospace',
+      'font-size': 11, 'font-weight': 500,
+    });
+    lbl.textContent = text;
+    labelsG.appendChild(lbl);
+    return lbl;
   });
-  if (canvasWrap) canvasWrap.appendChild(tooltipLayer);
+  const [redLabel, yellowLabel, blueLabel] = labelEls;
+  gsap.set(labelEls, { opacity: 0 });
 
   const interactiveTip = document.createElement('article');
   interactiveTip.className = 'grid-interactive-tooltip';
   if (canvasWrap) canvasWrap.appendChild(interactiveTip);
-
 
   function moveInteractiveTip(e) {
     if (!canvasWrap) return;
@@ -224,7 +316,7 @@ export function init() {
   function showInteractiveTip(point, e) {
     interactiveTip.innerHTML = `
       <h4>${point.type}</h4>
-      <p class="grid-tip-prompt">${point.prompt}</p>
+      <p class="grid-tip-prompt">${point.desc}</p>
       <p class="grid-tip-snippet">${point.snippet}</p>
     `;
     moveInteractiveTip(e);
@@ -234,6 +326,9 @@ export function init() {
   function hideInteractiveTip() {
     interactiveTip.style.opacity = '0';
   }
+
+  // positionTooltips kept as no-op (SVG labels are self-positioned; called by scroll/resize handlers)
+  function positionTooltips() {}
 
 
 
@@ -247,7 +342,6 @@ export function init() {
   gsap.set(headbar2,    { opacity: 0, y: 10 });
   gsap.set(convoLegend, { opacity: 0, display: 'none' });
   if (convoChips.length) gsap.set(convoChips, { opacity: 0, y: 8 });
-  gsap.set(tooltips.map((t) => t.node), { opacity: 0, y: 8 });
 
   /** Hero: oversized chart placed *below the fold* (viewport-based), then one tween brings it into the final slot */
   const HERO_SCALE = 2.48;
@@ -276,15 +370,6 @@ export function init() {
     });
   }
 
-  function positionTooltips() {
-    if (!canvasWrap) return;
-    const wrapRect = canvasWrap.getBoundingClientRect();
-    tooltips.forEach((t) => {
-      const p = svgToScreen(t.x, t.y);
-      t.node.style.left = `${p.left - wrapRect.left + t.dx}px`;
-      t.node.style.top = `${p.top - wrapRect.top + t.dy}px`;
-    });
-  }
   positionTooltips();
   window.addEventListener('resize', positionTooltips);
 
@@ -306,12 +391,14 @@ export function init() {
         gsap.set(flyLerp, { u: 0, _sl: NaN, _st: NaN });
         gsap.set(flyDot, { opacity: 0, y: 0, scale: 1 });
         gsap.set(gridLinesG, { opacity: 0 });
+        gsap.set([xTicksG, yTicksG], { opacity: 0 });
         if (headbar1) gsap.set(headbar1, { opacity: 0, y: 10 });
+        if (headbar2) gsap.set(headbar2, { clearProps: 'height,paddingTop,paddingBottom,overflow' });
         gsap.set(svgDotRed, { opacity: 0, scale: 0 });
         gsap.set(svgDotYellow, { opacity: 0, scale: 0 });
         gsap.set(svgDotBlue, { opacity: 0, scale: 0 });
         hideInteractiveTip();
-        gsap.set(tooltips.map((t) => t.node), { opacity: 0, y: 8 });
+        gsap.set(labelEls, { opacity: 0 });
         if (gridBody) gsap.set(gridBody, { gridTemplateColumns: '1fr', gap: 12 });
         if (gridSideLeft) gsap.set(gridSideLeft, { autoAlpha: 0 });
         if (gridSideRight) gsap.set(gridSideRight, { autoAlpha: 0 });
@@ -438,7 +525,7 @@ export function init() {
   // First axis (Y / Hedging) + hedging explainer
   const hedge0 = titleT + 0.48;
   tl.to([yAxis, yArrow], { opacity: 1, duration: 0.3, ease: 'power2.out' }, hedge0);
-  tl.to(yLabel, { opacity: 1, duration: 0.32, ease: 'power2.out' }, hedge0 + 0.1);
+  tl.to([yLabel, yTicksG], { opacity: 1, duration: 0.32, ease: 'power2.out' }, hedge0 + 0.1);
   const g0 = hedge0 + 0.28;
   if (gridSideLeft) tl.set(gridSideLeft, { autoAlpha: 1 }, g0);
   if (hedgeTitle) tl.to(hedgeTitle, { opacity: 1, y: 0, duration: 0.34 }, g0 + 0.06);
@@ -450,7 +537,7 @@ export function init() {
   const repBeat = hedge0 + 0.95;
   if (gridBottom) tl.set(gridBottom, { autoAlpha: 1 }, repBeat - 0.04);
   tl.to([xAxis, xArrow], { opacity: 1, duration: 0.32, ease: 'power2.out' }, repBeat);
-  tl.to(xLabel, { opacity: 1, duration: 0.34, ease: 'power2.out' }, repBeat + 0.12);
+  tl.to([xLabel, xTicksG], { opacity: 1, duration: 0.34, ease: 'power2.out' }, repBeat + 0.12);
   if (repTitle) tl.to(repTitle, { opacity: 1, y: 0, duration: 0.32 }, repBeat + 0.18);
   if (repCard) tl.to(repCard, { opacity: 1, y: 0, duration: 0.4 }, repBeat + 0.26);
   if (repDesc) tl.to(repDesc, { opacity: 1, y: 0, duration: 0.34 }, repBeat + 0.48);
@@ -463,6 +550,11 @@ export function init() {
 
   // 5.85 — metric cards slide out
   tl.to([hedgeCard, repCard], { opacity: 0, y: 10, duration: 0.5 }, 5.85);
+
+  // 6.0 — collapse headbar-2's layout height so the flex parent re-centers the chart
+  if (headbar2) {
+    tl.to(headbar2, { height: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden', duration: 0.7, ease: 'power2.inOut' }, 6.0);
+  }
 
   // 5.9+ — smooth continuous morph into the "types" map:
   // fade/slide cards out while the grid recenters and expands.
@@ -492,25 +584,16 @@ export function init() {
     }, 5.97);
   }
 
-  // 6.35 — red type context appears first (dot is already present; tooltip arrives now)
-  const redTooltip = tooltips.find((t) => t.key === 'ai-ai')?.node;
-  if (redTooltip) {
-    tl.to(redTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 6.35);
-  }
+  // 6.35 — red label appears beside the dot that's already present
+  tl.to(redLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 6.35);
 
-  // 7.05 — AI-Human yellow dot appears a bit later
+  // 7.05 — AI-Human yellow dot + label
   tl.to(svgDotYellow, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.05);
-  const yellowTooltip = tooltips.find((t) => t.key === 'ai-human')?.node;
-  if (yellowTooltip) {
-    tl.to(yellowTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 7.35);
-  }
+  tl.to(yellowLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 7.35);
 
-  // 7.6 — Human-Human blue dot and tooltip follow
+  // 7.6 — Human-Human blue dot + label
   tl.to(svgDotBlue, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 7.6);
-  const blueTooltip = tooltips.find((t) => t.key === 'human-human')?.node;
-  if (blueTooltip) {
-    tl.to(blueTooltip, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 7.9);
-  }
+  tl.to(blueLabel, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 7.9);
 
   // Keep refs used so lint doesn't strip while preserving future extensibility.
   void gridShell;

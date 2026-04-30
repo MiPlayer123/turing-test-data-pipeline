@@ -1,19 +1,9 @@
 import * as d3 from 'd3';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { light as lightCornerDot, getCornerRect } from '../lib/cornerDots.js';
 import { openConversation } from '../components/conversationReader.js';
 import { setSubtypePlotPayload } from '../lib/subtypePlotStore.js';
 import { CONDITION_COLOR } from '../data/constants.js';
-
-// Map each AI-AI condition to its corner-dot slot id
-const CORNER_SLOT = {
-  ai_ai_freeform:         'freeform',
-  ai_ai_freeform_persona: 'persona',
-  ai_ai_detective:        'detective',
-  ai_ai_reverse_turing:   'revturing',
-  ai_ai_structured:       'structured',
-};
 
 const SUBTYPES = [
   {
@@ -223,7 +213,7 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   svg.innerHTML = '';
   svg.setAttribute('viewBox', `0 0 ${VW} ${VH}`);
 
-  // Adaptive ranges: pad by 70% of the actual spread so dots fill the chart space
+  // Adaptive ranges: pad by 70% of the actual spread
   const reps   = subtypePoints.map(p => p.repetitiveness);
   const hedges = subtypePoints.map(p => p.hedging);
   const repSpread   = Math.max(...reps)   - Math.min(...reps);
@@ -237,12 +227,12 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const xS = v => ((v - repMin)   / (repMax   - repMin))   * IW;
   const yS = v => IH - ((v - hedgeMin) / (hedgeMax - hedgeMin)) * IH;
 
-  // Glow filters for each subtype dot
+  // Glow filters (subtle, matching 3D plot feel)
   const defs = mkEl('defs');
   subtypePoints.forEach((p, i) => {
-    const filt = mkEl('filter', { id: `spGlow${i}`, x: '-70%', y: '-70%', width: '240%', height: '240%' });
-    filt.appendChild(mkEl('feGaussianBlur', { in: 'SourceGraphic', stdDeviation: '5', result: 'blur' }));
-    filt.appendChild(mkEl('feFlood', { 'flood-color': p.color, 'flood-opacity': '0.75', result: 'color' }));
+    const filt = mkEl('filter', { id: `spGlow${i}`, x: '-80%', y: '-80%', width: '260%', height: '260%' });
+    filt.appendChild(mkEl('feGaussianBlur', { in: 'SourceGraphic', stdDeviation: '7', result: 'blur' }));
+    filt.appendChild(mkEl('feFlood', { 'flood-color': p.color, 'flood-opacity': '0.6', result: 'color' }));
     filt.appendChild(mkEl('feComposite', { in: 'color', in2: 'blur', operator: 'in', result: 'glow' }));
     const merge = mkEl('feMerge');
     merge.appendChild(mkEl('feMergeNode', { in: 'glow' }));
@@ -255,37 +245,39 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const root = mkEl('g', { transform: `translate(${M.left},${M.top})` });
   svg.appendChild(root);
 
-  // Blue grid lines (gridReveal style)
-  const TICKS = 5;
-  for (let i = 0; i <= TICKS; i++) {
-    const gx = (i / TICKS) * IW;
-    const gy = (i / TICKS) * IH;
-    root.appendChild(mkEl('line', { x1: gx, y1: 0,  x2: gx, y2: IH, stroke: '#1e3a5f', 'stroke-width': 1 }));
-    root.appendChild(mkEl('line', { x1: 0,  y1: gy, x2: IW, y2: gy, stroke: '#1e3a5f', 'stroke-width': 1 }));
+  // Square grid cells: ticksX/ticksY chosen so IW/ticksX ≈ IH/ticksY
+  // IW=618, IH=450 → 11×8 gives 56.2×56.25 ≈ square
+  const TICKS_X = 11;
+  const TICKS_Y = 8;
+  for (let i = 0; i <= TICKS_X; i++) {
+    const gx = (i / TICKS_X) * IW;
+    root.appendChild(mkEl('line', { x1: gx, y1: 0, x2: gx, y2: IH, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+  }
+  for (let i = 0; i <= TICKS_Y; i++) {
+    const gy = (i / TICKS_Y) * IH;
+    root.appendChild(mkEl('line', { x1: 0, y1: gy, x2: IW, y2: gy, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
   }
 
-  // Axes with arrow tips (gridReveal style)
-  const AX_COL = '#e6edf3';
-  root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: IW, y2: IH, stroke: AX_COL, 'stroke-width': 2.2 }));
-  root.appendChild(mkEl('polygon', { points: `${IW},${IH - 6} ${IW + 12},${IH} ${IW},${IH + 6}`, fill: AX_COL }));
-  root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: 0, y2: 0, stroke: AX_COL, 'stroke-width': 2.2 }));
-  root.appendChild(mkEl('polygon', { points: `-6,0 0,-12 6,0`, fill: AX_COL }));
+  // Thin axes, no arrows
+  const AX_COL = '#2d4a6a';
+  root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: IW, y2: IH, stroke: AX_COL, 'stroke-width': 1.2 }));
+  root.appendChild(mkEl('line', { x1: 0, y1: 0,  x2: 0,  y2: IH, stroke: AX_COL, 'stroke-width': 1.2 }));
 
   // Axis labels
   const xLab = mkEl('text', {
-    x: M.left + IW / 2, y: VH - 14,
-    'text-anchor': 'middle', fill: '#8b949e',
-    'font-size': 13, 'font-family': 'Inter, sans-serif',
-    'font-weight': 600, 'letter-spacing': '0.05em',
+    x: M.left + IW / 2, y: VH - 16,
+    'text-anchor': 'middle', fill: '#4a6a8a',
+    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'font-weight': 600, 'letter-spacing': '0.1em',
   });
   xLab.textContent = 'REPETITIVENESS';
   svg.appendChild(xLab);
 
   const yLab = mkEl('text', {
-    'text-anchor': 'middle', fill: '#8b949e',
-    'font-size': 13, 'font-family': 'Inter, sans-serif',
-    'font-weight': 600, 'letter-spacing': '0.05em',
-    transform: `rotate(-90) translate(${-(M.top + IH / 2)}, 20)`,
+    'text-anchor': 'middle', fill: '#4a6a8a',
+    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'font-weight': 600, 'letter-spacing': '0.1em',
+    transform: `rotate(-90) translate(${-(M.top + IH / 2)}, 18)`,
   });
   yLab.textContent = 'HEDGING';
   svg.appendChild(yLab);
@@ -331,19 +323,17 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
     });
     interactiveLayer.appendChild(dot);
 
-    // Smart label positioning: right side unless dot is in rightmost 38%
+    // Smart label positioning
     const labelRight = cx < IW * 0.62;
     const lx = labelRight ? cx + 14 : cx - 14;
     const anchor = labelRight ? 'start' : 'end';
-    // Shift label down when dot is near top edge
-    const ly = cy < IH * 0.18 ? cy + 22 : cy - 14;
+    const ly = cy < IH * 0.18 ? cy + 22 : cy - 12;
 
-    // Type name (colored)
     const nameEl = mkEl('text', {
       x: lx, y: ly,
       'text-anchor': anchor,
       fill: point.color,
-      'font-size': 12,
+      'font-size': 11,
       'font-family': 'JetBrains Mono, monospace',
       'font-weight': 500,
     });
@@ -465,56 +455,6 @@ function wirePinnedTimeline() {
     [0.82, 0.93],
     [0.88, 0.99],
   ];
-  // Track which subtype dots have already flown to the corner (prevents re-firing on scroll wiggle)
-  const dotsLaunched = new Set();
-
-  function launchSubtypeDot(card) {
-    const key = card.dataset.key;
-    if (dotsLaunched.has(key)) return;
-    const slot = CORNER_SLOT[key];
-    if (!slot) return;
-    dotsLaunched.add(key);
-
-    const headerDot = card.querySelector('.subtype-dot');
-    const color = getComputedStyle(card).getPropertyValue('--subtype-color').trim() || '#fff';
-    const rect = headerDot.getBoundingClientRect();
-
-    const flyer = document.createElement('div');
-    flyer.className = 'fly-dot';
-    flyer.style.background = color;
-    flyer.style.boxShadow = `0 0 22px ${color}88`;
-    document.body.appendChild(flyer);
-    gsap.set(flyer, {
-      left: rect.left + rect.width / 2 - 8,
-      top:  rect.top  + rect.height / 2 - 8,
-      opacity: 0,
-      scale: 0.6,
-    });
-    gsap.to(flyer, { opacity: 1, scale: 1, duration: 0.35 });
-
-    gsap.to(flyer, {
-      left: () => {
-        const c = getCornerRect(slot);
-        return c ? c.left + c.width / 2 - 8 : window.innerWidth - 40;
-      },
-      top: () => {
-        const c = getCornerRect(slot);
-        return c ? c.top + c.height / 2 - 8 : 28;
-      },
-      duration: 1.1,
-      delay: 0.25,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        lightCornerDot(slot);
-        gsap.to(flyer, {
-          opacity: 0,
-          duration: 0.3,
-          onComplete: () => { if (flyer.parentNode) flyer.remove(); },
-        });
-      },
-    });
-  }
-
   ScrollTrigger.create({
     trigger: section,
     start: 'top top',
