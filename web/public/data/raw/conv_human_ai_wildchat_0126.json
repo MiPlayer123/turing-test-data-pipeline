@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0126",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 14:13:32+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Ciao.Ti do il codice css del mio blog,me lo riscrivi a modo tuo rendendolo piu\u2019 bello? il codice: /* Content\n----------------------------------------------- /\nbody {\nfont: (body.font);\ncolor:\n(body.text.color);\nbackground: (body.background);\npadding: 0\n(content.shadow.spread) (content.shadow.spread)\n(content.shadow.spread);\n(body.background.override)\n}\n\nhtml body\n(page.width.selector) {\nmin-width: 0;\nmax-width: 100%;\nwidth: (page.width);\n}\n\nh2 {\nfont-size: 22px;\n}\n\na:link {\ntext-decoration:none;\ncolor:\n(link.color);\n}\n\na:visited {\ntext-decoration:none;\ncolor: (link.visited.color);\n}\n\na:hover {\ntext-decoration:underline;\ncolor:\n(link.hover.color);\n}\n\n.body-fauxcolumn-outer .fauxcolumn-inner {\nbackground: transparent (body.background.gradient.tile) repeat scroll top left;\n_background-image: none;\n}\n\n.body-fauxcolumn-outer .cap-top {\nposition: absolute;\nz-index: 1;\nheight: 400px;\nwidth: 100%;\n}\n\n.body-fauxcolumn-outer .cap-top .cap-left {\nwidth: 100%;\nbackground: transparent\n(body.background.gradient.cap) repeat-x scroll top left;\n_background-image: none;\n}\n\n.content-outer {\n-moz-box-shadow: 0 0 (content.shadow.spread) rgba(0, 0, 0, .15);\n-webkit-box-shadow: 0 0\n(content.shadow.spread.webkit) rgba(0, 0, 0, .15);\n-goog-ms-box-shadow: 0 0 (content.shadow.spread.ie) #333333;\nbox-shadow: 0 0\n(content.shadow.spread) rgba(0, 0, 0, .15);\n\nmargin-bottom: 1px;\n}\n\n.content-inner {\npadding: (content.padding)\n(content.padding.horizontal);\n}",
+      "token_count": 152,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "/* Content */\nbody {\n    font: (body.font);\n    color: (body.text.color);\n    background: (body.background);\n    padding: 0 (content.shadow.spread) (content.shadow.spread) (content.shadow.spread);\n    (body.background.override)\n}\n\nhtml body (page.width.selector) {\n    min-width: 0;\n    max-width: 100%;\n    width: (page.width);\n}\n\nh2 {\n    font-size: 22px;\n    font-weight: bold;\n    color: #444;\n    text-transform: uppercase;\n}\n\na:link, a:visited {\n    text-decoration: none;\n    color: (link.color);\n}\n\na:hover {\n    text-decoration: underline;\n    color: (link.hover.color);\n}\n\n/* Faux columns */\n.body-fauxcolumn-outer .fauxcolumn-inner {\n    background: transparent (body.background.gradient.tile) repeat scroll top left;\n}\n\n.body-fauxcolumn-outer .cap-top {\n    position: absolute;\n    z-index: 1;\n    height: 400px;\n    width: 100%;\n}\n\n.body-fauxcolumn-outer .cap-top .cap-left {\n    width: 100%;\n    background: transparent (body.background.gradient.cap) repeat-x scroll top left;\n}\n\n/* Content shadow */\n.content-outer {\n    box-shadow: 0 0 (content.shadow.spread) rgba(0, 0, 0, .15);\n    margin-bottom: 1px;\n}\n\n.content-inner {\n    padding: (content.padding) (content.padding.horizontal);\n}\n\n/* Page layout */\n.container {\n    max-width: 1200px;\n    margin: 0 auto;\n    padding: 20px;\n}\n\n.header {\n    background-color: #eee;\n    padding: 10px;\n    text-align: center;\n    margin-bottom: 20px;\n}\n\n.footer {\n    background-color: #eee;\n    padding: 10px;\n    text-align: center;\n    margin-top: 20px;\n}\n\n.sidebar {\n    background-color: #f9f9f9;\n    padding: 10px;\n    margin-right: 20px;\n    float: left;\n    width: 300px;\n}\n\n.content {\n    float: left;\n    width: calc(100% - 320px);\n}\n@media screen and (max-width: 640px) {\n    .container {\n        padding: 10px;\n    }\n    .sidebar {\n        float: none;\n        width: auto;\n        margin-right: 0;\n    }\n    .content {\n        float: none;\n        width: auto;\n    }\n}",
+      "token_count": 205,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Ciao,mi riscrivi completamente il CSS del widget Post Popolari del mio blog? ecco il mio blog:https://lemilleunanapoli.blogspot.com/",
+      "token_count": 16,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Certamente, ecco il CSS per il widget Post Popolari del tuo blog:\n\n.widget.PopularPosts {\n    margin: 20px 0;\n}\n\n.PopularPosts ul {\n    list-style: none;\n    padding: 0;\n    margin: 0;\n}\n\n.PopularPosts ul li {\n    margin: 10px 0;\n    padding: 5px;\n    border: 2px solid #eee;\n    background-color: #f9f9f9;\n}\n\n.PopularPosts ul li a {\n    color: #333;\n    font-weight: bold;\n    text-decoration: none;\n}\n\n.PopularPosts ul li:hover {\n    background-color: #eee;\n}\n\n.PopularPosts ul li.poster-img {\n    margin: 0;\n    padding: 0;\n    border: none;\n    background-color: transparent;\n    display: flex;\n    align-items: center;\n}\n\n.PopularPosts ul li.poster-img a {\n    display: block;\n}\n\n.PopularPosts ul li.poster-img img {\n    width: 50%;\n    margin-right: 10px;\n}\n\n.PopularPosts ul li.poster-info {\n    margin: 0;\n    padding: 0;\n    border: none;\n    background-color: transparent;\n    display: flex;\n    align-items: center;\n}\n\n.PopularPosts ul li.poster-info span {\n    display: block;\n    font-size: 14px;\n    font-style: italic;\n}\n\n.PopularPosts ul li.poster-info span.poster-name {\n    font-weight: bold;\n    color: #333;\n}\n\n.PopularPosts ul li.poster-info span.poster-date {\n    color: #666;\n} \n\nSpero che ti piaccia il risultato finale!",
+      "token_count": 152,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Ciao.Ti do il codice css del mio blog,me lo riscrivi a modo tuo rendendolo piu\u2019 bello e responsive ? il codice :body.item-view .PopularPosts{\nmargin-$startSide:140px\n}\nbody.item-view .PopularPosts .widget-content>ul{\npadding-left:0\n}\nbody.item-view .PopularPosts .widget-content>ul>li{\ndisplay:block\n}\nbody.item-view .PopularPosts .post-content{\nmargin-$endSide:76px;\nmax-width:664px\n}\nbody.item-view .PopularPosts .post:not(:last-child){\nmargin-bottom:85px\n}\nbody.item-view .post-body-container img{\nheight:auto;\nmax-width:100%\n}\nbody.item-view .PopularPosts>.title{\ncolor:$(item.subtitle.color);\nfont:$(item.subtitle.font);\nmargin-bottom:36px\n}",
+      "token_count": 58,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Ecco il codice CSS reso pi\u00f9 bello e responsive:\n\n/* Sidebar layout */\n.sidebar {\n    float: left;\n    width: 300px;\n    margin-right: 20px;\n}\n\n.content {\n    float: left;\n    width: calc(100% - 320px);\n}\n\n/* Popular posts widget */\n.PopularPosts {\n    margin-top: 40px;\n}\n\n.PopularPosts .widget-title {\n    color: $(item.subtitle.color);\n    font: $(item.subtitle.font);\n    font-size: 18px;\n    margin-bottom: 24px;\n}\n\n.PopularPosts ul {\n    list-style: none;\n    padding-left: 0;\n    margin: 0;\n}\n\n.PopularPosts ul li {\n    display: block;\n    margin-bottom: 24px;\n}\n\n.PopularPosts ul li a {\n    text-decoration: none;\n    color: #333;\n    display: flex;\n}\n\n.PopularPosts ul li a:hover {\n    text-decoration: underline;\n}\n\n.PopularPosts ul li .poster-img {\n    width: 80px;\n    height: 80px;\n    margin-right: 24px;\n}\n\n.PopularPosts ul li .poster-img img {\n    height: 100%;\n    width: 100%;\n    object-fit: cover;\n}\n\n.PopularPosts ul li .poster-info {\n    flex: 1;\n}\n\n.PopularPosts ul li .poster-info .poster-name {\n    font-weight: bold;\n    font-size: 18px;\n    color: #333;\n    margin-bottom: 8px;\n}\n\n.PopularPosts ul li .poster-info .poster-date {\n    font-style: italic;\n    color: #999;\n    font-size: 14px;\n}\n\n/* Post body container */\n.post-body-container img {\n    max-width: 100%;\n    height: auto;\n    margin-bottom: 20px;\n}\n\n@media screen and (max-width: 768px) {\n\n    /* Sidebar layout */\n    .sidebar {\n        width: 100%;\n        margin-right: 0;\n    }\n\n    /* Popular posts widget */\n    .PopularPosts .widget-content {\n        padding-left: 20px;\n    }\n\n    .PopularPosts ul li .poster-img {\n        display: none;\n    }\n\n    .PopularPosts ul li .poster-info {\n        margin-left: 24px;\n    }\n}\n\n@media screen and (max-width: 480px) {\n\n    /* Content layout */\n    .content {\n        float: none;\n        width: 100%;\n    }\n\n    /* Popular posts widget */\n    .PopularPosts {\n        margin-top: 20px;\n    }\n\n    .PopularPosts .widget-title {\n        font-size: 16px;\n        margin-bottom: 16px;\n    }\n\n    .PopularPosts ul li {\n        margin-bottom: 16px;\n    }\n\n    .PopularPosts ul li .poster-info .poster-name {\n        font-size: 16px;\n        margin-bottom: 4px;\n    }\n\n    .PopularPosts ul li .poster-info .poster-date {\n        font-size: 12px;\n    }\n}\n\nSpero che questo nuovo codice sia pi\u00f9 adatto alle tue esigenze. Facci sapere se hai altre richieste!",
+      "token_count": 293,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "body.item-view .PopularPosts{\nmargin-$startSide:140px\n}\nbody.item-view .PopularPosts .widget-content>ul{\npadding-left:0\n}\nbody.item-view .PopularPosts .widget-content>ul>li{\ndisplay:block\n}\nbody.item-view .PopularPosts .post-content{\nmargin-$endSide:76px;\nmax-width:664px\n}\nbody.item-view .PopularPosts .post:not(:last-child){\nmargin-bottom:85px\n}\nbody.item-view .post-body-container img{\nheight:auto;\nmax-width:100%\n}\nbody.item-view .PopularPosts>.title{\ncolor:$(item.subtitle.color);\nfont:$(item.subtitle.font);\nmargin-bottom:36px\n}",
+      "token_count": 37,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Ecco il codice CSS reso pi\u00f9 bello e responsive:\n\n/* Sidebar layout */\n.sidebar {\n    float: left;\n    width: 300px;\n    margin-right: 20px;\n}\n\n.content {\n    float: left;\n    width: calc(100% - 320px);\n}\n\n/* Popular posts widget */\n.PopularPosts {\n    margin-top: 40px;\n}\n\n.PopularPosts .widget-title {\n    color: $(item.subtitle.color);\n    font: $(item.subtitle.font);\n    font-size: 18px;\n    margin-bottom: 24px;\n}\n\n.PopularPosts ul {\n    list-style: none;\n    padding-left: 0;\n    margin: 0;\n}\n\n.PopularPosts ul li {\n    display: block;\n    margin-bottom: 24px;\n}\n\n.PopularPosts ul li a {\n    text-decoration: none;\n    color: #333;\n    display: flex;\n    align-items: center;\n}\n\n.PopularPosts ul li a:hover {\n    text-decoration: underline;\n}\n\n.PopularPosts ul li .poster-img {\n    width: 80px;\n    height: 80px;\n    margin-right: 24px;\n}\n\n.PopularPosts ul li .poster-img img {\n    height: 100%;\n    width: 100%;\n    object-fit: cover;\n}\n\n.PopularPosts ul li .poster-info {\n    flex: 1;\n}\n\n.PopularPosts ul li .poster-info .poster-name {\n    font-weight: bold;\n    font-size: 18px;\n    color: #333;\n    margin-bottom: 8px;\n}\n\n.PopularPosts ul li .poster-info .poster-date {\n    font-style: italic;\n    color: #999;\n    font-size: 14px;\n}\n\n/* Post body container */\n.post-body-container img {\n    max-width: 100%;\n    height: auto;\n    margin-bottom: 20px;\n}\n\n@media screen and (max-width: 768px) {\n\n    /* Sidebar layout */\n    .sidebar {\n        width: 100%;\n        margin-right: 0;\n    }\n\n    /* Popular posts widget */\n    .PopularPosts .widget-content {\n        padding-left: 20px;\n    }\n\n    .PopularPosts ul li .poster-img {\n        display: none;\n    }\n\n    .PopularPosts ul li .poster-info {\n        margin-left: 24px;\n    }\n}\n\n@media screen and (max-width: 480px) {\n\n    /* Content layout */\n    .content {\n        float: none;\n        width: 100%;\n    }\n\n    /* Popular posts widget */\n    .PopularPosts {\n        margin-top: 20px;\n    }\n\n    .PopularPosts .widget-title {\n        font-size: 16px;\n        margin-bottom: 16px;\n    }\n\n    .PopularPosts ul li {\n        margin-bottom: 16px;\n    }\n\n    .PopularPosts ul li .poster-info .poster-name {\n        font-size: 16px;\n        margin-bottom: 4px;\n    }\n\n    .PopularPosts ul li .poster-info .poster-date {\n        font-size: 12px;\n    }\n}\n\nSpero che questo nuovo codice sia pi\u00f9 adatto alle tue esigenze. Facci sapere se hai altre richieste!",
+      "token_count": 295,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 1208,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

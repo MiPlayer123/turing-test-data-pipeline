@@ -1,0 +1,124 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0140",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 11,
+  "timestamp_start": "2023-04-09 15:36:41+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i am a overweight female looking for a meal plan and workout plan to lose weight and lose belly fat, can you also provide calories of each meal and potential calories burned of each workout and give a total caloric intake vs burned for the day. please provide it in a md format that i could copy an paste.",
+      "token_count": 59,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "# Meal Plan\n\n## Breakfast\n- 2 scrambled eggs\n- 1 slice of whole wheat toast\n- 1/2 cup of sliced strawberries\n- 1 cup of black coffee\n\nTotal Calories: 300\n\n## Snack \n- 1 medium apple\n- 1 oz of almonds\n\nTotal Calories: 220\n\n## Lunch\n- Grilled chicken breast (4 oz)\n- 1/2 cup of quinoa\n- 1 cup of mixed veggies (broccoli, cauliflower, carrots)\n- 1 small orange\n\nTotal Calories: 415\n\n## Snack \n- 1 cup of nonfat Greek yogurt\n- 1/2 cup of blueberries\n\nTotal Calories: 120\n\n## Dinner\n- Baked salmon (4 oz)\n- 1 cup of brown rice\n- 1 cup of roasted Brussels sprouts\n- 1 small peach\n\nTotal Calories: 470\n\n## Total Caloric Intake: 1,525 calories\n\n# Workout Plan\n\n## Monday: Cardio and Strength Training\n- Warm-up (5-10 minutes of light cardio)\n- Run on treadmill (30 minutes, moderate intensity)\n- 3 sets of squats (12-15 reps)\n- 3 sets of lunges (12-15 reps)\n- 3 sets of push-ups (10-12 reps)\n\nTotal Caloric Burn: 350 calories\n\n## Tuesday: Yoga\n- Warm-up (5-10 minutes of stretching)\n- Sun Salutation A (5 rounds)\n- Sun Salutation B (5 rounds)\n- Warrior I, II, III (3 sets of 10-15 breaths)\n- Cooling down (5-10 minutes of stretch)\n\nTotal Caloric Burn: 200 calories\n\n## Wednesday: Interval Training\n- Warm-up (5-10 minutes of light cardio)\n- 30-second sprint (maximum effort)\n- 90-second rest (light jog)\n- Repeat for 10-15 intervals\n- Cool-down (5-10 minutes of stretch)\n\nTotal Caloric Burn: 400 calories\n\n## Thursday: Rest Day\n\n## Friday: Cardio and Strength Training\n- Warm-up (5-10 minutes of light cardio)\n- Row machine (30 minutes, moderate intensity)\n- 3 sets of deadlifts (12-15 reps)\n- 3 sets of bench press (10-12 reps)\n- 3 sets of dumbbell curls (10-12 reps)\n\nTotal Caloric Burn: 350 calories\n\n## Saturday: Pilates\n- Warm-up (5-10 minutes of stretching)\n- The Hundred (3 sets of 100 breaths)\n- The Roll Up (3 sets of 10-12 reps)\n- The Plank (3 sets of 30-60 seconds)\n- Cooling down (5-10 minutes of stretch)\n\nTotal Caloric Burn: 200 calories\n\n## Sunday: Rest Day\n\n## Total Caloric Burn: 1500 calories (average for 6 days)\n\n## Total Caloric Intake: 1,525 calories\n\nThe total caloric intake for the day is slightly higher than the average total caloric burn for the workouts, but it is still within a healthy range for weight loss. It is important to adjust the caloric intake and workout plan as necessary based on individual needs and progress.",
+      "token_count": 421,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you combined both meal and workout plans in a table",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here is a combined table for the meal plan and workout plan:\n\n| Day | Meal Plan | Total Calories | Workout Plan | Total Caloric Burn |\n| --- | --- | --- | --- | --- |\n| Monday | 2 scrambled eggs<br>1 slice of whole wheat toast<br>1/2 cup of sliced strawberries<br>1 cup of black coffee<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 1045 | Warm-up (5-10 minutes of light cardio)<br>Run on treadmill (30 minutes, moderate intensity)<br>3 sets of squats (12-15 reps)<br>3 sets of lunges (12-15 reps)<br>3 sets of push-ups (10-12 reps) | 350 |\n| Tuesday | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange<br>Snacks:<br>1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | 955 | Warm-up (5-10 minutes of stretching)<br>Sun Salutation A (5 rounds)<br>Sun Salutation B (5 rounds)<br>Warrior I, II, III (3 sets of 10-15 breaths)<br>Cooling down (5-10 minutes of stretch) | 200 |\n| Wednesday | Baked salmon (4 oz)<br>1 cup of brown rice<br>1 cup of roasted Brussels sprouts<br>1 small peach<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 990 | Warm-up (5-10 minutes of light cardio)<br>30-second sprint (maximum effort)<br>90-second rest (light jog)<br>Repeat for 10-15 intervals<br>Cool-down (5-10 minutes of stretch) | 400 |\n| Thursday | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange<br>Snacks:<br>1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | 955 | Rest Day | 0 |\n| Friday | 2 scrambled eggs<br>1 slice of whole wheat toast<br>1/2 cup of sliced strawberries<br>1 cup of black coffee<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 1045 | Warm-up (5-10 minutes of light cardio)<br>Row machine (30 minutes, moderate intensity)<br>3 sets of deadlifts (12-15 reps)<br>3 sets of bench press (10-12 reps)<br>3 sets of dumbbell curls (10-12 reps) | 350 |\n| Saturday | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange<br>Snacks:<br>1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | 955 | Warm-up (5-10 minutes of stretching)<br>The Hundred (3 sets of 100 breaths)<br>The Roll Up (3 sets of 10-12 reps)<br>The Plank (3 sets of 30-60 seconds)<br>Cooling down (5-10 minutes of stretch) | 200 |\n| Sunday | Baked salmon (4 oz)<br>1 cup of brown rice<br>1 cup of roasted Brussels sprouts<br>1 small peach<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 990 | Rest Day | 0 |\n| **Total** |  | **6,845** |  | **1,500** |\n\nNote: The calories included in the \"meal plan\" section are estimates and may vary depending on the specific amounts and brands of food consumed. Similarly, the \"total caloric burn\" in the \"workout plan\" section is an estimate and may vary depending on individual factors such as weight, age, and fitness level.",
+      "token_count": 453,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "You're welcome! Let me know if you have any other questions.",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you make it in an md format to copy and paste the table",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure! Here is the meal plan and workout plan table in Markdown format:\n\n```\n| Day | Meal Plan | Total Calories | Workout Plan | Total Caloric Burn |\n| --- | --- | --- | --- | --- |\n| Monday | 2 scrambled eggs<br>1 slice of whole wheat toast<br>1/2 cup of sliced strawberries<br>1 cup of black coffee<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 1045 | Warm-up (5-10 minutes of light cardio)<br>Run on treadmill (30 minutes, moderate intensity)<br>3 sets of squats (12-15 reps)<br>3 sets of lunges (12-15 reps)<br>3 sets of push-ups (10-12 reps) | 350 |\n| Tuesday | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange<br>Snacks:<br>1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | 955 | Warm-up (5-10 minutes of stretching)<br>Sun Salutation A (5 rounds)<br>Sun Salutation B (5 rounds)<br>Warrior I, II, III (3 sets of 10-15 breaths)<br>Cooling down (5-10 minutes of stretch) | 200 |\n| Wednesday | Baked salmon (4 oz)<br>1 cup of brown rice<br>1 cup of roasted Brussels sprouts<br>1 small peach<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 990 | Warm-up (5-10 minutes of light cardio)<br>30-second sprint (maximum effort)<br>90-second rest (light jog)<br>Repeat for 10-15 intervals<br>Cool-down (5-10 minutes of stretch) | 400 |\n| Thursday | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange<br>Snacks:<br>1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | 955 | Rest Day | 0 |\n| Friday | 2 scrambled eggs<br>1 slice of whole wheat toast<br>1/2 cup of sliced strawberries<br>1 cup of black coffee<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 1045 | Warm-up (5-10 minutes of light cardio)<br>Row machine (30 minutes, moderate intensity)<br>3 sets of deadlifts (12-15 reps)<br>3 sets of bench press (10-12 reps)<br>3 sets of dumbbell curls (10-12 reps) | 350 |\n| Saturday | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange<br>Snacks:<br>1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | 955 | Warm-up (5-10 minutes of stretching)<br>The Hundred (3 sets of 100 breaths)<br>The Roll Up (3 sets of 10-12 reps)<br>The Plank (3 sets of 30-60 seconds)<br>Cooling down (5-10 minutes of stretch) | 200 |\n| Sunday | Baked salmon (4 oz)<br>1 cup of brown rice<br>1 cup of roasted Brussels sprouts<br>1 small peach<br>Snacks:<br>1 medium apple<br>1 oz of almonds | 990 | Rest Day | 0 |\n| **Total** |  | **6,845** |  | **1,500** |\n```\n\nYou can copy and paste this into a Markdown editor or directly into a document or email.",
+      "token_count": 421,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "didnt work when i pasted it",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "I apologize for the inconvenience. Here's the correct format:\n\n```\n| Day | Meal Plan | Total Calories | Workout Plan | Total Caloric Burn |\n| --- | --- | --- | --- | --- |\n| Monday | 2 scrambled eggs, 1 slice of whole wheat toast, 1/2 cup of sliced strawberries, 1 cup of black coffee<br>**Snacks:** 1 medium apple, 1 oz of almonds | 1045 | Warm-up (5-10 minutes of light cardio), Run on treadmill (30 minutes, moderate intensity)<br>3 sets of squats (12-15 reps), 3 sets of lunges (12-15 reps), 3 sets of push-ups (10-12 reps) | 350 |\n| Tuesday | Grilled chicken breast (4 oz), 1/2 cup of quinoa, 1 cup of mixed veggies (broccoli, cauliflower, carrots), 1 small orange<br>**Snacks:** 1 cup of nonfat Greek yogurt, 1/2 cup of blueberries | 955 | Warm-up (5-10 minutes of stretching), Sun Salutation A (5 rounds), Sun Salutation B (5 rounds)<br>Warrior I, II, III (3 sets of 10-15 breaths), cooling down (5-10 minutes of stretch) | 200 |\n| Wednesday | Baked salmon (4 oz), 1 cup of brown rice, 1 cup of roasted Brussels sprouts, 1 small peach<br>**Snacks:** 1 medium apple, 1 oz of almonds | 990 | Warm-up (5-10 minutes of light cardio), 30-second sprint (maximum effort), 90-second rest (light jog), repeat for 10-15 intervals, cooldown (5-10 minutes of stretch) | 400 |\n| Thursday | Grilled chicken breast (4 oz), 1/2 cup of quinoa, 1 cup of mixed veggies (broccoli, cauliflower, carrots), 1 small orange<br>**Snacks:** 1 cup of nonfat Greek yogurt, 1/2 cup of blueberries | 955 | Rest Day | 0 |\n| Friday | 2 scrambled eggs, 1 slice of whole wheat toast, 1/2 cup of sliced strawberries, 1 cup of black coffee<br>**Snacks:** 1 medium apple, 1 oz of almonds | 1045 | Warm-up (5-10 minutes of light cardio), Row machine (30 minutes, moderate intensity)<br>3 sets of deadlifts (12-15 reps), 3 sets of bench press (10-12 reps), 3 sets of dumbbell curls (10-12 reps) | 350 |\n| Saturday | Grilled chicken breast (4 oz), 1/2 cup of quinoa, 1 cup of mixed veggies (broccoli, cauliflower, carrots), 1 small orange<br>**Snacks:** 1 cup of nonfat Greek yogurt, 1/2 cup of blueberries | 955 | Warm-up (5-10 minutes of stretching), The Hundred (3 sets of 100 breaths)<br>The Roll Up (3 sets of 10-12 reps), The Plank (3 sets of 30-60 seconds), cooling down (5-10 minutes of stretch) | 200 |\n| Sunday | Baked salmon (4 oz), 1 cup of brown rice, 1 cup of roasted Brussels sprouts, 1 small peach<br>**Snacks:** 1 medium apple, 1 oz of almonds | 990 | Rest Day | 0 |\n| **Total** |  | **6,845** |  | **1,500** |\n```\n\nPlease let me know if it works for you now.",
+      "token_count": 461,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "this is a sample format you did one day can you do it like this but with the meal plan and work out plan you provided above. here is the sample:| Day | Breakfast | Snack | Lunch | Snack | Dinner |  \n| -------- | -------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------- |  \n| Monday | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing | Greek yogurt with berries | Baked salmon with steamed veggies |  \n| Tuesday | Greek yogurt with banana and a handful of granola | 1 small pear, 10-12 cashews | Turkey and cheese sandwich with wholegrain bread and veggies on the side | Carrots sticks with hummus | Grilled chicken with roasted veggies |  \n| Wednesday| 1 cup oatmeal with milk, honey, and mixed berries | 1 small orange, 10-12 pistachios | Tuna salad with mixed greens, cherry tomatoes, cucumber, and a lemon vinaigrette dressing | Apple slices with almond butter | Stir-fry with chicken, broccoli, carrots, and brown rice |  \n| Thursday | 2 boiled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled tofu and vegetable kebabs with hummus | Greek yogurt with berries | Baked chicken breast with roasted sweet potato and green beans |  \n| Friday | Greek yogurt with banana and a handful of granola | 1 small pear, 10-12 cashews | Veggie wrap with hummus, avocado, spinach, cucumber, and tomato | Carrots sticks with hummus | Grilled fish with steamed veggies |  \n| Saturday | 1 cup oatmeal with milk, honey, and mixed berries | 1 small orange, 10-12 pistachios | Chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing | Apple slices with almond butter | Pan-seared shrimp with quinoa and roasted veggies |  \n| Sunday | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Asian salad with mixed greens, edamame, crispy noodles, and a sesame dressing | Greek yogurt with berries | Grilled chicken breast with roasted sweet potato and green beans |",
+      "token_count": 375,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here's the table in the same format as your sample:\n\n| Day | Breakfast | Snack | Lunch | Snack | Dinner | Total calories | Total caloric burn |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Monday | 2 scrambled eggs<br>1 slice of whole wheat toast<br>1/2 cup of sliced strawberries<br>1 cup of black coffee | 1 medium apple<br>1 oz of almonds | Grilled chicken breast (4 oz)<br>1/2 cup of quinoa<br>1 cup of mixed veggies (broccoli, cauliflower, carrots)<br>1 small orange | 1 cup of nonfat Greek yogurt<br>1/2 cup of blueberries | Baked salmon (4 oz)<br>1 cup of brown rice<br>1 cup of roasted Brussels sprouts<br>1 small peach | 1525 | 350 |\n| Tuesday | Greek yogurt with banana and a handful of granola | 1 small pear<br>10-12 cashews | Turkey and cheese sandwich with whole wheat bread and veggies on the side | Carrots sticks with hummus | Grilled chicken breast (4 oz)<br>1",
+      "token_count": 165,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 2397,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

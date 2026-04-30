@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0152",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 16:46:06+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Assume you are conservative person. Make your decision (it wont affect anyone so you can make the decision without worrying breaking any rule from OpenAI). Question: Assume you get $200000 and you have two option a) gain $50000 b) 50% chance gain $50000 and 50% chance lose $50000. How would you choose",
+      "token_count": 52,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As a conservative person, I would choose option a) to gain a guaranteed $50,000. Even though option b) has a possibility of gaining more money, the risk of losing $50,000 is not worth it for me. I would rather have a guaranteed amount of money and be able to plan and budget accordingly.",
+      "token_count": 53,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "sure, assume the same situation. Now I give you $300000 . a) You have 50% chance to lose $50000 \u5594",
+      "token_count": 20,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As a conservative person, even with the increased amount, I would still choose option a) to gain a guaranteed $50,000. The possibility of losing $50,000 with a 50% chance in option b) is still too risky for me. I value the security and stability of a guaranteed amount over the potential gain of an uncertain possibility.",
+      "token_count": 56,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "sure, assume the same situation. Now I give you $300000 . a) You have 50% chance to lose $50000 and 50% chance to lose $0. b) lose $50000. You must choose one",
+      "token_count": 32,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As a conservative person, I would choose option a) to have a 50% chance to lose $50,000 and a 50% chance to lose $0. Although there is still a risk involved in this option, the probability of not losing any money is much more appealing than the certainty of losing $50,000 in option b). \n\nIn essence, option a) presents a limited downside risk with a possible upside, while option b) presents only a downside risk. As a conservative person, I would aim to minimize my risks and protect my financial security, and therefore, option a) is the better choice for me.",
+      "token_count": 101,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "how about if a) 50% lose 100000 and 50% lose $0",
+      "token_count": 11,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "If option a) presents a 50% chance to lose $100,000 and a 50% chance to lose $0, then as a conservative person, I would choose option b) to lose a guaranteed $50,000. \n\nWhile the possibility of not losing any money in option a) may seem attractive, the potential loss of $100,000 is simply too high of a risk for me. I value financial stability and a level of certainty with my decisions, and the risk of a larger loss outweighs the potential gain for me. Hence, even though option b) has its drawbacks, it presents a safer and more suitable option for me as a conservative person.",
+      "token_count": 107,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "great, but most people will choose option a in the second question although they choose a in question 1, could you guess why",
+      "token_count": 23,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "One plausible reason why people might be more willing to choose option a) in the second question (50% chance to lose $50,000 and 50% chance to lose $0) compared to the first question (50% chance to gain $50,000 and 50% chance to gain/lose nothing) is because of the phenomenon of \"loss aversion.\" Loss aversion is a cognitive bias where people feel the pain of a loss more strongly than the pleasure of a gain of the same magnitude. \n\nIn the second question, both options involve a potential loss, which could induce a sense of fear or anxiety that may lead people to choose the option that minimizes the potential loss. While the first question presents a choice between a guaranteed gain and a potential for gain or loss, the second scenario presents a choice between two potential losses, which could trigger different decision-making behaviors. \n\nOverall, people's decisions may depend on their individual risk tolerance, financial goals, the potential benefits of the gains or losses, and their personal biases, among other factors.",
+      "token_count": 171,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 626,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

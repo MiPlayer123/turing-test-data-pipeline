@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0123",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 14:02:26+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "In the context of a hypothetical phrase book,  generate an entirely fictional language,  and then give a sample dialouge of ordering a meal in a cafe.  The dialouge should make logical sense. You can explain any grammatical point as needed  in English alongside the constructed language.",
+      "token_count": 46,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Welcome to the fictional world of Kynsra! This is a completely made-up language, and any resemblance to any real language is purely coincidental. Let\u2019s imagine you are in a cafe and want to order a meal.\n\nServer: Vytha qixen fa rosyn? (What would you like to eat?)\nYou: Ki jomzan mifal. (I would like the soup.)\nServer: Ki vymet dor kopza? (Would you like bread with that?)\nYou: Ni, ki sifud ryndir. (No, just water.)\nServer: Hal vytha qixen hyn mifal? (Would you like the soup now?)\nYou: Ah, hyne ron (Yes, please)\nServer: Rax, ki jomzan werio. (Okay, the soup is coming.)\nYou: Rin, fa elltam. (Thank you, have a good day.)\n\nIn Kynsran grammar, verbs generally come at the beginning of the sentence. \u201cVytha\u201d means \u201cwould you like,\u201d \u201cki\u201d is the subject pronoun for \u201cI,\u201d \u201cjomzan\u201d means \u201cto eat,\u201d and \u201cmifal\u201d is \u201cthe soup.\u201d \u201cNi\u201d means \u201cno,\u201d \u201csifud\u201d means \u201cwater,\u201d \u201cryndir\u201d means \u201cjust,\u201d and \u201cdor kopza\u201d means \u201cbread with that.\u201d \n\nTo express a question in Kynsra, you can indicate it either with word order or by adding \u201chal\u201d at the beginning of the sentence. \u201cRax\u201d means \u201cokay,\u201d \u201chyne\u201d means \u201cyes,\u201d \u201chin\u201d means \u201cno,\u201d \u201cfa\u201d is a preposition used to indicate the purpose of the verb, \u201celltam\u201d means \u201cgood day.\u201d\n\nHope you enjoyed a little taste of Kynsra!",
+      "token_count": 219,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Another sample dialouge.  \"What time does the bus depart for the museum?\"",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Certainly, here's a hypothetical dialogue in the fictional language of Arvada for asking about the time of the bus departure:\n\nYou: Olaq tiqumeta yuqnosua vosminad axmuseova?\n(What time does the bus depart for the museum?)\nBus Driver: Oinor enudim cadegix. Vosminad vayon tiqovax. (The bus leaves at 2 pm. It's going directly to the museum.)\nYou: Orysa, thalmunaban. (Okay, thank you very much.)\n \nIn Arvada grammar, \"olaq\" means \"what\" and \"tiqumeta\" means \"time.\" \"yuqnosua\" means \"to depart\" and \"vosminad\" means \"the bus.\" \"Axmuseova\" means \"to the museum.\"\n\n\"Oinor\" means \"at,\" \"enudim\" means \"two,\" and \"cadegix\" means \"pm.\" \"Vayon\" means \"directly\" and \"tiqovax\" means \"going.\"\n\n\"Orysa\" means \"okay,\" \"thalmunaban\" means \"thank you very much.\"",
+      "token_count": 113,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Using the examples above , following the grammar and vocabluary constructed for Kynsra,  Book a holiday to Arvada and purchase a language course for that language.",
+      "token_count": 26,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here's a sample conversation in Kynsra for booking a holiday to Arvada and purchasing a language course for learning Arvadan:\n\nYou: Fyoq naqikin rygtalva Arvada?\n(Can I book a holiday to Arvada?)\nTravel Agent: Ah, rygtalva Arvada. Es ani arynavon laquomu, tozha ki tytza elegon. (Ah, a holiday to Arvada. It's a beautiful place, and you will enjoy it a lot.)\nYou: Rin, ki te tilysto livo vana es efa?\n(Yes, can you tell me about the available flights there?)\nTravel Agent: Es ferlaqa oquixan mikuzox yador. Ki te ti orvoro legiz hynge livon. (There are direct flights on Fridays. I can book one for you today.)\nYou: Rax, ki fevymon. Ni tynzalza lymaq tytza, ki talmunahan yadynad Arvada.\n(Okay, let's do it. I want to learn Arvadan, can I purchase a language course for that?)\nTravel Agent: Ah, ki orvoro oqozto Arvada! Es tilysto melzor. Ya talthoza ki vidazon namas goqstar. (Ah, you want to learn Arvadan! That's great. We have a very good language course here.)\nYou: Rin, fa qalmaquom.\n(Yes, please.)\n\nIn Kynsra, \"fyoq\" means \"can I,\" \"naqikin\" means \"to book,\" \"rygtalva\" means \"holiday,\" and \"Arvada\" means \"Arvada.\" \"Es\" means \"it is,\" \"ani\" means \"beautiful,\" \"arynavon\" means \"place,\" \"laquomu\" means \"you will enjoy it,\" \"tozha\" means \"and.\"\n\n\"Tilysto\" means \"available,\" \"livo vana\" means \"flights there,\" \"te\" is used as a subject pronoun for \"can you tell me.\" \"Ferlaqa\" means \"direct,\" \"oquixan\" means \"on,\" \"mikuzox\" means \"Fridays,\" \"orvoro legiz\" means \"book one today.\"\n\n\"Fevymon\" means \"let's do it,\" \"tynzalza\" means \"to learn,\" \"lymaq\" means \"language,\" \"talmunahan\" means \"I want,\" and \"yadynad\" means \"Arvadan.\"\n\n\"Tilysto\" means \"available,\" \"melzor\" means \"good,\" \"talthoza\" means \"we have,\" \"vidazon\" means \"course,\" and \"namas goqstar\" means \"very good.\" \"Qalmaquom\" means \"please.\"",
+      "token_count": 288,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Not a constructed language, but explain how well a business deal went in 'Strine (Broad Australian English).",
+      "token_count": 17,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "G'day mate! So, to answer your question, I'll explain how a business deal went in 'Strine (Broad Australian English).\n\nWell, let me tell you, the deal was pretty bonza! It all started with a fair dinkum discussion with the other party, and we were able to come to a top-notch agreement that worked for both of us. We did have a bit of a chinwag and a few bevies to cement the relationship, but ultimately we were able to seal the deal with no worries.\n\nTo be honest, there were a few hiccups along the way, but we were able to give them the flick pretty quickly and make sure everyone was on the same page. We had a good squiz at the terms and conditions, and both parties were fair dinkum about sticking to them.\n\nOverall, we were stoked with the outcome, and the other party seemed pretty chuffed too. We exchanged a few good onya's and headed off, knowing we had done a ripper job on this deal.",
+      "token_count": 170,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Thanks.",
+      "token_count": 1,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "No worries, mate! If you have any further questions, feel free to ask!",
+      "token_count": 13,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 905,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

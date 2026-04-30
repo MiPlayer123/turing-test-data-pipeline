@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0125",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 14:10:27+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "give me quick TFMA guide",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "TFMA (TensorFlow Model Analysis) is a library developed by Google for evaluating TensorFlow models, which helps in understanding the performance of a model in terms of various metrics, slicing the dataset, and visualizing the results. It supports both TensorFlow Estimator and keras-based models, and can be run in Jupyter notebooks, Colab, or on command-line.\n\nHere's a quick guide to using TensorFlow Model Analysis:\n\n1. Install TFMA: First, install the necessary packages using pip.\n```python\n!pip install tensorflow_datasets\n!pip install tensorflow_model_analysis\n```\n\n2. Prepare data and train a TensorFlow model: Before starting with model analysis, you need to have a trained TensorFlow model. You can train your model using TensorFlow Estimators or keras. You may also use TensorFlow Extended (TFX) pipeline.\n\n3. Evaluate your model: Import the library and create an instance of the Evaluator module. Use the `tfma_Evaluator()` function to run the evaluation process. Pass the necessary parameters such as the model, dataset, and output directory.\n\n```python\nimport tensorflow_model_analysis as tfma\n\neval_config = tfma.EvalConfig(\n    model_specs=[\n        tfma.ModelSpec(signature_name='action', label_key='label_key')\n    ],\n    metrics_specs=[\n        tfma.MetricsSpec(per_example_weight_key='example_weight')\n    ],\n    slicing_specs=[tfma.SlicingSpec()]\n)\n\neval_result = tfma.run_model_analysis(\n    eval_config=eval_config,\n    data_location='path/to/your/evaluation/data',\n    file_format='tfrecords',\n    output_path='/path/to/output/directory',\n    model_path='path/to/your/trained/model')\n```\n\n4. Slice your evaluation dataset: You can use slicing to divide your dataset into different groups based on a certain feature. This helps in comparing the model performance across different features or categories.\n\n```python\n# Add slicing specs\neval_config.slicing_specs.extend([\n    tfma.SlicingSpec(feature_keys=['feature_name']),\n    tfma.SlicingSpec(feature_values={'feature_name': 'feature_value'})\n])\n\n# Re-run the evaluation with the new slicing specs\neval_result = tfma.run_model_analysis(\n    #... same as before\n)\n```\n\n5. Visualizing the results: You can use TFMA's visualization functions to display the evaluation results. You can display these visualizations in Jupyter notebooks or Colab environments.\n\n```python\n# Render a Time Series view of your model analysis\nimport tensorflow_model_analysis.notebook.visualization as tfma_vis\n\ntfma_vis.render_time_series(eval_result, 'path/to/output/directory')\n```\n\n```python\n# Render a Slicing Metrics view of your model analysis\ntfma_vis.render_slicing_metrics(eval_result, 'metrics_over_slices')\n```\n\nBy following this guide, you can quickly evaluate your TensorFlow model, slice your evaluation dataset, and visualize the results in a convenient manner using TensorFlow Model Analysis. Remember to adjust the specifics to match your particular model, dataset, and requirements.",
+      "token_count": 341,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "what 'serving_default' does in signatures dictionary in TFMA?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "In TensorFlow Model Analysis (TFMA), `serving_default` refers to the default signature of the model that will be used for inference or evaluation purposes. The term originates from a TensorFlow model's concept called SignatureDefs.\n\nWhen a TensorFlow model is saved, it may include one or more named SignatureDefs that define the inputs, outputs, and methods that should be called for specific use cases such as prediction, training, or evaluation. These signatures are basically the functions that provide prediction functionality for your model.\n\nThe `serving_default` signature is a specific predefined signature name that is considered the \"default\" signature to use when serving the model to make predictions. When you export your model using `tf.saved_model.save()` in TensorFlow 2.x, the `serving_default` signature is usually created automatically unless you specify otherwise.\n\nIn TFMA, when you define an `EvalConfig` or a `ModelSpec`, you can specify the signature name to use for evaluation purposes. Here's an example:\n\n```python\neval_config = tfma.EvalConfig(\n    model_specs=[\n        tfma.ModelSpec(signature_name='serving_default', label_key='label_key')\n    ],\n    # ... other configurations\n)\n```\n\nBy setting the `signature_name` to `'serving_default'` in the `ModelSpec` dictionary, you are telling TFMA to use the default signature defined in your TensorFlow model for evaluation when computing the metrics. This ensures that the proper input tensors, output tensors, and operations are used during the evaluation process.",
+      "token_count": 211,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "tell me should i use .net or JS/TS for DJango which one is best?",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "Django is a web framework for building web applications in Python. It handles the backend logic, including database operations, request handling, and URL routing. For frontend development, you will usually use HTML, CSS, and JavaScript (JS) for building the user interface and dynamic interactions on the web pages.\n\nConsidering this, the right choice for working with Django would be JavaScript or TypeScript (TS) instead of .NET.\n\nJavaScript is a standard choice for frontend development, and it works well with Django. JavaScript code can be embedded into your Django templates or served as static files, and various frontend libraries can be utilized alongside Django, such as React, Vue, or Angular.\n\nTypeScript is a superset of JavaScript that adds static types, making it useful for larger codebases or when you want a more robust development environment. It can be easily compiled into JavaScript when deploying your application, and TypeScript-based frontend frameworks can also be used with Django.\n\nOn the other hand, .NET is a backend framework primarily used for building server-side applications with C# or other .NET languages. While you can use .NET for building web applications, it serves the same purpose as Django, making it an irrelevant choice for frontend development in a Django-based web application.\n\nIn conclusion, JavaScript or TypeScript would be the best choice for frontend development in Django web applications. They provide the tools and flexibility to build interactive user interfaces and work well with Django's backend functionality.",
+      "token_count": 240,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "how to use TFMA in complete TFX pipeline?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "TensorFlow Model Analysis (TFMA) is typically used to evaluate machine learning models as part of the TensorFlow Extended (TFX) pipeline. To use TFMA in a complete TFX pipeline, you need to add an Evaluator component to the pipeline definition. The Evaluator is responsible for computing and visualizing various metrics for your model.\n\nHere is an example of how to integrate TFMA into a TFX pipeline:\n\n1. First, ensure that you have the necessary libraries installed:\n\n```bash\npip install tfx\n```\n\n2. Then, you may create a Python script to define the TFX pipeline:\n\n```python\nimport os\nimport tensorflow_model_analysis as tfma\nfrom tfx.components import CsvExampleGen, Evaluator, ExampleValidator, Pusher, ResolverNode, SchemaGen, StatisticsGen, Trainer, Transform\nfrom tfx.components.base import executor_spec\nfrom tfx.components.trainer.executor import GenericExecutor\nfrom tfx.dsl.experimental import latest_blessed_model_resolver\nfrom tfx.orchestration import metadata, pipeline\nfrom tfx.orchestration.local import local_dag_runner\nfrom tfx.proto import pusher_pb2, trainer_pb2\nfrom tfx.types import Channel\nfrom tfx.types.standard_artifacts import Model, ModelBlessing\nfrom tfx.utils.dsl_utils import external_input\n\n_pipeline_name = 'your_pipeline_name'\n_pipeline_root = os.path.join('tfx', _pipeline_name)\n_metadata_path = os.path.join(_pipeline_root, 'metadata', 'metadata.db')\n\n# Define the data and components\ndata_root = 'path/to/your/data'\nexample_gen = CsvExampleGen(input=external_input(data_root))\n\n# Add remaining components (Transform, Trainer, SchemaGen, etc.)\n# ...\n```\n\n3. Add the Evaluator component to your pipeline:\n\n```python\n# Configure your evaluation metrics\neval_config = tfma.EvalConfig(\n    model_specs=[\n        tfma.ModelSpec(label_key='your_label_key', signature_name='serving_default', prediction_key='raw_prediction'),\n    ],\n    slicing_specs=[\n        tfma.SlicingSpec(),\n        # Other slicing configurations if needed\n    ],\n    metrics_specs=[\n        tfma.MetricsSpec(metrics=[\n            tfma.MetricConfig(class_name='ExampleCount'),\n            tfma.MetricConfig(class_name='BinaryAccuracy', threshold=tfma.MetricThreshold(value_threshold=tfma.GenericValueThreshold(lower_bound={'value': 0.5}), change_threshold=tfma.GenericChangeThreshold(absolute={'value': -1e-2}, direction=tfma.MetricDirection.HIGHER_IS_BETTER))),\n        ])\n    ]\n)\n\n# Add the Evaluator component\n# Replace \"trainer\" with the Trainer component of your pipeline\n# Replace \"model_resolver\" with the ResolverNode component for model blessings, if any\nmodel_analyzer = Evaluator(\n    examples=example_gen.outputs['examples'],\n    model=trainer.outputs['model'],\n    baseline_model=model_resolver.outputs['model'],\n    eval_config=eval_config\n)\n```\n\n4. Now you can add the Evaluator component to your pipeline components and run the pipeline:\n\n```python\ncomponents = [example_gen, statistics_gen, schema_gen, example_validator, transform, trainer, model_analyzer, pusher]\n\ntfx_pipeline = pipeline.Pipeline(\n    pipeline_name=_pipeline_name,\n    pipeline_root=_pipeline_root,\n    components=components,\n    metadata_connection_config=metadata.sqlite_metadata_connection_config(_metadata_path),\n    enable_cache=True,\n)\n\nlocal_dag_runner.LocalDagRunner().run(tfx_pipeline)\n```\n\nBy following the steps above, you can integrate TensorFlow Model Analysis (TFMA) into a complete TFX pipeline. The Evaluator component will automatically evaluate your models and generate metrics as specified in `eval_config`. You can use the outputs of the Evaluator component for further analysis or to make decisions about model deployment based on the evaluation results.",
+      "token_count": 359,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 1186,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

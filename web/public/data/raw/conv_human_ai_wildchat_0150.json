@@ -1,0 +1,151 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0150",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 14,
+  "timestamp_start": "2023-04-09 16:43:10+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "In the context of a story, a hypothetcial (magical) makeover salon provides unique experiences for its customers.   As the customer enters the salon foreshadows elements in their (fantasy) experience, what are some unique experiences the salon could provide?  Nothing controversial . State a hypothetical customer name,  their experience,  their character name in the experience, the narrative foreshadowing (2-3 sentences),   and what sound effects the mirrored corridor uses to introduce the experience ?",
+      "token_count": 72,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Hypothetical customer name: Sarah  \nExperience: Transformation into a mermaid  \nCharacter name in the experience: Seraphina  \nNarrative foreshadowing: Sarah notices a small fountain in the waiting room with a sign that reads \"Make a wish and let the water guide your dreams.\"  \nSound effects: As Sarah walks down the mirrored corridor, she hears the sound of waves crashing against the shore and seagulls calling out to one another. \n\nHypothetical customer name: Mark  \nExperience: Transformation into a werewolf  \nCharacter name in the experience: Maximus  \nNarrative foreshadowing: Mark sees a portrait of a full moon hanging on the salon's wall  \nSound effects: As Mark walks down the mirrored corridor, he hears the sound of wolves howling in the distance and a low growling that seems to be getting louder and closer. \n\nHypothetical customer name: Ava  \nExperience: Transformation into a fairy  \nCharacter name in the experience: Avalon  \nNarrative foreshadowing: Ava sees a jar of glitter on the reception desk labeled \"Fairy Dust\"  \nSound effects: As Ava walks down the mirrored corridor, she hears the sound of tinkling bells and soft music that seems to be coming from the distance.",
+      "token_count": 185,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "I had a different idea...   A customer male , wants to experience being the mission commander of is own space mission?",
+      "token_count": 21,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here are some possible details for that scenario:\n\nHypothetical customer name: Tom  \nExperience: Becoming the mission commander on a space mission  \nCharacter name in the experience: Commander Tom  \nNarrative foreshadowing: Tom observes the framed NASA mission patches hanging on the wall in the waiting room  \nSound effects: As Tom walks down the mirrored corridor, he hears the sound of countdown beeps and rocket engine roar.\n\nOnce Tom enters the makeover room, he sees a spaceship console with controls, switches, and screens. Another employee of the salon plays the role of the flight director and provides instructions and updates on the mission progress. Tom puts on a white spacesuit and helmet and straps into the commander's seat. The screen shows a countdown and liftoff, and Tom feels the vibration and rumble of the ship. Once the ship reaches orbit, the screen displays views of Earth and various celestial objects. Tom performs various spacecraft maneuvers, handles emergencies, and communicates with the mission control center. The flight director provides coaching and feedback as Tom leads the mission crew to accomplish their objectives in space. At the end of the experience, Tom successfully re-enters Earth's atmosphere and lands the spaceship safely.",
+      "token_count": 198,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Maybe switch so Tom is the flight director in his experience, having to cope with some unexpected situations with quick reasoning and professional integrity?",
+      "token_count": 24,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here are some revised details based on that idea:\n\nHypothetical customer name: Tom  \nExperience: Becoming a flight director on a space mission  \nCharacter name in the experience: Flight Director Tom  \nNarrative foreshadowing: Tom sees a space shuttle model and a star chart on the reception desk  \nSound effects: As Tom walks down the mirrored corridor, he hears the sound of mission control chatter and occasional beeps and alarms.\n\nOnce Tom enters the makeover room, he sees a mission control room set up with control panels, monitors, and communication equipment. Another employee of the salon plays the role of the spacecraft commander and reports in with status updates, requests, and emergency notifications. Tom puts on a headset and takes a seat at the flight director's console. The monitors display various spacecraft telemetry, images, and video feeds. The spacecraft encounters various challenges, from communications issues to equipment failures to unforeseen hazards. Tom has to make quick decisions and issue commands to the astronaut crew to overcome these challenges while balancing safety, efficiency, and mission goals. The spacecraft successfully completes key mission objectives, such as deploying a satellite or conducting a scientific experiment. At the end of the experience, the salon employee who played the commander thanks Tom for his excellent guidance and teamwork, and Tom feels proud and satisfied with his successful space mission.",
+      "token_count": 223,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "From here I'll give some titles , same summaries needed.   \"HMS Pinarfore\",  \"The Midnight Ball\" and \"24 hours at 60 miles an hour!\"",
+      "token_count": 23,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here are some ideas for those titles: \n\nTitle: HMS Pinafore  \nExperience: Becoming a sailor on a tall ship  \nCharacter name in the experience: Sailor Sam  \nNarrative foreshadowing: Sam sees a painting of a classic tall ship on the reception wall  \nSound effects: As Sam walks down the mirrored corridor, he hears the sound of waves rocking the ship and the creaking of wooden planks.\n\nOnce Sam enters the makeover room, he sees a miniaturized sailing vessel complete with rigging, sails, and steering wheel. Another salon employee plays the role of the captain and instructs Sam on the duties of a sailor. Sam puts on a sailor's hat and works with other crew members to hoist the sails and navigate the ship. The screen shows views of the sea and the coastline, as well as various types of sea creatures. The ship encounters various challenges, such as rough weather or other ships in distress. Sam has to make quick decisions and follow the captain's orders to keep the ship and crew safe while fulfilling their mission. At the end of the experience, the ship returns to port, and the captain congratulates Sam on a job well done.\n\nTitle: The Midnight Ball  \nExperience: Attending a royal ball  \nCharacter name in the experience: Princess Penelope  \nNarrative foreshadowing: Penelope sees a glass slipper on a pedestal in the waiting room  \nSound effects: As Penelope walks down the mirrored corridor, she hears orchestral music and people chatting in a grand ballroom.\n\nOnce Penelope enters the makeover room, she sees a selection of elegant ballgowns and accessories, as well as a mirror to do her hair and makeup. Another salon employee plays the role of the prince and welcomes Penelope to the ball. Penelope puts on a beautiful gown and dances with other guests to the music of the orchestra. The ball features various attractions and surprises, such as fireworks, magic acts, and a fountains show. The prince may take Penelope on a romantic walk outside the ballroom or invite her to a secret garden for a private conversation. At the end of the experience, the orchestra plays the last dance, and the prince walks Penelope back to her carriage, promising to see her again soon.\n\nTitle: 24 Hours at 60 Miles an Hour!  \nExperience: Being a racecar driver in a high-speed endurance run  \nCharacter name in the experience: Racer Rick  \nNarrative foreshadowing: Rick sees a trophy and checkered flags on the reception desk  \nSound effects: As Rick walks down the mirrored corridor, he hears the sound of revving engines and screeching tires.\n\nOnce Rick enters the makeover room, he sees a driving cockpit complete with a steering wheel, pedals, and dashboard gauges. Another salon employee plays the role of the crew chief and gives Rick instructions on the car's features and controls. Rick puts on a racing suit and helmet and takes on the challenge of driving for 24 hours straight at high speeds. The screen shows various racetrack views and real-time telemetry data, such as speed, fuel, and tire pressure. The car faces various challenges, such as tire blowouts, engine overheating, or other competitors trying to bump or overtake it. Rick has to stay focused and alert, managing his own physical and mental endurance while balancing the car's performance and pit stops. At the end of the experience, the car crosses the finish line, and the crew chief and pit crew celebrate Rick's victory while awarding him with the trophy and checkered flag.",
+      "token_count": 580,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\" 20 foot from the summit\", \"Up, Up and away!\",  \"A very rare creature\"...",
+      "token_count": 14,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here are some ideas for those titles:\n\nTitle: 20 Foot from the Summit  \nExperience: Climbing a mountain  \nCharacter name in the experience: Climber Chris  \nNarrative foreshadowing: Chris sees a collection of carabiners and ice axes on display in the waiting room  \nSound effects: As Chris walks down the mirrored corridor, he hears the sound of wind gusts and rockfalls.\n\nOnce Chris enters the makeover room, he sees a climbing wall with various holds and obstacles. Another salon employee plays the role of the climbing partner and advises Chris on the proper techniques and safety procedures. Chris puts on a harness and starts climbing towards the top of a virtual mountain. The screen shows breathtaking views of the surrounding landscapes and wildlife, as well as various kinds of weather and light conditions. The climb presents various challenges, such as steep faces, narrow ledges, or unexpected hazards like rock slides or thunderstorms. Chris has to stay focused and composed, relying on his strength, agility, and mental stamina while following the partner's guidance. At the end of the experience, Chris reaches a virtual summit and celebrates the achievement with the partner.\n\nTitle: Up, Up and Away!  \nExperience: Flying a hot-air balloon  \nCharacter name in the experience: Balloonist Beth  \nNarrative foreshadowing: Beth sees a model of a hot-air balloon hanging from the ceiling in the waiting room  \nSound effects: As Beth walks down the mirrored corridor, she hears the sound of hot air blowing into large fabric bags.\n\nOnce Beth enters the makeover room, she sees a basket and a gas-fired burner attached to a hot-air balloon envelope. Another salon employee plays the role of the ground crew and gives Beth instructions on the balloon operation and navigation. Beth puts on a pilot's cap and flies the balloon over various scenic locations, such as mountains, rivers, or cities. The screen shows stunning aerial footage and landmarks, as well as other balloons and aircraft sharing the airspace. The balloon ride presents various challenges, such as changing winds, downdrafts, or obstacles like power lines or restricted airspace. Beth has to use her piloting skills and communication with the ground crew to maintain the flight path and ensure the safety of the balloon and the passengers. At the end of the experience, the balloon lands safely, and Beth receives accolades from the ground crew and passengers.\n\nTitle: A Very Rare Creature  \nExperience: Exploring a nature reserve  \nCharacter name in the experience: Wildlife Hunter Wayne  \nNarrative foreshadowing: Wayne sees a diorama of a jungle scene in the waiting room  \nSound effects: As Wayne walks down the mirrored corridor, he hears the sound of exotic animals and birds.\n\nOnce Wayne enters the makeover room, he sees equipment and uniforms for a wildlife reserve ranger, such as binoculars, cameras, and field guides. Another salon employee plays the role of the reserve manager and gives Wayne assignments for exploring and documenting the reserve. Wayne puts on ranger gear and hikes through various habitats, such as forests, savannas, or wetlands. The screen shows footage of diverse flora and fauna, as well as encounters with elusive or rare species, such as jaguars, eagles, or giant turtles. The reserve exploration presents various challenges, such as unexpected weather, terrain, or threats like poachers or natural disasters. Wayne has to use his field skills and scientific knowledge to collect data and samples, help injured or endangered animals, and preserve the reserve's ecological balance. At the end of the experience, Wayne presents his findings and recommendations to the reserve manager, feeling a sense of pride and duty for doing his part in protecting the environment.",
+      "token_count": 599,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\"Letters for London, Urgent\", \"It Came from the Desert!\", \"The Piper's tale\"",
+      "token_count": 12,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, here are some ideas for those titles:\n\nTitle: Letters for London, Urgent  \nExperience: Delivering mail during wartime  \nCharacter name in the experience: Postman Pete  \nNarrative foreshadowing: Pete sees a uniformed envelope box and a stamped letter display in the waiting room  \nSound effects: As Pete walks down the mirrored corridor, he hears the sound of airplanes flying and explosions in the distance.\n\nOnce Pete enters the makeover room, he sees a vintage motorcycle with a sidecar and various containers for carrying letters and parcels. Another salon employee plays the role of the postal supervisor and gives Pete instructions on the delivery routes and schedules. Pete puts on a postal hat and jacket and sets off to deliver mail to various locations in a virtual wartime London. The screen shows realistic street views, buildings, and landmarks from the historical period, as well as special events and encounters such as air raids, street celebrations, and meetings with famous personalities. The mail delivery presents various challenges, such as traffic jams, detours, or hostile strangers. Pete has to use his knowledge of the city and his interpersonal skills to avoid danger, communicate with the recipients, and fulfill the urgent mail duties. At the end of the experience, Pete receives a commendation from the postal supervisor for his outstanding performance.\n\nTitle: It Came from the Desert!  \nExperience: Investigating a mysterious creature  \nCharacter name in the experience: Scientist Sue  \nNarrative foreshadowing: Sue sees a set of magnifying glasses and a fossil collection on display in the waiting room  \nSound effects: As Sue walks down the mirrored corridor, she hears the sound of sand sliding and scuttling.\n\nOnce Sue enters the makeover room, she sees a laboratory and a desert research station with various instruments, samples, and equipment. Another salon employee plays the role of the research assistant and informs Sue of a bizarre discovery of a giant insect-like creature that attacks humans in the desert. Sue puts on a lab coat and travels to the research site to study the creature and gather evidence. The screen shows footage of the desert landscapes, wildlife, and people who have encountered the monster, as well as the creature itself from various angles and behaviors. The investigation presents various challenges, such as the hostile climate, the threat of the creature, or the lack of funding and cooperation from the authorities. Sue has to use her scientific skills and creativity to analyze the creature's biology and behavior, communicate with the research team and other stakeholder groups, and possibly design a solution to neutralize the creature. At the end of the experience, Sue presents her findings to the scientific community and media, hoping to spark a new understanding and appreciation of the mysteries of the natural world.\n\nTitle: The Piper's Tale  \nExperience: Playing a musical instrument in a historical setting  \nCharacter name in the experience: Piper Paul  \nNarrative foreshadowing: Paul sees some medieval-style flutes and a music book on the reception table  \nSound effects: As Paul walks down the mirrored corridor, he hears the sound of lute strings and female vocals.\n\nOnce Paul enters the makeover room, he sees a stage and a set of musical instruments from the medieval or Renaissance period, such as lutes, harps, tambourines, and recorders. Another salon employee plays the role of the festival organizer and assigns Paul to perform at a historical festival, where people dress up in period costumes and try to recreate the atmosphere and customs of the past. Paul puts on a piper's outfit and practices various pieces of medieval and folk music. The screen shows footage of the festival crowds, architecture, and decoration, as well as other performers and attractions such as jesters, actors, and vendors. The festival performance presents various challenges, such as the unexpected weather, hecklers or critics, or the demand for improvising and adapting to the unpredictable audience. Paul has to use his musical skill and sensitivity to adjust his performance to the festival's vibe and to keep the audience entertained and engaged. At the end of the experience, Paul receives applause and compliments from the festival organizers and patrons, feeling a sense of satisfaction and joy for sharing his musical talent with others.",
+      "token_count": 696,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "\"The Cloister\", \"How to cure a hangover\", \"How to win the National\"  and thanks for all the suggestions :)",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "You're welcome! Here are some ideas for those titles:\n\nTitle: The Cloister  \nExperience: Living as a monk in a medieval monastery  \nCharacter name in the experience: Brother Bernard  \nNarrative foreshadowing: Bernard sees a set of prayer books and a wooden cross on the reception desk  \nSound effects: As Bernard walks down the mirrored corridor, he hears the sound of church bells and choir singing.\n\nOnce Bernard enters the makeover room, he sees an austere room with a wooden bed, a desk, and a bookshelf. Another salon employee plays the role of the abbot and explains to Bernard the rules and rituals of monastic life. Bernard puts on a monk's robe and spends a day living in the virtual monastery, performing various tasks such as copying manuscripts, gardening, chanting, and praying. The screen shows footage of the monastery's architecture, art, and customs, as well as other monks who share their stories and wisdom. The monastic experience presents various challenges, such as the discipline and obedience required, the temptations and distractions of the outside world, or the internal struggles and doubts of the monks. Bernard has to use his faith, patience, and humility to appreciate the simple lifestyle of the monks and to deepen his spiritual understanding. At the end of the experience, the abbot grants Bernard a blessing and a commendation for his dedication to seeking God.\n\nTitle: How to Cure a Hangover  \nExperience: Surviving the aftermath of a night of partying  \nCharacter name in the experience: Partier Pat  \nNarrative foreshadowing: Pat sees a collection of vitamins and a water cooler in the waiting room  \nSound effects: As Pat walks down the mirrored corridor, he hears the sound of birds chirping and a phone ringing.\n\nOnce Pat enters the makeover room, he sees a bedroom with a messy bed, empty bottles, and a stack of pizza boxes. Another salon employee plays the role of the hangover nurse and administers various remedies and advices to Pat. Pat tries to recover from the effects of a wild party, such as headaches, nausea, and dizziness. The screen shows footage of the party scene, music, and people, as well as flashbacks and blurbs of the previous night's events. The hangover experience presents various challenges, such as the regret and embarrassment of the social interactions, the need to cover up or fix the damages, or the thirst and hunger for comfort food and drinks. Pat has to use his sense of humor, resourcefulness, and willpower to survive the hangover and learn some lessons about responsible fun. At the end of the experience, the hangover nurse gives Pat some final advice and encouragement to take care of himself in the future. \n\nTitle: How to Win the National  \nExperience: Competing in a horse race  \nCharacter name in the experience: Jockey Jane  \nNarrative foreshadowing: Jane sees a framed photo of a horse and a jockey on the reception desk  \nSound effects: As Jane walks down the mirrored corridor, she hears the sound of horses snorting and hooves pounding.\n\nOnce Jane enters the makeover room, she sees a horse stall, a saddle, and various riding accessories. Another salon employee plays the role of the horse trainer and assigns Jane to ride a trained horse in a national horse race. Jane puts on jockey gear and rides the horse to the racecourse, where other jocke",
+      "token_count": 554,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 3220,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

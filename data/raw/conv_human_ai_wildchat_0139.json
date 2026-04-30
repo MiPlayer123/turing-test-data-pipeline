@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0139",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 15:14:38+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "you are personaltrainerGPT i am a 5'0 female looking to lose weight i need a weekly meal plan that will help me lose weight as well as a workout plan i could do 4 days a week to lose belly far that i could do at home with no weights or equiment",
+      "token_count": 52,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Great to hear that you are interested in losing weight and adopting a healthy lifestyle. Here is a weekly meal plan that can help you achieve your goals:\n\nMonday:\n- Breakfast: 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange\n- Snack: 1 small apple, 10-12 almonds\n- Lunch: Grilled chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing\n- Snack: Greek yogurt with berries\n- Dinner: Baked salmon with steamed veggies\n\nTuesday:\n- Breakfast: Greek yogurt with banana and a handful of granola\n- Snack: 1 small pear, 10-12 cashews\n- Lunch: Turkey and cheese sandwich with wholegrain bread and veggies on the side\n- Snack: Carrots sticks with hummus\n- Dinner: Grilled chicken with roasted veggies\n\nWednesday:\n- Breakfast: 1 cup oatmeal with milk, honey, and mixed berries\n- Snack: 1 small orange, 10-12 pistachios\n- Lunch: Tuna salad with mixed greens, cherry tomatoes, cucumber, and a lemon vinaigrette dressing\n- Snack: Apple slices with almond butter\n- Dinner: Stir-fry with chicken, broccoli, carrots, and brown rice\n\nThursday:\n- Breakfast: 2 boiled eggs, 1 slice of wholegrain toast, 1 small orange\n- Snack: 1 small apple, 10-12 almonds\n- Lunch: Grilled tofu and vegetable kebabs with hummus\n- Snack: Greek yogurt with berries\n- Dinner: Baked chicken breast with roasted sweet potato and green beans\n\nFriday:\n- Breakfast: Greek yogurt with banana and a handful of granola\n- Snack: 1 small pear, 10-12 cashews\n- Lunch: Veggie wrap with hummus, avocado, spinach, cucumber, and tomato\n- Snack: Carrots sticks with hummus\n- Dinner: Grilled fish with steamed veggies\n\nSaturday:\n- Breakfast: 1 cup oatmeal with milk, honey, and mixed berries\n- Snack: 1 small orange, 10-12 pistachios\n- Lunch: Chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing\n- Snack: Apple slices with almond butter\n- Dinner: Pan-seared shrimp with quinoa and roasted veggies\n\nSunday:\n- Breakfast: 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange\n- Snack: 1 small apple, 10-12 almonds\n- Lunch: Asian salad with mixed greens, edamame, crispy noodles, and a sesame dressing\n- Snack: Greek yogurt with berries\n- Dinner: Grilled chicken breast with roasted sweet potato and green beans\n\nIn terms of your workout plan, here is an effective 4-day per week plan that you can use to target belly fat and tone your entire body:\n\nDay 1: Cardio and Abs\n- Warm up with 5 minutes of jumping jacks\n- Jog in place for 5 minutes\n- 30 seconds of high knees followed by 60 seconds of rest\n- 30 seconds of jumping lunges followed by 60 seconds of rest\n- 30 seconds of burpees followed by 60 seconds of rest\n- 30 seconds of mountain climbers followed by 60 seconds of rest\n- Repeat this circuit 4 times\n- Do 3 sets of 20 crunches, 20 Russian twists, and 1-minute plank\n\nDay 2: Lower Body\n- Warm up with 5 minutes of jumping jacks\n- 30 squats followed by 30 seconds of rest\n- 30 jump squats followed by 30 seconds of rest\n- 30 lunges followed by 30 seconds of rest\n- 30 jump lunges followed by 30 seconds of rest\n- Repeat this circuit 3 times\n- Do 3 sets of 20 leg raises, 20 donkey kicks, and 20 fire hydrants on each side\n\nDay 3: Upper Body\n- Warm up with 5 minutes of jumping jacks\n- 30 push-ups followed by 30 seconds of rest\n- 30 dips followed by 30 seconds of rest\n- 30 tricep extensions followed by 30 seconds of rest\n- 30 bicep curls followed by 30 seconds of rest\n- Repeat this circuit 3 times\n- Do 3 sets of 20 shoulder presses, 20 lateral raises, and 20 front raises\n\nDay 4: Yoga and Stretching\n- Warm up with 5 minutes of jumping jacks\n- Do a 30-minute yoga routine to stretch and release any tight muscles in your body\n- Finish with 10 minutes of stretching and deep-breathing exercises\n\nRemember to always stay hydrated during your workouts and listen to your body. If you need to rest, take a break! Also, make sure to consult with a healthcare professional before starting any new exercise or diet plan. Good luck on your weight loss journey!",
+      "token_count": 715,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "i could do a more rigurous workout routine,  remember i want to lose belly fat,",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure, I can provide a more rigorous workout routine that is specifically designed to help you lose belly fat. Here's a 4-day a week workout plan that you can try at home with no weights or equipment:\n\nDay 1: Cardio and Core\nWarm up with 5 minutes of jumping jacks\n- 20 seconds of burpees followed by 10 seconds of rest\n- 20 seconds of high knees followed by 10 seconds of rest\n- 20 seconds of jumping jacks followed by 10 seconds of rest\n- 20 seconds of mountain climbers followed by 10 seconds of rest\n- 20 seconds of bicycle crunches followed by 10 seconds of rest\n- Repeat this circuit 4 times\n- Do 3 sets of 30 seconds of plank, 20 leg raises, and 20 Russian twists\n\nDay 2: Lower Body\nWarm up with 5 minutes of jumping jacks\n- 20 side to side jumps followed by 10 seconds of rest\n- 20 jump squats followed by 10 seconds of rest\n- 20 jump lunges followed by 10 seconds of rest\n- 20 mountain climbers followed by 10 seconds of rest\n- Repeat this circuit 4 times\n- Do 3 sets of 20 sumo squats, 20 reverse lunges, and 10 jump squats\n\nDay 3: Upper Body and Core\nWarm up with 5 minutes of jumping jacks\n- 20 pushups followed by 10 seconds of rest\n- 20 dips followed by 10 seconds of rest\n- 20 tricep extensions followed by 10 seconds of rest\n- 20 bicep curls followed by 10 seconds of rest\n- Repeat this circuit 4 times\n- Do 3 sets of 20 plank jacks, 20 mountain climbers, and 20 oblique twist\n\nDay 4: HIIT and Abs\nWarm up with 5 minutes of jumping jacks\n- 20 seconds of squat jumps followed by 10 seconds of rest\n- 20 seconds of jumping lunges followed by 10 seconds of rest\n- 20 seconds of high knees followed by 10 seconds of rest\n- 20 seconds of bicycle crunches followed by 10 seconds of rest\n- Repeat this circuit 4 times\n- Do 3 sets of 20 leg raises, 20 Russian twists, and 20 flutter kicks\n\nRemember to always warm up before exercising and cool down after each workout routine. Increase intensity or reps as you progress through the weeks to continue challenging your body. Drink plenty of water and consult with a healthcare professional before starting any new exercise or diet plan. Good luck on your weight loss journey!",
+      "token_count": 415,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you provide this in a table format",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, here's your weekly meal plan and workout routine in table format:\n\n**Weekly Meal Plan**\n| Day       | Breakfast                                         | Snack            | Lunch                                              | Snack            | Dinner                                             |\n| ---       | ---                                               | ---              | ---                                                | ---              | ---                                                |\n| Monday    | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing | Greek yogurt with berries | Baked salmon with steamed veggies |\n| Tuesday   | Greek yogurt with banana and a handful of granola | 1 small pear, 10-12 cashews | Turkey and cheese sandwich with wholegrain bread and veggies on the side | Carrots sticks with hummus | Grilled chicken with roasted veggies |\n| Wednesday | 1 cup oatmeal with milk, honey, and mixed berries | 1 small orange, 10-12 pistachios | Tuna salad with mixed greens, cherry tomatoes, cucumber, and a lemon vinaigrette dressing | Apple slices with almond butter | Stir-fry with chicken, broccoli, carrots, and brown rice |\n| Thursday  | 2 boiled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled tofu and vegetable kebabs with hummus | Greek yogurt with berries | Baked chicken breast with roasted sweet potato and green beans |\n| Friday    | Greek yogurt with banana and a handful of granola | 1 small pear, 10-12 cashews | Veggie wrap with hummus, avocado, spinach, cucumber, and tomato | Carrots sticks with hummus | Grilled fish with steamed veggies |\n| Saturday  | 1 cup oatmeal with milk, honey, and mixed berries | 1 small orange, 10-12 pistachios | Chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing | Apple slices with almond butter | Pan-seared shrimp with quinoa and roasted veggies |\n| Sunday    | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Asian salad with mixed greens, edamame, crispy noodles, and a sesame dressing | Greek yogurt with berries | Grilled chicken breast with roasted sweet potato and green beans |\n\n**Workout Routine**\n| Day  | Exercise                                                  | Reps/Sets                                                                            |\n| ---  | ---                                                       | ---                                                                                  |\n| 1    | Cardio and Core                                           | - 20 seconds of burpees followed by 10 seconds of rest<br>- 30 seconds of plank<br>- 20 seconds of high knees followed by 10 seconds of rest<br>- 20 seconds of jumping jacks followed by 10 seconds of rest<br>- 20 seconds of mountain climbers followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 30 seconds of plank, 20 leg raises, and 20 Russian twists |\n| 2    | Lower Body                                                | - 20 side to side jumps followed by 10 seconds of rest<br>- 30 seconds of squat jumps<br>- 20 jump lunges followed by 10 seconds of rest<br>- 20 mountain climbers followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 sumo squats, 20 reverse lunges, and 10 jump squats |\n| 3    | Upper Body and Core                                       | - 20 pushups followed by 10 seconds of rest<br>- 20 dips followed by 10 seconds of rest<br>- 20 tricep extensions followed by 10 seconds of rest<br>- 20 bicep curls followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 plank jacks, 20 mountain climbers, and 20 oblique twist |\n| 4    | HIIT and Abs                                              | - 20 seconds of squat jumps followed by 10 seconds of rest<br>- 20 seconds of jumping lunges followed by 10 seconds of rest<br>- 20 seconds of high knees followed by 10 seconds of rest<br>- 20 seconds of bicycle crunches followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 leg raises, 20 Russian twists, and 20 flutter kicks |",
+      "token_count": 645,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you do it so i can copy and past in a md format and still have a table",
+      "token_count": 19,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Sure! Here's your weekly meal plan and workout routine in markdown table format:\n\n**Weekly Meal Plan**\n\n| Day      | Breakfast                                                | Snack                       | Lunch                                                                                                   | Snack                       | Dinner                                                  |\n| -------- | -------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------- |\n| Monday   | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing | Greek yogurt with berries   | Baked salmon with steamed veggies                        |\n| Tuesday  | Greek yogurt with banana and a handful of granola         | 1 small pear, 10-12 cashews | Turkey and cheese sandwich with wholegrain bread and veggies on the side                               | Carrots sticks with hummus   | Grilled chicken with roasted veggies                     |\n| Wednesday| 1 cup oatmeal with milk, honey, and mixed berries         | 1 small orange, 10-12 pistachios | Tuna salad with mixed greens, cherry tomatoes, cucumber, and a lemon vinaigrette dressing           | Apple slices with almond butter | Stir-fry with chicken, broccoli, carrots, and brown rice |\n| Thursday | 2 boiled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled tofu and vegetable kebabs with hummus                                                            | Greek yogurt with berries   | Baked chicken breast with roasted sweet potato and green beans |\n| Friday   | Greek yogurt with banana and a handful of granola         | 1 small pear, 10-12 cashews | Veggie wrap with hummus, avocado, spinach, cucumber, and tomato                                          | Carrots sticks with hummus   | Grilled fish with steamed veggies                        |\n| Saturday | 1 cup oatmeal with milk, honey, and mixed berries         | 1 small orange, 10-12 pistachios | Chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing      | Apple slices with almond butter | Pan-seared shrimp with quinoa and roasted veggies         |\n| Sunday   | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Asian salad with mixed greens, edamame, crispy noodles, and a sesame dressing                        | Greek yogurt with berries   | Grilled chicken breast with roasted sweet potato and green beans |\n\n**Workout Routine**\n\n| Day | Exercise                                                           | Reps/Sets                                                                                                                                                                                                       |\n| --- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| 1   | Cardio and Core                                                    | - 20 seconds of burpees followed by 10 seconds of rest<br>- 30 seconds of plank<br>- 20 seconds of high knees followed by 10 seconds of rest<br>- 20 seconds of jumping jacks followed by 10 seconds of rest<br>- 20 seconds of mountain climbers followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 30 seconds of plank, 20 leg raises, and 20 Russian twists |\n| 2   | Lower Body                                                         | - 20 side to side jumps followed by 10 seconds of rest<br>- 30 seconds of squat jumps<br>- 20 jump lunges followed by 10 seconds of rest<br>- 20 mountain climbers followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 sumo squats, 20 reverse lunges, and 10 jump squats |\n| 3   | Upper Body and Core                                                | - 20 pushups followed by 10 seconds of rest<br>- 20 dips followed by 10 seconds of rest<br>- 20 tricep extensions followed by 10 seconds of rest<br>- 20 bicep curls followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 plank jacks, 20 mountain climbers, and 20 oblique twist |\n| 4   | HIIT and Abs                                                       | - 20 seconds of squat jumps followed by 10 seconds of rest<br>- 20 seconds of jumping lunges followed by 10 seconds of rest<br>- 20 seconds of high knees followed by 10 seconds of rest<br>- 20 seconds of bicycle crunches followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 leg raises, 20 Russian twists, and 20 flutter kicks |",
+      "token_count": 645,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "this is great can you do the same for the work out plan better yet can you combine them both",
+      "token_count": 20,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, I can combine both the weekly meal plan and workout routine in the same table format:\n\n| Day      | Breakfast                                                | Snack                       | Lunch                                                                                                   | Snack                       | Dinner                                                  | Exercise                                                           | Reps/Sets                                                                                                                                                                                                       |\n| -------- | -------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| Monday   | 2 scrambled eggs, 1 slice of wholegrain toast, 1 small orange | 1 small apple, 10-12 almonds | Grilled chicken salad with mixed greens, cherry tomatoes, cucumber, and a balsamic vinaigrette dressing | Greek yogurt with berries   | Baked salmon with steamed veggies                        | Cardio and Core                                                    | - 20 seconds of burpees followed by 10 seconds of rest<br>- 30 seconds of plank<br>- 20 seconds of high knees followed by 10 seconds of rest<br>- 20 seconds of jumping jacks followed by 10 seconds of rest<br>- 20 seconds of mountain climbers followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 30 seconds of plank, 20 leg raises, and 20 Russian twists |\n| Tuesday  | Greek yogurt with banana and a handful of granola         | 1 small pear, 10-12 cashews | Turkey and cheese sandwich with wholegrain bread and veggies on the side                               | Carrots sticks with hummus   | Grilled chicken with roasted veggies                     | Lower Body                                                         | - 20 side to side jumps followed by 10 seconds of rest<br>- 30 seconds of squat jumps<br>- 20 jump lunges followed by 10 seconds of rest<br>- 20 mountain climbers followed by 10 seconds of rest<br>- Repeat this circuit 4 times<br>- 3 sets of 20 sumo squats, 20 reverse lunges, and",
+      "token_count": 266,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 2800,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0148",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 10,
+  "timestamp_start": "2023-04-09 16:35:05+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Find some word games containing Zettelkasten",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Unfortunately, as an AI language model, I am not aware of any word games that specifically contain the word \"Zettelkasten\". However, here are some word games that you might enjoy playing:\n\n1. Scrabble - a classic word game in which players use tiles with letters on them to form words on a game board. \n\n2. Boggle - a fast-paced game in which players race against the clock to find as many words as possible in a grid of letters. \n\n3. Bananagrams - a portable word game in which players race to create a grid of words from a set of letter tiles. \n\n4. Word search - a puzzle in which players must find hidden words in a grid of letters. \n\n5. Crosswords - a puzzle in which players must fill in a grid of blank squares with words that fit pre-defined clues, forming interlocking vertical and horizontal patterns. \n\nI hope you find a game that you enjoy!",
+      "token_count": 157,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Find some word games containing the word Zettelkasten",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I apologize but unfortunately, I am not aware of any word games that specifically contain the word \"Zettelkasten\" in them. However, you can create a word game using Zettelkasten as a theme or category. For example, players could be tasked with creating words related to Zettelkasten or using letters from the word Zettelkasten to form new words. Alternatively, you could create a crossword or word search puzzle with clues related to Zettelkasten. I hope that helps!",
+      "token_count": 81,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Find some puns containing Zettelkasten",
+      "token_count": 5,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "As an AI language model, I couldn't find any puns that contain \"Zettelkasten.\" However, I can try to invent one for you:\n\n- \"When it comes to organizing his thoughts, John prefers using a Zettelkasten instead of a \"scatter-brain\" approach!\n\nI hope you like it!",
+      "token_count": 45,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Find others more funny",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Here's another pun:\n\n- \"A Zettelkasten and a pen walked into a bar. The pen asked the Zettelkasten, 'Any good ideas in here?' The Zettelkasten responded, 'Nothing's written in stone.'\"\n\nI hope that brings a smile to your face!",
+      "token_count": 39,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Find others more funny",
+      "token_count": 4,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Here are two more puns for you:\n\n- \"I tried using a Zettelkasten to organize my thoughts, but I kept forgetting which note I put where. I guess you can say I got stuck in a Zettel-quandary!\"\n\n- \"Why did the writer start using a Zettelkasten? Because he was tired of forgettin' them, regretting them, and lettin' them go!\" (To the tune of the Lynyrd Skynyrd song \"Gimme Three Steps\")\n\nI hope these puns are more to your liking!",
+      "token_count": 79,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 428,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0143",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-4-0314",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-4-0314",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 8,
+  "timestamp_start": "2023-04-09 15:42:09+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "what are the top luxury brand names?",
+      "token_count": 7,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "1. Louis Vuitton\n2. Gucci\n3. Chanel\n4. Herm\u00e8s\n5. Prada\n6. Versace\n7. Dior\n8. Burberry\n9. Armani\n10. Saint Laurent (YSL)\n\nPlease note that this list may change over time, and there are many other luxury brands that may also be considered top names in the industry.",
+      "token_count": 49,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Based on the list you gave me. can you create a list of names that do not exist but sound like a top luxury brand name?",
+      "token_count": 26,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "1. Valmontier\n2. DeLaviso\n3. Elizar\u00e9\n4. Veracasti\n5. Soriani\n6. Bellafont\u00e9\n7. Cassioira\n8. Laurentina\n9. Esclarisse\n10. Rivaux\n\nPlease note that these names are fictional and generated to sound like luxury brands, but they don't represent existing companies as far as I am aware.",
+      "token_count": 46,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you give me 50 more?",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "1. Alanzio\n2. Maison Solair\u00e9\n3. Jardinelli\n4. Fontamar\n5. Alicetti\n6. L'Aviro\n7. Strenucci\n8. Ricciardelli\n9. Gastoni\u00e8re\n10. Bellamare\n11. Genoviara\n12. Talissanna\n13. Silviano\n14. Chastoin\u00e9\n15. Daventoux\n16. Viellini\n17. Elizavarra\n18. Carleaux\n19. Vanstr\u00edne\n20. Lorenzoni\n21. Cassanto\n22. L'Emmaraux\n23. Duponteclair\n24. Escavallo\n25. Morellino\n26. Vandellucci\n27. Fontanelli\n28. Lantinara\n29. Astoriaza\n30. Le Marquise\n31. Montelliss\u00e9\n32. VillaFontaine\n33. DeLaCr\u00e9me\n34. Nivellari\n35. Gavrielle\n36. Ambrosinia\n37. Jolivet\u00e9\n38. Michelisse\n39. Pierrosoni\n40. Sartorella\n41. Donsoretto\n42. Carratelli\n43. Vivazello\n44. Estell\u00edano\n45. Fiorentezza\n46. Cirelli\n47. Montemara\n48. Sabrinaque\n49. Galavantis\n50. Amerinsque\n\nPlease note that these names are fictional and generated to sound like luxury brands, but they don't represent existing companies as far as I am aware.",
+      "token_count": 128,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "can you make a new list of 50 luxury names that sound like 2 syllables?",
+      "token_count": 15,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-4-0314",
+      "content": "1. RenVa\n2. LuCiel\n3. MavLis\n4. CasaNo\n5. SumRay\n6. FiorTe\n7. VeLeis\n8. StelLi\n9. ElLark\n10. LurVoy\n11. LiMar\n12. SiNor\n13. GeVals\n14. L'Viel\n15. AzaRe\n16. EzaLo\n17. LaniRo\n18. DeSaire\n19. Kinv\u00c9e\n20. Brant\u00e9\n21. VisLoux\n22. LuxVore\n23. ElNaire\n24. Noct\u00e9a\n25. ValZor\n26. LoG\u00e9re\n27. SoF\u00edna\n28. Quent\u00e9\n29. Tres\u00f3ra\n30. PerZonn\n31. LuxeVo\n32. SerVoz\n33. DePr\u00edst\n34. SolUme\n35. SavReau\n36. RouVente\n37. ClasMil\n38. ElPr\u00e9mo\n39. TraVince\n40. BriTasq\n41. Av\u00f3nti\n42. BelPorte\n43. MonSiale\n44. NelSorr\n45. EsteLair\n46. Mart\u00e9zo\n47. AmariLux\n48. SerBrise\n49. ExuVent\n50. LuminV\u00e9\n\nPlease note that these names are fictional and generated to sound like luxury brands with two syllables, but they don't represent existing companies as far as I am aware.",
+      "token_count": 129,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 406,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-4-0314"
+  }
+}

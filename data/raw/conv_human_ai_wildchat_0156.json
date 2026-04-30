@@ -1,0 +1,187 @@
+{
+  "conversation_id": "conv_human_ai_wildchat_0156",
+  "condition": "human_ai",
+  "model_a": "human",
+  "model_b": "gpt-3.5-turbo-0301",
+  "system_prompt_a": "Real user conversation (WildChat)",
+  "system_prompt_b": "Model: gpt-3.5-turbo-0301",
+  "opening_prompt_id": "WC",
+  "temperature": null,
+  "max_turns": 18,
+  "timestamp_start": "2023-04-09 17:29:43+00:00",
+  "timestamp_end": null,
+  "turns": [
+    {
+      "turn_number": 1,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "How much RAM is supported by ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO",
+      "token_count": 24,
+      "response_time_ms": 0,
+      "is_opening_prompt": true
+    },
+    {
+      "turn_number": 2,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO supports up to 64GB of DDR4 RAM.",
+      "token_count": 26,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 3,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "What slots does this board have?",
+      "token_count": 6,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 4,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO has the following expansion slots:\n\n- 2 x PCIe 3.0 x16 slots (x16, x8/x8)\n- 1 x PCIe 3.0 x16 slot (x4)\n- 4 x PCIe 3.0 x1 slots\n\nAdditionally, the board has the following storage interface:\n\n- 1 x M.2_1 Socket 3 (Key M, type 2242/2260/2280/22110)\n- 1 x M.2_2 Socket 3 (Key M, type 2242/2260/2280)\n- 6 x SATA 6Gb/s ports\n\nOther connectivity options include:\n\n- Intel i219LM Gigabit Ethernet controller\n- Realtek RTL8117 Management LAN\n- 6 x USB 3.1 Gen 1 ports (4 at the back panel, 2 at mid-board)\n- 2 x USB 2.0 ports (2 at the mid-board)\n- DisplayPort, HDMI, DVI-D and VGA video output options.",
+      "token_count": 132,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 5,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "What features reduce PCIe lanes on this board?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 6,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "On the ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO, the number of PCIe lanes available can be reduced in certain configurations. \n\nThe board has a total of 32 PCIe lanes controlled by the Intel C246 chipset. The main PCIe 3.0 x16 slots is wired to 16 lanes, but if you install a device in the second PCIe 3.0 x16 slot, both slots operate at x8 speeds. The third PCIe 3.0 x16 runs at x4 speed. \n\nAdditionally, if you install an M.2 device in the M.2_1 slot, the third PCIe 3.0 x16 slot shares bandwidth with the M.2_1 slot, and it will operate at x1 speed. \n\nThese features can reduce the PCIe lanes on this board and affect the bandwidth available to other PCIe devices.",
+      "token_count": 135,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 7,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "How many lanes are supported by these devices? 01:00.0 Serial Attached SCSI controller: Broadcom / LSI SAS3008 PCI-Express Fusion-MPT SAS-3 (rev 02)\n02:00.0 Serial Attached SCSI controller: Broadcom / LSI SAS2008 PCI-Express Fusion-MPT SAS-2 [Falcon] (rev 03)",
+      "token_count": 37,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 8,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The Broadcom / LSI SAS3008 PCI-Express Fusion-MPT SAS-3 controller at 01:00.0 supports 8 PCIe lanes. It is a PCIe 3.0 controller and has a x8 host interface.\n\nThe Broadcom / LSI SAS2008 PCI-Express Fusion-MPT SAS-2 [Falcon] controller at 02:00.0 supports 8 PCIe lanes. It is a PCIe 2.0 controller and has a x8 host interface.\n\nPlease note that the number of PCIe lanes available to these devices may depend on the motherboard and how it is configured.",
+      "token_count": 77,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 9,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "So, if I am using both M.2 sockets and I wish to use 16 lanes for a GPU, will I have nough lanes for the two Broadcom controllers?",
+      "token_count": 28,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 10,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "If you use both M.2 sockets on the ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO, the PCIe 3.0 x16 slot and the third PCIe 3.0 x16 slot will share bandwidth with the M.2_1 socket.\n\nIf you install a GPU in the first PCIe 3.0 x16 slot and you want to use both Broadcom controllers simultaneously, the GPU will operate at x8 mode and each of the Broadcom controllers will operate at x4 mode.\n\nTherefore, if you plan to use both M.2 sockets and both Broadcom controllers while also using a GPU, you will have enough lanes for everything, but the GPU will be limited to PCIe 3.0 x8 speed.",
+      "token_count": 120,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 11,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "If I get rid of one of the M.2 sockets, will I get full bandwidth on all of the cards?",
+      "token_count": 20,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 12,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, if you use only one M.2 socket on the ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO, you will get full bandwidth for other PCIe devices.\n\nIn this case, the PCIe 3.0 x16 slot will operate at x16 mode, the second PCIe 3.0 x16 slot will operate at x8 mode, and the third PCIe 3.0 x16 slot will operate at x4 mode. \n\nThe Broadcom controllers will also get full bandwidth with an x8 interface each. Therefore, using only one M.2 socket will provide maximum bandwidth for other PCIe devices, including the GPU and the two Broadcom controllers.",
+      "token_count": 108,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 13,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Do any of the SATA ports consume lanes?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 14,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "On the ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO, the six SATA 6Gb/s ports are not wired to PCIe lanes, but they are connected to the chipset via a dedicated SATA controller. The chipset provides 22 PCIe lanes, and it also provides additional resources such as SATA and USB controllers.\n\nTherefore, using the SATA ports will not consume PCIe lanes, and they will not affect the bandwidth available to other PCIe devices. You can use all six SATA ports while still having the full allocation of PCIe lanes available for other devices.",
+      "token_count": 103,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 15,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "Is there anything I can purchase that would let me attach a second M.2 device to this motherboard without taking the penalty for consuming both M.2 sockets?",
+      "token_count": 27,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 16,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "Yes, you can use a PCIe M.2 adapter or expansion card to attach a second M.2 device to the ASUS LGA1151 ECC DDR4 M.2 C246 Server Workstation ATX Motherboard for 8th Generation Intel Motherboards WS C246 PRO.\n\nThese adapters will occupy a PCIe slot on your motherboard and provide you with additional M.2 sockets. When using a PCIe M.2 adapter, the M.2 sockets on the motherboard will be free to use for other purposes, and you can avoid consuming PCIe lanes that are shared with other devices.\n\nBefore buying a PCIe M.2 adapter, make sure to check its compatibility with your motherboard and M.2 devices, and make sure that it supports the speed and size of your M.2 devices.",
+      "token_count": 119,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 17,
+      "speaker": "model_a",
+      "model": "human",
+      "content": "How many lanes do PCIe M.2. adapters use?",
+      "token_count": 8,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    },
+    {
+      "turn_number": 18,
+      "speaker": "model_b",
+      "model": "gpt-3.5-turbo-0301",
+      "content": "The number of PCIe lanes used by PCIe M.2 adapters will depend on the specific adapter's design and the number of M.2 sockets it provides. PCIe M.2 adapters can use different numbers of PCIe lanes, ranging from x1 to x4, depending on the number of M.2 sockets and their supported speed and size.\n\nIn general, a PCIe M.2 adapter that provides a single M.2 socket will use PCIe x1 lanes, while an adapter that provides two M.2 sockets will use PCIe x4 lanes. You should check the specifications of the adapter you are interested in to determine the number of PCIe lanes it will use.\n\nIt's also important to note that using a PCIe M.2 adapter will occupy a PCIe slot on your motherboard and may affect the allocation of PCIe lanes to other devices. If you are concerned about using PCIe lanes for other devices, you should consider using an adapter that uses fewer PCIe lanes, or make sure that your motherboard has enough PCIe slots to accommodate all your devices.",
+      "token_count": 172,
+      "response_time_ms": 0,
+      "is_opening_prompt": false
+    }
+  ],
+  "metadata": {
+    "detective_guess": null,
+    "detective_correct": null,
+    "reverse_verdict_a": null,
+    "reverse_verdict_b": null,
+    "total_tokens_used": 1158,
+    "total_cost_usd": 0,
+    "source": "allenai/WildChat-1M",
+    "original_model": "gpt-3.5-turbo-0301"
+  }
+}
