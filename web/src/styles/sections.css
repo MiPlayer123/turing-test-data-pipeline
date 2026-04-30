@@ -232,15 +232,21 @@
   cursor: pointer;
   /* opacity is controlled by GSAP inline style */
   transition: opacity 0.2s ease;
-  animation: subtypeDotPulse 2.4s ease-in-out infinite;
+  animation: subtypeDotPulse 1.8s ease-in-out infinite;
 }
 .subtype-grid-dot.is-hovered {
   animation-play-state: paused;
 }
 
 @keyframes subtypeDotPulse {
-  0%, 100% { filter: drop-shadow(0 0 3px var(--dot-color)); }
-  50% { filter: drop-shadow(0 0 8px var(--dot-color)); }
+  0%, 100% {
+    r: 8;
+    filter: drop-shadow(0 0 4px var(--dot-color)) drop-shadow(0 0 8px var(--dot-color));
+  }
+  50% {
+    r: 10;
+    filter: drop-shadow(0 0 10px var(--dot-color)) drop-shadow(0 0 22px var(--dot-color)) drop-shadow(0 0 36px var(--dot-color));
+  }
 }
 
 /* Side-mounted metric cards are a bit narrower & denser than the old wide ones */

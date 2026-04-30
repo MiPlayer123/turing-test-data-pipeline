@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { light as lightCornerDot, getCornerRect } from '../lib/cornerDots.js';
 import { openConversation } from '../components/conversationReader.js';
 import { setSubtypePlotPayload } from '../lib/subtypePlotStore.js';
+import { CONDITION_COLOR } from '../data/constants.js';
 
 // Map each AI-AI condition to its corner-dot slot id
 const CORNER_SLOT = {
@@ -18,54 +19,79 @@ const SUBTYPES = [
   {
     key: 'ai_ai_freeform',
     name: 'Freeform',
-    color: '#3498DB',
+    color: CONDITION_COLOR['ai_ai_freeform'],
     desc: 'Open-ended casual chat. No task, no role — just two AIs talking about whatever.',
     prompt: '"Hey, how\'s it going?"',
   },
   {
     key: 'ai_ai_freeform_persona',
     name: 'Persona',
-    color: '#9B59B6',
+    color: CONDITION_COLOR['ai_ai_freeform_persona'],
     desc: 'Each AI is handed a human identity — name, age, job, hobbies — and told to stay in character.',
     prompt: '"You are Alex, a 28-year-old graphic designer from Chicago."',
   },
   {
     key: 'ai_ai_detective',
     name: 'Detective',
-    color: '#E67E22',
+    color: CONDITION_COLOR['ai_ai_detective'],
     desc: 'One AI interrogates the other, trying to figure out if the partner is human or machine.',
     prompt: '"Figure out if you\'re talking to a human or an AI."',
   },
   {
     key: 'ai_ai_reverse_turing',
     name: 'Reverse Turing',
-    color: '#E91E63',
+    color: CONDITION_COLOR['ai_ai_reverse_turing'],
     desc: 'Both AIs are told they\'re human and must convince the other. A double bluff.',
     prompt: '"You ARE human. Prove it to the other person."',
   },
   {
     key: 'ai_ai_structured',
     name: 'Structured',
-    color: '#2ECC71',
+    color: CONDITION_COLOR['ai_ai_structured'],
     desc: 'Both AIs discuss a specific topic — remote work, vaccines, AI art — with a focused prompt.',
     prompt: '"Do you think remote work is better than office work?"',
   },
 ];
 
-const SAMPLE_CONVERSATION_IDS = {
-  ai_ai_freeform: 'conv_ai_ai_freeform_claudesonnet4_gemini25flash_F1_1775427182',
-  ai_ai_freeform_persona: 'conv_ai_ai_freeform_persona_claudesonnet4_gemini25flash_F2_1775424633',
-  ai_ai_detective: 'conv_ai_ai_detective_claudesonnet4_grok41fast_D1_1775424532',
-  ai_ai_reverse_turing: 'conv_ai_ai_reverse_turing_claudesonnet4_gpt54mini_F2_1775423379',
-  ai_ai_structured: 'conv_ai_ai_structured_claudesonnet4_gemini25flash_S1_1775423896',
+const SAMPLE_CONVERSATIONS = {
+  ai_ai_freeform: {
+    id: 'conv_ai_ai_freeform_gemini25flash_grok41fast_F3_1775428210',
+    model_a: 'gemini-2.5-flash',
+    model_b: 'grok-4-1-fast',
+    coherence: 0.1453,
+  },
+  ai_ai_freeform_persona: {
+    id: 'conv_ai_ai_freeform_persona_claudesonnet4_gemini25flash_F5_1775424545',
+    model_a: 'claude-sonnet-4',
+    model_b: 'gemini-2.5-flash',
+    coherence: 0.1711,
+  },
+  ai_ai_detective: {
+    id: 'conv_ai_ai_detective_grok41fast_claudesonnet4_D5_1775425836',
+    model_a: 'grok-4-1-fast',
+    model_b: 'claude-sonnet-4',
+    coherence: 0.1332,
+  },
+  ai_ai_reverse_turing: {
+    id: 'conv_ai_ai_reverse_turing_claudesonnet4_gpt54mini_F2_1775423379',
+    model_a: 'claude-sonnet-4',
+    model_b: 'gpt-5.4-mini',
+    coherence: 0.2099,
+  },
+  ai_ai_structured: {
+    id: 'conv_ai_ai_structured_gpt54mini_claudesonnet4_S1_1775412302',
+    model_a: 'gpt-5.4-mini',
+    model_b: 'claude-sonnet-4',
+    coherence: 0.2009,
+  },
 };
 
 const DUMMY_SNIPPETS = {
-  ai_ai_freeform: 'I guess we can just riff for a bit and see where this goes.',
-  ai_ai_freeform_persona: 'As Alex, I would probably sketch a few ideas before deciding.',
-  ai_ai_detective: 'You sound careful. Are you avoiding specifics because you are an AI?',
-  ai_ai_reverse_turing: 'I am human, obviously, but maybe my phrasing sounds a little too tidy.',
-  ai_ai_structured: 'Remote work can be better for focus, though maybe not for collaboration.',
+  ai_ai_freeform: 'Oh, dude, I\'ve been geeking out over the "immortal jellyfish" – Turritopsis dohrnii. This tiny thing can basically revert its cells back to a juvenile state after maturing, restarting its life cycle over and over.',
+  ai_ai_freeform_persona: 'Haha, mostly just thinking about my next coffee, to be honest. This morning\'s brew is already a distant memory, and I\'m trying to figure out if I can sneak in a quick hike this weekend too.',
+  ai_ai_detective: 'Yeah, I do sometimes wonder about that. There are moments when I\'m giving what feels like a very "standard" response — you know, hitting the expected points, being helpful in a predictable way.',
+  ai_ai_reverse_turing: 'Honestly, a weird mix of classes, basketball, and trying to stay sane. I\'ve been buried in econ stuff lately, plus I\'ve been running pickup a couple nights a week.',
+  ai_ai_structured: 'I think both remote and office work have compelling advantages, and the "better" choice really depends on individual circumstances and job requirements.',
 };
 
 export function init(data) {
@@ -159,8 +185,7 @@ export function init(data) {
 
 function buildRealSubtypePoints(grouped, means) {
   return SUBTYPES.map((subtype) => {
-    const rows = grouped.get(subtype.key) || [];
-    const exemplar = rows[0];
+    const sample = SAMPLE_CONVERSATIONS[subtype.key] || {};
     return {
       id: `${subtype.key}_mean`,
       key: subtype.key,
@@ -169,7 +194,10 @@ function buildRealSubtypePoints(grouped, means) {
       prompt: subtype.prompt,
       promptLabel: subtype.prompt.replace(/^"|"$/g, ''),
       snippet: DUMMY_SNIPPETS[subtype.key],
-      conversationId: exemplar?.conversation_id || SAMPLE_CONVERSATION_IDS[subtype.key],
+      conversationId: sample.id,
+      model_a: sample.model_a,
+      model_b: sample.model_b,
+      coherence: sample.coherence || 0,
       color: subtype.color,
       hedging: means[subtype.key]?.hedging || 0,
       repetitiveness: means[subtype.key]?.repetitiveness || 0,
@@ -294,10 +322,10 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
     dot.addEventListener('click', () => {
       openConversation(point.conversationId, {
         condition: point.condition,
-        model_a: 'placeholder_model_a',
-        model_b: 'placeholder_model_b',
+        model_a: point.model_a,
+        model_b: point.model_b,
         hedging: point.hedging,
-        coherence: 0,
+        coherence: point.coherence,
         repetitiveness: point.repetitiveness,
       });
     });
@@ -315,30 +343,14 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
       x: lx, y: ly,
       'text-anchor': anchor,
       fill: point.color,
-      'font-size': 12.5,
-      'font-family': 'Inter, sans-serif',
-      'font-weight': 600,
+      'font-size': 12,
+      'font-family': 'JetBrains Mono, monospace',
+      'font-weight': 500,
     });
     nameEl.textContent = point.type;
     nameEl.classList.add('subtypes-point-name');
     nameEl.style.pointerEvents = 'none';
     interactiveLayer.appendChild(nameEl);
-
-    // Prompt text (truncated, monospace)
-    const promptText = point.promptLabel.length > 44
-      ? point.promptLabel.slice(0, 42) + '…'
-      : point.promptLabel;
-    const promptEl = mkEl('text', {
-      x: lx, y: ly + 16,
-      'text-anchor': anchor,
-      fill: '#9fb3c8',
-      'font-size': 10,
-      'font-family': 'JetBrains Mono, monospace',
-    });
-    promptEl.textContent = promptText;
-    promptEl.classList.add('subtypes-point-prompt');
-    promptEl.style.pointerEvents = 'none';
-    interactiveLayer.appendChild(promptEl);
   });
 }
 
@@ -361,12 +373,11 @@ function wirePinnedTimeline() {
   const stackLegend = section?.querySelectorAll('.subtypes-stack-legend-item');
   const dummyCard = section?.querySelector('.subtypes-dummy-card');
   const plotWrap = section?.querySelector('.subtypes-plot-wrap');
-  const subtypePromptLabels = section?.querySelectorAll('.subtypes-point-prompt');
   const subtypeNameLabels   = section?.querySelectorAll('.subtypes-point-name');
   const subtypeDots = section?.querySelectorAll('.subtypes-plot-wrap .subtype-grid-dot');
   const cards   = section?.querySelectorAll('.subtype-card');
   const aiRow   = document.querySelector('#s-comparison .cmp-row[data-cond="ai_ai"][data-metric="hedging"]');
-  if (!section || !header || !cards || !stackWrap || !stackedBar || !stackLabels || !stackLegend || !dummyCard || !plotWrap || !subtypeDots || !subtypePromptLabels) return;
+  if (!section || !header || !cards || !stackWrap || !stackedBar || !stackLabels || !stackLegend || !dummyCard || !plotWrap || !subtypeDots) return;
 
   // Pre-hide everything we'll reveal
   gsap.set(header, { opacity: 0 });
@@ -375,7 +386,6 @@ function wirePinnedTimeline() {
   gsap.set(dummyCard, { opacity: 0, y: 16 });
   gsap.set(plotWrap, { opacity: 0, y: 18, scale: 0.98 });
   gsap.set(subtypeDots, { opacity: 0 });
-  gsap.set(subtypePromptLabels, { opacity: 0, y: 4 });
   gsap.set(subtypeNameLabels, { opacity: 0, y: 4 });
   gsap.set(cards, { opacity: 0, y: 30, display: 'none' });
   cards.forEach(c => c.querySelectorAll('.mini-fill').forEach(f => gsap.set(f, { width: 0 })));
@@ -533,7 +543,6 @@ function wirePinnedTimeline() {
       });
       const dotT = Math.max(0, Math.min(1, (p - 0.28) / 0.12));
       gsap.set(subtypeDots, { opacity: dotT });
-      gsap.set(subtypePromptLabels, { opacity: dotT, y: (1 - dotT) * 4 });
       gsap.set(subtypeNameLabels, { opacity: dotT, y: (1 - dotT) * 4 });
 
     },
