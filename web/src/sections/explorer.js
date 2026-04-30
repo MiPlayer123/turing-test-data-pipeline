@@ -50,19 +50,33 @@ export function init(data) {
   container.innerHTML = '';
 
   const convs = data.trajectories.conversations;
-  const sqrtReps = convs.map(c => Math.sqrt(c.final[0]));
-  const cohs = convs.map(c => c.final[1]);
-  const points = convs.map((c, i) => [sqrtReps[i], cohs[i]]);
+  // Data is pipeline-normalized: rep^0.30 → clip@p99 → mean-center → [-1,1]
+  //                               hedge^0.40 → clip@p99 → mean-center → [-1,1]
+  const reps   = convs.map(c => c.final[0]);
+  const hedges = convs.map(c => c.final[2]);
 
-  const xMin = 0, xMax = d3.max(sqrtReps) * 1.15;
-  const yMin = 0, yMax = d3.max(cohs) * 1.15;
+  // Add a small seeded jitter so conversations with identical zero values
+  // (77 are stacked at exactly the same point) spread into a readable cloud
+  // rather than a single spike. Magnitude ~3% of the data range.
+  const JITTER = 0.032;
+  const seededRand = (i, salt) => {
+    const x = Math.sin(i * 9301 + salt * 49297 + 233) * 10000;
+    return (x - Math.floor(x) - 0.5) * 2; // uniform in [-1, 1]
+  };
+  const repsJ   = reps.map((v, i)   => v + seededRand(i, 0) * JITTER);
+  const hedgesJ = hedges.map((v, i) => v + seededRand(i, 1) * JITTER);
+  const points = convs.map((_, i) => [repsJ[i], hedgesJ[i]]);
+
+  const pad  = 0.22;
+  const xMin = d3.min(repsJ)   - pad, xMax = d3.max(repsJ)   + pad;
+  const yMin = d3.min(hedgesJ) - pad, yMax = d3.max(hedgesJ) + pad;
 
   // KDE grid
   const gridRes = 80;
   const gridX = d3.range(gridRes).map(i => xMin + (xMax - xMin) * i / (gridRes - 1));
   const gridY = d3.range(gridRes).map(i => yMin + (yMax - yMin) * i / (gridRes - 1));
-  const stdX = d3.deviation(sqrtReps) || 0.01;
-  const stdY = d3.deviation(cohs) || 0.01;
+  const stdX = d3.deviation(repsJ)   || 0.01;
+  const stdY = d3.deviation(hedgesJ) || 0.01;
   const bw = 0.9 * Math.min(stdX, stdY) * Math.pow(points.length, -0.2);
   const density = gaussianKDE(points, gridX, gridY, bw);
   const maxDensity = d3.max(density);
@@ -181,15 +195,15 @@ export function init(data) {
 
   for (let i = 0; i <= 4; i++) {
     const frac = i / 4;
-    const sqrtVal = xMin + (xMax - xMin) * frac;
-    scene.add(makeLabel((sqrtVal * sqrtVal).toFixed(3), new THREE.Vector3(frac, -0.04, 1.06)));
+    const xVal = xMin + (xMax - xMin) * frac;
+    scene.add(makeLabel(xVal.toFixed(2), new THREE.Vector3(frac, -0.04, 1.06)));
   }
-  scene.add(makeLabel('Repetitiveness (sqrt)', new THREE.Vector3(0.5, -0.07, 1.14), 0.038));
+  scene.add(makeLabel('Repetitiveness', new THREE.Vector3(0.5, -0.07, 1.14), 0.038));
   for (let i = 0; i <= 4; i++) {
     const frac = i / 4;
     scene.add(makeLabel((yMin + (yMax - yMin) * frac).toFixed(2), new THREE.Vector3(-0.07, -0.04, frac)));
   }
-  scene.add(makeLabel('Coherence', new THREE.Vector3(-0.1, -0.07, 0.5), 0.038));
+  scene.add(makeLabel('Hedging', new THREE.Vector3(-0.1, -0.07, 0.5), 0.038));
   scene.add(makeLabel('Density', new THREE.Vector3(-0.07, heightScale * 0.5, -0.04), 0.038));
 
   // Scatter dots
@@ -198,8 +212,8 @@ export function init(data) {
   const dotConditions = [];
 
   convs.forEach((c, i) => {
-    const nx = (sqrtReps[i] - xMin) / (xMax - xMin);
-    const nz = (cohs[i] - yMin) / (yMax - yMin);
+    const nx = (repsJ[i]   - xMin) / (xMax - xMin);
+    const nz = (hedgesJ[i] - yMin) / (yMax - yMin);
     const gx = Math.min(gridRes - 1, Math.max(0, Math.round(nx * (gridRes - 1))));
     const gz = Math.min(gridRes - 1, Math.max(0, Math.round(nz * (gridRes - 1))));
     const h = (density[gx * gridRes + gz] / maxDensity) * heightScale + 0.005;
