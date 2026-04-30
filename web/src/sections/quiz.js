@@ -116,14 +116,27 @@ export async function init() {
   }
 
   // Scroll-lock helpers: hold the page in place until the viewer picks an answer.
+  // Two layers of defence:
+  //   1. wheel preventDefault — blocks new gesture events immediately.
+  //   2. scroll clamp — snaps back any scroll that slips through mid-flight on
+  //      macOS trackpads, where the browser ignores preventDefault() for a
+  //      gesture that was already in progress when the listener was added.
   const preventScroll = (e) => e.preventDefault();
   let scrollLocked = false;
+  let lockedScrollY = 0;
+  const clampScroll = () => {
+    if (window.scrollY !== lockedScrollY) {
+      window.scrollTo({ top: lockedScrollY, behavior: 'instant' });
+    }
+  };
   function lockScroll() {
     if (scrollLocked) return;
     scrollLocked = true;
+    lockedScrollY = window.scrollY;
     window.addEventListener('wheel', preventScroll, { passive: false });
     window.addEventListener('touchmove', preventScroll, { passive: false });
     window.addEventListener('keydown', blockScrollKeys, { passive: false });
+    window.addEventListener('scroll', clampScroll, { passive: true });
   }
   function unlockScroll() {
     if (!scrollLocked) return;
@@ -131,6 +144,7 @@ export async function init() {
     window.removeEventListener('wheel', preventScroll);
     window.removeEventListener('touchmove', preventScroll);
     window.removeEventListener('keydown', blockScrollKeys);
+    window.removeEventListener('scroll', clampScroll);
   }
   function blockScrollKeys(e) {
     const keys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Space', ' '];
