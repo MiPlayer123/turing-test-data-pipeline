@@ -156,11 +156,11 @@ export async function init() {
       const summary = correct
         ? 'You chose <strong>AI</strong>. This thread is model-generated — that matches the dataset label.'
         : 'You chose <strong>Human</strong>. The label for this thread is <strong>AI</strong> — it is model-generated.';
-      resultEl.innerHTML = `
-        <p class="quiz-result-badge" aria-hidden="true">Answer</p>
-        <p class="quiz-result-truth">AI</p>
-        <p class="quiz-result-verdict">${correct ? 'Nice — you got it.' : 'Not quite this time.'}</p>
-        <p class="quiz-result-summary">${summary}</p>
+        // <p class="quiz-result-badge" aria-hidden="true">Answer</p>
+        // <p class="quiz-result-truth">AI</p>
+        // <p class="quiz-result-verdict">${correct ? 'Nice — you got it.' : 'Not quite this time.'}</p>
+        // <p class="quiz-result-summary">${summary}</p>
+        resultEl.innerHTML = `
         <div class="others-bar">
           <p class="others-bar-label">How others answered</p>
           <div class="others-row">
