@@ -133,7 +133,36 @@ function tlHideSnippet() {
   el.remove();
 }
 
-function bindPointHover(selection, cond) {
+function bindPointHover(selection, cond, circles, dropLines) {
+  const enlargeMatching = (d) => {
+    circles?.filter((c) => c.turn === d.turn)
+      .interrupt()
+      .transition().duration(140).ease(EASE_OUT)
+      .attr('r', 6.5)
+      .attr('stroke', cond.color)
+      .attr('stroke-width', 2)
+      .attr('fill', '#0D1117');
+    dropLines?.filter((c) => c.turn === d.turn)
+      .interrupt()
+      .transition().duration(140).ease(EASE_OUT)
+      .attr('stroke-opacity', 0.55)
+      .attr('stroke-width', 1.25);
+  };
+  const restoreMatching = (d) => {
+    circles?.filter((c) => c.turn === d.turn)
+      .interrupt()
+      .transition().duration(180).ease(EASE_IN_OUT)
+      .attr('r', 2.6)
+      .attr('stroke', '#0D1117')
+      .attr('stroke-width', 1.5)
+      .attr('fill', cond.color);
+    dropLines?.filter((c) => c.turn === d.turn)
+      .interrupt()
+      .transition().duration(180).ease(EASE_IN_OUT)
+      .attr('stroke-opacity', 0.18)
+      .attr('stroke-width', 1);
+  };
+
   selection
     .style('cursor', 'pointer')
     .on('pointerenter', (event, d) => {
@@ -142,13 +171,15 @@ function bindPointHover(selection, cond) {
         hoverHideTimer = null;
       }
       if (currentStep === 0 && cond.key !== 'human_human') return;
+      enlargeMatching(d);
       tlShowSnippet(cond.key, d.turn, event);
     })
     .on('pointermove', (e) => {
       if (currentStep === 0 && cond.key !== 'human_human') return;
       tlMoveSnippet(e);
     })
-    .on('pointerleave', (event) => {
+    .on('pointerleave', (event, d) => {
+      restoreMatching(d);
       const next = event.relatedTarget;
       if (next instanceof Element && next.closest('circle.hit-target')) return;
       hoverHideTimer = window.setTimeout(() => {
@@ -395,6 +426,21 @@ export function init(data) {
   conditionData.forEach(cond => {
     if (cond.points.length < 2) return;
     const g = svg.append('g').attr('opacity', 0).attr('data-key', cond.key);
+
+    // Faint dotted drop lines from each dot down to the x-axis — visual hint that points are interactive.
+    // Appended first so they sit beneath the path/dots.
+    const dropLines = g.selectAll('line.drop').data(cond.points).join('line')
+      .attr('class', 'drop')
+      .attr('x1', d => x(d.turn))
+      .attr('x2', d => x(d.turn))
+      .attr('y1', d => yScale(d.mean))
+      .attr('y2', height)
+      .attr('stroke', cond.color)
+      .attr('stroke-opacity', 0.18)
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', '2,3')
+      .style('pointer-events', 'none');
+
     const path = g.append('path').datum(cond.points).attr('fill', 'none')
       .attr('stroke', cond.color)
       .attr('stroke-width', cond.key === 'ai_ai_reverse_turing' ? 3 : 1.5)
@@ -414,10 +460,10 @@ export function init(data) {
       .attr('class', 'hit-target')
       .attr('cx', d => x(d.turn))
       .attr('cy', d => yScale(d.mean))
-      .attr('r', 10)
+      .attr('r', 12)
       .attr('fill', 'transparent')
       .style('pointer-events', 'all');
-    bindPointHover(hitTargets, cond);
+    bindPointHover(hitTargets, cond, circles, dropLines);
 
     const last = cond.points[cond.points.length - 1];
     const label = g.append('text').attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)
@@ -425,7 +471,7 @@ export function init(data) {
       .attr('font-family', 'Inter, sans-serif')
       .text(cond.label);
 
-    groups[cond.key] = { g, path, circles, hitTargets, label, cond, drawn: false };
+    groups[cond.key] = { g, path, circles, hitTargets, dropLines, label, cond, drawn: false };
   });
 
   act3Trend = createAct3TrendOverlay();
@@ -473,6 +519,7 @@ function clearLineTransitions() {
     entry.path.interrupt();
     entry.circles.interrupt();
     entry.hitTargets?.interrupt();
+    entry.dropLines?.interrupt();
     entry.label.interrupt();
   });
   if (act3Trend) {
@@ -490,12 +537,16 @@ function clearLineTransitions() {
 }
 
 function resetLineStyle(entry) {
-  const { g, path, circles, label, cond } = entry;
+  const { g, path, circles, dropLines, label, cond } = entry;
   g.style('filter', null);
   path
     .attr('stroke', cond.color)
     .attr('stroke-width', cond.key === 'ai_ai_reverse_turing' ? 3 : 1.5);
-  circles.attr('fill', cond.color);
+  circles
+    .attr('fill', cond.color)
+    .attr('stroke', '#0D1117')
+    .attr('stroke-width', 1.5);
+  dropLines?.attr('stroke', cond.color).attr('stroke-width', 1).attr('stroke-opacity', 0.18);
   label.attr('fill', cond.color);
 }
 
@@ -519,7 +570,7 @@ function setYAxisForMetric(mode = 'hedging', duration = 450) {
 function drawLine(key, { duration = 800 } = {}) {
   const entry = groups[key];
   if (!entry) return;
-  const { g, path, circles, hitTargets, cond } = entry;
+  const { g, path, circles, hitTargets, dropLines, cond } = entry;
   resetLineStyle(entry);
   g.attr('opacity', 1);
   path.attr('stroke-width', cond.key === 'ai_ai_reverse_turing' ? 3 : 1.5);
@@ -532,13 +583,19 @@ function drawLine(key, { duration = 800 } = {}) {
     .transition().duration(260).delay(duration * 0.75)
     .attr('r', 2.6);
   hitTargets?.attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean));
+  dropLines
+    ?.attr('x1', d => x(d.turn)).attr('x2', d => x(d.turn))
+    .attr('y1', d => yScale(d.mean)).attr('y2', height)
+    .attr('stroke-opacity', 0)
+    .transition().duration(360).delay(duration * 0.75)
+    .attr('stroke-opacity', 0.18);
   entry.drawn = true;
 }
 
 function materializeLine(key, { duration = 500, opacity = 1, strokeWidth = null } = {}) {
   const entry = groups[key];
   if (!entry) return;
-  const { g, path, circles, hitTargets, cond } = entry;
+  const { g, path, circles, hitTargets, dropLines, cond } = entry;
   resetLineStyle(entry);
   const sw = strokeWidth ?? (cond.key === 'ai_ai_reverse_turing' ? 3 : 1.5);
   path.attr('d', lineGen(cond.points))
@@ -548,6 +605,10 @@ function materializeLine(key, { duration = 500, opacity = 1, strokeWidth = null 
     .attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean)).attr('r', 2.6);
   hitTargets?.transition().duration(duration).ease(EASE_IN_OUT)
     .attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean));
+  dropLines?.transition().duration(duration).ease(EASE_IN_OUT)
+    .attr('x1', d => x(d.turn)).attr('x2', d => x(d.turn))
+    .attr('y1', d => yScale(d.mean)).attr('y2', height)
+    .attr('stroke-opacity', 0.18);
   g.transition().duration(duration).ease(EASE_IN_OUT).attr('opacity', opacity);
   entry.drawn = true;
 }
@@ -555,7 +616,7 @@ function materializeLine(key, { duration = 500, opacity = 1, strokeWidth = null 
 function fanOutFromOrigin(key, order) {
   const entry = groups[key];
   if (!entry) return;
-  const { g, path, circles, hitTargets, cond } = entry;
+  const { g, path, circles, hitTargets, dropLines, cond } = entry;
   resetLineStyle(entry);
 
   const sharedOriginMean = d3.mean(
@@ -600,6 +661,18 @@ function fanOutFromOrigin(key, order) {
     .attr('cx', d => x(d.turn))
     .attr('cy', d => yScale(d.mean));
 
+  dropLines
+    ?.attr('x1', x(2)).attr('x2', x(2))
+    .attr('y1', yScale(sharedOriginMean)).attr('y2', height)
+    .attr('stroke-opacity', 0)
+    .transition()
+    .delay(order * 100 + 220)
+    .duration(600)
+    .ease(EASE_OUT)
+    .attr('x1', d => x(d.turn)).attr('x2', d => x(d.turn))
+    .attr('y1', d => yScale(d.mean)).attr('y2', height)
+    .attr('stroke-opacity', 0.18);
+
   g.attr('opacity', 0)
     .transition()
     .delay(order * 100)
@@ -612,7 +685,7 @@ function fanOutFromCombined(key, order) {
   const entry = groups[key];
   const combined = groups.ai_ai_combined;
   if (!entry || !combined) return;
-  const { g, path, circles, hitTargets, cond } = entry;
+  const { g, path, circles, hitTargets, dropLines, cond } = entry;
   resetLineStyle(entry);
 
   const comboPts = combined.cond.points;
@@ -653,6 +726,18 @@ function fanOutFromCombined(key, order) {
     .ease(EASE_OUT)
     .attr('cx', d => x(d.turn))
     .attr('cy', d => yScale(d.mean));
+
+  dropLines
+    ?.attr('x1', d => x(d.turn)).attr('x2', d => x(d.turn))
+    .attr('y1', d => yScale(comboByTurn.get(d.turn) ?? comboPts[0].mean)).attr('y2', height)
+    .attr('stroke-opacity', 0)
+    .transition()
+    .delay(order * 100 + 220)
+    .duration(600)
+    .ease(EASE_OUT)
+    .attr('x1', d => x(d.turn)).attr('x2', d => x(d.turn))
+    .attr('y1', d => yScale(d.mean)).attr('y2', height)
+    .attr('stroke-opacity', 0.18);
 
   g.attr('opacity', 0)
     .transition()
