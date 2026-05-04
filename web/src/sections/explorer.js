@@ -28,20 +28,29 @@ function gaussianKDE(points, gridX, gridY, bandwidth) {
   return grid;
 }
 
+// Topographic paper ramp: low density reads as warm grey contour, peaks
+// pull strongly toward the accent rust. Skewed so the mid + high band has
+// most of the visual weight — keeps the mesh legible against paper instead
+// of fading into it.
 function heightColor(t) {
-  if (t < 0.25) {
-    const s = t / 0.25;
-    return new THREE.Color(0.07 + s * 0.0, 0.1 + s * 0.3, 0.4 + s * 0.3);
-  } else if (t < 0.5) {
-    const s = (t - 0.25) / 0.25;
-    return new THREE.Color(0.07 + s * 0.05, 0.4 + s * 0.35, 0.7 - s * 0.05);
-  } else if (t < 0.75) {
-    const s = (t - 0.5) / 0.25;
-    return new THREE.Color(0.12 + s * 0.5, 0.75 + s * 0.15, 0.65 - s * 0.35);
-  } else {
-    const s = (t - 0.75) / 0.25;
-    return new THREE.Color(0.62 + s * 0.38, 0.9 + s * 0.1, 0.3 - s * 0.15);
-  }
+  // Stops [ink-3 → ink-2 → ochre → sienna → accent rust]
+  const stops = [
+    [0.431, 0.396, 0.341], // #6E6557 — ink-3
+    [0.227, 0.200, 0.165], // #3A332A — ink-2 (deep warm)
+    [0.769, 0.604, 0.106], // #C49A1B — ochre
+    [0.761, 0.416, 0.173], // #C26A2C — sienna
+    [0.784, 0.294, 0.086], // #C84B16 — accent rust
+  ];
+  const k = Math.max(0, Math.min(0.999, t)) * (stops.length - 1);
+  const i = Math.floor(k);
+  const f = k - i;
+  const a = stops[i];
+  const b = stops[Math.min(i + 1, stops.length - 1)];
+  return new THREE.Color(
+    a[0] + (b[0] - a[0]) * f,
+    a[1] + (b[1] - a[1]) * f,
+    a[2] + (b[2] - a[2]) * f,
+  );
 }
 
 export function init(data) {
@@ -85,7 +94,7 @@ export function init(data) {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(W, H);
-  renderer.setClearColor(0x0D1117);
+  renderer.setClearColor(0xF2EDE2);
   container.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -133,7 +142,7 @@ export function init(data) {
   geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   geo.setIndex(lineIndices);
-  scene.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.7 })));
+  scene.add(new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.95 })));
 
   // Floor contour lines
   const contourPixels = 256;
@@ -154,7 +163,7 @@ export function init(data) {
         if (pts.length < 2) return;
         scene.add(new THREE.Line(
           new THREE.BufferGeometry().setFromPoints(pts),
-          new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.5 })
+          new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.7 })
         ));
       });
     });
@@ -179,8 +188,8 @@ export function init(data) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 256; canvas.height = 64;
-    ctx.fillStyle = '#8B949E';
-    ctx.font = `${Math.round(fontSize * 500)}px Inter, sans-serif`;
+    ctx.fillStyle = '#6E6557';
+    ctx.font = `${Math.round(fontSize * 500)}px Inter Tight, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(text, 128, 32);
@@ -298,10 +307,10 @@ export function init(data) {
       void main() {
         vColor = color;
         vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        // Match Three.js PointsMaterial sizeAttenuation formula, then scale ~6x
-        // to produce a visible halo ring outside the regular dot.
-        float screenPx = projectionMatrix[1][1] * 300.0 * 0.09 / (-mv.z);
-        gl_PointSize = clamp(screenPx, 8.0, 56.0);
+        // Tighter halo than before — about 4x dot size, capped so it never
+        // takes over the screen at close zoom.
+        float screenPx = projectionMatrix[1][1] * 300.0 * 0.075 / (-mv.z);
+        gl_PointSize = clamp(screenPx, 8.0, 44.0);
         gl_Position = projectionMatrix * mv;
       }
     `,
@@ -311,8 +320,9 @@ export function init(data) {
       void main() {
         float d = length(gl_PointCoord - vec2(0.5));
         if (d > 0.5) discard;
-        // Soft Gaussian bloom — peaks at center, fades gently outward.
-        float bloom = exp(-d * d * 8.0) * 0.85;
+        // Subtle natural glow — sharper falloff (less smear) and capped
+        // peak alpha so it reads as a soft halo, not a bloom.
+        float bloom = exp(-d * d * 10.0) * 0.55;
         gl_FragColor = vec4(vColor, bloom * uOpacity);
       }
     `,

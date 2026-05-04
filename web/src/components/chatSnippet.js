@@ -110,7 +110,7 @@ function ensurePanel() {
     panel.innerHTML = `
       <div class="panel-header">
         <div>
-          <h3 id="panel-title" style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;">Conversation</h3>
+          <h3 id="panel-title" style="font-family:var(--font-serif); font-size:20px; font-weight:500;">Conversation</h3>
           <p class="text-muted" id="panel-subtitle" style="font-size:12px; margin-top:4px;"></p>
         </div>
         <button class="panel-close" id="panel-close">&times;</button>
@@ -207,11 +207,11 @@ export async function openTranscriptPanel(conversation) {
   }
 
   if (!id) {
-    chatEl.innerHTML = `<p style="text-align:center; color:#E74C3C; padding:40px;">No conversation id.</p>`;
+    chatEl.innerHTML = `<p style="text-align:center; color:#B43A2A; padding:40px;">No conversation id.</p>`;
     return;
   }
 
-  chatEl.innerHTML = `<p style="text-align:center; color:#8B949E; padding:40px;">Loading…</p>`;
+  chatEl.innerHTML = `<p style="text-align:center; color:#6E6557; padding:40px;">Loading…</p>`;
   try {
     const conv = await loadConversation(id);
     // Prefer metrics from the summary row if present, otherwise whatever the raw file has.
@@ -223,7 +223,7 @@ export async function openTranscriptPanel(conversation) {
     renderAllTurns(chatEl, { ...conv, model_a: conv.model_a || conversation?.model_a, model_b: conv.model_b || conversation?.model_b });
   } catch (err) {
     console.warn('openTranscriptPanel: failed to load', id, err);
-    chatEl.innerHTML = `<p style="text-align:center; color:#E74C3C; padding:40px;">Failed to load transcript.</p>`;
+    chatEl.innerHTML = `<p style="text-align:center; color:#B43A2A; padding:40px;">Failed to load transcript.</p>`;
   }
 }
 

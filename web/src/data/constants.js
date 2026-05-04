@@ -1,24 +1,29 @@
+// Forensic Editorial palette — tuned against #F2EDE2 paper.
+// Human-Human reads as the calm baseline (blue), Human-AI as the mixed
+// intermediary (yellow), and the five AI-AI subtypes share the AI red family.
 export const CONDITIONS = [
-  { key: "human_human",            label: "Human-Human",     color: "#1ABC9C" },
-  { key: "human_ai",               label: "Human-AI",        color: "#A855F7" },
-  { key: "ai_ai_detective",        label: "AI Detective",    color: "#FF7438" },
-  { key: "ai_ai_freeform",         label: "AI Freeform",     color: "#FF4D6D" },
-  { key: "ai_ai_freeform_persona", label: "AI Persona",      color: "#C9184A" },
-  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing",  color: "#FF006E" },
-  { key: "ai_ai_structured",       label: "AI Structured",   color: "#FFAA00" },
+  { key: "human_human",            label: "Human-Human",       color: "#2F5D8A" },
+  { key: "human_ai",               label: "Human-AI",          color: "#C49A1B" },
+  { key: "ai_ai_detective",        label: "AI Detective",      color: "#C26A2C" },
+  { key: "ai_ai_freeform",         label: "AI Freeform",       color: "#B43A2A" },
+  { key: "ai_ai_freeform_persona", label: "AI Persona",        color: "#8C2A3D" },
+  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing", color: "#A23560" },
+  { key: "ai_ai_structured",       label: "AI Structured",     color: "#B5851C" },
 ];
 
 export const CONDITION_COLOR = Object.fromEntries(CONDITIONS.map(c => [c.key, c.color]));
 export const CONDITION_LABEL = Object.fromEntries(CONDITIONS.map(c => [c.key, c.label]));
 
+// Model colors — kept distinct on paper ground. Paired roughly to vendor identity
+// but desaturated so they cohere with the data palette above.
 export const MODEL_COLORS = {
-  "gpt-5.4":         "#10A37F",
-  "gpt-5.4-mini":    "#74AA9C",
-  "gemini-2.5-flash": "#4285F4",
-  "grok-4-1-fast":   "#1DA1F2",
-  "claude-sonnet-4": "#D97706",
-  "llama-4-scout":   "#A855F7",
-  "human":           "#1ABC9C",
+  "gpt-5.4":         "#3F6B5E",
+  "gpt-5.4-mini":    "#6E8E83",
+  "gemini-2.5-flash": "#3A5E86",
+  "grok-4-1-fast":   "#4A7299",
+  "claude-sonnet-4": "#C84B16",
+  "llama-4-scout":   "#7A4A6B",
+  "human":           "#2F5D8A",
 };
 
 export const MODEL_LABELS = {

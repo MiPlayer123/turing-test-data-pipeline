@@ -48,23 +48,7 @@ export function init(data) {
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom);
 
-  // Glow filter for the human baseline bar — visually marks it as "you" amid the AI rows.
-  const humanGlowColor = CONDITION_COLOR.human_human;
-  const defs = svgRoot.append('defs');
-  const filter = defs.append('filter')
-    .attr('id', 'humanBarGlow')
-    .attr('x', '-30%').attr('y', '-60%')
-    .attr('width', '160%').attr('height', '220%');
-  filter.append('feGaussianBlur')
-    .attr('in', 'SourceGraphic').attr('stdDeviation', 6).attr('result', 'blur');
-  filter.append('feFlood')
-    .attr('flood-color', humanGlowColor).attr('flood-opacity', 0.8).attr('result', 'color');
-  filter.append('feComposite')
-    .attr('in', 'color').attr('in2', 'blur').attr('operator', 'in').attr('result', 'glow');
-  const merge = filter.append('feMerge');
-  merge.append('feMergeNode').attr('in', 'glow');
-  merge.append('feMergeNode').attr('in', 'SourceGraphic');
-
+  // Human baseline reads as "you" via bold weight on its label, not a glow.
   svg = svgRoot.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
   y = d3.scaleBand().domain(stats.map(d => d.model)).range([0, height]).padding(0.3);
@@ -73,21 +57,24 @@ export function init(data) {
   svg.selectAll('.y-label').data(stats).join('text')
     .attr('x', -10).attr('y', d => y(d.model) + y.bandwidth() / 2)
     .attr('dy', '0.35em').attr('text-anchor', 'end')
-    .attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'Inter, sans-serif')
+    .attr('fill', d => d.model === 'human' ? '#14110C' : '#6E6557')
+    .attr('font-size', '13px')
+    .attr('font-family', 'Inter Tight, sans-serif')
+    .attr('font-weight', d => d.model === 'human' ? 700 : 400)
     .text(d => d.model === 'human' ? `${d.label} (you & co.)` : `${d.label} (n=${d.n})`);
 
   svg.append('g').attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(5).tickFormat(d => d + '%').tickSize(-height))
     .call(g => g.select('.domain').remove())
-    .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick line').attr('stroke', '#D9D0BD'))
+    .call(g => g.selectAll('.tick text').attr('fill', '#6E6557').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace'));
 
   // 50% marker — shown later via onStep
   svg.append('text').attr('class', 'fifty-label').attr('x', x(50)).attr('y', height + 28).attr('text-anchor', 'middle')
-    .attr('fill', '#484F58').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace')
+    .attr('fill', '#9A8F7C').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace')
     .text('50%').attr('opacity', 0);
   svg.append('rect').attr('class', 'fifty-shade').attr('x', 0).attr('y', 0).attr('width', x(50)).attr('height', height)
-    .attr('fill', '#E74C3C').attr('opacity', 0);
+    .attr('fill', '#B43A2A').attr('opacity', 0);
 
   // Bars: AI bars start hidden (width 0, faded), human bar starts already drawn so the
   // viewer enters the section seeing the baseline they just answered against in the quiz.
@@ -96,12 +83,11 @@ export function init(data) {
     .attr('x', 0)
     .attr('width', d => d.model === 'human' ? x(d.accuracy) : 0)
     .attr('fill', d => d.color).attr('rx', 4)
-    .attr('opacity', d => d.model === 'human' ? 1 : 0.15)
-    .attr('filter', d => d.model === 'human' ? 'url(#humanBarGlow)' : null);
+    .attr('opacity', d => d.model === 'human' ? 1 : 0.15);
 
   svg.selectAll('.val-label').data(stats).join('text').attr('class', 'val-label')
     .attr('y', d => y(d.model) + y.bandwidth() / 2).attr('dy', '0.35em')
-    .attr('fill', '#f0f3f6').attr('font-size', '14px').attr('font-weight', '700')
+    .attr('fill', '#14110C').attr('font-size', '14px').attr('font-weight', '700')
     .attr('font-family', 'JetBrains Mono, monospace')
     .attr('x', d => d.model === 'human' ? x(d.accuracy) + 8 : 8)
     .attr('opacity', d => d.model === 'human' ? 1 : 0)
@@ -261,9 +247,7 @@ function playCollapseIntoDot() {
   tl.to(flyDot, { scale: 2.05, duration: 0.14, ease: 'power3.out' }, impactT);
   tl.to(flyDot, { scale: 1, duration: 0.52, ease: 'elastic.out(1.15, 0.48)' }, impactT + 0.14);
   tl.to(flyDot, { y: -16, duration: 0.2, ease: 'power2.out' }, impactT + 0.56);
-  tl.to(flyDot, { y: 0, duration: 0.55, ease: 'bounce.out(1.35)' }, impactT + 0.76);
-  tl.to(flyDot, { y: -6, duration: 0.14, ease: 'power2.out' }, impactT + 1.33);
-  tl.to(flyDot, { y: 0, scale: 1, duration: 0.32, ease: 'power2.inOut' }, impactT + 1.47);
+  tl.to(flyDot, { y: 0, scale: 1, duration: 0.55, ease: 'bounce.out(1.35)' }, impactT + 0.76);
 }
 
 function revealModels(keys) {

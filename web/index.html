@@ -7,7 +7,7 @@
   <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1117'/><circle cx='16' cy='16' r='7' fill='none' stroke='%2358A6FF' stroke-width='2'/><circle cx='16' cy='16' r='2.5' fill='%2358A6FF'/></svg>"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- S0: TITLE SLIDE -->
@@ -75,7 +75,7 @@
           <!-- Phase 2 headline (conversation types) -->
           <div class="grid-headbar grid-headbar-2" id="grid-headbar-2">
             <h2 class="grid-headline">Three kinds of conversation.</h2>
-            <p class="grid-headline-sub">We looked at what happens when the mix of human and AI changes — and whether you can tell the difference.</p>
+            <p class="grid-headline-sub">We looked at what happens when the mix of human and AI changes and whether you can tell the difference.</p>
           </div>
           <div class="grid-headbar" id="grid-headbar-1">
             <h2 class="grid-headline">Two numbers that reveal who's talking.</h2>
@@ -103,6 +103,7 @@
                      viewBox="0 0 640 520"
                      preserveAspectRatio="xMidYMid meet"
                      aria-hidden="true"></svg>
+                <p class="grid-explore-hint" id="grid-explore-hint">↳ Hover or click any dot to read the conversation.</p>
               </div>
               </div>
               <div class="grid-bottom">
@@ -130,21 +131,21 @@
           <!-- Phase 2: conversation-type legend chips (start hidden) -->
           <div class="convo-legend" id="convo-legend">
             <div class="convo-chip" data-type="ai-ai">
-              <span class="convo-dot" style="background:#E74C3C;box-shadow:0 0 12px rgba(231,76,60,.6)"></span>
+              <span class="convo-dot" style="background:var(--red)"></span>
               <div>
                 <h4>AI &harr; AI</h4>
                 <p>Models left alone together. Hedging spikes, repetition climbs.</p>
               </div>
             </div>
             <div class="convo-chip" data-type="ai-human">
-              <span class="convo-dot" style="background:#F1C40F;box-shadow:0 0 12px rgba(241,196,15,.6)"></span>
+              <span class="convo-dot" style="background:var(--yellow)"></span>
               <div>
                 <h4>AI &harr; Human</h4>
                 <p>Mixed dialogue. AIs temper themselves when a human is on the other end.</p>
               </div>
             </div>
             <div class="convo-chip" data-type="human-human">
-              <span class="convo-dot" style="background:#58A6FF;box-shadow:0 0 12px rgba(88,166,255,.6)"></span>
+              <span class="convo-dot" style="background:var(--blue)"></span>
               <div>
                 <h4>Human &harr; Human</h4>
                 <p>The baseline. Low on both — this is what "natural" sounds like.</p>
@@ -179,6 +180,7 @@
             <!-- Right column: big scatter plot -->
             <div class="subtypes-right-col">
               <div class="subtypes-plot-wrap" id="subtypes-plot-wrap">
+                <p class="subtypes-plot-hint">↳ Hover or click any dot to read the conversation.</p>
                 <svg id="subtypes-plot" class="subtypes-plot" viewBox="0 0 720 560" preserveAspectRatio="xMidYMid meet"></svg>
                 <div class="grid-interactive-tooltip subtypes-plot-tooltip" id="subtypes-plot-tooltip"></div>
               </div>
@@ -198,6 +200,7 @@
           <h2 class="timeline-title">Reverse Turing.</h2>
           <p class="timeline-sub">Hedging over 20 turns. The longer it goes, the harder they try.</p>
           <div id="timeline-chart"></div>
+          <p class="timeline-hint">↳ Hover or click any dot to read the conversation.</p>
         </div>
       </div>
       <div class="scrolly-steps">
@@ -231,7 +234,7 @@
 
     <!-- S8: 3D SCATTER -->
     <section id="s-explorer" class="act">
-      <div class="full-screen center-content" style="flex-direction:column; padding:40px;">
+      <div class="full-screen center-content" style="flex-direction:column; padding:24px 40px 4px;">
         <div class="explorer-header">
           <h2 class="explorer-title">Every conversation.</h2>
           <p class="explorer-sub">486 conversations mapped by Repetitiveness × Hedging. Rotate, zoom, filter by condition.</p>
@@ -244,8 +247,8 @@
             <span class="pipeline-note">162 × 3 categories, balanced</span>
           </div> -->
         </div>
-        <div id="explorer-viz" style="width:100%; flex:1; min-height:500px; position:relative;"></div>
-        <div class="filter-chips" id="explorer-filters" style="max-width:900px; margin:12px auto 0;"></div>
+        <div id="explorer-viz" style="width:88%; max-width:1180px; height:75vh; max-height:680px; min-height:420px; position:relative; margin:0 auto;"></div>
+        <div class="filter-chips" id="explorer-filters" style="max-width:900px; margin:-12px auto 0;"></div>
       </div>
     </section>
 
@@ -255,8 +258,8 @@
   <div class="side-panel" id="conversation-panel">
     <div class="panel-header">
       <div>
-        <h3 id="panel-title" style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;">Conversation</h3>
-        <p class="text-muted" id="panel-subtitle" style="font-size:12px; margin-top:4px;"></p>
+        <h3 id="panel-title" style="font-family:var(--font-serif); font-size:20px; font-weight:500; line-height:1.15;">Conversation</h3>
+        <p class="text-muted" id="panel-subtitle" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; margin-top:4px;"></p>
       </div>
       <button class="panel-close" id="panel-close">&times;</button>
     </div>

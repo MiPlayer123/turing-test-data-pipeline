@@ -1,7 +1,59 @@
+/* =========================================================
+   Forensic Editorial — design tokens
+   Implements the Style Guide system across the site.
+   ========================================================= */
 :root {
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* Paper & ink */
+  --paper:        #F2EDE2;
+  --paper-2:      #ECE6D7;
+  --paper-rule:   #D9D0BD;
+  --ink:          #14110C;
+  --ink-2:        #3A332A;
+  --ink-3:        #6E6557;
+  --ink-4:        #9A8F7C;
+
+  /* Semantic data colors — tuned for the printed-paper palette */
+  --red:          #B43A2A;   /* AI ↔ AI */
+  --red-soft:     #E2C5BC;
+  --yellow:       #C49A1B;   /* AI ↔ Human */
+  --yellow-soft:  #E8D9A2;
+  --blue:         #2F5D8A;   /* Human ↔ Human */
+  --blue-soft:    #BFCDDB;
+
+  /* AI-AI subtypes — tuned variants */
+  --sub-freeform:    #B43A2A;
+  --sub-persona:     #8C2A3D;
+  --sub-detective:   #C26A2C;
+  --sub-reverse:     #A23560;
+  --sub-structured:  #B5851C;
+
+  /* Single warm accent — pull-quotes, marker, the thesis */
+  --accent:       #C84B16;
+
+  /* Fonts */
+  --font-serif: 'Newsreader', 'Times New Roman', Georgia, serif;
+  --font-sans:  'Inter Tight', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Legacy aliases used by some sections */
+  --font-display: var(--font-serif);
+
+  /* Spacing — 4px base */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+
+  /* Radii — minimal */
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 8px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -9,76 +61,106 @@ html { scroll-behavior: smooth; }
 html, body { min-height: 100vh; }
 
 body {
-  background: #0D1117;
-  color: #d0d7de;
+  background: var(--paper);
+  color: var(--ink-2);
   font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+
+  /* Subtle paper grain — repeating dot noise from the Style Guide */
+  background-image:
+    radial-gradient(circle at 25% 15%, rgba(20,17,12,0.018) 1px, transparent 1.5px),
+    radial-gradient(circle at 75% 65%, rgba(20,17,12,0.015) 1px, transparent 1.5px),
+    radial-gradient(circle at 50% 90%, rgba(20,17,12,0.012) 1px, transparent 1.5px);
+  background-size: 7px 7px, 11px 11px, 13px 13px;
 }
 
-/* Editorial typography */
-h1, h2, h3 {
+::selection { background: var(--accent); color: var(--paper); }
+
+/* Editorial typography — serif for thought, sans for instruction */
+h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  font-weight: 400;
-  color: #f0f3f6;
+  font-weight: 500;
+  color: var(--ink);
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 /* Mono for data labels */
 .mono {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 
-a { color: #58A6FF; text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline wavy; text-underline-offset: 4px; }
 
-/* Shared tooltip */
+/* Shared hover tooltip */
 .tooltip {
   position: fixed;
   pointer-events: none;
-  background: #161B22;
-  border: 1px solid #30363D;
-  border-radius: 8px;
+  background: var(--ink);
+  border: none;
+  border-radius: 6px;
   padding: 10px 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-size: 13px;
-  color: #d0d7de;
+  color: var(--paper);
   opacity: 0;
   transition: opacity 0.15s;
   z-index: 1000;
   max-width: 320px;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 24px rgba(20,17,12,0.18);
 }
-.tooltip .val { font-weight: 700; color: #f0f3f6; }
-.tooltip .label { color: #8B949E; font-size: 11px; }
+.tooltip .val   { font-weight: 600; color: var(--paper); }
+.tooltip .label {
+  color: rgba(242,237,226,0.6);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
 
-/* Muted text */
-.text-muted { color: #8B949E; }
-.text-accent { color: #F39C12; font-weight: 600; }
+/* Muted text (paper context) */
+.text-muted  { color: var(--ink-3); }
+.text-accent { color: var(--accent); font-weight: 600; }
+
+/* Hedging mark — wavy underline in accent. Used inline in copy. */
+.hedge,
+.hedge-mark {
+  text-decoration: underline wavy var(--accent);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
 
 /* Pull quotes — conversation excerpts between sections */
 .pull-quote {
   max-width: 680px;
   margin: 0 auto;
-  padding: 80px 40px 100px;
+  padding: var(--s-9) var(--s-7) var(--s-9);
   text-align: center;
+  border-left: 3px solid var(--accent);
 }
 .pull-quote blockquote {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 28px;
   font-style: italic;
-  color: #c9d1d9;
-  line-height: 1.5;
-  margin-bottom: 16px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: var(--s-3);
 }
 .pull-quote cite {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: #8B949E;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
   font-style: normal;
 }
 

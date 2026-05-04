@@ -1,14 +1,17 @@
 import * as d3 from 'd3';
 import { loadConversation } from '../data/loader.js';
+import { openConversation } from '../components/conversationReader.js';
 
+// Tuned to the Forensic Editorial palette. Reverse Turing keeps the deepest
+// magenta-red so it can carry the storyline weight against the rest of the AI family.
 const SHOWN_CONDITIONS = [
-  { key: 'human_human',            label: 'Human-Human',    color: '#F1C40F' },
-  { key: 'ai_ai_combined',         label: 'AI-AI (combined)', color: '#FF4D6D' },
-  { key: 'ai_ai_freeform',         label: 'Freeform',       color: '#FF4D6D' },
-  { key: 'ai_ai_freeform_persona', label: 'Persona',        color: '#C9184A' },
-  { key: 'ai_ai_detective',        label: 'Detective',      color: '#FF7438' },
-  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing', color: '#FF006E' },
-  { key: 'ai_ai_structured',       label: 'Structured',     color: '#FFAA00' },
+  { key: 'human_human',            label: 'Human-Human',    color: '#2F5D8A' },
+  { key: 'ai_ai_combined',         label: 'AI-AI (combined)', color: '#B43A2A' },
+  { key: 'ai_ai_freeform',         label: 'Freeform',       color: '#B43A2A' },
+  { key: 'ai_ai_freeform_persona', label: 'Persona',        color: '#8C2A3D' },
+  { key: 'ai_ai_detective',        label: 'Detective',      color: '#C26A2C' },
+  { key: 'ai_ai_reverse_turing',   label: 'Reverse Turing', color: '#A23560' },
+  { key: 'ai_ai_structured',       label: 'Structured',     color: '#B5851C' },
 ];
 
 const AI_AI_KEYS = [
@@ -77,6 +80,34 @@ function tlPickId(condKey) {
   return row?.conversation_id || null;
 }
 
+// Per-act line visibility — gates hover and click so dots only respond
+// when their line is actually rendered on screen.
+function visibleKeysForStep(step) {
+  if (step <= 0) return new Set(['human_human']);
+  if (step === 1) return new Set(['human_human', 'ai_ai_combined']);
+  return new Set(['human_human', ...AI_AI_KEYS]); // acts 2 + 3
+}
+function isCondVisible(condKey) {
+  return visibleKeysForStep(currentStep).has(condKey);
+}
+
+function openTimelineConversation(condKey) {
+  const id = condKey === 'human_human' ? TIMELINE_HH_EXAMPLE_ID : tlPickId(condKey);
+  if (!id) return;
+  const conv = condKey === 'human_human'
+    ? hhRepresentativeConv
+    : tlSnippetCache.get(condKey);
+  const metrics = conv ? {
+    condition: conv.condition || condKey,
+    model_a: conv.model_a,
+    model_b: conv.model_b,
+    hedging: conv.hedging,
+    repetitiveness: conv.repetitiveness,
+    coherence: conv.coherence,
+  } : { condition: condKey };
+  openConversation(id, metrics);
+}
+
 function tlShowSnippet(condKey, turnNumber, event) {
   if (condKey === 'human_human') {
     if (hhRepresentativeConv) {
@@ -141,7 +172,7 @@ function bindPointHover(selection, cond, circles, dropLines) {
       .attr('r', 6.5)
       .attr('stroke', cond.color)
       .attr('stroke-width', 2)
-      .attr('fill', '#0D1117');
+      .attr('fill', '#F2EDE2');
     dropLines?.filter((c) => c.turn === d.turn)
       .interrupt()
       .transition().duration(140).ease(EASE_OUT)
@@ -153,7 +184,7 @@ function bindPointHover(selection, cond, circles, dropLines) {
       .interrupt()
       .transition().duration(180).ease(EASE_IN_OUT)
       .attr('r', 2.6)
-      .attr('stroke', '#0D1117')
+      .attr('stroke', '#F2EDE2')
       .attr('stroke-width', 1.5)
       .attr('fill', cond.color);
     dropLines?.filter((c) => c.turn === d.turn)
@@ -166,16 +197,16 @@ function bindPointHover(selection, cond, circles, dropLines) {
   selection
     .style('cursor', 'pointer')
     .on('pointerenter', (event, d) => {
+      if (!isCondVisible(cond.key)) return;
       if (hoverHideTimer) {
         window.clearTimeout(hoverHideTimer);
         hoverHideTimer = null;
       }
-      if (currentStep === 0 && cond.key !== 'human_human') return;
       enlargeMatching(d);
       tlShowSnippet(cond.key, d.turn, event);
     })
     .on('pointermove', (e) => {
-      if (currentStep === 0 && cond.key !== 'human_human') return;
+      if (!isCondVisible(cond.key)) return;
       tlMoveSnippet(e);
     })
     .on('pointerleave', (event, d) => {
@@ -185,6 +216,10 @@ function bindPointHover(selection, cond, circles, dropLines) {
       hoverHideTimer = window.setTimeout(() => {
         tlHideSnippet();
       }, 60);
+    })
+    .on('click', () => {
+      if (!isCondVisible(cond.key)) return;
+      openTimelineConversation(cond.key);
     });
 }
 
@@ -232,7 +267,7 @@ function highlightHedging(text) {
   let m;
   while ((m = rx.exec(text)) !== null) {
     out.push(escapeHtml(text.slice(last, m.index)));
-    out.push(`<span style="color:#f0f6fc; font-weight:700;">${escapeHtml(m[0])}</span>`);
+    out.push(`<span style="background:#E2C5BC; color:#6b1e14; font-style:italic; padding:0 3px; border-radius:2px; font-weight:500;">${escapeHtml(m[0])}</span>`);
     last = m.index + m[0].length;
   }
   out.push(escapeHtml(text.slice(last)));
@@ -406,19 +441,19 @@ export function init(data) {
   xAxisG = svg.append('g').attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(18).tickSize(-height).tickFormat(d => d))
     .call(g => g.select('.domain').remove())
-    .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick line').attr('stroke', '#D9D0BD'))
+    .call(g => g.selectAll('.tick text').attr('fill', '#6E6557').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
 
   yAxisG = svg.append('g')
     .call(d3.axisLeft(yScale).ticks(6).tickSize(-width).tickFormat(d3.format('.1f')))
     .call(g => g.select('.domain').remove())
-    .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick line').attr('stroke', '#D9D0BD'))
+    .call(g => g.selectAll('.tick text').attr('fill', '#6E6557').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
 
   svg.append('text').attr('x', width / 2).attr('y', height + 40).attr('text-anchor', 'middle')
-    .attr('fill', '#484F58').attr('font-size', '15px').attr('font-family', 'Inter, sans-serif').text('Turn Number');
+    .attr('fill', '#9A8F7C').attr('font-size', '15px').attr('font-family', 'Inter Tight, sans-serif').text('Turn Number');
   yAxisLabel = svg.append('text').attr('transform', 'rotate(-90)').attr('x', -height / 2).attr('y', -42)
-    .attr('text-anchor', 'middle').attr('fill', '#484F58').attr('font-size', '15px').attr('font-family', 'Inter, sans-serif').text('Hedging');
+    .attr('text-anchor', 'middle').attr('fill', '#9A8F7C').attr('font-size', '15px').attr('font-family', 'Inter Tight, sans-serif').text('Hedging');
 
   lineGen = d3.line().x(d => x(d.turn)).y(d => yScale(d.mean)).curve(d3.curveMonotoneX);
 
@@ -452,7 +487,7 @@ export function init(data) {
 
     const circles = g.selectAll('circle').data(cond.points).join('circle')
       .attr('cx', d => x(d.turn)).attr('cy', d => yScale(d.mean))
-      .attr('r', 0).attr('fill', cond.color).attr('stroke', '#0D1117').attr('stroke-width', 1.5)
+      .attr('r', 0).attr('fill', cond.color).attr('stroke', '#F2EDE2').attr('stroke-width', 1.5)
       .style('pointer-events', 'none');
 
     // Larger invisible hit-area so hover works around each dot (not only exact pixel hit).
@@ -468,7 +503,7 @@ export function init(data) {
     const last = cond.points[cond.points.length - 1];
     const label = g.append('text').attr('x', x(last.turn) + 8).attr('y', yScale(last.mean) + 4)
       .attr('fill', cond.color).attr('font-size', '13px').attr('font-weight', '600')
-      .attr('font-family', 'Inter, sans-serif')
+      .attr('font-family', 'Inter Tight, sans-serif')
       .text(cond.label);
 
     groups[cond.key] = { g, path, circles, hitTargets, dropLines, label, cond, drawn: false };
@@ -544,7 +579,7 @@ function resetLineStyle(entry) {
     .attr('stroke-width', cond.key === 'ai_ai_reverse_turing' ? 3 : 1.5);
   circles
     .attr('fill', cond.color)
-    .attr('stroke', '#0D1117')
+    .attr('stroke', '#F2EDE2')
     .attr('stroke-width', 1.5);
   dropLines?.attr('stroke', cond.color).attr('stroke-width', 1).attr('stroke-opacity', 0.18);
   label.attr('fill', cond.color);
@@ -563,8 +598,8 @@ function setYAxisForMetric(mode = 'hedging', duration = 450) {
   yAxisG.transition().duration(duration).ease(EASE_IN_OUT)
     .call(d3.axisLeft(yScale).ticks(6).tickSize(-width).tickFormat(d3.format('.1f')))
     .call(g => g.select('.domain').remove())
-    .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick line').attr('stroke', '#D9D0BD'))
+    .call(g => g.selectAll('.tick text').attr('fill', '#6E6557').attr('font-size', '13px').attr('font-family', 'JetBrains Mono, monospace'));
 }
 
 function drawLine(key, { duration = 800 } = {}) {
@@ -754,12 +789,12 @@ function createAct3TrendOverlay() {
 
   const aiPath = g.append('path')
     .attr('fill', 'none')
-    .attr('stroke', '#FF4D6D')
+    .attr('stroke', '#B43A2A')
     .attr('stroke-width', 2)
     .attr('d', lineGen(aiPoints));
   const hhPath = g.append('path')
     .attr('fill', 'none')
-    .attr('stroke', '#F1C40F')
+    .attr('stroke', '#2F5D8A')
     .attr('stroke-width', 2)
     .attr('d', lineGen(hhPoints));
 
@@ -768,17 +803,17 @@ function createAct3TrendOverlay() {
   const aiLabel = g.append('text')
     .attr('x', x(aiLast.turn) + 10)
     .attr('y', yScale(aiLast.mean) - 10)
-    .attr('fill', '#FF4D6D')
+    .attr('fill', '#B43A2A')
     .attr('font-size', '11px')
-    .attr('font-family', 'Inter, sans-serif')
+    .attr('font-family', 'Inter Tight, sans-serif')
     .text('All trending down')
     .attr('opacity', 0);
   const hhLabel = g.append('text')
     .attr('x', x(hhLast.turn) + 10)
     .attr('y', yScale(hhLast.mean) + 14)
-    .attr('fill', '#F1C40F')
+    .attr('fill', '#2F5D8A')
     .attr('font-size', '11px')
-    .attr('font-family', 'Inter, sans-serif')
+    .attr('font-family', 'Inter Tight, sans-serif')
     .text('Human-Human trend')
     .attr('opacity', 0);
 
@@ -856,13 +891,13 @@ function resetAct3TrendOverlay() {
   act3Trend.aiLabel.attr('opacity', 0);
   act3Trend.hhLabel.attr('opacity', 0);
   act3Trend.aiPath
-    .attr('stroke', '#FF4D6D')
+    .attr('stroke', '#B43A2A')
     .attr('stroke-width', 2)
     .attr('stroke-dasharray', null)
     .attr('stroke-dashoffset', null)
     .attr('d', lineGen(act3Trend.aiPoints));
   act3Trend.hhPath
-    .attr('stroke', '#F1C40F')
+    .attr('stroke', '#2F5D8A')
     .attr('stroke-width', 2)
     .attr('stroke-dasharray', null)
     .attr('stroke-dashoffset', null)
@@ -874,16 +909,16 @@ function createAct4TrendOverlay() {
   const g = svg.append('g').attr('class', 'act4-trendline').attr('opacity', 0);
   const path = g.append('path')
     .attr('fill', 'none')
-    .attr('stroke', '#FF006E')
+    .attr('stroke', '#A23560')
     .attr('stroke-width', 2)
     .attr('d', lineGen(rtPoints));
   const last = rtPoints[rtPoints.length - 1];
   const label = g.append('text')
     .attr('x', x(last.turn) + 10)
     .attr('y', yScale(last.mean) - 10)
-    .attr('fill', '#FF006E')
+    .attr('fill', '#A23560')
     .attr('font-size', '11px')
-    .attr('font-family', 'Inter, sans-serif')
+    .attr('font-family', 'Inter Tight, sans-serif')
     .text('Reverse Turing trend')
     .attr('opacity', 0);
   return { g, path, label, points: rtPoints };
@@ -894,7 +929,7 @@ function resetAct4TrendOverlay() {
   act4Trend.g.attr('opacity', 0);
   act4Trend.label.attr('opacity', 0);
   act4Trend.path
-    .attr('stroke', '#FF006E')
+    .attr('stroke', '#A23560')
     .attr('stroke-width', 2)
     .attr('stroke-dasharray', null)
     .attr('stroke-dashoffset', null)
@@ -983,14 +1018,14 @@ function renderRevealAnnotations() {
   ag.append('text')
     .attr('x', labelX)
     .attr('y', labelY)
-    .attr('fill', '#FF006E')
+    .attr('fill', '#A23560')
     .attr('font-size', '12px')
     .attr('font-weight', '700')
-    .attr('font-family', 'Inter, sans-serif')
+    .attr('font-family', 'Inter Tight, sans-serif')
     .text('Still climbing at turn 20');
   ag.append('polygon')
     .attr('points', `${labelX + 152},${labelY - 10} ${labelX + 164},${labelY - 10} ${labelX + 158},${labelY - 18}`)
-    .attr('fill', '#FF006E');
+    .attr('fill', '#A23560');
 
   ag.append('rect')
     .attr('x', tooltipX)
@@ -999,29 +1034,29 @@ function renderRevealAnnotations() {
     .attr('height', 46)
     .attr('rx', 6)
     .attr('fill', 'rgba(13,17,23,0.92)')
-    .attr('stroke', '#FF006E')
+    .attr('stroke', '#A23560')
     .attr('stroke-width', 1);
   ag.append('text')
     .attr('x', tooltipX + 12)
     .attr('y', tooltipY + 18)
-    .attr('fill', '#FF006E')
+    .attr('fill', '#A23560')
     .attr('font-size', '11px')
     .attr('font-weight', '700')
-    .attr('font-family', 'Inter, sans-serif')
+    .attr('font-family', 'Inter Tight, sans-serif')
     .text('Only line that goes up');
   ag.append('text')
     .attr('x', tooltipX + 12)
     .attr('y', tooltipY + 34)
-    .attr('fill', '#8B949E')
+    .attr('fill', '#6E6557')
     .attr('font-size', '11px')
-    .attr('font-family', 'Inter, sans-serif')
+    .attr('font-family', 'Inter Tight, sans-serif')
     .text(`+${(lateAvg - earlyAvg).toFixed(2)} over time`);
   ag.append('line')
     .attr('x1', tooltipX + 236)
     .attr('y1', tooltipY + 24)
     .attr('x2', x(point11.turn))
     .attr('y2', yScale(point11.mean) - 4)
-    .attr('stroke', '#FF006E')
+    .attr('stroke', '#A23560')
     .attr('stroke-width', 1)
     .attr('stroke-dasharray', '4,3');
 
@@ -1094,7 +1129,7 @@ function enterAct3() {
       entry.g.style('filter', null);
       entry.path.transition().duration(1200).ease(EASE_IN_OUT)
         .attr('stroke-width', 3)
-        .attr('stroke', '#FF006E');
+        .attr('stroke', '#A23560');
       entry.g.transition().duration(1200).ease(EASE_IN_OUT).attr('opacity', 1);
       return;
     }

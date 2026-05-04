@@ -41,8 +41,8 @@ export function init() {
   const hedgeToY = (v) => (1 - v) * H;
 
   // Neutral axis colours for metric explanation phase
-  const COL_X = '#c9d1d9';   // off-white → Repetitiveness
-  const COL_Y = '#c9d1d9';   // off-white → Hedging
+  const COL_X = '#3A332A';   // off-white → Repetitiveness
+  const COL_Y = '#3A332A';   // off-white → Hedging
 
   // ── Defs: glow filters for each dot colour ────────────────────────────────
   const defs = el('defs');
@@ -62,7 +62,7 @@ export function init() {
     defs.appendChild(filt);
   }
 
-  makeGlow('gridRedGlow',       '#E74C3C');
+  makeGlow('gridRedGlow',       '#B43A2A');
   makeGlow('gridYellowGlow',   CONDITION_COLOR.human_ai);
   makeGlow('gridBlueGlow',     CONDITION_COLOR.human_human);
   svg.appendChild(defs);
@@ -79,28 +79,28 @@ export function init() {
   root.appendChild(gridLinesG);
   for (let i = 0; i <= TICKS_X; i++) {
     const x = (i / TICKS_X) * W;
-    gridLinesG.appendChild(el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+    gridLinesG.appendChild(el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#9A8F7C', 'stroke-width': 0.6 }));
   }
   for (let i = 0; i <= TICKS_Y; i++) {
     const y = (i / TICKS_Y) * H;
-    gridLinesG.appendChild(el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+    gridLinesG.appendChild(el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#9A8F7C', 'stroke-width': 0.6 }));
   }
 
   // ── Axes + arrows + labels ────────────────────────────────────────────────
-  const xAxis  = el('line', { x1: 0, y1: H, x2: W, y2: H, stroke: '#2d4a6a', 'stroke-width': 1.2 });
-  const xArrow = el('polygon', { points: `${W},${H - 6} ${W + 12},${H} ${W},${H + 6}`, fill: '#2d4a6a' });
+  const xAxis  = el('line', { x1: 0, y1: H, x2: W, y2: H, stroke: '#9A8F7C', 'stroke-width': 1.2 });
+  const xArrow = el('polygon', { points: `${W},${H - 6} ${W + 12},${H} ${W},${H + 6}`, fill: '#9A8F7C' });
   const xLabel = el('text', {
-    x: W / 2, y: H + 52, 'text-anchor': 'middle', fill: '#4a6a8a',
-    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    x: W / 2, y: H + 52, 'text-anchor': 'middle', fill: '#6E6557',
+    'font-size': 11, 'font-family': 'Inter Tight, sans-serif',
     'font-weight': 600, 'letter-spacing': '0.1em',
   });
   xLabel.textContent = 'REPETITIVENESS';
 
-  const yAxis  = el('line', { x1: 0, y1: H, x2: 0, y2: 0, stroke: '#2d4a6a', 'stroke-width': 1.2 });
-  const yArrow = el('polygon', { points: `-6,0 0,-12 6,0`, fill: '#2d4a6a' });
+  const yAxis  = el('line', { x1: 0, y1: H, x2: 0, y2: 0, stroke: '#9A8F7C', 'stroke-width': 1.2 });
+  const yArrow = el('polygon', { points: `-6,0 0,-12 6,0`, fill: '#9A8F7C' });
   const yLabel = el('text', {
-    x: -H / 2, y: -46, 'text-anchor': 'middle', fill: '#4a6a8a',
-    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    x: -H / 2, y: -46, 'text-anchor': 'middle', fill: '#6E6557',
+    'font-size': 11, 'font-family': 'Inter Tight, sans-serif',
     'font-weight': 600, 'letter-spacing': '0.1em',
     transform: 'rotate(-90)',
   });
@@ -115,20 +115,20 @@ export function init() {
   const Y_TICK_LABELS = ['0', '.25', '.50', '.75', '1'];
   X_TICK_VALS.forEach((v, i) => {
     const x = repToX(v);
-    xTicksG.appendChild(el('line', { x1: x, y1: H, x2: x, y2: H + 5, stroke: '#2d4a6a', 'stroke-width': 1 }));
+    xTicksG.appendChild(el('line', { x1: x, y1: H, x2: x, y2: H + 5, stroke: '#9A8F7C', 'stroke-width': 1 }));
     const lbl = el('text', {
-      x, y: H + 18, 'text-anchor': 'middle', fill: '#4a6a8a',
-      'font-size': 9, 'font-family': 'Inter, sans-serif', 'font-weight': 500,
+      x, y: H + 18, 'text-anchor': 'middle', fill: '#6E6557',
+      'font-size': 9, 'font-family': 'Inter Tight, sans-serif', 'font-weight': 500,
     });
     lbl.textContent = X_TICK_LABELS[i];
     xTicksG.appendChild(lbl);
   });
   Y_TICK_VALS.forEach((v, i) => {
     const y = H - v * H;
-    yTicksG.appendChild(el('line', { x1: -5, y1: y, x2: 0, y2: y, stroke: '#2d4a6a', 'stroke-width': 1 }));
+    yTicksG.appendChild(el('line', { x1: -5, y1: y, x2: 0, y2: y, stroke: '#9A8F7C', 'stroke-width': 1 }));
     const lbl = el('text', {
-      x: -10, y: y + 3.5, 'text-anchor': 'end', fill: '#4a6a8a',
-      'font-size': 9, 'font-family': 'Inter, sans-serif', 'font-weight': 500,
+      x: -10, y: y + 3.5, 'text-anchor': 'end', fill: '#6E6557',
+      'font-size': 9, 'font-family': 'Inter Tight, sans-serif', 'font-weight': 500,
     });
     lbl.textContent = Y_TICK_LABELS[i];
     yTicksG.appendChild(lbl);
@@ -144,10 +144,10 @@ export function init() {
   const DOT_X = W * 0.14;
   const DOT_Y = H * 0.14;
   const svgDotRed = el('circle', {
-    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#E74C3C',
+    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#B43A2A',
     class: 'subtype-grid-dot',
   });
-  svgDotRed.style.setProperty('--dot-color', '#E74C3C');
+  svgDotRed.style.setProperty('--dot-color', '#B43A2A');
   gsap.set(svgDotRed, { opacity: 0, scale: 0, transformOrigin: `${DOT_X}px ${DOT_Y}px` });
   root.appendChild(svgDotRed);
 
@@ -301,7 +301,7 @@ export function init() {
   const labelEls = LABEL_DEFS.map(({ cx, cy, text }) => {
     const lbl = el('text', {
       x: cx + 15, y: cy + 4,
-      'text-anchor': 'start', fill: '#c9d1d9',
+      'text-anchor': 'start', fill: '#3A332A',
       'font-family': 'JetBrains Mono, monospace',
       'font-size': 11, 'font-weight': 500,
     });
@@ -640,6 +640,10 @@ export function init() {
   tl.call(syncLabelPositions, null, 6.3);
   tl.to([svgDotRed, svgDotYellow, svgDotBlue], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
   tl.to([redLabel, yellowLabel, blueLabel], { opacity: 1, duration: 0.4, ease: 'power2.out' }, 6.9);
+
+  // Fade in the explore prompt at the same beat as the dots.
+  const exploreHint = document.getElementById('grid-explore-hint');
+  if (exploreHint) tl.to(exploreHint, { opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
 
   // Keep refs used so lint doesn't strip while preserving future extensibility.
   void gridShell;
