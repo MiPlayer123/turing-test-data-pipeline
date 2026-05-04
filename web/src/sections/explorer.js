@@ -85,7 +85,7 @@ export function init(data) {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(W, H);
-  renderer.setClearColor(0x0D1117);
+  renderer.setClearColor(0xF2EDE2);
   container.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -179,8 +179,8 @@ export function init(data) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 256; canvas.height = 64;
-    ctx.fillStyle = '#8B949E';
-    ctx.font = `${Math.round(fontSize * 500)}px Inter, sans-serif`;
+    ctx.fillStyle = '#6E6557';
+    ctx.font = `${Math.round(fontSize * 500)}px Inter Tight, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(text, 128, 32);

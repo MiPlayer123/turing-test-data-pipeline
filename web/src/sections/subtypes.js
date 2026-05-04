@@ -251,31 +251,31 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const TICKS_Y = 8;
   for (let i = 0; i <= TICKS_X; i++) {
     const gx = (i / TICKS_X) * IW;
-    root.appendChild(mkEl('line', { x1: gx, y1: 0, x2: gx, y2: IH, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+    root.appendChild(mkEl('line', { x1: gx, y1: 0, x2: gx, y2: IH, stroke: '#D9D0BD', 'stroke-width': 0.8 }));
   }
   for (let i = 0; i <= TICKS_Y; i++) {
     const gy = (i / TICKS_Y) * IH;
-    root.appendChild(mkEl('line', { x1: 0, y1: gy, x2: IW, y2: gy, stroke: '#0e2a4a', 'stroke-width': 0.8 }));
+    root.appendChild(mkEl('line', { x1: 0, y1: gy, x2: IW, y2: gy, stroke: '#D9D0BD', 'stroke-width': 0.8 }));
   }
 
   // Thin axes, no arrows
-  const AX_COL = '#2d4a6a';
+  const AX_COL = '#9A8F7C';
   root.appendChild(mkEl('line', { x1: 0, y1: IH, x2: IW, y2: IH, stroke: AX_COL, 'stroke-width': 1.2 }));
   root.appendChild(mkEl('line', { x1: 0, y1: 0,  x2: 0,  y2: IH, stroke: AX_COL, 'stroke-width': 1.2 }));
 
   // Axis labels
   const xLab = mkEl('text', {
     x: M.left + IW / 2, y: VH - 16,
-    'text-anchor': 'middle', fill: '#4a6a8a',
-    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'text-anchor': 'middle', fill: '#6E6557',
+    'font-size': 11, 'font-family': 'Inter Tight, sans-serif',
     'font-weight': 600, 'letter-spacing': '0.1em',
   });
   xLab.textContent = 'REPETITIVENESS';
   svg.appendChild(xLab);
 
   const yLab = mkEl('text', {
-    'text-anchor': 'middle', fill: '#4a6a8a',
-    'font-size': 11, 'font-family': 'Inter, sans-serif',
+    'text-anchor': 'middle', fill: '#6E6557',
+    'font-size': 11, 'font-family': 'Inter Tight, sans-serif',
     'font-weight': 600, 'letter-spacing': '0.1em',
     transform: `rotate(-90) translate(${-(M.top + IH / 2)}, 18)`,
   });

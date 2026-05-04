@@ -21,7 +21,7 @@ export async function openConversation(conversationId, metrics) {
   panel.classList.add('open');
   overlay.classList.add('visible');
 
-  chatEl.innerHTML = '<p style="text-align:center; color:#8B949E; padding:40px;">Loading...</p>';
+  chatEl.innerHTML = '<p style="text-align:center; color:#6E6557; padding:40px;">Loading...</p>';
 
   if (metrics) {
     titleEl.textContent = `${CONDITION_LABEL[metrics.condition] || metrics.condition}`;
@@ -52,6 +52,6 @@ export async function openConversation(conversationId, metrics) {
       `;
     }).join('');
   } catch (e) {
-    chatEl.innerHTML = `<p style="text-align:center; color:#E74C3C; padding:40px;">Failed to load conversation</p>`;
+    chatEl.innerHTML = `<p style="text-align:center; color:#B43A2A; padding:40px;">Failed to load conversation</p>`;
   }
 }

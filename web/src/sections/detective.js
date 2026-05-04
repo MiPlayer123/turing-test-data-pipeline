@@ -73,21 +73,21 @@ export function init(data) {
   svg.selectAll('.y-label').data(stats).join('text')
     .attr('x', -10).attr('y', d => y(d.model) + y.bandwidth() / 2)
     .attr('dy', '0.35em').attr('text-anchor', 'end')
-    .attr('fill', '#8B949E').attr('font-size', '13px').attr('font-family', 'Inter, sans-serif')
+    .attr('fill', '#6E6557').attr('font-size', '13px').attr('font-family', 'Inter Tight, sans-serif')
     .text(d => d.model === 'human' ? `${d.label} (you & co.)` : `${d.label} (n=${d.n})`);
 
   svg.append('g').attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(5).tickFormat(d => d + '%').tickSize(-height))
     .call(g => g.select('.domain').remove())
-    .call(g => g.selectAll('.tick line').attr('stroke', '#1a1f27'))
-    .call(g => g.selectAll('.tick text').attr('fill', '#8B949E').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace'));
+    .call(g => g.selectAll('.tick line').attr('stroke', '#D9D0BD'))
+    .call(g => g.selectAll('.tick text').attr('fill', '#6E6557').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace'));
 
   // 50% marker — shown later via onStep
   svg.append('text').attr('class', 'fifty-label').attr('x', x(50)).attr('y', height + 28).attr('text-anchor', 'middle')
-    .attr('fill', '#484F58').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace')
+    .attr('fill', '#9A8F7C').attr('font-size', '11px').attr('font-family', 'JetBrains Mono, monospace')
     .text('50%').attr('opacity', 0);
   svg.append('rect').attr('class', 'fifty-shade').attr('x', 0).attr('y', 0).attr('width', x(50)).attr('height', height)
-    .attr('fill', '#E74C3C').attr('opacity', 0);
+    .attr('fill', '#B43A2A').attr('opacity', 0);
 
   // Bars: AI bars start hidden (width 0, faded), human bar starts already drawn so the
   // viewer enters the section seeing the baseline they just answered against in the quiz.
@@ -101,7 +101,7 @@ export function init(data) {
 
   svg.selectAll('.val-label').data(stats).join('text').attr('class', 'val-label')
     .attr('y', d => y(d.model) + y.bandwidth() / 2).attr('dy', '0.35em')
-    .attr('fill', '#f0f3f6').attr('font-size', '14px').attr('font-weight', '700')
+    .attr('fill', '#14110C').attr('font-size', '14px').attr('font-weight', '700')
     .attr('font-family', 'JetBrains Mono, monospace')
     .attr('x', d => d.model === 'human' ? x(d.accuracy) + 8 : 8)
     .attr('opacity', d => d.model === 'human' ? 1 : 0)
