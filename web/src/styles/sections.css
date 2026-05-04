@@ -928,7 +928,7 @@
 .explorer-header {
   max-width: 680px;
   text-align: center;
-  margin-bottom: var(--s-5);
+  margin-bottom: var(--s-3);
 }
 .explorer-title {
   font-family: var(--font-serif);
