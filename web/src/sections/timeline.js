@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { loadConversation } from '../data/loader.js';
+import { openConversation } from '../components/conversationReader.js';
 
 // Tuned to the Forensic Editorial palette. Reverse Turing keeps the deepest
 // magenta-red so it can carry the storyline weight against the rest of the AI family.
@@ -77,6 +78,34 @@ function tlPickId(condKey) {
   if (!fullData || !fullData.conversations) return null;
   const row = fullData.conversations.find(c => c.condition === condKey);
   return row?.conversation_id || null;
+}
+
+// Per-act line visibility — gates hover and click so dots only respond
+// when their line is actually rendered on screen.
+function visibleKeysForStep(step) {
+  if (step <= 0) return new Set(['human_human']);
+  if (step === 1) return new Set(['human_human', 'ai_ai_combined']);
+  return new Set(['human_human', ...AI_AI_KEYS]); // acts 2 + 3
+}
+function isCondVisible(condKey) {
+  return visibleKeysForStep(currentStep).has(condKey);
+}
+
+function openTimelineConversation(condKey) {
+  const id = condKey === 'human_human' ? TIMELINE_HH_EXAMPLE_ID : tlPickId(condKey);
+  if (!id) return;
+  const conv = condKey === 'human_human'
+    ? hhRepresentativeConv
+    : tlSnippetCache.get(condKey);
+  const metrics = conv ? {
+    condition: conv.condition || condKey,
+    model_a: conv.model_a,
+    model_b: conv.model_b,
+    hedging: conv.hedging,
+    repetitiveness: conv.repetitiveness,
+    coherence: conv.coherence,
+  } : { condition: condKey };
+  openConversation(id, metrics);
 }
 
 function tlShowSnippet(condKey, turnNumber, event) {
@@ -168,16 +197,16 @@ function bindPointHover(selection, cond, circles, dropLines) {
   selection
     .style('cursor', 'pointer')
     .on('pointerenter', (event, d) => {
+      if (!isCondVisible(cond.key)) return;
       if (hoverHideTimer) {
         window.clearTimeout(hoverHideTimer);
         hoverHideTimer = null;
       }
-      if (currentStep === 0 && cond.key !== 'human_human') return;
       enlargeMatching(d);
       tlShowSnippet(cond.key, d.turn, event);
     })
     .on('pointermove', (e) => {
-      if (currentStep === 0 && cond.key !== 'human_human') return;
+      if (!isCondVisible(cond.key)) return;
       tlMoveSnippet(e);
     })
     .on('pointerleave', (event, d) => {
@@ -187,6 +216,10 @@ function bindPointHover(selection, cond, circles, dropLines) {
       hoverHideTimer = window.setTimeout(() => {
         tlHideSnippet();
       }, 60);
+    })
+    .on('click', () => {
+      if (!isCondVisible(cond.key)) return;
+      openTimelineConversation(cond.key);
     });
 }
 

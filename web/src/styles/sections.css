@@ -127,11 +127,11 @@
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(500px, var(--grid-chart-max-width)) minmax(220px, 280px);
   gap: var(--s-5);
-  align-items: center;
+  align-items: start;
   justify-content: center;
 }
-.grid-side-left  { display: flex; justify-content: flex-end; }
-.grid-side-right { display: flex; justify-content: flex-start; }
+.grid-side-left  { display: flex; justify-content: flex-end;   align-items: flex-start; }
+.grid-side-right { display: flex; justify-content: flex-start; align-items: flex-start; }
 .grid-centre {
   display: flex;
   flex-direction: column;
@@ -156,6 +156,8 @@
   border: 1px solid var(--ink);
   background: var(--paper);
   transform: translateX(-14px);
+  /* Explicit aspect drives the hedging-card height match below */
+  aspect-ratio: 640 / 520;
 }
 .grid-svg {
   width: 100%;
@@ -168,6 +170,8 @@
   max-width: var(--grid-chart-max-width);
   display: flex;
   justify-content: flex-start;
+  /* Mirror the chart-frame's leftward nudge so card edges line up */
+  transform: translateX(-14px);
 }
 .grid-side-right .grid-headbar {
   text-align: left;
@@ -299,12 +303,16 @@
 #mdef-repetition { box-sizing: border-box; }
 #mdef-hedging {
   width: var(--metric-card-x);
-  min-height: var(--metric-card-y);
-  transform: translate(30px, -130px) !important;
+  /* Mirror the chart-frame's aspect so heights line up at any width. */
+  aspect-ratio: 260 / 446;
+  min-height: 0;
+  height: auto;
+  transform: none !important;
+  align-self: flex-start;
 }
 #mdef-repetition {
-  width: calc(var(--metric-card-y) + 300px);
-  min-height: var(--metric-card-x);
+  width: 100%;
+  min-height: 0;
 }
 #mdef-repetition .mdef-desc {
   min-height: 64px;
@@ -416,7 +424,11 @@
   position: relative;
   z-index: 2;
   padding: 0 0 25vh 0;
+  /* Step container shouldn't intercept pointer events meant for the chart;
+     only the text/card itself should consume hover/click. */
+  pointer-events: none;
 }
+.scrolly-steps .step-card { pointer-events: auto; }
 .step {
   min-height: 55vh;
   display: flex;
@@ -837,10 +849,18 @@
   pointer-events: none;
 }
 
-#s-timeline .step { align-items: center; }
+#s-timeline .step {
+  align-items: center;
+  /* Push step text into the left margin so it stays clear of the
+     centered chart; chart size + position are unchanged. */
+  padding: 0 var(--s-6);
+}
+#s-timeline .step .step-card {
+  max-width: 260px;
+}
 #s-timeline .step .step-card h3 { display: none; }
 #s-timeline .step .step-card p {
-  font-size: clamp(14px, 1.05vw, 16px);
+  font-size: clamp(13px, 0.95vw, 15px);
   line-height: 1.55;
 }
 
@@ -887,6 +907,21 @@
   max-width: 520px;
   text-align: center;
   opacity: 0;
+}
+.timeline-hint {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 5px 12px;
+  border: 1px solid var(--paper-rule);
+  border-radius: 999px;
+  background: var(--paper);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* ===== Explorer header ===== */
@@ -1137,12 +1172,11 @@
 }
 .subtypes-header {
   text-align: center;
-  padding: 22px var(--s-6);
-  border: 1px solid var(--paper-rule);
-  border-radius: var(--r-md);
-  background: var(--paper);
+  padding: 0;
+  border: 0;
+  background: transparent;
   max-width: 640px;
-  margin: 0 auto var(--s-4);
+  margin: 0 auto var(--s-5);
   flex-shrink: 0;
 }
 .subtypes-title {
@@ -1169,7 +1203,12 @@
   border-radius: var(--r-md);
   padding: var(--s-4) var(--s-5);
   background: var(--paper-2);
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
+.subtypes-stack-wrap .subtypes-stacked-bar { flex: 1 1 auto; min-height: 0; }
 .subtypes-stack-title {
   margin: 0 0 10px;
   font-family: var(--font-mono);
@@ -1207,11 +1246,12 @@
 .subtypes-stack-legend-value { color: var(--ink); font-weight: 600; }
 
 .subtypes-dummy-card {
-  margin-top: 14px;
-  padding: 10px 12px;
+  margin-top: 0;
+  padding: var(--s-3) var(--s-4);
   border: 1px solid var(--paper-rule);
   border-radius: var(--r-md);
   background: var(--paper-2);
+  flex: 0 0 auto;
 }
 .subtypes-key-title {
   margin: 0 0 8px;
@@ -1271,6 +1311,28 @@
 .subtypes-plot-tooltip { z-index: 20; }
 .subtypes-point-prompt,
 .subtypes-point-name { pointer-events: none; }
+
+/* Affordance hint floating just above the plot's gridlines, inside the chart frame. */
+.subtypes-plot-hint {
+  position: absolute;
+  top: var(--s-3);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 5px 12px;
+  border: 1px solid var(--paper-rule);
+  border-radius: 999px;
+  background: var(--paper);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 5;
+  margin: 0;
+}
 
 /* 6-column grid so the two orphan cards on row 2 straddle center */
 .subtypes-grid {
