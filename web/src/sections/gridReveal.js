@@ -79,11 +79,11 @@ export function init() {
   root.appendChild(gridLinesG);
   for (let i = 0; i <= TICKS_X; i++) {
     const x = (i / TICKS_X) * W;
-    gridLinesG.appendChild(el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#D9D0BD', 'stroke-width': 0.8 }));
+    gridLinesG.appendChild(el('line', { x1: x, y1: 0, x2: x, y2: H, stroke: '#9A8F7C', 'stroke-width': 0.6 }));
   }
   for (let i = 0; i <= TICKS_Y; i++) {
     const y = (i / TICKS_Y) * H;
-    gridLinesG.appendChild(el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#D9D0BD', 'stroke-width': 0.8 }));
+    gridLinesG.appendChild(el('line', { x1: 0, y1: y, x2: W, y2: y, stroke: '#9A8F7C', 'stroke-width': 0.6 }));
   }
 
   // ── Axes + arrows + labels ────────────────────────────────────────────────
@@ -640,6 +640,10 @@ export function init() {
   tl.call(syncLabelPositions, null, 6.3);
   tl.to([svgDotRed, svgDotYellow, svgDotBlue], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
   tl.to([redLabel, yellowLabel, blueLabel], { opacity: 1, duration: 0.4, ease: 'power2.out' }, 6.9);
+
+  // Fade in the explore prompt at the same beat as the dots.
+  const exploreHint = document.getElementById('grid-explore-hint');
+  if (exploreHint) tl.to(exploreHint, { opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
 
   // Keep refs used so lint doesn't strip while preserving future extensibility.
   void gridShell;

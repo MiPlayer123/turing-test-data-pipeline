@@ -251,11 +251,11 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
   const TICKS_Y = 8;
   for (let i = 0; i <= TICKS_X; i++) {
     const gx = (i / TICKS_X) * IW;
-    root.appendChild(mkEl('line', { x1: gx, y1: 0, x2: gx, y2: IH, stroke: '#D9D0BD', 'stroke-width': 0.8 }));
+    root.appendChild(mkEl('line', { x1: gx, y1: 0, x2: gx, y2: IH, stroke: '#9A8F7C', 'stroke-width': 0.6 }));
   }
   for (let i = 0; i <= TICKS_Y; i++) {
     const gy = (i / TICKS_Y) * IH;
-    root.appendChild(mkEl('line', { x1: 0, y1: gy, x2: IW, y2: gy, stroke: '#D9D0BD', 'stroke-width': 0.8 }));
+    root.appendChild(mkEl('line', { x1: 0, y1: gy, x2: IW, y2: gy, stroke: '#9A8F7C', 'stroke-width': 0.6 }));
   }
 
   // Thin axes, no arrows

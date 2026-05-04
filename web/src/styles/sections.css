@@ -66,7 +66,7 @@
 }
 .grid-headbar {
   text-align: center;
-  max-width: 640px;
+  max-width: 1100px;
   margin: 0 auto var(--s-2);
 }
 .grid-headbar-2 {
@@ -80,11 +80,12 @@
 }
 .grid-headline {
   font-family: var(--font-serif);
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(24px, 2.5vw, 36px);
   font-weight: 500;
   color: var(--ink);
   line-height: 1.05;
   letter-spacing: -0.015em;
+  white-space: nowrap;
   margin: 0 0 6px;
 }
 .grid-headline em {
@@ -98,6 +99,28 @@
   color: var(--ink-2);
   line-height: 1.5;
   margin: 0 0 var(--s-6);
+}
+/* Phase-2 explore prompt — pinned to the bottom edge of the chart frame.
+   Absolute positioning keeps it out of flow so phase-1 spacing isn't disturbed. */
+.grid-explore-hint {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 5px 12px;
+  border: 1px solid var(--paper-rule);
+  border-radius: 999px;
+  background: var(--paper);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  margin: 0;
 }
 
 .grid-body {
@@ -264,11 +287,10 @@
   font-size: 13px;
   line-height: 1.55;
   margin-bottom: var(--s-3);
-  border: 1px solid var(--paper-rule);
-  border-radius: var(--r-sm);
-  background: var(--paper);
-  padding: var(--s-3);
-  min-height: 104px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  min-height: 0;
   color: var(--ink-2);
 }
 .mdef-side .mdef-row { display: flex; flex-direction: column; gap: var(--s-2); }
@@ -634,7 +656,8 @@
 }
 #quiz-prompt-area button.quiz-word.quiz-choice-btn:disabled { opacity: 1; }
 
-/* After submit: Human = data red, AI = data blue (cool baseline color) */
+/* After submit — quiz feedback colors. AI is the canonical correct answer
+   in this thread, so AI = green, Human (the lure) = red. */
 #quiz-prompt-area.quiz-prompt-answered button.quiz-word.quiz-choice-btn[data-answer='human'] {
   --dot-color: var(--red);
   color: var(--paper);
@@ -642,10 +665,10 @@
   background: var(--red);
 }
 #quiz-prompt-area.quiz-prompt-answered button.quiz-word.quiz-choice-btn[data-answer='ai'] {
-  --dot-color: var(--blue);
+  --dot-color: #5C8C3A;
   color: var(--paper);
-  border-color: var(--blue);
-  background: var(--blue);
+  border-color: #5C8C3A;
+  background: #5C8C3A;
 }
 .quiz-result-badge {
   font-family: var(--font-mono);
@@ -772,8 +795,8 @@
   text-transform: uppercase;
 }
 .mdef-row-bubbles { display: flex; gap: 6px; flex-wrap: wrap; }
-.mdef-row-highlight.mdef-row-highlight-red    { border-color: var(--paper-rule); }
-.mdef-row-highlight.mdef-row-highlight-yellow { border-color: var(--paper-rule); }
+.mdef-row-highlight.mdef-row-highlight-red    { border-color: transparent; padding: 0; }
+.mdef-row-highlight.mdef-row-highlight-yellow { border-color: transparent; padding: 0; }
 
 .mini-bubble {
   display: inline-block;
@@ -801,7 +824,7 @@
 #s-grid .mdef-title-yellow { color: var(--yellow); }
 #s-grid .mdef-desc { color: var(--ink-2); }
 #s-grid .mdef-row-highlight-red,
-#s-grid .mdef-row-highlight-yellow { border-color: var(--paper-rule) !important; }
+#s-grid .mdef-row-highlight-yellow { border-color: transparent !important; }
 
 /* ===== Comparison chart ===== */
 #s-comparison .scrolly-viz {

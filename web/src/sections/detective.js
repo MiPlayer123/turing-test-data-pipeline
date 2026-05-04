@@ -48,23 +48,7 @@ export function init(data) {
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom);
 
-  // Glow filter for the human baseline bar — visually marks it as "you" amid the AI rows.
-  const humanGlowColor = CONDITION_COLOR.human_human;
-  const defs = svgRoot.append('defs');
-  const filter = defs.append('filter')
-    .attr('id', 'humanBarGlow')
-    .attr('x', '-30%').attr('y', '-60%')
-    .attr('width', '160%').attr('height', '220%');
-  filter.append('feGaussianBlur')
-    .attr('in', 'SourceGraphic').attr('stdDeviation', 6).attr('result', 'blur');
-  filter.append('feFlood')
-    .attr('flood-color', humanGlowColor).attr('flood-opacity', 0.8).attr('result', 'color');
-  filter.append('feComposite')
-    .attr('in', 'color').attr('in2', 'blur').attr('operator', 'in').attr('result', 'glow');
-  const merge = filter.append('feMerge');
-  merge.append('feMergeNode').attr('in', 'glow');
-  merge.append('feMergeNode').attr('in', 'SourceGraphic');
-
+  // Human baseline reads as "you" via bold weight on its label, not a glow.
   svg = svgRoot.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
   y = d3.scaleBand().domain(stats.map(d => d.model)).range([0, height]).padding(0.3);
@@ -73,7 +57,10 @@ export function init(data) {
   svg.selectAll('.y-label').data(stats).join('text')
     .attr('x', -10).attr('y', d => y(d.model) + y.bandwidth() / 2)
     .attr('dy', '0.35em').attr('text-anchor', 'end')
-    .attr('fill', '#6E6557').attr('font-size', '13px').attr('font-family', 'Inter Tight, sans-serif')
+    .attr('fill', d => d.model === 'human' ? '#14110C' : '#6E6557')
+    .attr('font-size', '13px')
+    .attr('font-family', 'Inter Tight, sans-serif')
+    .attr('font-weight', d => d.model === 'human' ? 700 : 400)
     .text(d => d.model === 'human' ? `${d.label} (you & co.)` : `${d.label} (n=${d.n})`);
 
   svg.append('g').attr('transform', `translate(0,${height})`)
@@ -96,8 +83,7 @@ export function init(data) {
     .attr('x', 0)
     .attr('width', d => d.model === 'human' ? x(d.accuracy) : 0)
     .attr('fill', d => d.color).attr('rx', 4)
-    .attr('opacity', d => d.model === 'human' ? 1 : 0.15)
-    .attr('filter', d => d.model === 'human' ? 'url(#humanBarGlow)' : null);
+    .attr('opacity', d => d.model === 'human' ? 1 : 0.15);
 
   svg.selectAll('.val-label').data(stats).join('text').attr('class', 'val-label')
     .attr('y', d => y(d.model) + y.bandwidth() / 2).attr('dy', '0.35em')
@@ -261,9 +247,7 @@ function playCollapseIntoDot() {
   tl.to(flyDot, { scale: 2.05, duration: 0.14, ease: 'power3.out' }, impactT);
   tl.to(flyDot, { scale: 1, duration: 0.52, ease: 'elastic.out(1.15, 0.48)' }, impactT + 0.14);
   tl.to(flyDot, { y: -16, duration: 0.2, ease: 'power2.out' }, impactT + 0.56);
-  tl.to(flyDot, { y: 0, duration: 0.55, ease: 'bounce.out(1.35)' }, impactT + 0.76);
-  tl.to(flyDot, { y: -6, duration: 0.14, ease: 'power2.out' }, impactT + 1.33);
-  tl.to(flyDot, { y: 0, scale: 1, duration: 0.32, ease: 'power2.inOut' }, impactT + 1.47);
+  tl.to(flyDot, { y: 0, scale: 1, duration: 0.55, ease: 'bounce.out(1.35)' }, impactT + 0.76);
 }
 
 function revealModels(keys) {
