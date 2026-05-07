@@ -140,9 +140,10 @@ export function init() {
   });
 
   // ── Phase-1 dot: AI-AI (red) — high hedging, low repetition ──────────────
-  // Keep red AI-AI point close to the upper-left chart corner (high hedging, low repetition)
-  const DOT_X = W * 0.14;
-  const DOT_Y = H * 0.14;
+  // Anchor at the same conversation coordinates the dot will hold in Phase 2,
+  // so the handoff into Phase 2 does not visibly shift the dot.
+  const DOT_X = (0.012 / X_AXIS_MAX) * W;
+  const DOT_Y = (1 - 0.782) * H;
   const svgDotRed = el('circle', {
     cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#B43A2A',
     class: 'subtype-grid-dot',
@@ -416,11 +417,23 @@ export function init() {
       end:   'bottom bottom',
       // Smooth scrub: playhead eases toward scroll over ~1s so fast flicks stay readable
       scrub: HANDOFF_SCRUB,
-      onUpdate: () => positionTooltips(),
+      onUpdate: () => {
+        positionTooltips();
+        // Once the playhead is firmly past the phase-1 handoff, force-hide the
+        // DOM fly-dot. Without this, scrub smoothing on a quick up/down scrub can
+        // briefly re-show it at a stale screen position (chart morphed beneath it),
+        // which reads as a "double dot" beside the AI-AI SVG point.
+        if (tl.time() > handoffT + 0.18) {
+          if (flyDot.style.visibility !== 'hidden') flyDot.style.visibility = 'hidden';
+        } else if (flyDot.style.visibility === 'hidden') {
+          flyDot.style.visibility = '';
+        }
+      },
       onLeaveBack: () => {
         // Fully rewind scene state when user scrolls above this section.
         gsap.killTweensOf(flyDot);
         gsap.set(flyLerp, { u: 0, _sl: NaN, _st: NaN });
+        flyDot.style.visibility = '';
         gsap.set(flyDot, { opacity: 0, y: 0, scale: 1 });
         gsap.set(gridLinesG, { opacity: 0 });
         gsap.set([xTicksG, yTicksG], { opacity: 0 });
@@ -587,22 +600,22 @@ export function init() {
 
   // ── PHASE 2: three conversation types ────────────────────────────────────
 
-  // 5.85 — title fades away before phase-2 map presentation
-  tl.to(headbar1, { opacity: 0, y: -8, duration: 0.5 }, 5.85);
+  // 4.0 — title fades away before phase-2 map presentation
+  tl.to(headbar1, { opacity: 0, y: -8, duration: 0.5 }, 4.0);
 
-  // 5.85 — metric cards slide out
-  tl.to([hedgeCard, repCard], { opacity: 0, y: 10, duration: 0.5 }, 5.85);
+  // 4.0 — metric cards slide out
+  tl.to([hedgeCard, repCard], { opacity: 0, y: 10, duration: 0.5 }, 4.0);
 
-  // 5.9+ — smooth continuous morph into the "types" map:
+  // 4.05+ — smooth continuous morph into the "types" map:
   // fade/slide cards out while the grid recenters and expands.
   if (gridSideLeft) {
-    tl.to(gridSideLeft, { opacity: 0, x: -40, duration: 1.0, ease: 'power2.inOut' }, 5.9);
+    tl.to(gridSideLeft, { opacity: 0, x: -40, duration: 1.0, ease: 'power2.inOut' }, 4.05);
   }
   if (gridSideRight) {
-    tl.to(gridSideRight, { opacity: 0, x: 40, duration: 1.0, ease: 'power2.inOut' }, 5.9);
+    tl.to(gridSideRight, { opacity: 0, x: 40, duration: 1.0, ease: 'power2.inOut' }, 4.05);
   }
   if (gridBottom) {
-    tl.to(gridBottom, { opacity: 0, y: 30, duration: 1.0, ease: 'power2.inOut' }, 5.9);
+    tl.to(gridBottom, { opacity: 0, y: 30, duration: 1.0, ease: 'power2.inOut' }, 4.05);
   }
   if (gridBody) {
     tl.to(gridBody, {
@@ -611,7 +624,7 @@ export function init() {
       marginTop: PHASE_TWO_PLOT_GAP_Y,
       duration: 1.1,
       ease: 'power2.inOut',
-    }, 5.93);
+    }, 4.08);
   }
   if (canvasWrap) {
     tl.to(canvasWrap, {
@@ -619,7 +632,7 @@ export function init() {
       duration: 1.1,
       ease: 'power2.inOut',
       onUpdate: positionTooltips,
-    }, 5.97);
+    }, 4.12);
   }
   if (gridShell) {
     tl.to(gridShell, {
@@ -627,23 +640,27 @@ export function init() {
       duration: 1.1,
       ease: 'power2.inOut',
       onUpdate: positionTooltips,
-    }, 5.93);
+    }, 4.08);
   }
 
   // Show phase-2 heading centered above the three-type plot.
-  tl.to(headbar2, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 6.12);
+  tl.to(headbar2, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 4.27);
 
   // Place all three dots directly at their final coordinates for this phase.
-  tl.set(svgDotRed, { attr: { cx: PHASE_TWO_TARGETS.red.x, cy: PHASE_TWO_TARGETS.red.y } }, 6.3);
-  tl.set(svgDotYellow, { attr: { cx: PHASE_TWO_TARGETS.yellow.x, cy: PHASE_TWO_TARGETS.yellow.y } }, 6.3);
-  tl.set(svgDotBlue, { attr: { cx: PHASE_TWO_TARGETS.blue.x, cy: PHASE_TWO_TARGETS.blue.y } }, 6.3);
-  tl.call(syncLabelPositions, null, 6.3);
-  tl.to([svgDotRed, svgDotYellow, svgDotBlue], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
-  tl.to([redLabel, yellowLabel, blueLabel], { opacity: 1, duration: 0.4, ease: 'power2.out' }, 6.9);
+  tl.set(svgDotRed, { attr: { cx: PHASE_TWO_TARGETS.red.x, cy: PHASE_TWO_TARGETS.red.y } }, 4.45);
+  tl.set(svgDotYellow, { attr: { cx: PHASE_TWO_TARGETS.yellow.x, cy: PHASE_TWO_TARGETS.yellow.y } }, 4.45);
+  tl.set(svgDotBlue, { attr: { cx: PHASE_TWO_TARGETS.blue.x, cy: PHASE_TWO_TARGETS.blue.y } }, 4.45);
+  tl.call(syncLabelPositions, null, 4.45);
+  tl.to([svgDotRed, svgDotYellow, svgDotBlue], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, 4.75);
+  tl.to([redLabel, yellowLabel, blueLabel], { opacity: 1, duration: 0.4, ease: 'power2.out' }, 5.05);
 
   // Fade in the explore prompt at the same beat as the dots.
   const exploreHint = document.getElementById('grid-explore-hint');
-  if (exploreHint) tl.to(exploreHint, { opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.6);
+  if (exploreHint) tl.to(exploreHint, { opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 4.75);
+
+  // Tail dwell: hold the fully-revealed Phase-2 map on screen long enough to read
+  // before scrolling unpins. No-op tween extends timeline duration only.
+  tl.to({}, { duration: 2.6 }, 5.45);
 
   // Keep refs used so lint doesn't strip while preserving future extensibility.
   void gridShell;

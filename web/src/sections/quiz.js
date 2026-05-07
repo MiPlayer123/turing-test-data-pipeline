@@ -169,7 +169,7 @@ export async function init() {
       resultEl.classList.remove('hidden');
       resultEl.innerHTML = `
         <p class="quiz-result-line">
-          You chose <strong>${correct ? 'AI' : 'Human'}</strong>${correct ? '' : ' — the label for this thread is <strong>AI</strong>'}.
+          You chose <strong>${correct ? 'AI' : 'Human'}</strong>${correct ? '' : '. The actual label here is <strong>AI</strong>'}.
         </p>
       `;
       gsap.fromTo(resultEl, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 });
