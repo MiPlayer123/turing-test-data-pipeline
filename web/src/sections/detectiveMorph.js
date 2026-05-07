@@ -4,9 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export function init() {
   const section = document.getElementById('s-detective');
   const titleEl = document.querySelector('.detective-chart-title');
+  const subtitleEl = document.querySelector('.detective-chart-subtitle');
   if (!section || !titleEl) return;
 
-  gsap.set(titleEl, { opacity: 0 });
+  const fadeTargets = [titleEl, subtitleEl].filter(Boolean);
+  gsap.set(fadeTargets, { opacity: 0 });
 
   ScrollTrigger.create({
     trigger: section,
@@ -14,9 +16,9 @@ export function init() {
     end:   'top 20%',
     scrub: true,
     onUpdate: (self) => {
-      gsap.set(titleEl, { opacity: Math.min(1, self.progress / 0.4) });
+      gsap.set(fadeTargets, { opacity: Math.min(1, self.progress / 0.4) });
     },
-    onLeave:     () => gsap.set(titleEl, { opacity: 1 }),
-    onLeaveBack: () => gsap.set(titleEl, { opacity: 0 }),
+    onLeave:     () => gsap.set(fadeTargets, { opacity: 1 }),
+    onLeaveBack: () => gsap.set(fadeTargets, { opacity: 0 }),
   });
 }

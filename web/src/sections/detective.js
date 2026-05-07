@@ -106,13 +106,15 @@ export function init(data) {
       if (!collapseArmed) return;
       const stack = document.querySelector('#s-detective .detective-stack');
       const titleEl = document.querySelector('#s-detective .detective-chart-title');
+      const subtitleEl = document.querySelector('#s-detective .detective-chart-subtitle');
       const frame = document.getElementById('detective-collapse-frame');
       const flyDot = document.getElementById('story-red-dot');
-      gsap.killTweensOf([stack, titleEl, frame, flyDot].filter(Boolean));
+      gsap.killTweensOf([stack, titleEl, subtitleEl, frame, flyDot].filter(Boolean));
       if (frame) gsap.set(frame, { opacity: 0, display: 'none' });
       if (flyDot) gsap.set(flyDot, { opacity: 0, scale: 0, y: 0 });
       if (stack) gsap.set(stack, { opacity: 1, scale: 1, clearProps: 'transform' });
       if (titleEl) gsap.set(titleEl, { opacity: 1 });
+      if (subtitleEl) gsap.set(subtitleEl, { opacity: 1 });
       collapseArmed = false;
     },
   });
@@ -124,21 +126,13 @@ export function onStep(step) {
   svg.selectAll('.annotation').remove();
 
   if (step === 0) {
-    // Reset only the AI bars; the human baseline stays visible across all steps.
-    revealed.clear();
-    revealed.add('human');
-    svg.selectAll('.bar').filter(d => d.model !== 'human')
-      .transition().duration(400).attr('width', 0).attr('opacity', 0.15);
-    svg.selectAll('.val-label').filter(d => d.model !== 'human')
-      .transition().duration(200).attr('opacity', 0);
-  } else if (step === 1) {
     revealModels(['gpt-5.4', 'gpt-5.4-mini', 'gemini-2.5-flash']);
-  } else if (step === 2) {
+  } else if (step === 1) {
     revealModels(['gpt-5.4', 'gpt-5.4-mini', 'gemini-2.5-flash', 'grok-4-1-fast', 'claude-sonnet-4']);
     // Show 50% marker now that all bars are in
     svg.select('.fifty-label').transition().duration(400).attr('opacity', 1);
     svg.select('.fifty-shade').transition().duration(400).attr('opacity', 0.03);
-  } else if (step === 3) {
+  } else if (step === 2) {
     playCollapseIntoDot();
   }
 }
