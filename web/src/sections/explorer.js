@@ -274,6 +274,7 @@ export function init(data) {
   const dotMat = new THREE.PointsMaterial({ size: 0.015, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: 0, map: _circleTex, alphaTest: 0.5 });
   const dotMesh = new THREE.Points(dotGeo, dotMat);
   dotMesh.frustumCulled = false;
+  dotMesh.renderOrder = 2; // always draws on top of the glow
   scene.add(dotMesh);
 
   // ── Glow layer: one ring per highlighted conversation ─────────────────────
@@ -334,8 +335,10 @@ export function init(data) {
 
   const hlMesh = new THREE.Points(hlGeo, hlMat);
   hlMesh.frustumCulled = false;
+  hlMesh.renderOrder = 1; // draws behind the dots
   scene.add(hlMesh);
   // ─────────────────────────────────────────────────────────────────────────
+
 
 
   // Drive the fly-in with a GSAP tween once Three.js has rendered the first frame.
