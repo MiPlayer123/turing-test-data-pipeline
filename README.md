@@ -2,15 +2,18 @@
 
 Scrollytelling data visualization exploring how LLMs communicate with humans and other LLMs. Thesis: **"The harder an AI tries to seem human, the more it gives itself away."**
 
+**Live:** https://miplayer123.github.io/turing-test-data-pipeline/
+
 ## Structure
 
 ```
 web/           → Scrollytelling visualization (Vite + D3 + Three.js)
-data/          → 362 conversation transcripts + computed metrics
+data/          → 486 conversation transcripts + computed metrics
 viz/           → Standalone EDA charts (legacy, now integrated into web/)
 config.py      → Model definitions, prompts, settings
 generate.py    → AI-AI conversation generation via LLM APIs
 analyze.py     → Metric computation (repetitiveness, coherence, hedging)
+compute_trajectories.py → Per-turn metric trajectories for timeline viz
 ingest_human_data.py → Human-human (PersonaChat) + Human-AI (WildChat) ingestion
 ```
 
@@ -26,7 +29,7 @@ ingest_human_data.py → Human-human (PersonaChat) + Human-AI (WildChat) ingesti
 cd web && npm install && npm run dev
 ```
 
-Scrollytelling page with 6 sections: hero, metric explainer, detective accuracy, turn-by-turn trajectory, 3D explorer, and interactive guessing game.
+Scrollytelling page with 8 sections: guessing quiz, subtype overview, turn-by-turn timeline, grid reveal, detective accuracy, and 3D conversation explorer.
 
 ## Conditions
 
