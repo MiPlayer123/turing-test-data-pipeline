@@ -62,7 +62,7 @@ export function init() {
     defs.appendChild(filt);
   }
 
-  makeGlow('gridRedGlow',       '#B43A2A');
+  makeGlow('gridRedGlow',       CONDITION_COLOR.ai_ai_detective);
   makeGlow('gridYellowGlow',   CONDITION_COLOR.human_ai);
   makeGlow('gridBlueGlow',     CONDITION_COLOR.human_human);
   svg.appendChild(defs);
@@ -145,10 +145,10 @@ export function init() {
   const DOT_X = (0.012 / X_AXIS_MAX) * W;
   const DOT_Y = (1 - 0.782) * H;
   const svgDotRed = el('circle', {
-    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: '#B43A2A',
+    cx: DOT_X, cy: DOT_Y, r: 8.5, fill: CONDITION_COLOR.ai_ai_detective,
     class: 'subtype-grid-dot',
   });
-  svgDotRed.style.setProperty('--dot-color', '#B43A2A');
+  svgDotRed.style.setProperty('--dot-color', CONDITION_COLOR.ai_ai_detective);
   gsap.set(svgDotRed, { opacity: 0, scale: 0, transformOrigin: `${DOT_X}px ${DOT_Y}px` });
   root.appendChild(svgDotRed);
 

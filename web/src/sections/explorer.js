@@ -33,13 +33,12 @@ function gaussianKDE(points, gridX, gridY, bandwidth) {
 // most of the visual weight — keeps the mesh legible against paper instead
 // of fading into it.
 function heightColor(t) {
-  // Stops [ink-3 → ink-2 → ochre → sienna → accent rust]
   const stops = [
-    [0.431, 0.396, 0.341], // #6E6557 — ink-3
-    [0.227, 0.200, 0.165], // #3A332A — ink-2 (deep warm)
-    [0.769, 0.604, 0.106], // #C49A1B — ochre
-    [0.761, 0.416, 0.173], // #C26A2C — sienna
-    [0.784, 0.294, 0.086], // #C84B16 — accent rust
+    [0.847, 0.820, 0.780], // #D8D1C7 — warm beige
+    [0.600, 0.576, 0.545], // #99938B — warm mid-grey
+    [0.373, 0.353, 0.329], // #5F5A54 — dark warm grey
+    [0.200, 0.188, 0.176], // #33302D — near-black warm
+    [0.118, 0.110, 0.102], // #1E1C1A — almost black at peaks
   ];
   const k = Math.max(0, Math.min(0.999, t)) * (stops.length - 1);
   const i = Math.floor(k);
@@ -301,14 +300,17 @@ export function init(data) {
     vertexColors: true,
     transparent: true,
     depthWrite: false,
-    uniforms: { uOpacity: { value: 0 } },
+    uniforms: {
+      uOpacity:    { value: 0 },
+      uFalloff:    { value: 20.0 },
+      uBrightness: { value: 3.0 },
+      uWhiteMix:   { value: 0.70 },
+    },
     vertexShader: `
       varying vec3 vColor;
       void main() {
         vColor = color;
         vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        // Tighter halo than before — about 4x dot size, capped so it never
-        // takes over the screen at close zoom.
         float screenPx = projectionMatrix[1][1] * 300.0 * 0.075 / (-mv.z);
         gl_PointSize = clamp(screenPx, 8.0, 44.0);
         gl_Position = projectionMatrix * mv;
@@ -316,15 +318,15 @@ export function init(data) {
     `,
     fragmentShader: `
       uniform float uOpacity;
+      uniform float uFalloff;
+      uniform float uBrightness;
+      uniform float uWhiteMix;
       varying vec3 vColor;
       void main() {
         float d = length(gl_PointCoord - vec2(0.5));
         if (d > 0.5) discard;
-        // Lift the halo toward white at the center so dark base colors
-        // (deep red, navy, ochre) read as a light bloom rather than a
-        // muddy smudge against the paper background.
-        float bloom = exp(-d * d * 10.0) * 0.55;
-        vec3 lifted = mix(vColor, vec3(1.0), 0.55);
+        float bloom = exp(-d * d * uFalloff) * uBrightness;
+        vec3 lifted = mix(vColor, vec3(1.0), uWhiteMix);
         gl_FragColor = vec4(lifted, bloom * uOpacity);
       }
     `,
@@ -334,6 +336,7 @@ export function init(data) {
   hlMesh.frustumCulled = false;
   scene.add(hlMesh);
   // ─────────────────────────────────────────────────────────────────────────
+
 
   // Drive the fly-in with a GSAP tween once Three.js has rendered the first frame.
   const entrance = { t: 0 };

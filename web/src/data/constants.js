@@ -1,14 +1,15 @@
 // Forensic Editorial palette — tuned against #F2EDE2 paper.
 // Human-Human reads as the calm baseline (blue), Human-AI as the mixed
-// intermediary (yellow), and the five AI-AI subtypes share the AI red family.
+// intermediary (yellow), and the five AI-AI subtypes share the fire palette
+// (Black Cherry → Oxblood → Brick Ember → Red Ochre → Cayenne Red).
 export const CONDITIONS = [
-  { key: "human_human",            label: "Human-Human",       color: "#2F5D8A" },
-  { key: "human_ai",               label: "Human-AI",          color: "#C49A1B" },
-  { key: "ai_ai_detective",        label: "AI Detective",      color: "#C26A2C" },
-  { key: "ai_ai_freeform",         label: "AI Freeform",       color: "#B43A2A" },
-  { key: "ai_ai_freeform_persona", label: "AI Persona",        color: "#8C2A3D" },
-  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing", color: "#A23560" },
-  { key: "ai_ai_structured",       label: "AI Structured",     color: "#B5851C" },
+  { key: "human_human",            label: "Human-Human",       color: "#1D6FA8" },
+  { key: "human_ai",               label: "Human-AI",          color: "#FFCC00" },
+  { key: "ai_ai_freeform_persona", label: "AI Persona",        color: "#6A040F" },
+  { key: "ai_ai_freeform",         label: "AI Freeform",       color: "#9D0208" },
+  { key: "ai_ai_structured",       label: "AI Structured",     color: "#F48C06" },
+  { key: "ai_ai_detective",        label: "AI Detective",      color: "#DC2F02" },
+  { key: "ai_ai_reverse_turing",   label: "AI Reverse Turing", color: "#E85D04" },
 ];
 
 export const CONDITION_COLOR = Object.fromEntries(CONDITIONS.map(c => [c.key, c.color]));

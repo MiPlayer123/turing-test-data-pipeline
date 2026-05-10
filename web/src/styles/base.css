@@ -13,12 +13,18 @@
   --ink-4:        #9A8F7C;
 
   /* Semantic data colors — tuned for the printed-paper palette */
-  --red:          #B43A2A;   /* AI ↔ AI */
-  --red-soft:     #E2C5BC;
-  --yellow:       #C49A1B;   /* AI ↔ Human */
-  --yellow-soft:  #E8D9A2;
-  --blue:         #2F5D8A;   /* Human ↔ Human */
-  --blue-soft:    #BFCDDB;
+  --red:          #DC2F02;   /* AI ↔ AI (matches ai_ai_detective) */
+  --red-soft:     #F5C4B8;
+  --yellow:       #FFCC00;   /* AI ↔ Human */
+  --yellow-soft:  #FFF0A0;
+  --blue:         #1D6FA8;   /* Human ↔ Human */
+  --blue-soft:    #B8D4E8;
+
+  /* Metric accent colors — both green so they don't read as condition-type keys. */
+  --hedge-accent:      #2D6A4F;
+  --hedge-accent-soft: #B7E4C7;
+  --rep-accent:        #2D6A4F;
+  --rep-accent-soft:   #B7E4C7;
 
   /* AI-AI subtypes — tuned variants */
   --sub-freeform:    #B43A2A;

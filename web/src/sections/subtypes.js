@@ -86,11 +86,12 @@ const DUMMY_SNIPPETS = {
 
 export function init(data) {
   const grid = document.getElementById('subtypes-grid');
-  const stackedBar = document.getElementById('subtypes-stacked-bar');
+  const stackedBar    = document.getElementById('subtypes-stacked-bar');
+  const stackedBarRep = document.getElementById('subtypes-stacked-bar-rep');
   const stackedLegend = document.getElementById('subtypes-stacked-legend');
   const plotSvg = document.getElementById('subtypes-plot');
   const plotTooltip = document.getElementById('subtypes-plot-tooltip');
-  if (!grid || !stackedBar || !stackedLegend || !plotSvg || !plotTooltip) return;
+  if (!grid || !stackedBar || !stackedBarRep || !stackedLegend || !plotSvg || !plotTooltip) return;
 
   const grouped = d3.group(data.conversations, d => d.condition);
   const means = {};
@@ -102,41 +103,57 @@ export function init(data) {
       n:              rows.length,
     };
   });
-  const hedgingTotals = SUBTYPES.map((s) => ({
+  const combinedTotals = SUBTYPES.map((s) => ({
     ...s,
-    totalHedging: (means[s.key].hedging || 0) * (means[s.key].n || 0),
+    totalHedging:    (means[s.key].hedging        || 0) * (means[s.key].n || 0),
+    totalRep:        (means[s.key].repetitiveness || 0) * (means[s.key].n || 0),
   }));
-  const totalHedgingSum = d3.sum(hedgingTotals, d => d.totalHedging) || 1;
+  const totalHedgingSum = d3.sum(combinedTotals, d => d.totalHedging) || 1;
+  const totalRepSum     = d3.sum(combinedTotals, d => d.totalRep)     || 1;
 
   grid.innerHTML = '';
   stackedBar.innerHTML = '';
+  stackedBarRep.innerHTML = '';
   stackedLegend.innerHTML = '';
 
-  // Single stacked vertical bar — use inline styles to guarantee narrow width
-  stackedBar.style.cssText = [
+  const BAR_STYLE = [
     'display:flex', 'flex-direction:column',
     'width:26px', 'height:180px',
     'border-radius:8px', 'overflow:hidden',
     'margin:0 auto', 'border:none',
     'background:none', 'padding:0', 'box-shadow:none',
   ].join(';');
-  hedgingTotals.forEach((entry) => {
-    const flexVal = Math.max(2, (entry.totalHedging / totalHedgingSum) * 100);
-    const seg = document.createElement('div');
-    seg.style.cssText = `flex:${flexVal};width:100%;background:${entry.color};opacity:0.9;`;
-    seg.title = entry.name;
-    stackedBar.appendChild(seg);
+
+  stackedBar.style.cssText    = BAR_STYLE;
+  stackedBarRep.style.cssText = BAR_STYLE;
+
+  combinedTotals.forEach((entry) => {
+    const hFlex = Math.max(2, (entry.totalHedging / totalHedgingSum) * 100);
+    const rFlex = Math.max(2, (entry.totalRep     / totalRepSum)     * 100);
+
+    const hSeg = document.createElement('div');
+    hSeg.style.cssText = `flex:${hFlex};width:100%;background:${entry.color};opacity:0.9;`;
+    hSeg.title = entry.name;
+    stackedBar.appendChild(hSeg);
+
+    const rSeg = document.createElement('div');
+    rSeg.style.cssText = `flex:${rFlex};width:100%;background:${entry.color};opacity:0.9;`;
+    rSeg.title = entry.name;
+    stackedBarRep.appendChild(rSeg);
   });
 
-  // Legend below the bar
-  hedgingTotals.forEach((entry) => {
+  // Shared legend — dot | name | H% | R%
+  combinedTotals.forEach((entry) => {
+    const hPct = ((entry.totalHedging / totalHedgingSum) * 100).toFixed(0);
+    const rPct = ((entry.totalRep     / totalRepSum)     * 100).toFixed(0);
     const item = document.createElement('div');
     item.className = 'subtypes-stack-legend-item';
     item.style.setProperty('--subtype-color', entry.color);
     item.innerHTML = `
       <span class="subtypes-stack-legend-dot"></span>
       <span class="subtypes-stack-legend-name">${entry.name}</span>
-      <span class="subtypes-stack-legend-value">${((entry.totalHedging / totalHedgingSum) * 100).toFixed(0)}%</span>
+      <span class="subtypes-stack-legend-value">${hPct}%</span>
+      <span class="subtypes-stack-legend-value">${rPct}%</span>
     `;
     stackedLegend.appendChild(item);
   });
@@ -160,7 +177,7 @@ export function init(data) {
   renderSubtypePlot(plotSvg, plotTooltip, realSubtypePoints);
   setSubtypePlotPayload({
     points: realSubtypePoints,
-    totals: hedgingTotals.map((entry) => ({
+    totals: combinedTotals.map((entry) => ({
       key: entry.key,
       name: entry.name,
       totalHedging: entry.totalHedging,
@@ -183,6 +200,7 @@ function buildRealSubtypePoints(grouped, means) {
       condition: subtype.key,
       prompt: subtype.prompt,
       promptLabel: subtype.prompt.replace(/^"|"$/g, ''),
+      desc: subtype.desc,
       snippet: DUMMY_SNIPPETS[subtype.key],
       conversationId: sample.id,
       model_a: sample.model_a,
@@ -300,7 +318,7 @@ function renderSubtypePlot(svg, tooltipEl, subtypePoints) {
       tooltipEl.innerHTML = `
         <h4>${point.type}</h4>
         <p class="grid-tip-prompt">${point.prompt}</p>
-        <p class="grid-tip-snippet">${point.snippet}</p>
+        <p class="grid-tip-snippet">${point.desc}</p>
       `;
       tooltipEl.classList.add('is-visible');
       movePlotTooltip(tooltipEl, svg, e);
