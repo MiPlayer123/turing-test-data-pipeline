@@ -94,17 +94,20 @@ function isCondVisible(condKey) {
 function openTimelineConversation(condKey) {
   const id = condKey === 'human_human' ? TIMELINE_HH_EXAMPLE_ID : tlPickId(condKey);
   if (!id) return;
+  // Aggregate metrics live on the conversations CSV row, not the raw JSON
+  // returned by loadConversation — pull from there so the panel header
+  // shows real numbers instead of NaN.
+  const csvRow = fullData?.conversations?.find(c => c.conversation_id === id);
   const conv = condKey === 'human_human'
     ? hhRepresentativeConv
     : tlSnippetCache.get(condKey);
-  const metrics = conv ? {
-    condition: conv.condition || condKey,
-    model_a: conv.model_a,
-    model_b: conv.model_b,
-    hedging: conv.hedging,
-    repetitiveness: conv.repetitiveness,
-    coherence: conv.coherence,
-  } : { condition: condKey };
+  const metrics = {
+    condition: csvRow?.condition || conv?.condition || condKey,
+    model_a: csvRow?.model_a || conv?.model_a,
+    model_b: csvRow?.model_b || conv?.model_b,
+    hedging: csvRow?.hedging,
+    repetitiveness: csvRow?.repetitiveness,
+  };
   openConversation(id, metrics);
 }
 

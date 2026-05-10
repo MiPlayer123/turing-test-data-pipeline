@@ -209,14 +209,16 @@ export function init() {
   };
 
   // ── Interactive tooltip event handlers ────────────────────────────────────
-  [[svgDotRed, DOT_CONVOS.red], [svgDotYellow, DOT_CONVOS.yellow], [svgDotBlue, DOT_CONVOS.blue]].forEach(([dot, data]) => {
+  [[svgDotRed, DOT_CONVOS.red, 'gridRedGlow'], [svgDotYellow, DOT_CONVOS.yellow, 'gridYellowGlow'], [svgDotBlue, DOT_CONVOS.blue, 'gridBlueGlow']].forEach(([dot, data, glowId]) => {
     dot.addEventListener('mouseenter', (e) => {
       dot.classList.add('is-hovered');
+      dot.setAttribute('filter', `url(#${glowId})`);
       showInteractiveTip(data, e);
     });
     dot.addEventListener('mousemove', (e) => moveInteractiveTip(e));
     dot.addEventListener('mouseleave', () => {
       dot.classList.remove('is-hovered');
+      dot.removeAttribute('filter');
       hideInteractiveTip();
     });
     dot.addEventListener('click', () => {

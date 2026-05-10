@@ -24,15 +24,15 @@ export function init(data) {
       accuracy: (correct / rows.length) * 100, n: rows.length,
     });
   }
-  // Human baseline: lifted from the quiz "How others answered" — 74% of viewers correctly
-  // labelled the AI thread as AI. Colored with the human-human condition color so the bar
-  // visually ties to the H-H baseline reused throughout the rest of the story.
+  // Human baseline: Jones & Bergen 2024 (UCSD) — humans correctly identified GPT-4 as AI
+  // ~54% of the time. Colored with the human-human condition color so the bar visually ties
+  // to the H-H baseline reused throughout the rest of the story.
   stats.push({
     model: 'human',
     label: MODEL_LABELS.human || 'Human',
     color: CONDITION_COLOR.human_human,
-    accuracy: 74,
-    n: 'quiz',
+    accuracy: 54,
+    n: 'study',
   });
   stats.sort((a, b) => b.accuracy - a.accuracy);
 

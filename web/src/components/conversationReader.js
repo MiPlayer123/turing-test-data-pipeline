@@ -28,7 +28,6 @@ export async function openConversation(conversationId, metrics) {
     subtitleEl.textContent = `${MODEL_LABELS[metrics.model_a] || metrics.model_a} ↔ ${MODEL_LABELS[metrics.model_b] || metrics.model_b}`;
     metricsEl.innerHTML = [
       { label: 'hedging', value: (+metrics.hedging).toFixed(3) },
-      { label: 'coherence', value: (+metrics.coherence).toFixed(3) },
       { label: 'repetitive', value: (+metrics.repetitiveness).toFixed(4) },
     ].map(m => `
       <div class="panel-metric">

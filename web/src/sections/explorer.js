@@ -320,10 +320,12 @@ export function init(data) {
       void main() {
         float d = length(gl_PointCoord - vec2(0.5));
         if (d > 0.5) discard;
-        // Subtle natural glow — sharper falloff (less smear) and capped
-        // peak alpha so it reads as a soft halo, not a bloom.
+        // Lift the halo toward white at the center so dark base colors
+        // (deep red, navy, ochre) read as a light bloom rather than a
+        // muddy smudge against the paper background.
         float bloom = exp(-d * d * 10.0) * 0.55;
-        gl_FragColor = vec4(vColor, bloom * uOpacity);
+        vec3 lifted = mix(vColor, vec3(1.0), 0.55);
+        gl_FragColor = vec4(lifted, bloom * uOpacity);
       }
     `,
   });
@@ -371,7 +373,9 @@ export function init(data) {
     onToggle(active) {
       const colAttr = dotGeo.attributes.color;
       const hlColAttr = hlGeo.attributes.color;
-      const fadeCol = new THREE.Color(0x2b3139);
+      // Warm muted grey from the paper palette (matches --ink-4) so dimmed
+      // dots recede gently instead of going near-black against the cream bg.
+      const fadeCol = new THREE.Color(0x9A8F7C);
       const singleSelected = active.size === 1;
       const selectedKey = singleSelected ? Array.from(active)[0] : null;
       convs.forEach((c, i) => {

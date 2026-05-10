@@ -143,7 +143,6 @@ function renderMetrics(metricsEl, conv) {
   const rows = [
     { label: 'hedging',    value: fmt(conv.hedging, 3) },
     { label: 'repetitive', value: fmt(conv.repetitiveness, 4) },
-    { label: 'coherence',  value: fmt(conv.coherence, 3) },
   ];
   metricsEl.innerHTML = rows.map(m => `
     <div class="panel-metric">
